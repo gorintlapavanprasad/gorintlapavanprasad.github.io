@@ -177,3 +177,6 @@ footer.ft{border-top:1px solid var(--rule);background:var(--bg)}
 /* smooth dropdown reveal for read-more */
 .pd .more{display:block;max-height:0;overflow:hidden;transition:max-height .4s ease}
 .pd .more.open{max-height:1500px}
+
+/* role badges: Lead (green, default) vs Contributor (blue) */
+.prow .pt .badge.alt{color:var(--blue);background:#eaf1fb}
