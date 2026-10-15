@@ -146,3 +146,13 @@ footer.ft{border-top:1px solid var(--rule);background:var(--bg)}
 .pagehead{max-width:var(--max);margin:0 auto;padding:3.2rem 1.5rem .5rem;text-align:center}
 .pagehead h1{font-size:2.3rem;margin:.2rem 0 .35rem}
 .pagehead .sub{color:var(--muted);font-family:var(--disp);font-weight:600;margin:0;max-width:640px;margin-left:auto;margin-right:auto}
+
+/* ---------- projects: one row per project ---------- */
+.projlist{max-width:780px;margin:0 auto}
+.prow{display:grid;grid-template-columns:230px 1fr;gap:1.6rem;padding:1.45rem 0;border-top:1px solid var(--rule);align-items:start}
+.prow:first-child{border-top:none}
+.prow .pt{font-family:var(--disp);font-weight:700;font-size:1.18rem;color:var(--ink);line-height:1.3}
+.prow .pt .badge{display:inline-block;margin-left:.1rem;font-family:var(--disp);font-size:.64rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green-dark);background:#eef6e6;border-radius:999px;padding:.16rem .55rem;vertical-align:middle;white-space:nowrap}
+.prow .pd{font-size:1.02rem;color:var(--muted);line-height:1.65}
+.prow .pd a{font-family:var(--disp);font-weight:700;font-size:.86rem;white-space:nowrap}
+@media (max-width:620px){.prow{grid-template-columns:1fr;gap:.35rem;padding:1.2rem 0}.prow .pt{font-size:1.12rem}}
