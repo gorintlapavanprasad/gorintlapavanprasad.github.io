@@ -173,3 +173,7 @@ footer.ft{border-top:1px solid var(--rule);background:var(--bg)}
 .projlist .prow{border-top:none;border-bottom:1px solid var(--rule);padding:1.6rem 0}
 .readmore{background:none;border:none;cursor:pointer;color:var(--blue);font-family:var(--sans);font-weight:700;font-size:.9rem;padding:0;margin:.2rem 0 .6rem}
 .readmore:hover{color:var(--blue-dark);text-decoration:underline;text-underline-offset:3px}
+
+/* smooth dropdown reveal for read-more */
+.pd .more{display:block;max-height:0;overflow:hidden;transition:max-height .4s ease}
+.pd .more.open{max-height:1500px}
