@@ -162,3 +162,9 @@ footer.ft{border-top:1px solid var(--rule);background:var(--bg)}
 .prow .pd p:last-child{margin-bottom:0}
 .prow .pd p.pm{margin-top:.6rem;font-family:var(--disp);font-weight:700;font-size:.74rem;letter-spacing:.03em;text-transform:uppercase;color:var(--faint)}
 .prow .pd p.pm a{text-transform:none;letter-spacing:0;font-size:.78rem}
+
+/* read more / less */
+.pd .more{display:none}
+.pd .more.open{display:block}
+.readmore{background:none;border:none;color:var(--blue);font-family:var(--disp);font-weight:700;font-size:.92rem;cursor:pointer;padding:.15rem 0;margin:.1rem 0 .4rem}
+.readmore:hover{text-decoration:underline;color:var(--blue-dark)}
