@@ -156,3 +156,9 @@ footer.ft{border-top:1px solid var(--rule);background:var(--bg)}
 .prow .pd{font-size:1.02rem;color:var(--muted);line-height:1.65}
 .prow .pd a{font-family:var(--disp);font-weight:700;font-size:.86rem;white-space:nowrap}
 @media (max-width:620px){.prow{grid-template-columns:1fr;gap:.35rem;padding:1.2rem 0}.prow .pt{font-size:1.12rem}}
+
+/* expanded project rows */
+.prow .pd p{margin:0 0 .7rem;font-size:1.02rem;color:var(--muted);line-height:1.65}
+.prow .pd p:last-child{margin-bottom:0}
+.prow .pd p.pm{margin-top:.6rem;font-family:var(--disp);font-weight:700;font-size:.74rem;letter-spacing:.03em;text-transform:uppercase;color:var(--faint)}
+.prow .pd p.pm a{text-transform:none;letter-spacing:0;font-size:.78rem}
