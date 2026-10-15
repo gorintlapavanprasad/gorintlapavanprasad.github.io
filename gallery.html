@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Pavan Prasad Gorintla</title>
+<meta name="description" content="A gallery of moments from Pavan Prasad Gorintla's graduate studies, conferences, and lab life.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topnav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Pavan Prasad Gorintla</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="gallery.html" aria-current="page">Gallery</a>
+      <a href="index.html#cv">CV</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="pagehead">
+    <p class="eyebrow">Gallery</p>
+    <h1>Moments</h1>
+    <p class="sub">A few moments from grad school, conferences, award nights, and the lab.</p>
+  </div>
+  <section class="section">
+    <div class="gallery-grid" id="galgrid">
+      <figure><img src="images/gallery/IMG_1034.jpg" alt="Graduation day" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_1799.jpg" alt="With colleagues at a research poster session" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_2638.jpg" alt="Outdoors in Flagstaff" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_3747.jpg" alt="Receiving an award with teammates" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_8452.jpg" alt="At a workshop event" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_1754.jpg" alt="Portrait" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_4150.jpg" alt="Group photo at sunset" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_2331.jpg" alt="Working in the lab" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_5220.jpg" alt="Graduation at Northern Arizona University" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_1647.jpg" alt="At an event" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_3757.jpg" alt="Holding a Northern Arizona University pennant with the team" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_1658.jpg" alt="At the Greater Phoenix Chamber Foundation" loading="lazy"></figure>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <div class="ft-inner">
+    &copy; <span id="yr"></span> Pavan Prasad Gorintla &middot; Flagstaff, Arizona &middot;
+    <a href="mailto:ppg8@nau.edu">ppg8@nau.edu</a>
+  </div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="x" id="lbx" aria-label="Close">&times;</button>
+  <button class="nav prev" id="lbprev" aria-label="Previous photo">&#8249;</button>
+  <img id="lbimg" src="" alt="">
+  <button class="nav next" id="lbnext" aria-label="Next photo">&#8250;</button>
+</div>
+
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+(function(){
+  var imgs=[].slice.call(document.querySelectorAll('#galgrid img'));
+  var lb=document.getElementById('lb'),lbimg=document.getElementById('lbimg'),i=0;
+  function open(n){i=(n+imgs.length)%imgs.length;lbimg.src=imgs[i].src;lbimg.alt=imgs[i].alt;lb.classList.add('on');}
+  function close(){lb.classList.remove('on');}
+  imgs.forEach(function(im,n){im.parentNode.addEventListener('click',function(){open(n);});});
+  document.getElementById('lbx').onclick=close;
+  document.getElementById('lbprev').onclick=function(e){e.stopPropagation();open(i-1);};
+  document.getElementById('lbnext').onclick=function(e){e.stopPropagation();open(i+1);};
+  lb.addEventListener('click',function(e){if(e.target===lb)close();});
+  document.addEventListener('keydown',function(e){if(!lb.classList.contains('on'))return;if(e.key==='Escape')close();else if(e.key==='ArrowLeft')open(i-1);else if(e.key==='ArrowRight')open(i+1);});
+})();
+</script>
+</body>
+</html>

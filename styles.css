@@ -130,3 +130,19 @@ footer.ft{border-top:1px solid var(--rule);background:var(--bg)}
 .lb .nav:hover{background:rgba(255,255,255,.22)}
 .lb .prev{left:14px}.lb .next{right:14px}
 @media (max-width:640px){.lb .nav{font-size:24px;padding:.2rem .5rem}}
+
+/* ---------- top nav (dashboard bar) ---------- */
+.topnav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);backdrop-filter:saturate(1.3) blur(10px);border-bottom:1px solid var(--rule)}
+.nav-inner{max-width:var(--max);margin:0 auto;padding:.6rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.brand{font-family:var(--disp);font-weight:700;font-size:1rem;color:var(--ink);text-decoration:none;letter-spacing:.2px}
+.brand:hover{color:var(--blue);text-decoration:none}
+.nav-links{display:flex;gap:.25rem;flex-wrap:wrap}
+.nav-links a{font-family:var(--disp);font-weight:600;font-size:.9rem;color:var(--ink);text-decoration:none;padding:.42rem .9rem;border-radius:999px;transition:background .15s,color .15s}
+.nav-links a:hover{background:var(--soft);color:var(--blue);text-decoration:none}
+.nav-links a[aria-current="page"]{background:var(--blue);color:#fff}
+@media (max-width:560px){.nav-inner{padding:.5rem 1rem;gap:.35rem}.brand{font-size:.9rem;width:100%}.nav-links a{padding:.32rem .7rem;font-size:.82rem}}
+
+/* inner-page header */
+.pagehead{max-width:var(--max);margin:0 auto;padding:3.2rem 1.5rem .5rem;text-align:center}
+.pagehead h1{font-size:2.3rem;margin:.2rem 0 .35rem}
+.pagehead .sub{color:var(--muted);font-family:var(--disp);font-weight:600;margin:0;max-width:640px;margin-left:auto;margin-right:auto}
