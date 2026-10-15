@@ -51,6 +51,42 @@
     </p>
   </section>
 
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <p class="eyebrow">Projects</p>
+    <h2>What I build</h2>
+    <div class="projgrid">
+      <div class="proj">
+        <div class="pj-ico">&#127918;</div>
+        <h3>CardioCare Quest</h3>
+        <p>A culturally grounded, accessible serious game for hypertension management, co-designed with and for the Navajo community.</p>
+        <div class="tags"><span class="tag">Serious Games</span><span class="tag">Health</span><span class="tag">Co-design</span></div>
+        <a class="go" href="https://github.com/gorintlapavanprasad/CardioCare-Quest" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+      </div>
+      <div class="proj">
+        <div class="pj-ico">&#128202;</div>
+        <h3>Accessible Research Dashboard</h3>
+        <p>An interactive, accessible platform that maps 215 accessibility and serious-games papers (1994&ndash;2023) across nine experiential design dimensions, with keyboard, screen-reader, and sonification support.</p>
+        <div class="tags"><span class="tag">Data Viz</span><span class="tag">Accessibility</span><span class="tag">HCI</span></div>
+        <a class="go" href="https://gorintlapavanprasad.github.io/Interactive-Visualization-PHT-Lab-Model/" target="_blank" rel="noopener">View project &rarr;</a>
+      </div>
+      <div class="proj">
+        <div class="pj-ico">&#128270;</div>
+        <h3>Games-for-Health Explorer</h3>
+        <p>An exploratory visualization of games-for-health research, built for rapid, accessible synthesis of the field.</p>
+        <div class="tags"><span class="tag">Data Viz</span><span class="tag">Research</span></div>
+        <a class="go" href="https://gorintlapavanprasad.github.io/Pavan_3MRP/" target="_blank" rel="noopener">View project &rarr;</a>
+      </div>
+      <div class="proj">
+        <div class="pj-ico">&#129517;</div>
+        <h3>SPEKTR Career Matrix</h3>
+        <p>A visual career-placement matrix that helps students and graduates explore and compare career paths.</p>
+        <div class="tags"><span class="tag">Tool</span><span class="tag">Visualization</span></div>
+        <a class="go" href="https://gorintlapavanprasad.github.io/SPEKTR/" target="_blank" rel="noopener">View project &rarr;</a>
+      </div>
+    </div>
+  </section>
+
   <!-- SELECTED WORK -->
   <section class="section" id="work">
     <p class="eyebrow">Research</p>
@@ -81,6 +117,26 @@
 
     <div class="pub">
       <p class="cite"><span class="me">Pavan Prasad Gorintla</span> and Jared Duval. <span class="ptitle">&ldquo;Interactive Visualization of Thirty Years of Accessibility and Serious-Games Research.&rdquo;</span> <span class="status">Presented</span><br>NAU Graduate Student Government Research Symposium, 2025.</p>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section" id="gallery">
+    <p class="eyebrow">Gallery</p>
+    <h2>Moments</h2>
+    <div class="gallery-grid" id="galgrid">
+      <figure><img src="images/gallery/IMG_1034.jpg" alt="Graduation day" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_1799.jpg" alt="With colleagues at a research poster session" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_2638.jpg" alt="Outdoors in Flagstaff" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_3747.jpg" alt="Receiving an award with teammates" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_8452.jpg" alt="At a workshop event" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_1754.jpg" alt="Portrait" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_4150.jpg" alt="Group photo at sunset" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_2331.jpg" alt="Working in the lab" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_5220.jpg" alt="Graduation at Northern Arizona University" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_1647.jpg" alt="At an event" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_3757.jpg" alt="Holding a Northern Arizona University pennant with the team" loading="lazy"></figure>
+      <figure><img src="images/gallery/IMG_1658.jpg" alt="At the Greater Phoenix Chamber Foundation" loading="lazy"></figure>
     </div>
   </section>
 
@@ -120,6 +176,27 @@
   </div>
 </footer>
 
-<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="x" id="lbx" aria-label="Close">&times;</button>
+  <button class="nav prev" id="lbprev" aria-label="Previous photo">&#8249;</button>
+  <img id="lbimg" src="" alt="">
+  <button class="nav next" id="lbnext" aria-label="Next photo">&#8250;</button>
+</div>
+
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+(function(){
+  var imgs=[].slice.call(document.querySelectorAll('#galgrid img'));
+  var lb=document.getElementById('lb'),lbimg=document.getElementById('lbimg'),i=0;
+  function open(n){i=(n+imgs.length)%imgs.length;lbimg.src=imgs[i].src;lbimg.alt=imgs[i].alt;lb.classList.add('on');}
+  function close(){lb.classList.remove('on');}
+  imgs.forEach(function(im,n){im.parentNode.addEventListener('click',function(){open(n);});});
+  document.getElementById('lbx').onclick=close;
+  document.getElementById('lbprev').onclick=function(e){e.stopPropagation();open(i-1);};
+  document.getElementById('lbnext').onclick=function(e){e.stopPropagation();open(i+1);};
+  lb.addEventListener('click',function(e){if(e.target===lb)close();});
+  document.addEventListener('keydown',function(e){if(!lb.classList.contains('on'))return;if(e.key==='Escape')close();else if(e.key==='ArrowLeft')open(i-1);else if(e.key==='ArrowRight')open(i+1);});
+})();
+</script>
 </body>
 </html>
