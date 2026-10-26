@@ -180,3 +180,32 @@ footer.ft{border-top:1px solid var(--rule);background:var(--bg)}
 
 /* role badges: Lead (green, default) vs Contributor (blue) */
 .prow .pt .badge.alt{color:var(--blue);background:#eaf1fb}
+
+/* ---------- achievements ---------- */
+.achwrap{max-width:820px;margin:0 auto}
+.statline{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin:0 auto 2.6rem;max-width:720px}
+.statline .stat{background:var(--soft);border:1px solid var(--rule);border-radius:999px;padding:.5rem 1.1rem;font-family:var(--disp);font-weight:700;font-size:.92rem;color:var(--ink)}
+.statline .stat b{color:var(--blue)}
+.achsec{margin:0 0 2.6rem}
+.achsec .subhead{display:flex;align-items:center;gap:.6rem}
+.achsec .subhead .sc{font-size:1.1rem}
+.achlist{list-style:none;margin:0;padding:0}
+.aitem{display:grid;grid-template-columns:70px 1fr;gap:1.1rem;padding:1.05rem 0;border-top:1px solid var(--rule)}
+.aitem:first-child{border-top:none}
+.ayr{font-family:var(--disp);font-weight:700;font-size:.9rem;color:var(--faint);padding-top:.15rem;white-space:nowrap}
+.abody{min-width:0}
+.atitle{display:block;font-family:var(--disp);font-weight:700;font-size:1.06rem;color:var(--ink);line-height:1.35}
+.awhere{display:block;font-size:.92rem;color:var(--blue);margin:.12rem 0 .25rem}
+.adesc{display:block;font-size:.97rem;color:var(--muted);line-height:1.6}
+.atag{display:inline-block;margin-left:.45rem;font-family:var(--disp);font-weight:700;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:.14rem .5rem;vertical-align:middle;white-space:nowrap}
+.atag.gold{color:#8a6a00;background:#fbefc6}
+.atag.silver{color:#5a6472;background:#eceff3}
+.atag.bronze{color:#8a5a2b;background:#f4e5d6}
+.atag.blue{color:var(--blue);background:#eaf1fb}
+.atag.green{color:var(--green-dark);background:#eef6e6}
+.achnote{max-width:720px;margin:1.5rem auto 0;font-size:.88rem;color:var(--faint);text-align:center;line-height:1.6}
+@media (max-width:620px){
+  .aitem{grid-template-columns:1fr;gap:.2rem;padding:1rem 0}
+  .ayr{order:2;padding-top:.2rem;font-size:.82rem}
+  .abody{order:1}
+}
