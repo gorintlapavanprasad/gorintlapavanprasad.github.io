@@ -44,26 +44,48 @@
 
   /* 16:9 slide frame, centred (PowerPoint proportions) */
   .deck{position:fixed;left:0;right:0;top:0;bottom:var(--foot);z-index:2}
-  .slide{position:absolute;inset:0;margin:auto;
+  .slide{position:absolute;inset:0;margin:auto;z-index:1;
     width:min(calc(100vw - 26px), calc((100vh - var(--foot) - 26px) * 16 / 9));
     height:min(calc(100vh - var(--foot) - 26px), calc((100vw - 26px) * 9 / 16));
     display:flex;flex-direction:column;justify-content:center;overflow:hidden;
     padding:clamp(22px,3vw,52px) clamp(30px,4.8vw,78px);
-    opacity:0;visibility:hidden;transform:scale(.993);
-    transition:opacity .55s ease,transform .6s cubic-bezier(.2,.7,.2,1),visibility 0s linear .55s}
-  .slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .55s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+    opacity:0;visibility:hidden;transform:translate3d(5.5%,0,0) scale(.985);
+    transition:opacity .5s ease, transform .64s cubic-bezier(.22,.61,.36,1), visibility 0s linear .64s;
+    will-change:opacity,transform}
+  #deck[data-dir="back"] .slide{transform:translate3d(-5.5%,0,0) scale(.985)}
+  .slide.active{opacity:1;visibility:visible;transform:none;z-index:3;
+    transition:opacity .5s ease, transform .64s cubic-bezier(.22,.61,.36,1)}
+  .slide.leaving{opacity:0;visibility:visible;z-index:2;transform:translate3d(-6.5%,0,0) scale(.99);
+    transition:opacity .44s ease, transform .56s cubic-bezier(.4,0,.6,1)}
+  #deck[data-dir="back"] .slide.leaving{transform:translate3d(6.5%,0,0) scale(.99)}
   .stage{width:100%;min-width:0}
 
-  /* entrance: short, soft, staggered focus-in — gentle fades, no fly/bounce */
-  .a{opacity:0;transform:translateY(10px);filter:blur(5px)}
-  .slide.active .a{animation:rise .62s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i,0)*.055s + .1s)}
-  @keyframes rise{to{opacity:1;transform:none;filter:none}}
-  .pop{opacity:0;transform:scale(.84);transform-box:fill-box;transform-origin:center}
-  .slide.active .pop{animation:pop .55s cubic-bezier(.2,.75,.3,1) forwards;animation-delay:calc(var(--i,0)*.055s + .1s)}
-  @keyframes pop{to{opacity:1;transform:none}}
+  /* entrance: choreographed cascade — JS sets --i per element so content builds in sequence */
+  .a{opacity:0;transform:translateY(16px)}
+  .slide.active .a{animation:rise .6s cubic-bezier(.22,.61,.36,1) both;animation-delay:calc(var(--i,0)*.06s + .18s)}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .pop{opacity:0;transform:scale(.86);transform-box:fill-box;transform-origin:center}
+  .slide.active .pop{animation:pop .56s cubic-bezier(.2,.8,.3,1) both;animation-delay:calc(var(--i,0)*.06s + .18s)}
+  @keyframes pop{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:none}}
   .draw{stroke-dasharray:var(--len,1000);stroke-dashoffset:var(--len,1000)}
-  .slide.active .draw{animation:draw 1.1s ease forwards;animation-delay:calc(var(--i,0)*.055s + .12s)}
+  .slide.active .draw{animation:draw 1.15s ease forwards;animation-delay:calc(var(--i,0)*.06s + .24s)}
   @keyframes draw{to{stroke-dashoffset:0}}
+
+  /* cinematic section-break sweep (plays only when the chapter changes) */
+  #sweep{position:fixed;inset:0;z-index:40;pointer-events:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(10px,1.6vw,18px);
+    background:linear-gradient(118deg, color-mix(in srgb,var(--now) 92%, #05100d) 0%, color-mix(in srgb,var(--now) 34%, #05100d) 52%, #05100d 100%);
+    transform:translateX(-101%);visibility:hidden}
+  #sweep.play{animation:sweep 1.15s cubic-bezier(.76,0,.24,1) forwards;visibility:visible}
+  @keyframes sweep{0%{transform:translateX(-101%)}40%{transform:translateX(0)}60%{transform:translateX(0)}100%{transform:translateX(101%)}}
+  #sweep .sk{font-family:var(--font-mono);font-size:clamp(.7rem,1.3vw,.95rem);letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.82);opacity:0}
+  #sweep .sn{font-family:var(--font-display);font-weight:700;color:#fff;font-size:clamp(2.1rem,7.5vw,5.8rem);letter-spacing:.005em;line-height:1;text-align:center;padding:0 6vw;opacity:0;transform:translateY(18px);text-shadow:0 8px 40px rgba(0,0,0,.4)}
+  #sweep.play .sk,#sweep.play .sn{animation:swName 1.15s ease forwards}
+  @keyframes swName{0%,16%{opacity:0;transform:translateY(18px)}36%,56%{opacity:1;transform:none}74%,100%{opacity:0;transform:translateY(-12px)}}
+
+  /* micro-interaction: the current footer dot breathes */
+  .pdot.cur{animation:dotpulse 2.4s ease-in-out infinite}
+  @keyframes dotpulse{0%,100%{box-shadow:0 0 0 3px color-mix(in srgb,var(--gc) 26%,transparent),0 0 9px color-mix(in srgb,var(--gc) 48%,transparent)}
+    50%{box-shadow:0 0 0 5px color-mix(in srgb,var(--gc) 15%,transparent),0 0 16px color-mix(in srgb,var(--gc) 65%,transparent)}}
 
   /* click-to-reveal (one slide only) */
   [data-step]{opacity:0;transform:translateY(11px);transition:opacity .5s ease,transform .5s ease}
@@ -149,6 +171,14 @@
   .figcard img{width:100%;height:auto;display:block;border-radius:9px;max-height:54vh;object-fit:contain}
   .figcard .src{font-family:var(--font-mono);font-size:.68rem;color:#5c5c64;text-align:right;margin-top:7px}
   .figcard.dark .src{color:var(--faint)}
+
+  /* phone-screenshot showcase (real CardioCare Quest screens) */
+  .phones{display:flex;gap:clamp(16px,2.6vw,36px);justify-content:center;align-items:flex-start;margin-top:clamp(12px,1.8vw,22px)}
+  .phone{margin:0;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .phone .scr{background:#0d1216;border:1px solid var(--cardbrd);border-radius:22px;padding:7px;box-shadow:0 22px 54px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.04)}
+  .phone img{height:min(39vh,440px);width:auto;display:block;border-radius:15px}
+  .phone figcaption{font-family:var(--font-mono);font-size:clamp(.66rem,1vw,.8rem);color:var(--muted);text-align:center;max-width:22ch;line-height:1.35}
+  .phone figcaption b{color:var(--ink)}
 
   /* bars */
   .bars{display:flex;gap:clamp(26px,5vw,70px);align-items:flex-end;margin-top:clamp(16px,2.2vw,28px);height:clamp(120px,20vh,195px)}
@@ -249,7 +279,10 @@
     .a,.pop{opacity:1;transform:none;filter:none}
     .slide.active .a,.slide.active .pop,.slide.active .draw,.slide.active .bar .col{animation:none}
     .draw{stroke-dashoffset:0}.bar .col{transform:none}.key{background-size:100% 30%}
-    [data-step]{transition:opacity .2s ease}.slide{transition:none}
+    .pdot.cur{animation:none}
+    #sweep{display:none !important}
+    [data-step]{transition:opacity .2s ease}
+    .slide,.slide.active,.slide.leaving{transition:opacity .25s ease !important;transform:none !important}
   }
 
   /* print / PDF export: one slide per page, backgrounds kept, controls hidden */
@@ -258,7 +291,7 @@
     html,body{height:auto;overflow:visible;background:#07100e}
     .bg,.tint{display:none}
     .veil{position:absolute;background:#07100e}
-    .foot,.nav,.zone,.bar-prog,.notes-panel{display:none !important}
+    .foot,.nav,.zone,.bar-prog,.notes-panel,#sweep{display:none !important}
     .deck{position:static;inset:auto}
     .slide{position:relative;inset:auto;opacity:1 !important;visibility:visible !important;transform:none !important;
       page-break-after:always;break-after:page;width:16in;height:9in;margin:0 auto;
@@ -274,6 +307,7 @@
 <div class="veil" aria-hidden="true"></div>
 <div class="tint" aria-hidden="true"></div>
 <div class="bar-prog" id="prog"></div>
+<div id="sweep" aria-hidden="true"><span class="sk" id="sweepKick"></span><span class="sn" id="sweepName"></span></div>
 
 <div class="deck" id="deck">
 
@@ -465,10 +499,10 @@
         <div class="panel a" style="--act:var(--coral)"><h3 style="color:var(--coral)">A risk</h3><p>Seated video gaming was the only sitting habit linked to higher BP (282 teenagers) — likely snacking, and the stress and excitement of play. Light activity that breaks up sitting lowers BP.</p></div>
         <div class="panel a" style="--act:var(--teal)"><h3 style="color:var(--teal)">A requirement</h3><p>A correct reading needs: rest 5 min · seated, back supported · feet flat · arm at heart level · no talking.</p></div>
       </div>
-      <p class="explain a">In CardioCare Quest, <b>Dog Walking</b> is for movement, and <b>Quiet Minute</b> is slow breathing before a calm, seated reading — both sides, one platform.</p>
+      <p class="explain a">In CardioCare Quest, <b>Dog Walking</b> is for movement, and <b>Vascular Village</b> frames a calm, seated blood-pressure reading — both sides, one platform.</p>
       <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Goldfield+2011+sedentary+gaming+blood+pressure" target="_blank" rel="noopener">Goldfield et al. 2011</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Shimbo+2020+home+blood+pressure+monitoring+AHA" target="_blank" rel="noopener">Shimbo et al. 2020</a></div>
     </div>
-    <aside class="aside"><p>Sitting needs its own slide, because it pulls the design in two directions. On one side, sitting is a risk: in 282 teenagers, seated video gaming was the only sitting habit linked to higher blood pressure — the authors point to snacking, and the stress and excitement of play. The 2025 guideline adds that even light activity that breaks up sitting lowers BP.</p><p>On the other side, sitting is a requirement: a correct home reading needs five minutes of rest, seated, back supported, feet flat, arm at heart level, no talking.</p><p>So the design does both. In CardioCare Quest, Dog Walking is for movement, and Quiet Minute is slow breathing before a calm, seated reading.</p></aside>
+    <aside class="aside"><p>Sitting needs its own slide, because it pulls the design in two directions. On one side, sitting is a risk: in 282 teenagers, seated video gaming was the only sitting habit linked to higher blood pressure — the authors point to snacking, and the stress and excitement of play. The 2025 guideline adds that even light activity that breaks up sitting lowers BP.</p><p>On the other side, sitting is a requirement: a correct home reading needs five minutes of rest, seated, back supported, feet flat, arm at heart level, no talking.</p><p>So the design does both. In CardioCare Quest, Dog Walking is for movement, and Vascular Village frames a calm, seated blood-pressure reading.</p></aside>
   </section>
 
   <section class="slide" data-sec="2" style="--act:var(--green)" data-grp="Intersectionality">
@@ -809,17 +843,14 @@
     <div class="stage">
       <div class="eyebrow a">CardioCare Quest Today</div>
       <h2 class="a">A game for each factor — moving for exercise, still for measuring.</h2>
-      <div class="row">
-        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>Exercise · Dog Walking</span>
-        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>Diet · Diet Quest</span>
-        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>Education · Heart Smarts</span>
-        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>Medication · Pill Path</span>
-        <span class="chip c a" style="--act:var(--teal)"><span class="dotc"></span>Measuring · Quiet Minute</span>
+      <div class="phones a">
+        <figure class="phone"><div class="scr"><img src="ccq_catalog.png" alt="CardioCare Quest in-app Game Catalog: Exercise, Education, Measurements, Diet, and Medication, each listed with its game"></div><figcaption>In-app catalog — <b>one game per factor</b></figcaption></figure>
+        <figure class="phone"><div class="scr"><img src="ccq_dogwalk.png" alt="Dog Walking exercise game: a GPS-tracked quick walk of 500 steps, with a culturally grounded dog and the prompt how does exercise help with blood pressure"></div><figcaption><b>Dog Walking</b> — moving, for exercise</figcaption></figure>
+        <figure class="phone"><div class="scr"><img src="ccq_vascular.png" alt="Vascular Village measurement game: a village lives inside your blood vessels; buttons to start a quest or log a blood-pressure reading"></div><figcaption><b>Vascular Village</b> — still, for a seated reading</figcaption></figure>
       </div>
-      <p class="explain a" style="margin-top:16px">Built in <b>Flutter and Firebase</b>, with story games in <b>Twine</b>; works <b>offline</b>. Pill Path can mark a dose as caregiver-assisted; Quiet Minute is slow breathing before a calm, seated reading.</p>
-      <div class="placeholder a">▸ <b>Add:</b> 2–3 real CardioCare Quest app screenshots here (home, Dog Walking, Quiet Minute). <b>Not deployed yet</b> — next steps: accessibility work with players with disabilities, and a data plan with the community.</div>
+      <p class="explain a" style="max-width:76ch;margin-top:clamp(10px,1.4vw,16px)">Five games — <b>Dog Walking</b> (exercise), <b>DASH Diet</b> (diet), <b>Heart Smarts</b> (education), <b>Bingo Bash</b> (medication), <b>Vascular Village</b> (measuring). Built in <b>Flutter + Firebase</b> with story games in <b>Twine</b>; works <b>offline</b>. <b>Not yet deployed</b> — next: accessibility work with players with disabilities, and a community data plan.</p>
     </div>
-    <aside class="aside"><p>What is CardioCare Quest today? Games for each factor: Dog Walking for exercise, Diet Quest for diet, Heart Smarts for education, Pill Path for medication — where a dose can be marked caregiver-assisted — and Quiet Minute for measuring: slow breathing, then a calm, seated reading. That covers both sides: moving for exercise, still for measuring.</p><p>It is built in Flutter and Firebase, with story games in Twine, and it works offline. It is not deployed yet; the next steps are accessibility work with players with disabilities and a data plan with the community.</p></aside>
+    <aside class="aside"><p>What is CardioCare Quest today? A game for each factor: Dog Walking for exercise, DASH Diet for diet, Heart Smarts for education, Bingo Bash for medication — where a dose can be marked caregiver-assisted — and Vascular Village for measuring, which uses slow breathing before a calm, seated reading. That covers both sides: moving for exercise, still for measuring.</p><p>On the left is the in-app catalog, one game per factor; on the right is the Dog Walking exercise game, a GPS-tracked walk. It is built in Flutter and Firebase, with story games in Twine, and it works offline. It is not deployed yet; the next steps are accessibility work with players with disabilities, and a data plan with the community.</p></aside>
   </section>
 
   <section class="slide" data-sec="5" style="--act:var(--coral)">
@@ -995,16 +1026,47 @@
     nbb.innerHTML = a? a.innerHTML : '<p>(No notes.)</p>';
   }
 
+  var deckEl=document.getElementById('deck');
+  var sweep=document.getElementById('sweep');
+  var sweepName=document.getElementById('sweepName');
+  var sweepKick=document.getElementById('sweepKick');
+  var sweepT=null;
+  function secOf(k){ return +slides[k].getAttribute('data-sec')||0; }
+  function groupOf(i){ for(var q=0;q<groups.length;q++){ if(i>=groups[q].start && i<groups[q].start+groups[q].count) return q; } return 0; }
+
   function go(i,opts){
     opts=opts||{};
     i=Math.max(0,Math.min(N-1,i));
-    var prev=cur; cur=i;
-    slides.forEach(function(s,k){ s.classList.toggle('active',k===i); });
+    var prevIdx=cur;
+    var first=!!opts.first;
+    var dir=(i<prevIdx)?'back':'fwd';
+    deckEl.setAttribute('data-dir',dir);
+    // outgoing slide animates out; all others reset cleanly
+    slides.forEach(function(x,k){ if(k!==i && k!==prevIdx){ x.classList.remove('active','leaving'); } });
+    if(prevIdx!==i && !first){
+      var po=slides[prevIdx];
+      po.classList.remove('active');
+      po.classList.add('leaving');
+      (function(el){ setTimeout(function(){ el.classList.remove('leaving'); }, 680); })(po);
+    }
+    cur=i;
     var s=slides[i];
     // shift the background glow to the current section's viridis hue
-    var secNow=+s.getAttribute('data-sec')||0;
+    var secNow=secOf(i);
     var hexNow=getComputedStyle(document.documentElement).getPropertyValue(SECTIONS[secNow].v).trim();
     if(hexNow) document.body.style.setProperty('--now', hexNow);
+    // cinematic sweep only when the chapter (section) changes
+    if(!first && prevIdx!==i && secOf(prevIdx)!==secNow){
+      var gi=groupOf(i);
+      sweepName.textContent=groups[gi].label;
+      sweepKick.textContent='Chapter '+(gi+1)+' of '+groups.length;
+      sweep.classList.remove('play'); void sweep.offsetWidth; sweep.classList.add('play');
+      if(sweepT) clearTimeout(sweepT);
+      sweepT=setTimeout(function(){ sweep.classList.remove('play'); }, 1250);
+    }
+    // activate + re-trigger the staggered cascade (set --i per element so it builds in sequence)
+    s.classList.remove('active'); void s.offsetWidth; s.classList.add('active');
+    var ai=0; [].slice.call(s.querySelectorAll('.a,.pop')).forEach(function(el){ el.style.setProperty('--i', Math.min(ai++,13)); });
     // steps: start collapsed unless we arrived going backwards (then show all)
     if(opts.allSteps) showStep(s, steps(s).length); else showStep(s,0);
     countUp(s);
@@ -1014,7 +1076,7 @@
       var active = (i>=g.start && i<g.start+g.count);
       g.el.classList.toggle('on',active);
       g.dots.forEach(function(d,k){
-        var gi=g.start+k; d.classList.toggle('done', gi<i); d.classList.toggle('cur', gi===i);
+        var gj=g.start+k; d.classList.toggle('done', gj<i); d.classList.toggle('cur', gj===i);
       });
     });
     pageno.textContent=(i+1)+' / '+N;
@@ -1055,7 +1117,7 @@
     if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){ dx<0?next():prev(); }
   },{passive:true});
 
-  go(0);
+  go(0,{first:true});
 })();
 </script>
 </body></html>
