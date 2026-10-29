@@ -314,6 +314,12 @@
   .build .bbig{font-family:var(--font-display);font-weight:700;font-size:clamp(1.55rem,3.6vw,3rem);line-height:1.12;color:var(--ink);max-width:26ch;margin:0}
   .build .bsm{font-family:var(--font-body);font-size:clamp(1rem,1.75vw,1.45rem);color:var(--muted);margin:0}
   .build .byellow{color:var(--yellow);font-weight:700}
+  /* Venn (Intersectionality) */
+  .venn{max-width:min(100%,640px);height:auto;margin:0 auto;display:block}
+  .venn .vlbl{font-family:var(--font-display);font-size:19px;font-weight:700;fill:var(--ink)}
+  .venn .voverlap{font-family:var(--font-display);font-size:15px;font-weight:700;fill:#0c0a06}
+  .venncap{font-family:var(--font-body);text-align:center;color:var(--ink);font-size:clamp(1rem,1.6vw,1.35rem);margin-top:clamp(10px,2vh,20px);max-width:60ch;margin-left:auto;margin-right:auto}
+  .venncap b{color:var(--yellow);font-weight:700}
   /* two-column "who carries more" */
   .who2{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(20px,4vw,64px);margin-top:clamp(14px,2.4vh,26px);align-items:start}
   .wbars{display:flex;flex-direction:column;gap:clamp(6px,1.2vh,12px)}
@@ -428,7 +434,7 @@
     <div class="stage">
       <h2 class="a">What Is Hypertension?</h2>
       <div class="bpcenter">
-        <div class="bpnum a"><span class="sys">130</span><span class="sl">/</span><span class="dia">80</span></div>
+        <div class="bpnum a"><span class="sys" data-count="130">130</span><span class="sl">/</span><span class="dia" data-count="80">80</span></div>
         <div class="bplabel a">systolic and diastolic pressure, in mmHg (WHO uses 140/90)</div>
         <div class="bpfacts">
           <p class="bpfact" data-step>It usually has <b>no symptoms</b>, but it leads to heart attack, stroke, and heart failure.</p>
@@ -448,13 +454,13 @@
         <div class="wleft">
           <div class="whd">Diagnosed hypertension</div>
           <div class="wbars">
-            <div class="hbar"><span class="hlb">AI/AN adults</span><div class="htrack"><div class="hfill" style="width:89%;background:var(--yellow)"></div></div><span class="hval">33.7%</span></div>
-            <div class="hbar"><span class="hlb">All US adults</span><div class="htrack"><div class="hfill" style="width:76%;background:var(--greybar)"></div></div><span class="hval">28.7%</span></div>
+            <div class="hbar"><span class="hlb">AI/AN adults</span><div class="htrack"><div class="hfill" style="width:89%;background:var(--yellow)"></div></div><span class="hval"><span data-count="33.7" data-dec="1">33.7</span>%</span></div>
+            <div class="hbar"><span class="hlb">All US adults</span><div class="htrack"><div class="hfill" style="width:76%;background:var(--greybar)"></div></div><span class="hval"><span data-count="28.7" data-dec="1">28.7</span>%</span></div>
           </div>
           <div class="whd">Disability, large urban areas</div>
           <div class="wbars">
-            <div class="hbar"><span class="hlb">AI/AN adults</span><div class="htrack"><div class="hfill" style="width:50%;background:var(--yellow)"></div></div><span class="hval">18.9%</span></div>
-            <div class="hbar"><span class="hlb">All US adults</span><div class="htrack"><div class="hfill" style="width:21%;background:var(--greybar)"></div></div><span class="hval">7.9%</span></div>
+            <div class="hbar"><span class="hlb">AI/AN adults</span><div class="htrack"><div class="hfill" style="width:50%;background:var(--yellow)"></div></div><span class="hval"><span data-count="18.9" data-dec="1">18.9</span>%</span></div>
+            <div class="hbar"><span class="hlb">All US adults</span><div class="htrack"><div class="hfill" style="width:21%;background:var(--greybar)"></div></div><span class="hval"><span data-count="7.9" data-dec="1">7.9</span>%</span></div>
           </div>
           <div class="wnote">AI/AN = American Indian and Alaska Native</div>
         </div>
@@ -489,18 +495,26 @@
   <section class="slide" data-sec="0">
     <div class="stage">
       <h2 class="a">Intersectional Research in HCI</h2>
-      <div class="build">
-        <div data-step>
-          <p class="bbig">Navajo people, and people with disabilities,</p>
-          <p class="bsm">are usually studied as two separate populations</p>
-        </div>
-        <div data-step>
-          <p class="bsm" style="margin-top:clamp(14px,3vh,34px)">This review instead studies</p>
-          <p class="bbig">Urban Diné adults with disabilities, and their supporters</p>
-          <p class="bsm byellow">as one population</p>
-        </div>
+      <p class="explain a" style="max-width:70ch;margin-left:auto;margin-right:auto;text-align:center">Where identities meet, the experience is <b>different</b>, not added (Crenshaw). HCI mostly studies one identity at a time.</p>
+      <div class="fig a" style="margin-top:clamp(8px,1.6vh,18px)">
+        <svg class="venn" viewBox="0 0 760 400" role="img" aria-label="Venn diagram: Indigenous Dine adults and people with disabilities overlap in this review's population">
+          <defs><clipPath id="vclip"><circle cx="300" cy="205" r="168"/></clipPath></defs>
+          <g data-step>
+            <circle cx="300" cy="205" r="168" fill="#5fc457" fill-opacity=".17" stroke="#5fc457" stroke-width="2.5"/>
+            <text class="vlbl" x="186" y="198" text-anchor="middle"><tspan x="186">Indigenous</tspan><tspan x="186" dy="26">(Diné) adults</tspan></text>
+          </g>
+          <g data-step>
+            <circle cx="460" cy="205" r="168" fill="#f2d21a" fill-opacity=".15" stroke="#f2d21a" stroke-width="2.5"/>
+            <text class="vlbl" x="574" y="198" text-anchor="middle"><tspan x="574">People with</tspan><tspan x="574" dy="26">disabilities</tspan></text>
+          </g>
+          <g data-step>
+            <circle cx="460" cy="205" r="168" fill="#efe9d6" fill-opacity=".92" clip-path="url(#vclip)"/>
+            <text class="voverlap" x="380" y="200" text-anchor="middle"><tspan x="380">This</tspan><tspan x="380" dy="22">review</tspan></text>
+          </g>
+        </svg>
       </div>
-      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Crenshaw+1991+mapping+the+margins+intersectionality" target="_blank" rel="noopener">Crenshaw, 1991</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Schlesinger+2017+intersectional+HCI+identity" target="_blank" rel="noopener">Schlesinger et al., 2017</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Sum+2022+disability+justice+ableism+colonialism" target="_blank" rel="noopener">Sum et al., 2022</a></div>
+      <p class="venncap a" data-step>The overlap is this review: <b>urban Diné adults with disabilities, and their supporters, as one population.</b></p>
+      <div class="cite a" style="text-align:center;border-left:none;padding-left:0;margin-left:auto;margin-right:auto"><a class="lnk" href="https://scholar.google.com/scholar?q=Crenshaw+1991+mapping+the+margins+intersectionality" target="_blank" rel="noopener">Crenshaw, 1991</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Schlesinger+2017+intersectional+HCI+identity" target="_blank" rel="noopener">Schlesinger et al., 2017</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Sum+2022+disability+justice+ableism+colonialism" target="_blank" rel="noopener">Sum et al., 2022</a></div>
     </div>
     <aside class="aside"><p>This is where my framing comes in: intersectional research in HCI. The usual approach takes two populations — Navajo people and people with disabilities — and studies them side by side. Crenshaw showed why that misses people: where identities meet, the experience is different, not added.</p><p>(click) So this review treats them as one population: urban Diné adults with disabilities, and the people who support them, in Flagstaff. HCI has mostly studied one identity at a time, so studying both together is a contribution the field has been asking for.</p></aside>
   </section>
@@ -524,10 +538,10 @@
       <p class="explain a" style="max-width:none">Six concept blocks: games, technology, hypertension, Indigenous, disability, and design</p>
       <div class="glab a" style="font-weight:400;color:var(--muted)">PubMed (1,539), ACM Digital Library (100), and Google Scholar (120), searched on 7 September 2026</div>
       <div class="funnel">
-        <div class="fbar" style="--fi:0;width:72%;background:var(--greybar)"><span class="fn">1,759</span> <span class="fl">records</span></div>
-        <div class="fbar" style="--fi:1;width:61%;background:var(--blue);color:#f3f1ea"><span class="fn">1,709</span> <span class="fl">screened</span></div>
-        <div class="fbar" style="--fi:2;width:49%;background:var(--teal2);color:#f3f1ea"><span class="fn">961</span> <span class="fl">read in full</span></div>
-        <div class="fbar" style="--fi:3;width:34%;background:var(--yellow)"><span class="fn">176</span> <span class="fl">included</span></div>
+        <div class="fbar" style="--fi:0;width:72%;background:var(--greybar)"><span class="fn" data-count="1759">1,759</span> <span class="fl">records</span></div>
+        <div class="fbar" style="--fi:1;width:61%;background:var(--blue);color:#f3f1ea"><span class="fn" data-count="1709">1,709</span> <span class="fl">screened</span></div>
+        <div class="fbar" style="--fi:2;width:49%;background:var(--teal2);color:#f3f1ea"><span class="fn" data-count="961">961</span> <span class="fl">read in full</span></div>
+        <div class="fbar" style="--fi:3;width:34%;background:var(--yellow)"><span class="fn" data-count="176">176</span> <span class="fl">included</span></div>
       </div>
       <div class="cite a">50 duplicates removed · 748 excluded on title/abstract · 785 at full text · <a class="lnk" href="https://scholar.google.com/scholar?q=scoping+review+methodology+Arksey+OMalley" target="_blank" rel="noopener">scoping-review method</a></div>
     </div>
@@ -1097,11 +1111,12 @@
   function shownCount(s){ return steps(s).filter(function(e){return e.classList.contains('shown');}).length; }
   function showStep(s,n){ steps(s).forEach(function(e,i){ e.classList.toggle('shown', i<n); }); }
 
+  function fmtNum(v,dec){ return dec>0 ? v.toFixed(dec) : Math.round(v).toLocaleString('en-US'); }
   function countUp(s){
     [].slice.call(s.querySelectorAll('[data-count]')).forEach(function(el){
-      var tgt=parseFloat(el.getAttribute('data-count')), dec=+(el.getAttribute('data-dec')||0), t0=null, dur=900;
+      var tgt=parseFloat(el.getAttribute('data-count')), dec=+(el.getAttribute('data-dec')||0), t0=null, dur=950;
       function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1); var e=1-Math.pow(1-p,3);
-        el.textContent=(tgt*e).toFixed(dec); if(p<1)requestAnimationFrame(step); else el.textContent=tgt.toFixed(dec); }
+        el.textContent=fmtNum(tgt*e,dec); if(p<1)requestAnimationFrame(step); else el.textContent=fmtNum(tgt,dec); }
       requestAnimationFrame(step);
     });
   }
