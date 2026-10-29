@@ -249,7 +249,7 @@
   .hlb{font-family:var(--font-body);font-size:clamp(.84rem,1.2vw,1.02rem);color:var(--muted);text-align:right;line-height:1.18}
   .htrack{height:clamp(15px,2.3vh,23px);background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden}
   .hfill{height:100%;border-radius:6px;transform-origin:left;transform:scaleX(0)}
-  [data-step].shown .hfill,.cmpblock.show .hfill{animation:hgrow .8s cubic-bezier(.2,.7,.2,1) forwards}
+  [data-step].shown .hfill,.slide.active .cmpblock:not([data-step]) .hfill{animation:hgrow .8s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:.25s}
   @keyframes hgrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
   .hval{font-family:var(--font-display);font-weight:700;font-size:clamp(1.05rem,1.9vw,1.55rem);color:var(--ink);font-variant-numeric:tabular-nums}
   .hval.k{color:var(--act,var(--teal))}
@@ -401,32 +401,56 @@
 
   <section class="slide" data-sec="0">
     <div class="stage">
-      <div class="eyebrow a">Who Carries More of It?</div>
-      <h2 class="a">Indigenous adults, and people with disabilities, carry more.</h2>
+      <div class="eyebrow a">Who Carries More of It? · 1 of 3</div>
+      <h2 class="a">Indigenous adults are diagnosed more often.</h2>
       <p class="explain a">Worldwide, <b>33%</b> of adults aged 30–79 have hypertension; in the US, <b>46.7%</b>. Nearly half do not know they have it (WHO, 2023).</p>
       <div class="cmp">
-        <div class="cmpblock" data-step>
+        <div class="cmpblock a">
           <div class="cmphd">Diagnosed hypertension</div>
           <div class="hbar"><span class="hlb">AI/AN adults</span><div class="htrack"><div class="hfill" style="width:89%;background:var(--green)"></div></div><span class="hval k" style="color:var(--green)">33.7%</span></div>
           <div class="hbar"><span class="hlb">All US adults</span><div class="htrack"><div class="hfill" style="width:76%;background:var(--muted)"></div></div><span class="hval">28.7%</span></div>
-          <div class="cmpsrc">Self-reported diagnosis · Villarroel et al., 2020</div>
-        </div>
-        <div class="cmpblock" data-step>
-          <div class="cmphd">Disability — large urban areas (more than twice as common)</div>
-          <div class="hbar"><span class="hlb">AI/AN adults</span><div class="htrack"><div class="hfill" style="width:50%;background:var(--teal)"></div></div><span class="hval k" style="color:var(--teal)">18.9%</span></div>
-          <div class="hbar"><span class="hlb">All US adults</span><div class="htrack"><div class="hfill" style="width:21%;background:var(--muted)"></div></div><span class="hval">7.9%</span></div>
-          <div class="cmpsrc">Villarroel et al., 2020</div>
-        </div>
-        <div class="cmpblock" data-step>
-          <div class="cmphd">Navajo (Diné) adults</div>
-          <div class="hbar"><span class="hlb">Measured, cohort</span><div class="htrack"><div class="hfill" style="width:95%;background:var(--green)"></div></div><span class="hval k" style="color:var(--green)">35.9%</span></div>
-          <div class="hbar"><span class="hlb">Told by a provider</span><div class="htrack"><div class="hfill" style="width:78%;background:var(--muted)"></div></div><span class="hval">29.4%</span></div>
-          <div class="cmpsrc">Cohort: Harmon et al., 2016 · Self-report: Navajo Nation BRFSS 2013–2016 (Francisco et al., 2017). Heart disease was the 4th leading cause of death on the NM Navajo Nation, 2021–2024 (Foley, 2025).</div>
+          <div class="cmpsrc">Self-reported, so the true number is likely higher · Villarroel et al., 2020</div>
         </div>
       </div>
-      <div class="cite a">AI/AN = American Indian and Alaska Native · Diné = the Navajo people's own name · <a class="lnk" href="https://scholar.google.com/scholar?q=Villarroel+2020+disability+American+Indian+Alaska+Native" target="_blank" rel="noopener">Villarroel 2020</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Harmon+2016+Navajo+hypertension+cohort" target="_blank" rel="noopener">Harmon 2016</a> · <a class="lnk" href="https://nec.navajo-nsn.gov" target="_blank" rel="noopener">Francisco 2017 · Navajo BRFSS</a> · <a class="lnk" href="https://nec.navajo-nsn.gov" target="_blank" rel="noopener">Foley 2025</a></div>
+      <div class="cite a">AI/AN = American Indian and Alaska Native · <a class="lnk" href="https://scholar.google.com/scholar?q=Villarroel+2020+disability+American+Indian+Alaska+Native" target="_blank" rel="noopener">Villarroel 2020</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=WHO+2023+global+report+hypertension" target="_blank" rel="noopener">WHO 2023</a></div>
     </div>
-    <aside class="aside"><p>How common is it? Worldwide, 33 percent of adults aged 30 to 79 have hypertension, about 1.3 billion people; in the US, 46.7 percent. These come from measured blood pressure, so they include people never diagnosed; worldwide, 46 percent do not know they have it.</p><p>(click) American Indian and Alaska Native adults carry more: 33.7 percent diagnosed, against 28.7 of all US adults. These are self-reported by Villarroel and colleagues in 2020, so the true number is likely higher.</p><p>(click) And in large urban areas, disability is more than twice as common: 18.9 percent against 7.9.</p><p>(click) For Navajo adults, Harmon and colleagues measured 35.9 percent in a cohort; in the Navajo Nation's own Behavioral Risk Factor survey, 29.4 percent were told by a provider they had high blood pressure. For context, heart disease was the fourth leading cause of death on the New Mexico portion of the Navajo Nation from 2021 to 2024.</p></aside>
+    <aside class="aside"><p>How common is it? Worldwide, 33 percent of adults aged 30 to 79 have hypertension, about 1.3 billion people; in the US, 46.7 percent. These come from measured blood pressure, so they include people never diagnosed; worldwide, 46 percent do not know they have it.</p><p>American Indian and Alaska Native adults carry more: 33.7 percent diagnosed, against 28.7 of all US adults. These are self-reported by Villarroel and colleagues in 2020, so the true number is likely higher.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="0">
+    <div class="stage">
+      <div class="eyebrow a">Who Carries More of It? · 2 of 3</div>
+      <h2 class="a">Disability is more than twice as common.</h2>
+      <p class="explain a">Any disability, among adults in large urban areas:</p>
+      <div class="cmp">
+        <div class="cmpblock a">
+          <div class="cmphd">Any disability · large urban areas</div>
+          <div class="hbar"><span class="hlb">AI/AN adults</span><div class="htrack"><div class="hfill" style="width:50%;background:var(--teal)"></div></div><span class="hval k" style="color:var(--teal)">18.9%</span></div>
+          <div class="hbar"><span class="hlb">All US adults</span><div class="htrack"><div class="hfill" style="width:21%;background:var(--muted)"></div></div><span class="hval">7.9%</span></div>
+          <div class="cmpsrc">More than twice as common · Villarroel et al., 2020</div>
+        </div>
+      </div>
+      <div class="cite a">This is the intersection the review is about: Indigeneity and disability together · <a class="lnk" href="https://scholar.google.com/scholar?q=Villarroel+2020+disability+American+Indian+Alaska+Native" target="_blank" rel="noopener">Villarroel 2020</a></div>
+    </div>
+    <aside class="aside"><p>And disability follows the same pattern. In large urban areas, disability among American Indian and Alaska Native adults is 18.9 percent, against 7.9 for all US adults — more than twice as common. That intersection, Indigeneity and disability together, is what this review is about.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="0">
+    <div class="stage">
+      <div class="eyebrow a">Who Carries More of It? · 3 of 3</div>
+      <h2 class="a">And more again among Navajo (Diné) adults.</h2>
+      <div class="cmp">
+        <div class="cmpblock a">
+          <div class="cmphd">Hypertension among Navajo (Diné) adults</div>
+          <div class="hbar"><span class="hlb">Measured, cohort</span><div class="htrack"><div class="hfill" style="width:95%;background:var(--green)"></div></div><span class="hval k" style="color:var(--green)">35.9%</span></div>
+          <div class="hbar"><span class="hlb">Told by a provider</span><div class="htrack"><div class="hfill" style="width:78%;background:var(--muted)"></div></div><span class="hval">29.4%</span></div>
+          <div class="cmpsrc">Cohort: Harmon et al., 2016 · Self-report: Navajo Nation BRFSS 2013–2016 (Francisco et al., 2017)</div>
+        </div>
+      </div>
+      <p class="explain a">For context: heart disease was the <b>4th leading cause of death</b> on the New Mexico portion of the Navajo Nation, 2021–2024 (Foley, 2025).</p>
+      <div class="cite a">Diné = the Navajo people's own name · <a class="lnk" href="https://scholar.google.com/scholar?q=Harmon+2016+Navajo+hypertension+cohort" target="_blank" rel="noopener">Harmon 2016</a> · <a class="lnk" href="https://nec.navajo-nsn.gov" target="_blank" rel="noopener">Navajo BRFSS · Francisco 2017</a> · <a class="lnk" href="https://nec.navajo-nsn.gov" target="_blank" rel="noopener">Foley 2025</a></div>
+    </div>
+    <aside class="aside"><p>And for Navajo adults specifically: Harmon and colleagues measured 35.9 percent in a cohort; in the Navajo Nation's own Behavioral Risk Factor survey, 29.4 percent were told by a provider they had high blood pressure.</p><p>For context, heart disease was the fourth leading cause of death on the New Mexico portion of the Navajo Nation from 2021 to 2024.</p></aside>
   </section>
 
   <section class="slide" data-sec="0">
@@ -1112,6 +1136,21 @@
   var deckEl=document.getElementById('deck');
   function secOf(k){ return +slides[k].getAttribute('data-sec')||0; }
 
+  // fit-to-slide: scale a slide's content down so it never overflows / gets chopped,
+  // whatever fonts the viewer's browser renders (Cambria / Times are taller on Windows).
+  function fit(s){
+    if(!s) return;
+    var st=s.querySelector('.stage'); if(!st) return;
+    st.style.transform='none';
+    var cs=getComputedStyle(s);
+    var availH=s.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
+    var availW=s.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+    var h=st.scrollHeight, w=st.scrollWidth;
+    var sc=Math.min(1, availH/(h||1), availW/(w||1));
+    st.style.transformOrigin='center center';
+    st.style.transform = sc<0.998 ? 'scale('+(Math.floor(sc*1000)/1000)+')' : 'none';
+  }
+
   function go(i,opts){
     opts=opts||{};
     i=Math.max(0,Math.min(N-1,i));
@@ -1140,6 +1179,7 @@
     if(opts.allSteps) showStep(s, steps(s).length); else showStep(s,0);
     countUp(s);
     renderNotes(s);
+    fit(s);
     // footer dots
     groups.forEach(function(g){
       var active = (i>=g.start && i<g.start+g.count);
@@ -1185,6 +1225,10 @@
     var dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
     if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){ dx<0?next():prev(); }
   },{passive:true});
+
+  var rzT=null;
+  window.addEventListener('resize',function(){ clearTimeout(rzT); rzT=setTimeout(function(){ fit(slides[cur]); },120); });
+  window.addEventListener('load',function(){ fit(slides[cur]); });
 
   go(0,{first:true});
 })();
