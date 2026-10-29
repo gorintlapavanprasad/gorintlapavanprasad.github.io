@@ -88,11 +88,9 @@
   .k{color:var(--act,var(--teal))}
 
   /* emphasis marker (draws under key phrases) */
-  .key{font-weight:700;color:var(--ink);
-    background-image:linear-gradient(var(--hl),var(--hl));
-    background-repeat:no-repeat;background-position:0 92%;background-size:0% 30%;padding:0 .06em}
-  .slide.active .key{animation:mark .7s cubic-bezier(.2,.7,.2,1) forwards .85s}
-  @keyframes mark{to{background-size:100% 30%}}
+  /* emphasis = clean full-color word, NO partial marker box */
+  .key{font-weight:700;color:var(--yellow)}
+  @keyframes mark{to{}}
 
   .big{font-family:var(--font-display);font-weight:700;line-height:.9;font-size:clamp(3.4rem,9.6vw,7.6rem);
     color:var(--act,var(--teal));font-variant-numeric:tabular-nums;display:inline-block;position:relative;
@@ -556,9 +554,8 @@
       <div class="split">
         <div>
           <h2 class="a">Only <span class="key">1 of 176</span> studies involved both groups.</h2>
-          <p class="explain a">33 involved Indigenous people, 47 involved people with disabilities — and only one involved both: a review of dementia care, not hypertension tools.</p>
-          <p class="explain a" style="margin-top:10px"><b>Design implications:</b> study both identities together; ask who a design leaves out, and who holds power.</p>
-          <div class="cite a">Prior work: <a class="lnk" href="https://scholar.google.com/scholar?q=Erete+Israni+Dillahunt+2018+intersectional+HCI+design+margins" target="_blank" rel="noopener">Erete, Israni &amp; Dillahunt 2018</a> — intersecting axes of privilege and oppression, with disability and non-European origin on one diagram.</div>
+          <p class="explain a">33 Indigenous · 47 disability · <b>1 both</b> — and that one is dementia care, not hypertension.</p>
+          <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Erete+Israni+Dillahunt+2018+intersectional+HCI+design+margins" target="_blank" rel="noopener">Erete, Israni &amp; Dillahunt 2018</a></div>
         </div>
         <div class="figcard a">
           <img src="erete.png" alt="Erete 2018 figure: a radial diagram of intersecting axes of privilege, domination, and oppression, listing disability, race, gender, class, and more">
