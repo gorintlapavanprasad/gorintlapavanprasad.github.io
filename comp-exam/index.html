@@ -71,17 +71,6 @@
   .slide.active .draw{animation:draw 1.15s ease forwards;animation-delay:calc(var(--i,0)*.06s + .24s)}
   @keyframes draw{to{stroke-dashoffset:0}}
 
-  /* cinematic section-break sweep (plays only when the chapter changes) */
-  #sweep{position:fixed;inset:0;z-index:40;pointer-events:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(10px,1.6vw,18px);
-    background:linear-gradient(118deg, color-mix(in srgb,var(--now) 92%, #05100d) 0%, color-mix(in srgb,var(--now) 34%, #05100d) 52%, #05100d 100%);
-    transform:translateX(-101%);visibility:hidden}
-  #sweep.play{animation:sweep 1.15s cubic-bezier(.76,0,.24,1) forwards;visibility:visible}
-  @keyframes sweep{0%{transform:translateX(-101%)}40%{transform:translateX(0)}60%{transform:translateX(0)}100%{transform:translateX(101%)}}
-  #sweep .sk{font-family:var(--font-mono);font-size:clamp(.7rem,1.3vw,.95rem);letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.82);opacity:0}
-  #sweep .sn{font-family:var(--font-display);font-weight:700;color:#fff;font-size:clamp(2.1rem,7.5vw,5.8rem);letter-spacing:.005em;line-height:1;text-align:center;padding:0 6vw;opacity:0;transform:translateY(18px);text-shadow:0 8px 40px rgba(0,0,0,.4)}
-  #sweep.play .sk,#sweep.play .sn{animation:swName 1.15s ease forwards}
-  @keyframes swName{0%,16%{opacity:0;transform:translateY(18px)}36%,56%{opacity:1;transform:none}74%,100%{opacity:0;transform:translateY(-12px)}}
-
   /* micro-interaction: the current footer dot breathes */
   .pdot.cur{animation:dotpulse 2.4s ease-in-out infinite}
   @keyframes dotpulse{0%,100%{box-shadow:0 0 0 3px color-mix(in srgb,var(--gc) 26%,transparent),0 0 9px color-mix(in srgb,var(--gc) 48%,transparent)}
@@ -227,6 +216,65 @@
   .cover-sub .who{color:var(--ink)}
   .committee{font-family:var(--font-mono);font-size:clamp(.72rem,1vw,.84rem);color:var(--faint);margin-top:16px;letter-spacing:.02em}
 
+  /* title (cover) slide — title big, to the top; meta + logos below */
+  .slide.cover::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:linear-gradient(180deg, rgba(5,10,9,.9) 0%, rgba(5,10,9,.66) 40%, rgba(5,10,9,.5) 62%, rgba(5,10,9,.86) 100%)}
+  .slide.cover .stage{position:relative;z-index:1;display:flex;flex-direction:column;height:100%}
+  .slide.cover h1{font-size:clamp(1.85rem,4.4vw,3.55rem);margin-top:clamp(8px,1.6vh,18px);max-width:21ch;text-shadow:0 2px 24px rgba(0,0,0,.6)}
+  .cover-tag{text-shadow:0 2px 20px rgba(0,0,0,.55)}
+  .cover-tag{font-family:var(--font-display);font-style:italic;font-weight:600;font-size:clamp(1.15rem,2.4vw,1.95rem);color:var(--ink);margin:clamp(16px,2.6vh,30px) 0 0;line-height:1.25}
+  .cover-tag .ig{color:var(--green);font-style:normal}
+  .cover-tag .di{color:var(--teal);font-style:normal}
+  .cover-meta{margin-top:clamp(18px,3vh,36px)}
+  .cover-meta .who{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:clamp(1.05rem,1.9vw,1.5rem)}
+  .cover-meta .aff{color:var(--muted);font-size:clamp(.92rem,1.4vw,1.14rem);margin-top:4px;font-family:var(--font-body)}
+  .cover-logos{margin-top:auto;display:flex;align-items:center;gap:clamp(22px,3.2vw,36px);padding-top:clamp(14px,3vh,34px)}
+  .cover-logos img{height:clamp(34px,4.8vh,56px);width:auto;opacity:.96}
+
+  /* big blood-pressure number (slide: What Is Hypertension) */
+  .bpnum{font-family:var(--font-display);font-weight:700;font-size:clamp(3.8rem,11vw,8.4rem);line-height:.92;color:var(--act,var(--teal));font-variant-numeric:tabular-nums;margin-top:clamp(12px,2.4vh,30px);text-shadow:0 0 50px color-mix(in srgb,var(--act,var(--teal)) 42%,transparent)}
+  .bpnum .sl{color:var(--faint);font-weight:400;margin:0 .04em}
+  .bpnum .bpunit{font-family:var(--font-body);font-size:.26em;color:var(--muted);font-weight:400;margin-left:.22em;vertical-align:baseline}
+  .bplabel{font-family:var(--font-body);color:var(--muted);font-size:clamp(.98rem,1.55vw,1.24rem);margin-top:clamp(8px,1.4vh,14px);max-width:48ch}
+  .reveal-list{display:flex;flex-direction:column;gap:clamp(10px,1.6vh,18px);margin-top:clamp(14px,2.4vh,26px)}
+  .reveal-list .ri{display:flex;gap:14px;align-items:flex-start;font-family:var(--font-body);font-size:clamp(1rem,1.7vw,1.34rem);line-height:1.4;color:var(--ink);max-width:62ch}
+  .reveal-list .ri .rd{flex:none;width:11px;height:11px;border-radius:50%;margin-top:.5em;background:var(--act,var(--teal));box-shadow:0 0 0 4px color-mix(in srgb,var(--act,var(--teal)) 22%,transparent)}
+  .reveal-list .ri b{color:var(--act,var(--teal));font-weight:700}
+
+  /* aligned horizontal comparison bars (Who Carries More · Small Drops) */
+  .cmp{display:flex;flex-direction:column;gap:clamp(9px,1.7vh,18px);margin-top:clamp(12px,2vh,22px)}
+  .cmpblock{display:flex;flex-direction:column;gap:5px}
+  .cmphd{font-family:var(--font-mono);font-size:clamp(.68rem,1vw,.8rem);letter-spacing:.13em;text-transform:uppercase;color:var(--act,var(--teal));font-weight:600}
+  .hbar{display:grid;grid-template-columns:clamp(120px,15vw,210px) 1fr clamp(58px,6.5vw,84px);align-items:center;gap:clamp(8px,1.2vw,14px);margin-top:4px}
+  .hlb{font-family:var(--font-body);font-size:clamp(.84rem,1.2vw,1.02rem);color:var(--muted);text-align:right;line-height:1.18}
+  .htrack{height:clamp(15px,2.3vh,23px);background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden}
+  .hfill{height:100%;border-radius:6px;transform-origin:left;transform:scaleX(0)}
+  [data-step].shown .hfill,.cmpblock.show .hfill{animation:hgrow .8s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes hgrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  .hval{font-family:var(--font-display);font-weight:700;font-size:clamp(1.05rem,1.9vw,1.55rem);color:var(--ink);font-variant-numeric:tabular-nums}
+  .hval.k{color:var(--act,var(--teal))}
+  .cmpsrc{font-family:var(--font-mono);font-size:clamp(.64rem,.95vw,.76rem);color:var(--faint);margin-top:2px}
+
+  /* PRISMA-style flow (Finding the Literature) */
+  .prisma{display:flex;flex-direction:column;align-items:stretch;margin-top:clamp(10px,2vh,22px)}
+  .prow{position:relative;display:grid;grid-template-columns:1fr minmax(210px,330px) 1fr;align-items:center;gap:clamp(10px,2vw,24px)}
+  .prow + .prow{margin-top:clamp(18px,3.2vh,34px)}
+  .prow + .prow::before{content:"";position:absolute;left:50%;top:calc(-1 * clamp(18px,3.2vh,34px));height:clamp(18px,3.2vh,34px);width:2px;background:var(--faint);opacity:.45;transform:translateX(-50%)}
+  .pstage{grid-column:2;background:var(--card);border:1px solid var(--cardbrd);border-radius:12px;padding:clamp(8px,1.3vh,14px) clamp(14px,2vw,24px);text-align:center;box-shadow:0 10px 26px rgba(0,0,0,.28)}
+  .pstage.inc{border-color:var(--act,var(--teal));background:linear-gradient(180deg,color-mix(in srgb,var(--act,var(--teal)) 20%,transparent),transparent),var(--card)}
+  .pstage .pn{font-family:var(--font-display);font-weight:700;font-size:clamp(1.3rem,2.7vw,2.15rem);color:var(--ink);line-height:1;font-variant-numeric:tabular-nums}
+  .pstage.inc .pn{color:var(--act,var(--teal))}
+  .pstage .pl{font-family:var(--font-body);font-size:clamp(.8rem,1.2vw,1.02rem);color:var(--muted);margin-top:3px}
+  .pexcl{grid-column:3;justify-self:start;font-family:var(--font-mono);font-size:clamp(.66rem,1vw,.8rem);color:var(--faint);border-left:2px solid var(--line);padding-left:10px;max-width:26ch;line-height:1.4}
+  .pexcl b{color:var(--coral)}
+  .psrc{grid-column:1;justify-self:end;text-align:right;font-family:var(--font-mono);font-size:clamp(.64rem,.95vw,.76rem);color:var(--faint);max-width:22ch;line-height:1.4}
+
+  /* big one-per-click questions (Guiding Questions) */
+  .qbig{list-style:none;margin:clamp(16px,4vh,44px) 0 0;padding:0;display:flex;flex-direction:column;gap:clamp(16px,3.6vh,40px)}
+  .qbig li{display:flex;gap:clamp(16px,2.4vw,34px);align-items:center}
+  .qbig .qn{font-family:var(--font-display);font-weight:700;font-size:clamp(2.3rem,6vw,4.6rem);line-height:1;flex:none;min-width:1.5em;text-align:center}
+  .qbig .qt{font-family:var(--font-display);font-size:clamp(1.25rem,2.8vw,2.25rem);line-height:1.22;color:var(--ink);font-weight:600}
+
   /* comparison table */
   .ctab{width:100%;border-collapse:collapse;margin-top:clamp(12px,1.6vw,20px);font-family:var(--font-body);font-size:clamp(.78rem,1.12vw,.98rem)}
   .ctab th,.ctab td{text-align:left;padding:.52em .74em;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.34}
@@ -307,17 +355,21 @@
 <div class="veil" aria-hidden="true"></div>
 <div class="tint" aria-hidden="true"></div>
 <div class="bar-prog" id="prog"></div>
-<div id="sweep" aria-hidden="true"><span class="sk" id="sweepKick"></span><span class="sn" id="sweepName"></span></div>
 
 <div class="deck" id="deck">
 
   <!-- ==================== PROBLEM ==================== -->
-  <section class="slide" data-sec="0" data-cover>
+  <section class="slide cover" data-sec="0" data-cover>
     <div class="stage">
       <div class="eyebrow a">Comprehensive Exam · Oral Defense</div>
-      <h1 class="a">A scoping review of playful health technology for hypertension self-management in Indigenous communities</h1>
-      <div class="cover-sub a"><b>Hypertension care where Indigeneity and disability meet</b><span class="who">Pavan Prasad Gorintla · Playful Health Technology Lab · Northern Arizona University</span></div>
-      <div class="committee a">Committee: Dr. Jared Duval (Chair) · Dr. Ashish Amresh · Dr. Igor Steinmacher · Dr. Laia Turmo Vidal</div>
+      <h1 class="a">A Scoping Review of Playful Health Technology for Hypertension Self-Management in Indigenous Communities</h1>
+      <p class="cover-tag a">Hypertension care where <span class="ig">Indigeneity</span> and <span class="di">disability</span> meet.</p>
+      <div class="cover-meta a">
+        <div class="who">Pavan Prasad Gorintla</div>
+        <div class="aff">Playful Health Technology Lab · Northern Arizona University</div>
+        <div class="committee">Committee: Dr. Jared Duval (Chair) · Dr. Ashish Amresh · Dr. Igor Steinmacher · Dr. Laia Turmo Vidal</div>
+      </div>
+      <div class="cover-logos a"><img src="nau.jpg" alt="Northern Arizona University"><img src="pht.png" alt="Playful Health Technology Lab"></div>
     </div>
     <aside class="aside"><p>Good morning, and thank you for being here.</p><p>My comprehensive exam is a scoping review of playful health technology for hypertension self-management in Indigenous communities: hypertension care where Indigeneity and disability meet.</p></aside>
   </section>
@@ -334,104 +386,135 @@
 
   <section class="slide" data-sec="0">
     <div class="stage">
-      <div class="eyebrow a">A1 · What Is Hypertension</div>
-      <h2 class="a">Blood pressure that stays too high — and quietly raises cardiac risk.</h2>
-      <div class="grid2">
-        <div class="panel a"><div class="num"><span class="key">130 / 80</span></div><p>mmHg — systolic over diastolic, the US threshold (WHO uses 140/90).</p></div>
-        <div class="panel a"><div class="num">−10 → −20%</div><p>every <b>10 mmHg</b> lower in systolic pressure ≈ <b>20% lower</b> cardiovascular risk.</p></div>
+      <div class="eyebrow a">What Is Hypertension?</div>
+      <h2 class="a">Blood pressure that stays too high, and quietly raises cardiac risk.</h2>
+      <div class="bpnum a"><span>130</span><span class="sl">/</span><span>80</span><span class="bpunit">mmHg</span></div>
+      <div class="bplabel a">Systolic over diastolic. The US threshold (WHO uses 140/90).</div>
+      <div class="reveal-list">
+        <div class="ri" data-step><span class="rd"></span><div>Usually <b>no symptoms</b>, yet over time it leads to heart attack, stroke, and heart failure.</div></div>
+        <div class="ri" data-step><span class="rd"></span><div>Every <b>10 mmHg</b> lower in systolic pressure means about <b>20% lower</b> cardiovascular risk.</div></div>
       </div>
-      <p class="explain a">Usually <b>no symptoms</b> — but over time it leads to heart attack, stroke, and heart failure.</p>
       <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Jones+2025+AHA+ACC+hypertension+guideline" target="_blank" rel="noopener">Jones et al. 2025</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=WHO+2023+global+report+hypertension" target="_blank" rel="noopener">WHO 2023</a></div>
     </div>
-    <aside class="aside"><p>I want to start with what hypertension is, because not everyone works with it. It is blood pressure that stays too high. A reading has two numbers: systolic, when the heart beats, and diastolic, when it rests, in millimeters of mercury. In the US, hypertension starts at 130 over 80.</p><p>It is called a silent killer because it has no symptoms, but over time it leads to heart attack, stroke, and heart failure.</p><p>And small changes matter: every 10 points lower in systolic pressure means about 20 percent lower cardiovascular risk.</p></aside>
+    <aside class="aside"><p>I want to start with what hypertension is, because not everyone works with it. It is blood pressure that stays too high. A reading has two numbers: systolic, when the heart beats, and diastolic, when it rests, in millimeters of mercury. In the US, hypertension starts at 130 over 80.</p><p>(click) It is called a silent killer because it has no symptoms, but over time it leads to heart attack, stroke, and heart failure.</p><p>(click) And small changes matter: every 10 points lower in systolic pressure means about 20 percent lower cardiovascular risk.</p></aside>
   </section>
 
   <section class="slide" data-sec="0">
     <div class="stage">
-      <div class="eyebrow a">A2 · Who Carries More of It</div>
+      <div class="eyebrow a">Who Carries More of It?</div>
       <h2 class="a">Indigenous adults, and people with disabilities, carry more.</h2>
-      <div class="bars">
-        <div class="bar"><span class="v a" style="color:var(--teal)"><span data-count="33.7" data-dec="1">33.7</span>%</span><div class="col" style="--i:1;height:100%;background:linear-gradient(var(--teal),#1f9d92)"></div><span class="lb">AI/AN adults, diagnosed</span></div>
-        <div class="bar"><span class="v a" style="color:var(--muted)"><span data-count="28.7" data-dec="1">28.7</span>%</span><div class="col" style="--i:2;height:85%;background:var(--line)"></div><span class="lb">all US adults</span></div>
-        <div class="bar"><span class="v a" style="color:var(--green)"><span data-count="35.9" data-dec="1">35.9</span>%</span><div class="col" style="--i:3;height:107%;background:linear-gradient(var(--green),#3f9e5e)"></div><span class="lb">Navajo (Diné) adults, cohort</span></div>
+      <p class="explain a">Worldwide, <b>33%</b> of adults aged 30–79 have hypertension; in the US, <b>46.7%</b>. Nearly half do not know they have it (WHO, 2023).</p>
+      <div class="cmp">
+        <div class="cmpblock" data-step>
+          <div class="cmphd">Diagnosed hypertension</div>
+          <div class="hbar"><span class="hlb">AI/AN adults</span><div class="htrack"><div class="hfill" style="width:89%;background:var(--green)"></div></div><span class="hval k" style="color:var(--green)">33.7%</span></div>
+          <div class="hbar"><span class="hlb">All US adults</span><div class="htrack"><div class="hfill" style="width:76%;background:var(--muted)"></div></div><span class="hval">28.7%</span></div>
+          <div class="cmpsrc">Self-reported diagnosis · Villarroel et al., 2020</div>
+        </div>
+        <div class="cmpblock" data-step>
+          <div class="cmphd">Disability — large urban areas (more than twice as common)</div>
+          <div class="hbar"><span class="hlb">AI/AN adults</span><div class="htrack"><div class="hfill" style="width:50%;background:var(--teal)"></div></div><span class="hval k" style="color:var(--teal)">18.9%</span></div>
+          <div class="hbar"><span class="hlb">All US adults</span><div class="htrack"><div class="hfill" style="width:21%;background:var(--muted)"></div></div><span class="hval">7.9%</span></div>
+          <div class="cmpsrc">Villarroel et al., 2020</div>
+        </div>
+        <div class="cmpblock" data-step>
+          <div class="cmphd">Navajo (Diné) adults</div>
+          <div class="hbar"><span class="hlb">Measured, cohort</span><div class="htrack"><div class="hfill" style="width:95%;background:var(--green)"></div></div><span class="hval k" style="color:var(--green)">35.9%</span></div>
+          <div class="hbar"><span class="hlb">Told by a provider</span><div class="htrack"><div class="hfill" style="width:78%;background:var(--muted)"></div></div><span class="hval">29.4%</span></div>
+          <div class="cmpsrc">Cohort: Harmon et al., 2016 · Self-report: Navajo Nation BRFSS 2013–2016 (Francisco et al., 2017). Heart disease was the 4th leading cause of death on the NM Navajo Nation, 2021–2024 (Foley, 2025).</div>
+        </div>
       </div>
-      <p class="explain a">In large urban areas, disability among AI/AN adults is <span class="key">18.9%</span> vs 7.9% — more than twice as common. Worldwide, 46% with hypertension do not know; in the US, more than half.</p>
-      <div class="cite a">AI/AN = American Indian and Alaska Native · <a class="lnk" href="https://scholar.google.com/scholar?q=Villarroel+2020+disability+American+Indian+Alaska+Native" target="_blank" rel="noopener">Villarroel 2020</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Harmon+2016+Navajo+hypertension+cohort" target="_blank" rel="noopener">Harmon 2016</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Percy+1997+Navajo+Health+Nutrition+Survey+blood+pressure" target="_blank" rel="noopener">Percy 1997</a></div>
+      <div class="cite a">AI/AN = American Indian and Alaska Native · Diné = the Navajo people's own name · <a class="lnk" href="https://scholar.google.com/scholar?q=Villarroel+2020+disability+American+Indian+Alaska+Native" target="_blank" rel="noopener">Villarroel 2020</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Harmon+2016+Navajo+hypertension+cohort" target="_blank" rel="noopener">Harmon 2016</a> · <a class="lnk" href="https://nec.navajo-nsn.gov" target="_blank" rel="noopener">Francisco 2017 · Navajo BRFSS</a> · <a class="lnk" href="https://nec.navajo-nsn.gov" target="_blank" rel="noopener">Foley 2025</a></div>
     </div>
-    <aside class="aside"><p>How common is it? Worldwide, 33 percent of adults 30–79 have hypertension — 1.3 billion people; in the US, 46.7 percent. These are measured, so they include people never diagnosed; worldwide 46 percent do not know they have it.</p><p>American Indian and Alaska Native adults carry more: 33.7 percent diagnosed, against 28.7 of all US adults — and these are self-reported, so the true number is likely higher. In large urban areas, disability is more than twice as common: 18.9 against 7.9.</p><p>For Navajo adults, a cohort study found 35.9 percent. Diné is the Navajo people's own name for themselves.</p></aside>
+    <aside class="aside"><p>How common is it? Worldwide, 33 percent of adults aged 30 to 79 have hypertension, about 1.3 billion people; in the US, 46.7 percent. These come from measured blood pressure, so they include people never diagnosed; worldwide, 46 percent do not know they have it.</p><p>(click) American Indian and Alaska Native adults carry more: 33.7 percent diagnosed, against 28.7 of all US adults. These are self-reported by Villarroel and colleagues in 2020, so the true number is likely higher.</p><p>(click) And in large urban areas, disability is more than twice as common: 18.9 percent against 7.9.</p><p>(click) For Navajo adults, Harmon and colleagues measured 35.9 percent in a cohort; in the Navajo Nation's own Behavioral Risk Factor survey, 29.4 percent were told by a provider they had high blood pressure. For context, heart disease was the fourth leading cause of death on the New Mexico portion of the Navajo Nation from 2021 to 2024.</p></aside>
   </section>
 
   <section class="slide" data-sec="0">
     <div class="stage">
-      <div class="eyebrow a">A3 · Small Drops in Blood Pressure Matter</div>
-      <h2 class="a">A playful tool only has to aim for a few points.</h2>
-      <p class="explain a">Drop in systolic pressure (mmHg) reported for people with hypertension:</p>
-      <div class="row">
-        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>Less sodium · 6–8</span>
-        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>DASH diet · 5–8 (11.4 in trial)</span>
-        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>Aerobic activity · 4–8</span>
-        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>Weight loss · 6–8</span>
-        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>Slow breathing · ~5</span>
-        <span class="chip c a" style="--act:var(--gold)"><span class="dotc"></span>eSMART-HD game · ~7</span>
+      <div class="eyebrow a">Why Small Drops Matter</div>
+      <h2 class="a">Each change lowers pressure by only a few points — and a game reaches the same range.</h2>
+      <p class="explain a">Every <b>10 mmHg</b> lower in systolic pressure means about <b>20% lower</b> cardiovascular risk (WHO, 2023). Drop in systolic pressure for people with hypertension:</p>
+      <div class="cmp">
+        <div data-step>
+          <div class="hbar"><span class="hlb">Less sodium</span><div class="htrack"><div class="hfill" style="width:83%;background:var(--green)"></div></div><span class="hval">6–8</span></div>
+          <div class="hbar"><span class="hlb">DASH diet</span><div class="htrack"><div class="hfill" style="width:77%;background:var(--green)"></div></div><span class="hval">5–8</span></div>
+          <div class="hbar"><span class="hlb">Aerobic activity</span><div class="htrack"><div class="hfill" style="width:71%;background:var(--green)"></div></div><span class="hval">4–8</span></div>
+          <div class="hbar"><span class="hlb">Weight loss</span><div class="htrack"><div class="hfill" style="width:83%;background:var(--green)"></div></div><span class="hval">6–8</span></div>
+          <div class="hbar"><span class="hlb">Slow breathing</span><div class="htrack"><div class="hfill" style="width:59%;background:var(--green)"></div></div><span class="hval">~5</span></div>
+          <div class="cmpsrc">mmHg · Jones et al., 2025 · DASH trial: Appel et al., 1997 (11.4 mmHg)</div>
+        </div>
+        <div class="cmpblock" data-step>
+          <div class="hbar"><span class="hlb">eSMART-HD — a serious game</span><div class="htrack"><div class="hfill" style="width:83%;background:var(--gold)"></div></div><span class="hval k" style="color:var(--gold)">~7</span></div>
+          <div class="cmpsrc">A serious game for hypertension reached the same range (game group) · Hickman et al., 2015</div>
+        </div>
       </div>
-      <p class="explain a" style="margin-top:16px">These are the sizes of change a playful tool can realistically target — including a <b>serious game</b>.</p>
-      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Jones+2025+hypertension+guideline+lifestyle+Table+12" target="_blank" rel="noopener">Jones et al. 2025</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Appel+1997+DASH+trial+blood+pressure" target="_blank" rel="noopener">Appel 1997</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Hickman+2015+eSMART-HD+serious+game+hypertension" target="_blank" rel="noopener">Hickman 2015</a></div>
+      <div class="cite a">The point: a playful tool does not need a large effect — it has to reach a few mmHg, which lifestyle change and one serious game already show is possible.</div>
     </div>
-    <aside class="aside"><p>One point that comes up throughout: small drops matter. WHO estimates every 10 mmHg lower in systolic pressure means about 20 percent lower cardiovascular risk, and any sustained drop helps over the long term.</p><p>Here are the drops reported for people with hypertension — sodium 6 to 8, DASH 5 to 8 and 11.4 in the original trial, aerobic 4 to 8, weight loss 6 to 8, slow breathing about 5, and eSMART-HD, a serious game, about 7 in the game group. These are the sizes of change a playful tool can aim for.</p></aside>
+    <aside class="aside"><p>Why does this slide matter? Because it sets the bar a playful tool has to clear. The World Health Organization estimates every 10 mmHg lower in systolic pressure means about 20 percent lower cardiovascular risk, and any sustained drop helps.</p><p>(click) Here are the drops reported for people with hypertension: cutting sodium, 6 to 8; the DASH diet, 5 to 8, and 11.4 in the original trial; aerobic activity, 4 to 8; losing weight, 6 to 8; slow breathing, about 5.</p><p>(click) And eSMART-HD, a serious game for hypertension, reached about 7 in the game group — the same range as lifestyle change. So a playful tool does not need a large effect; it only has to reach a few mmHg.</p></aside>
   </section>
 
   <section class="slide" data-sec="0">
     <div class="stage">
-      <div class="eyebrow a">A4 · Intersectional Research in HCI</div>
+      <div class="eyebrow a">Intersectional Research in HCI</div>
       <h2 class="a">Study the two identities as one population.</h2>
-      <div class="grid2">
-        <div class="panel a" style="--act:var(--muted)"><h3 style="color:var(--muted)">The usual approach</h3><p>Navajo people, and people with disabilities, studied as <b>two separate populations</b>, side by side.</p></div>
-        <div class="panel a" style="--act:var(--teal)"><h3 style="color:var(--teal)">This review instead</h3><p><b>Urban Diné adults with disabilities, and their supporters</b>, studied as <b>one population</b>.</p></div>
+      <div class="split" style="align-items:center">
+        <div>
+          <p class="explain a">Crenshaw showed why studying identities side by side misses people: where they meet, the experience is <b>different</b>, not added. HCI has mostly studied <b>one identity at a time</b>.</p>
+          <p class="explain a" style="margin-top:12px">This review treats <b>urban Diné adults with disabilities, and their supporters</b>, as <b>one population</b>.</p>
+          <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Crenshaw+1991+mapping+the+margins+intersectionality" target="_blank" rel="noopener">Crenshaw 1991</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Schlesinger+2017+intersectional+HCI+identity" target="_blank" rel="noopener">Schlesinger et al. 2017</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Sum+2022+disability+justice+ableism+colonialism" target="_blank" rel="noopener">Sum et al. 2022</a></div>
+        </div>
+        <div class="fig a" style="margin-top:0">
+          <svg viewBox="0 0 560 370" role="img" aria-label="Venn diagram: Indigenous Dine adults and people with disabilities overlap in this review's population">
+            <defs><clipPath id="clipL"><circle cx="210" cy="150" r="128"/></clipPath></defs>
+            <g data-step>
+              <circle cx="210" cy="150" r="128" fill="#1fae8c" fill-opacity=".2" stroke="#1fae8c" stroke-width="2.5"/>
+              <text x="138" y="142" fill="#f2f7f4" font-size="17" text-anchor="middle" font-weight="600"><tspan x="138">Indigenous</tspan><tspan x="138" dy="22">(Diné) adults</tspan></text>
+            </g>
+            <g data-step>
+              <circle cx="350" cy="150" r="128" fill="#3f8ac6" fill-opacity=".2" stroke="#3f8ac6" stroke-width="2.5"/>
+              <text x="422" y="142" fill="#f2f7f4" font-size="17" text-anchor="middle" font-weight="600"><tspan x="422">People with</tspan><tspan x="422" dy="22">disabilities</tspan></text>
+            </g>
+            <g data-step>
+              <circle cx="350" cy="150" r="128" fill="#a8d93c" fill-opacity=".82" clip-path="url(#clipL)"/>
+              <path d="M280 300 L280 205" stroke="#7e938d" stroke-width="1.5"/>
+              <text x="280" y="328" fill="#a8d93c" font-size="16" text-anchor="middle" font-weight="700">This review</text>
+              <text x="280" y="350" fill="#b0c2bc" font-size="12.5" text-anchor="middle">urban Diné adults with disabilities</text>
+            </g>
+          </svg>
+        </div>
       </div>
-      <p class="explain a">Crenshaw showed why side-by-side misses people: where identities meet, the experience is <b>different</b>, not added. HCI has mostly studied one identity at a time.</p>
-      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Crenshaw+1991+mapping+the+margins+intersectionality" target="_blank" rel="noopener">Crenshaw 1991</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Schlesinger+2017+intersectional+HCI+identity" target="_blank" rel="noopener">Schlesinger et al. 2017</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Sum+2022+disability+justice+ableism+colonialism" target="_blank" rel="noopener">Sum et al. 2022</a></div>
     </div>
-    <aside class="aside"><p>This is where my framing comes in: intersectional research in HCI. The usual approach would take two populations — Navajo people and people with disabilities — and put them side by side. Crenshaw showed why that misses people: where identities meet, the experience is different, not added.</p><p>So this review treats them as one population: urban Diné adults with disabilities, and the people who support them, in Flagstaff. HCI has mostly studied one identity at a time, so studying both together is a contribution the field has been asking for.</p></aside>
+    <aside class="aside"><p>This is where my framing comes in: intersectional research in HCI. Crenshaw showed why putting two populations side by side misses people: where identities meet, the experience is different, not added.</p><p>(click) The usual approach studies Indigenous people and people with disabilities separately. (click) This review treats them as one population — (click) the overlap: urban Diné adults with disabilities, and the people who support them, in Flagstaff. HCI has mostly studied one identity at a time, so studying both together is a contribution the field has been asking for.</p></aside>
   </section>
 
   <section class="slide" data-sec="0">
     <div class="stage">
       <div class="eyebrow a">Guiding Questions</div>
       <h2 class="a">Three questions shaped my reading.</h2>
-      <ol class="takes">
-        <li class="a"><span class="n t">1</span><div>How is hypertension lived and managed by <b>Indigenous people and people with disabilities</b>?</div></li>
-        <li class="a"><span class="n g">2</span><div>How are <b>games and play</b> used to support it?</div></li>
-        <li class="a"><span class="n b">3</span><div>How are these tools <b>designed with communities</b>?</div></li>
+      <ol class="qbig">
+        <li data-step><span class="qn" style="color:var(--teal)">1</span><div class="qt">How is hypertension <b style="color:var(--teal)">lived and managed</b> by Indigenous people and people with disabilities?</div></li>
+        <li data-step><span class="qn" style="color:var(--green)">2</span><div class="qt">How are <b style="color:var(--green)">games and play</b> used to support it?</div></li>
+        <li data-step><span class="qn" style="color:var(--gold)">3</span><div class="qt">How are these tools <b style="color:var(--gold)">designed with communities</b>?</div></li>
       </ol>
-      <p class="explain a">From what I found, I derive preliminary research questions at the end.</p>
     </div>
-    <aside class="aside"><p>Three guiding questions shaped my reading. One: how is hypertension lived and managed in Indigenous communities, and by people with disabilities? Two: how are games and play used to support it? Three: how are these tools designed with communities?</p><p>From what I found, I derive preliminary research questions at the end.</p></aside>
+    <aside class="aside"><p>Three guiding questions shaped my reading.</p><p>(click) One: how is hypertension lived and managed in Indigenous communities, and by people with disabilities? (click) Two: how are games and play used to support it? (click) Three: how are these tools designed with communities?</p><p>From what I found, I derive preliminary research questions at the end.</p></aside>
   </section>
 
   <!-- ==================== METHOD ==================== -->
   <section class="slide" data-sec="1">
     <div class="stage">
       <div class="eyebrow a">Finding the Literature</div>
-      <div class="split">
-        <div>
-          <h2 class="a">From a wide net to a focused set.</h2>
-          <p class="explain a">Six concept blocks — <b>games, technology, hypertension, Indigenous, disability, design</b> — across PubMed (1,539), ACM DL (100), and Google Scholar (120). Searched 7 September 2026.</p>
-          <div class="cite a">Six queries combining the blocks · full strings in backup · <a class="lnk" href="https://scholar.google.com/scholar?q=scoping+review+methodology+Arksey+OMalley" target="_blank" rel="noopener">scoping-review method</a></div>
-        </div>
-        <div class="fig a" style="margin-top:0">
-        <svg viewBox="0 0 440 230" role="img" aria-label="Screening funnel from 1,759 records to 176 included">
-          <g font-size="14" text-anchor="middle">
-            <g class="a" style="--i:0"><rect x="5" y="6" width="430" height="34" rx="6" fill="rgba(86,167,230,.14)" stroke="#56a7e6" stroke-width="1.5"/><text x="220" y="28" fill="#eef4f2">1,759 records identified</text></g>
-            <g class="a" style="--i:1"><rect x="48" y="50" width="344" height="34" rx="6" fill="rgba(86,167,230,.14)" stroke="#56a7e6" stroke-width="1.5"/><text x="220" y="72" fill="#eef4f2">1,709 screened (50 duplicates removed)</text></g>
-            <g class="a" style="--i:2"><rect x="92" y="94" width="256" height="34" rx="6" fill="rgba(69,194,207,.14)" stroke="#45c2cf" stroke-width="1.5"/><text x="220" y="116" fill="#eef4f2">961 read in full text</text></g>
-            <g class="a" style="--i:3"><rect x="128" y="138" width="184" height="46" rx="8" fill="#f2b84b"/><text x="220" y="159" fill="#15201c" font-weight="700" font-size="16">176 included</text><text x="220" y="176" fill="#15201c" font-size="11">met the inclusion criteria</text></g>
-            <path class="draw" d="M220 40 L220 50 M220 84 L220 94 M220 128 L220 138" stroke="#7a8e8a" stroke-width="1.5"/>
-          </g>
-        </svg>
-        </div>
+      <h2 class="a">From a wide net to a focused set.</h2>
+      <p class="explain a">Six concept blocks — <b>games, technology, hypertension, Indigenous, disability, design</b> — across <b>PubMed</b>, the <b>ACM Digital Library</b>, and <b>Google Scholar</b>, searched 7 September 2026.</p>
+      <div class="prisma">
+        <div class="prow" data-step><div class="pstage"><div class="pn">1,759</div><div class="pl">records identified</div></div><div class="pexcl">PubMed 1,539 · ACM DL 100 · Scholar 120</div></div>
+        <div class="prow" data-step><div class="pstage"><div class="pn">1,709</div><div class="pl">screened — title &amp; abstract</div></div><div class="pexcl"><b>−50</b> duplicates removed</div></div>
+        <div class="prow" data-step><div class="pstage"><div class="pn">961</div><div class="pl">read in full text</div></div><div class="pexcl"><b>−748</b> excluded on title / abstract</div></div>
+        <div class="prow" data-step><div class="pstage inc"><div class="pn">176</div><div class="pl">included</div></div><div class="pexcl"><b>−785</b> did not meet the criteria at full text</div></div>
       </div>
+      <div class="cite a">Six queries combining the blocks · full search strings in backup · <a class="lnk" href="https://scholar.google.com/scholar?q=scoping+review+methodology+Arksey+OMalley" target="_blank" rel="noopener">scoping-review method</a></div>
     </div>
-    <aside class="aside"><p>I searched three databases on 7 September 2026, using six concept blocks: games, technology, hypertension, Indigenous, disability, and design. The full search strings are in the backup.</p><p>PubMed gave 1,539 records, the ACM Digital Library 100, and Google Scholar 120. After removing 50 duplicates, I screened 1,709 titles and abstracts, read 961 in full, and included 176 studies.</p></aside>
+    <aside class="aside"><p>I searched three databases on 7 September 2026, using six concept blocks: games, technology, hypertension, Indigenous, disability, and design. The full search strings are in the backup.</p><p>(click) PubMed gave 1,539 records, the ACM Digital Library 100, and Google Scholar 120 — 1,759 in all. (click) After removing 50 duplicates, I screened 1,709 titles and abstracts. (click) I read 961 in full text, excluding 748 on title and abstract. (click) And 176 met the inclusion criteria; 785 did not at full text.</p></aside>
   </section>
 
   <section class="slide" data-sec="1">
@@ -1027,12 +1110,7 @@
   }
 
   var deckEl=document.getElementById('deck');
-  var sweep=document.getElementById('sweep');
-  var sweepName=document.getElementById('sweepName');
-  var sweepKick=document.getElementById('sweepKick');
-  var sweepT=null;
   function secOf(k){ return +slides[k].getAttribute('data-sec')||0; }
-  function groupOf(i){ for(var q=0;q<groups.length;q++){ if(i>=groups[q].start && i<groups[q].start+groups[q].count) return q; } return 0; }
 
   function go(i,opts){
     opts=opts||{};
@@ -1055,15 +1133,6 @@
     var secNow=secOf(i);
     var hexNow=getComputedStyle(document.documentElement).getPropertyValue(SECTIONS[secNow].v).trim();
     if(hexNow) document.body.style.setProperty('--now', hexNow);
-    // cinematic sweep only when the chapter (section) changes
-    if(!first && prevIdx!==i && secOf(prevIdx)!==secNow){
-      var gi=groupOf(i);
-      sweepName.textContent=groups[gi].label;
-      sweepKick.textContent='Chapter '+(gi+1)+' of '+groups.length;
-      sweep.classList.remove('play'); void sweep.offsetWidth; sweep.classList.add('play');
-      if(sweepT) clearTimeout(sweepT);
-      sweepT=setTimeout(function(){ sweep.classList.remove('play'); }, 1250);
-    }
     // activate + re-trigger the staggered cascade (set --i per element so it builds in sequence)
     s.classList.remove('active'); void s.offsetWidth; s.classList.add('active');
     var ai=0; [].slice.call(s.querySelectorAll('.a,.pop')).forEach(function(el){ el.style.setProperty('--i', Math.min(ai++,13)); });
