@@ -232,10 +232,23 @@
   .cover-logos img{height:clamp(34px,4.8vh,56px);width:auto;opacity:.96}
 
   /* big blood-pressure number (slide: What Is Hypertension) */
-  .bpnum{font-family:var(--font-display);font-weight:700;font-size:clamp(3.8rem,11vw,8.4rem);line-height:.92;color:var(--act,var(--teal));font-variant-numeric:tabular-nums;margin-top:clamp(12px,2.4vh,30px);text-shadow:0 0 50px color-mix(in srgb,var(--act,var(--teal)) 42%,transparent)}
-  .bpnum .sl{color:var(--faint);font-weight:400;margin:0 .04em}
-  .bpnum .bpunit{font-family:var(--font-body);font-size:.26em;color:var(--muted);font-weight:400;margin-left:.22em;vertical-align:baseline}
-  .bplabel{font-family:var(--font-body);color:var(--muted);font-size:clamp(.98rem,1.55vw,1.24rem);margin-top:clamp(8px,1.4vh,14px);max-width:48ch}
+  .bpnum{font-family:var(--font-display);font-weight:700;font-size:clamp(3.8rem,11vw,8.4rem);line-height:.92;color:#1fae8c;font-variant-numeric:tabular-nums;margin-top:clamp(10px,2.2vh,24px);text-align:center;text-shadow:0 0 56px rgba(31,174,140,.45)}
+  .bpnum .sys{color:#1fae8c}
+  .bpnum .dia{color:#46c56a}
+  .bpnum .sl{color:var(--faint);font-weight:400;margin:0 .02em}
+  .bpnum .bpunit{font-family:var(--font-body);font-size:.24em;color:var(--muted);font-weight:400;margin-left:.2em;vertical-align:baseline}
+  .bplabel{font-family:var(--font-body);color:var(--muted);font-size:clamp(.98rem,1.55vw,1.24rem);margin-top:clamp(8px,1.4vh,14px);max-width:52ch}
+  /* centered "What is hypertension" + two facts side by side */
+  .bp3c{text-align:center}
+  .bp3c .eyebrow{justify-content:center}
+  .bp3c h2{margin-left:auto;margin-right:auto;max-width:20ch}
+  .bp3c .bplabel{margin-left:auto;margin-right:auto}
+  .bp3c .cite{margin:clamp(12px,2vh,20px) auto 0;border-left:none;padding-left:0;text-align:center}
+  .bp2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,3.6vw,56px);margin:clamp(16px,2.8vh,34px) auto 0;max-width:min(100%,980px);text-align:left}
+  @media (max-width:760px){.bp2{grid-template-columns:1fr;gap:14px}}
+  .bp2 .ri{display:flex;gap:13px;align-items:flex-start;font-family:var(--font-body);font-size:clamp(1rem,1.55vw,1.3rem);line-height:1.42;color:var(--ink)}
+  .bp2 .ri .rd{flex:none;width:11px;height:11px;border-radius:50%;margin-top:.5em;background:#1fae8c;box-shadow:0 0 0 4px color-mix(in srgb,#1fae8c 22%,transparent)}
+  .bp2 .ri b{color:#1fae8c;font-weight:700}
   .reveal-list{display:flex;flex-direction:column;gap:clamp(10px,1.6vh,18px);margin-top:clamp(14px,2.4vh,26px)}
   .reveal-list .ri{display:flex;gap:14px;align-items:flex-start;font-family:var(--font-body);font-size:clamp(1rem,1.7vw,1.34rem);line-height:1.4;color:var(--ink);max-width:62ch}
   .reveal-list .ri .rd{flex:none;width:11px;height:11px;border-radius:50%;margin-top:.5em;background:var(--act,var(--teal));box-shadow:0 0 0 4px color-mix(in srgb,var(--act,var(--teal)) 22%,transparent)}
@@ -385,12 +398,12 @@
   </section>
 
   <section class="slide" data-sec="0">
-    <div class="stage">
+    <div class="stage bp3c">
       <div class="eyebrow a">What Is Hypertension?</div>
       <h2 class="a">Blood pressure that stays too high, and quietly raises cardiac risk.</h2>
-      <div class="bpnum a"><span>130</span><span class="sl">/</span><span>80</span><span class="bpunit">mmHg</span></div>
+      <div class="bpnum a"><span class="sys">130</span><span class="sl">/</span><span class="dia">80</span><span class="bpunit">mmHg</span></div>
       <div class="bplabel a">Systolic over diastolic. The US threshold (WHO uses 140/90).</div>
-      <div class="reveal-list">
+      <div class="bp2">
         <div class="ri" data-step><span class="rd"></span><div>Usually <b>no symptoms</b>, yet over time it leads to heart attack, stroke, and heart failure.</div></div>
         <div class="ri" data-step><span class="rd"></span><div>Every <b>10 mmHg</b> lower in systolic pressure means about <b>20% lower</b> cardiovascular risk.</div></div>
       </div>
@@ -401,13 +414,13 @@
 
   <section class="slide" data-sec="0">
     <div class="stage">
-      <div class="eyebrow a">Who Carries More of It? · 1 of 3</div>
-      <h2 class="a">Indigenous adults are diagnosed more often.</h2>
+      <div class="eyebrow a">Who Carries More of It?</div>
+      <h2 class="a">Indigenous adults, and people with disabilities, carry more.</h2>
       <p class="explain a">Worldwide, <b>33%</b> of adults aged 30–79 have hypertension; in the US, <b>46.7%</b>. Nearly half do not know they have it (WHO, 2023).</p>
       <div class="cmp">
         <div class="cmpblock a">
           <div class="cmphd">Diagnosed hypertension</div>
-          <div class="hbar"><span class="hlb">AI/AN adults</span><div class="htrack"><div class="hfill" style="width:89%;background:var(--green)"></div></div><span class="hval k" style="color:var(--green)">33.7%</span></div>
+          <div class="hbar"><span class="hlb">AI/AN adults</span><div class="htrack"><div class="hfill" style="width:89%;background:#1fae8c"></div></div><span class="hval k" style="color:#1fae8c">33.7%</span></div>
           <div class="hbar"><span class="hlb">All US adults</span><div class="htrack"><div class="hfill" style="width:76%;background:var(--muted)"></div></div><span class="hval">28.7%</span></div>
           <div class="cmpsrc">Self-reported, so the true number is likely higher · Villarroel et al., 2020</div>
         </div>
@@ -419,38 +432,38 @@
 
   <section class="slide" data-sec="0">
     <div class="stage">
-      <div class="eyebrow a">Who Carries More of It? · 2 of 3</div>
-      <h2 class="a">Disability is more than twice as common.</h2>
-      <p class="explain a">Any disability, among adults in large urban areas:</p>
+      <div class="eyebrow a">Who Carries More of It?</div>
+      <h2 class="a">Indigenous adults, and people with disabilities, carry more.</h2>
+      <p class="explain a">Worldwide, <b>33%</b> of adults aged 30–79 have hypertension; in the US, <b>46.7%</b>. Nearly half do not know they have it (WHO, 2023).</p>
       <div class="cmp">
         <div class="cmpblock a">
           <div class="cmphd">Any disability · large urban areas</div>
-          <div class="hbar"><span class="hlb">AI/AN adults</span><div class="htrack"><div class="hfill" style="width:50%;background:var(--teal)"></div></div><span class="hval k" style="color:var(--teal)">18.9%</span></div>
+          <div class="hbar"><span class="hlb">AI/AN adults</span><div class="htrack"><div class="hfill" style="width:50%;background:#1fae8c"></div></div><span class="hval k" style="color:#1fae8c">18.9%</span></div>
           <div class="hbar"><span class="hlb">All US adults</span><div class="htrack"><div class="hfill" style="width:21%;background:var(--muted)"></div></div><span class="hval">7.9%</span></div>
-          <div class="cmpsrc">More than twice as common · Villarroel et al., 2020</div>
+          <div class="cmpsrc">More than twice as common — the intersection this review is about · Villarroel et al., 2020</div>
         </div>
       </div>
-      <div class="cite a">This is the intersection the review is about: Indigeneity and disability together · <a class="lnk" href="https://scholar.google.com/scholar?q=Villarroel+2020+disability+American+Indian+Alaska+Native" target="_blank" rel="noopener">Villarroel 2020</a></div>
+      <div class="cite a">AI/AN = American Indian and Alaska Native · <a class="lnk" href="https://scholar.google.com/scholar?q=Villarroel+2020+disability+American+Indian+Alaska+Native" target="_blank" rel="noopener">Villarroel 2020</a></div>
     </div>
     <aside class="aside"><p>And disability follows the same pattern. In large urban areas, disability among American Indian and Alaska Native adults is 18.9 percent, against 7.9 for all US adults — more than twice as common. That intersection, Indigeneity and disability together, is what this review is about.</p></aside>
   </section>
 
   <section class="slide" data-sec="0">
     <div class="stage">
-      <div class="eyebrow a">Who Carries More of It? · 3 of 3</div>
-      <h2 class="a">And more again among Navajo (Diné) adults.</h2>
+      <div class="eyebrow a">Who Carries More of It?</div>
+      <h2 class="a">Indigenous adults, and people with disabilities, carry more.</h2>
+      <p class="explain a">Worldwide, <b>33%</b> of adults aged 30–79 have hypertension; in the US, <b>46.7%</b>. Nearly half do not know they have it (WHO, 2023).</p>
       <div class="cmp">
         <div class="cmpblock a">
           <div class="cmphd">Hypertension among Navajo (Diné) adults</div>
-          <div class="hbar"><span class="hlb">Measured, cohort</span><div class="htrack"><div class="hfill" style="width:95%;background:var(--green)"></div></div><span class="hval k" style="color:var(--green)">35.9%</span></div>
-          <div class="hbar"><span class="hlb">Told by a provider</span><div class="htrack"><div class="hfill" style="width:78%;background:var(--muted)"></div></div><span class="hval">29.4%</span></div>
-          <div class="cmpsrc">Cohort: Harmon et al., 2016 · Self-report: Navajo Nation BRFSS 2013–2016 (Francisco et al., 2017)</div>
+          <div class="hbar"><span class="hlb">Measured, cohort</span><div class="htrack"><div class="hfill" style="width:95%;background:#1fae8c"></div></div><span class="hval k" style="color:#1fae8c">35.9%</span></div>
+          <div class="hbar"><span class="hlb">Told by a provider</span><div class="htrack"><div class="hfill" style="width:78%;background:#46c56a"></div></div><span class="hval k" style="color:#46c56a">29.4%</span></div>
+          <div class="cmpsrc">Cohort: Harmon et al., 2016 · Navajo BRFSS 2013–2016 (Francisco et al., 2017). Heart disease was the 4th leading cause of death on the NM Navajo Nation, 2021–2024 (Foley, 2025).</div>
         </div>
       </div>
-      <p class="explain a">For context: heart disease was the <b>4th leading cause of death</b> on the New Mexico portion of the Navajo Nation, 2021–2024 (Foley, 2025).</p>
       <div class="cite a">Diné = the Navajo people's own name · <a class="lnk" href="https://scholar.google.com/scholar?q=Harmon+2016+Navajo+hypertension+cohort" target="_blank" rel="noopener">Harmon 2016</a> · <a class="lnk" href="https://nec.navajo-nsn.gov" target="_blank" rel="noopener">Navajo BRFSS · Francisco 2017</a> · <a class="lnk" href="https://nec.navajo-nsn.gov" target="_blank" rel="noopener">Foley 2025</a></div>
     </div>
-    <aside class="aside"><p>And for Navajo adults specifically: Harmon and colleagues measured 35.9 percent in a cohort; in the Navajo Nation's own Behavioral Risk Factor survey, 29.4 percent were told by a provider they had high blood pressure.</p><p>For context, heart disease was the fourth leading cause of death on the New Mexico portion of the Navajo Nation from 2021 to 2024.</p></aside>
+    <aside class="aside"><p>And for Navajo adults specifically: Harmon and colleagues measured 35.9 percent in a cohort; in the Navajo Nation's own Behavioral Risk Factor survey, 29.4 percent were told by a provider they had high blood pressure. For context, heart disease was the fourth leading cause of death on the New Mexico portion of the Navajo Nation from 2021 to 2024.</p></aside>
   </section>
 
   <section class="slide" data-sec="0">
