@@ -1,0 +1,1061 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Comp Exam Defense Deck</title>
+<meta name="description" content="Oral-defense scoping review: 176 studies, the literature-to-prior-work pattern, real paper figures, PHT + NAU footer with labelled per-slide dots.">
+<!-- system fonts only: Cambria (display + labels) + Times New Roman (body) -->
+
+<style>
+  /* ───────────────────────────────────────────────────────────────
+     Dark 16:9 oral-defense stage over the Antelope Canyon photo.
+     Teal / blue / green / cyan / gold / terracotta — NO purple.
+     Six sections, each with labelled per-slide dots in the footer.
+     One idea per slide; speaker notes (press N) carry the talk.
+     Figures are the real figures from the cited papers.
+     Click-to-reveal is used on ONLY one slide (the synthesis matrix).
+     ─────────────────────────────────────────────────────────────── */
+  :root{
+    --base:#0a120f; --ink:#f2f7f4; --muted:#b0c2bc; --faint:#7e938d;
+    --line:rgba(255,255,255,.13); --card:rgba(9,16,14,.5); --cardbrd:rgba(255,255,255,.12);
+    /* viridis sequence, blue → teal → green → yellow, tuned for a dark stage (no purple) */
+    --teal:#3f8ac6; --blue:#1f9fae; --green:#1fae8c; --cyan:#4ac36a; --gold:#a8d93c; --coral:#f2e21c;
+    --now:#3f8ac6;                 /* section tint for the background glow (set by JS) */
+    --hl:#f5de3c;                  /* emphasis marker */
+    --foot:76px;
+    --font-display:"Cambria","Palatino Linotype",Georgia,serif;   /* headings + big numbers */
+    --font-body:"Times New Roman",Times,"Liberation Serif",serif; /* body copy */
+    --font-mono:"Cambria","Palatino Linotype",Georgia,serif;      /* labels: uppercase + tracked */
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--base);color:var(--ink);font-family:var(--font-body);overflow:hidden;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+  /* canyon photo — kept, treated cinematically so text stays legible */
+  .bg{position:fixed;inset:-2.5%;background:#0a120f url("bg.jpg") center 40%/cover no-repeat;
+    filter:brightness(.5) contrast(1.07) saturate(.64);animation:drift 60s ease-in-out infinite alternate;z-index:0}
+  .veil{position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:
+      linear-gradient(180deg, rgba(8,14,12,.42) 0%, rgba(8,14,12,.64) 48%, rgba(6,11,10,.9) 100%),
+      radial-gradient(140% 120% at 80% 14%, rgba(8,14,12,0) 0%, rgba(8,14,12,.5) 56%, rgba(6,11,10,.93) 100%)}
+  .tint{position:fixed;inset:0;z-index:1;pointer-events:none;mix-blend-mode:screen;opacity:.4;transition:background .9s ease;
+    background:radial-gradient(58% 78% at 84% 8%, color-mix(in srgb,var(--now) 42%,transparent) 0%, transparent 62%)}
+  @keyframes drift{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.09) translate(-1.3%,-1%)}}
+
+  /* 16:9 slide frame, centred (PowerPoint proportions) */
+  .deck{position:fixed;left:0;right:0;top:0;bottom:var(--foot);z-index:2}
+  .slide{position:absolute;inset:0;margin:auto;
+    width:min(calc(100vw - 26px), calc((100vh - var(--foot) - 26px) * 16 / 9));
+    height:min(calc(100vh - var(--foot) - 26px), calc((100vw - 26px) * 9 / 16));
+    display:flex;flex-direction:column;justify-content:center;overflow:hidden;
+    padding:clamp(22px,3vw,52px) clamp(30px,4.8vw,78px);
+    opacity:0;visibility:hidden;transform:scale(.993);
+    transition:opacity .55s ease,transform .6s cubic-bezier(.2,.7,.2,1),visibility 0s linear .55s}
+  .slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .55s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+  .stage{width:100%;min-width:0}
+
+  /* entrance: short, soft, staggered focus-in — gentle fades, no fly/bounce */
+  .a{opacity:0;transform:translateY(10px);filter:blur(5px)}
+  .slide.active .a{animation:rise .62s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i,0)*.055s + .1s)}
+  @keyframes rise{to{opacity:1;transform:none;filter:none}}
+  .pop{opacity:0;transform:scale(.84);transform-box:fill-box;transform-origin:center}
+  .slide.active .pop{animation:pop .55s cubic-bezier(.2,.75,.3,1) forwards;animation-delay:calc(var(--i,0)*.055s + .1s)}
+  @keyframes pop{to{opacity:1;transform:none}}
+  .draw{stroke-dasharray:var(--len,1000);stroke-dashoffset:var(--len,1000)}
+  .slide.active .draw{animation:draw 1.1s ease forwards;animation-delay:calc(var(--i,0)*.055s + .12s)}
+  @keyframes draw{to{stroke-dashoffset:0}}
+
+  /* click-to-reveal (one slide only) */
+  [data-step]{opacity:0;transform:translateY(11px);transition:opacity .5s ease,transform .5s ease}
+  [data-step].shown{opacity:1;transform:none}
+
+  .eyebrow{font-family:var(--font-mono);font-size:clamp(.66rem,.95vw,.82rem);letter-spacing:.24em;text-transform:uppercase;font-weight:600;
+    color:var(--muted);margin-bottom:clamp(10px,1.4vw,18px);display:flex;gap:12px;align-items:center}
+  .eyebrow::before{content:"";width:30px;height:2px;border-radius:2px;background:var(--act,var(--teal));flex:none;
+    box-shadow:0 0 12px color-mix(in srgb,var(--act,var(--teal)) 75%,transparent)}
+  h1{font-family:var(--font-display);font-weight:700;line-height:1.07;text-wrap:balance;margin:0;font-size:clamp(1.7rem,4.2vw,3.4rem);letter-spacing:.004em}
+  h2{font-family:var(--font-display);font-weight:700;line-height:1.1;text-wrap:balance;margin:0;font-size:clamp(1.45rem,3.3vw,2.55rem);letter-spacing:.004em}
+  .explain{font-family:var(--font-body);font-size:clamp(1rem,1.5vw,1.3rem);line-height:1.5;color:var(--muted);margin-top:clamp(10px,1.4vw,18px);max-width:54ch}
+  .explain b{color:var(--ink);font-weight:700}
+  .k{color:var(--act,var(--teal))}
+
+  /* emphasis marker (draws under key phrases) */
+  .key{font-weight:700;color:var(--ink);
+    background-image:linear-gradient(var(--hl),var(--hl));
+    background-repeat:no-repeat;background-position:0 92%;background-size:0% 30%;padding:0 .06em}
+  .slide.active .key{animation:mark .7s cubic-bezier(.2,.7,.2,1) forwards .85s}
+  @keyframes mark{to{background-size:100% 30%}}
+
+  .big{font-family:var(--font-display);font-weight:700;line-height:.9;font-size:clamp(3.4rem,9.6vw,7.6rem);
+    color:var(--act,var(--teal));font-variant-numeric:tabular-nums;display:inline-block;position:relative;
+    text-shadow:0 0 46px color-mix(in srgb,var(--act,var(--teal)) 45%,transparent)}
+  .big.y{color:var(--gold);text-shadow:0 0 46px color-mix(in srgb,var(--gold) 45%,transparent)}
+  .big.c{color:var(--coral);text-shadow:0 0 46px color-mix(in srgb,var(--coral) 45%,transparent)}
+  .big-sub{font-family:var(--font-body);font-size:clamp(1rem,1.85vw,1.42rem);color:var(--ink);max-width:36ch;margin-top:14px;line-height:1.42}
+
+  .cite{font-family:var(--font-mono);font-size:clamp(.72rem,1vw,.86rem);color:var(--muted);margin-top:clamp(10px,1.5vw,18px);
+    border-left:2px solid var(--act,var(--line));padding-left:12px;max-width:72ch;line-height:1.5;letter-spacing:.01em}
+  .cite b{color:var(--ink);font-weight:600}
+  a.lnk{color:var(--act,var(--teal));text-decoration:none;border-bottom:1px dotted currentColor;font-weight:600}
+  a.lnk:hover{border-bottom-style:solid}
+
+  .row{display:flex;flex-wrap:wrap;gap:clamp(6px,1vw,11px);margin-top:clamp(12px,1.8vw,20px)}
+  .chip{font-family:var(--font-mono);font-size:clamp(.78rem,1.2vw,.96rem);padding:.46em .86em;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);display:inline-flex;align-items:center}
+  .chip.c{border-color:var(--act,var(--teal));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--act,var(--teal)) 32%,transparent)}
+  .chip .dotc{width:.55em;height:.55em;border-radius:50%;background:var(--act,var(--teal));margin-right:.5em;flex:none}
+
+  .steps{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:clamp(14px,2.2vw,28px);font-family:var(--font-display);font-size:clamp(1rem,1.9vw,1.44rem)}
+  .steps .st{padding:.32em .8em;border-radius:11px;background:var(--card);border:1px solid var(--line)}
+  .steps .st.hot{border-color:var(--act,var(--teal));box-shadow:inset 0 -4px 0 var(--hl)}
+  .steps .arw{color:var(--faint);font-size:.8em}
+
+  /* three-panel theme layout: literature → implications → prior work */
+  .three{display:grid;grid-template-columns:1fr 1fr 1.08fr;gap:clamp(12px,1.5vw,18px);margin-top:clamp(14px,1.9vw,22px);align-items:stretch}
+  @media (max-width:900px){.three{grid-template-columns:1fr}}
+  .pane{background:var(--card);border:1px solid var(--cardbrd);border-radius:14px;padding:clamp(13px,1.5vw,19px);min-width:0;display:flex;flex-direction:column;gap:8px;
+    box-shadow:0 10px 30px rgba(0,0,0,.28);position:relative;overflow:hidden}
+  .pane::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--act,var(--teal));opacity:.35}
+  .pane.hero{border-color:color-mix(in srgb,var(--act,var(--teal)) 55%,var(--cardbrd));
+    background:linear-gradient(180deg,color-mix(in srgb,var(--act,var(--teal)) 15%,transparent),color-mix(in srgb,var(--act,var(--teal)) 5%,transparent)),var(--card);
+    box-shadow:0 14px 40px rgba(0,0,0,.4),inset 0 0 0 1px color-mix(in srgb,var(--act,var(--teal)) 24%,transparent)}
+  .pane.hero::before{opacity:1;box-shadow:0 0 16px color-mix(in srgb,var(--act,var(--teal)) 70%,transparent)}
+  .pane .tag{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:600}
+  .pane.hero .tag{color:var(--act,var(--teal))}
+  .pane h3{font-family:var(--font-display);font-size:clamp(1.04rem,1.55vw,1.32rem);margin:0;font-weight:700;color:var(--ink);line-height:1.14}
+  .pane p{margin:0;font-family:var(--font-body);font-size:clamp(.9rem,1.3vw,1.06rem);line-height:1.46;color:var(--muted)}
+  .pane p b{color:var(--ink);font-weight:700}
+  .pane .fig{margin:3px 0 0;display:block}
+  .pane img{width:100%;height:auto;display:block;border-radius:9px;max-height:30vh;object-fit:contain;background:#fff;padding:5px}
+  .pane img.contain{background:transparent;padding:0}
+  .pane .src{font-family:var(--font-mono);font-size:.62rem;color:var(--faint);margin-top:6px}
+  .pane .cite{margin-top:auto;border-left-color:var(--act,var(--line))}
+
+  /* generic 2-up panels */
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:clamp(12px,1.5vw,18px);margin-top:clamp(14px,1.9vw,24px);align-items:stretch}
+  .panel{background:var(--card);border:1px solid var(--cardbrd);border-radius:14px;padding:clamp(14px,1.6vw,20px);min-width:0;display:flex;flex-direction:column;gap:7px;
+    box-shadow:0 10px 30px rgba(0,0,0,.28);position:relative;overflow:hidden}
+  .panel::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--act,var(--teal));opacity:.6}
+  .panel h3{font-family:var(--font-display);font-size:clamp(1.04rem,1.6vw,1.36rem);margin:0;font-weight:700;color:var(--ink)}
+  .panel p{margin:0;font-family:var(--font-body);font-size:clamp(.92rem,1.35vw,1.08rem);line-height:1.46;color:var(--muted)}
+  .panel p b{color:var(--ink);font-weight:700}
+  .panel .num{font-family:var(--font-display);font-size:clamp(1.8rem,3.4vw,2.7rem);font-weight:700;color:var(--act,var(--teal));line-height:1}
+  .panel .cite{margin-top:auto;padding-top:6px}
+
+  /* split: text + a real paper figure */
+  .split{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(16px,2.6vw,38px);align-items:center;margin-top:clamp(12px,1.7vw,20px)}
+  @media (max-width:860px){.split{grid-template-columns:1fr}}
+  .figcard{background:#fcfcfb;border-radius:14px;padding:11px;box-shadow:0 20px 54px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.14)}
+  .figcard.dark{background:#0e1317;border:1px solid var(--cardbrd)}
+  .figcard img{width:100%;height:auto;display:block;border-radius:9px;max-height:54vh;object-fit:contain}
+  .figcard .src{font-family:var(--font-mono);font-size:.68rem;color:#5c5c64;text-align:right;margin-top:7px}
+  .figcard.dark .src{color:var(--faint)}
+
+  /* bars */
+  .bars{display:flex;gap:clamp(26px,5vw,70px);align-items:flex-end;margin-top:clamp(16px,2.2vw,28px);height:clamp(120px,20vh,195px)}
+  .bar{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:8px;height:100%}
+  .bar .col{width:clamp(60px,8vw,100px);border-radius:10px 10px 0 0;transform:scaleY(0);transform-origin:bottom;box-shadow:0 0 30px color-mix(in srgb,var(--act,var(--teal)) 30%,transparent)}
+  .slide.active .bar .col{animation:rise-bar 1.05s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i,0)*.06s + .2s)}
+  @keyframes rise-bar{to{transform:scaleY(1)}}
+  .bar .v{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.4rem);font-weight:700;font-variant-numeric:tabular-nums}
+  .bar .lb{font-family:var(--font-mono);font-size:clamp(.7rem,1vw,.82rem);color:var(--muted);text-align:center;max-width:16ch}
+
+  .fig{margin-top:clamp(8px,1.4vw,16px);display:flex;justify-content:center}
+  svg{display:block;max-width:100%;height:auto}
+  svg text{font-family:var(--font-mono)}
+  .cap{font-family:var(--font-mono);font-size:clamp(.7rem,1vw,.84rem);color:var(--muted);margin-top:12px;text-align:center;max-width:74ch;margin-left:auto;margin-right:auto}
+
+  .takes{display:flex;flex-direction:column;gap:clamp(12px,1.7vw,20px);margin:clamp(14px,2vw,24px) 0 0;padding:0}
+  .takes li{list-style:none;display:flex;gap:15px;align-items:flex-start;font-family:var(--font-body);font-size:clamp(1rem,1.65vw,1.32rem);line-height:1.38;max-width:60ch}
+  .takes li .n{font-family:var(--font-display);color:#0e1a16;background:var(--hl);border-radius:10px;min-width:1.95em;height:1.95em;display:flex;align-items:center;justify-content:center;flex:none;font-size:.78em;font-weight:700}
+  .takes li .n.t{background:var(--teal);color:#06130f}.takes li .n.g{background:var(--green);color:#06130f}.takes li .n.b{background:var(--blue);color:#06130f}.takes li .n.k{background:var(--coral);color:#1a1705}
+
+  .points{margin:clamp(14px,1.8vw,24px) 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:clamp(11px,1.5vw,18px)}
+  .points li{font-family:var(--font-body);font-size:clamp(1rem,1.65vw,1.32rem);line-height:1.38;padding-left:28px;position:relative;max-width:58ch}
+  .points li::before{content:"";position:absolute;left:0;top:.46em;width:11px;height:11px;border-radius:50%;background:var(--act,var(--teal));box-shadow:0 0 0 4px color-mix(in srgb,var(--act,var(--teal)) 22%,transparent)}
+  .points li .s{display:block;font-size:.62em;color:var(--faint);margin-top:4px;font-family:var(--font-mono)}
+  .points li .s a.lnk{color:var(--muted)}
+
+  /* hierarchy / driver diagram */
+  .tree{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,28px);margin-top:clamp(12px,1.6vw,20px)}
+  @media (max-width:820px){.tree{grid-template-columns:1fr}}
+  .branch{background:var(--card);border:1px solid var(--cardbrd);border-radius:14px;padding:clamp(12px,1.5vw,18px);transition:all .4s ease;box-shadow:0 10px 30px rgba(0,0,0,.26)}
+  .branch.dim{opacity:.32;filter:saturate(.35)}
+  .branch.on{border-color:var(--act);box-shadow:0 0 0 1.5px var(--act), 0 16px 44px rgba(0,0,0,.4)}
+  .branch>.bh{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:10px}
+  .node{font-family:var(--font-display);font-size:clamp(.98rem,1.4vw,1.16rem);color:var(--ink);font-weight:700;margin:0 0 4px}
+  .leaf{display:flex;flex-wrap:wrap;gap:6px;margin:5px 0 12px}
+  .leaf span{font-family:var(--font-mono);font-size:clamp(.72rem,1.05vw,.84rem);color:var(--muted);background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:8px;padding:.3em .6em}
+  .leaf span b{color:var(--ink);font-weight:700}
+  .leaf span.hot{border-color:var(--act);color:var(--ink);background:color-mix(in srgb,var(--act) 16%,transparent)}
+  .herelbl{display:inline-block;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--act);border:1px dashed var(--act);border-radius:7px;padding:.22em .55em;margin-bottom:9px}
+
+  .placeholder{border:1px dashed var(--coral);border-radius:12px;padding:12px 15px;font-family:var(--font-mono);font-size:clamp(.76rem,1.15vw,.9rem);color:var(--muted);background:var(--card);margin-top:clamp(10px,1.6vw,18px)}
+  .placeholder b{color:var(--coral)}
+
+  .cover-sub{font-family:var(--font-body);margin-top:clamp(16px,2.5vw,30px);font-size:clamp(.95rem,1.6vw,1.22rem);color:var(--muted);line-height:1.52}
+  .cover-sub b{display:block;color:var(--ink);font-family:var(--font-display);font-size:1.3em;font-weight:700;margin-bottom:6px}
+  .cover-sub .who{color:var(--ink)}
+  .committee{font-family:var(--font-mono);font-size:clamp(.72rem,1vw,.84rem);color:var(--faint);margin-top:16px;letter-spacing:.02em}
+
+  /* comparison table */
+  .ctab{width:100%;border-collapse:collapse;margin-top:clamp(12px,1.6vw,20px);font-family:var(--font-body);font-size:clamp(.78rem,1.12vw,.98rem)}
+  .ctab th,.ctab td{text-align:left;padding:.52em .74em;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.34}
+  .ctab th{font-family:var(--font-mono);font-size:.8em;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600}
+  .ctab td b{color:var(--ink);font-weight:700}
+  .ctab tr td:first-child{font-family:var(--font-display);font-weight:700;color:var(--ink)}
+  .ctab .flag{color:var(--coral);font-weight:700}
+  .ctab .ok{color:var(--green);font-weight:700}
+
+  /* ── footer: PHT logo · labelled per-slide dot groups · NAU logo · page ── */
+  .foot{position:fixed;left:0;right:0;bottom:0;z-index:10;height:calc(var(--foot) + env(safe-area-inset-bottom,0px));
+    display:flex;align-items:center;gap:clamp(8px,1.4vw,20px);
+    padding:0 max(18px,env(safe-area-inset-right,0px)) env(safe-area-inset-bottom,0px) max(18px,env(safe-area-inset-left,0px));
+    background:linear-gradient(0deg,#060d0b 62%,rgba(6,13,11,0));font-family:var(--font-mono)}
+  .foot .pht{height:38px;width:auto;flex:none;opacity:.96}
+  .foot .nau{height:30px;width:auto;flex:none;opacity:.95}
+  .navrow{display:flex;gap:clamp(10px,1.6vw,28px);align-items:flex-end;margin:0 auto;flex-wrap:nowrap;overflow:hidden}
+  .navgrp{display:flex;flex-direction:column;gap:7px;align-items:center}
+  .glabel{font-family:var(--font-mono);font-size:clamp(.56rem,1vw,.68rem);letter-spacing:.12em;text-transform:uppercase;color:var(--faint);white-space:nowrap;transition:color .35s ease;font-weight:600}
+  .navgrp.on .glabel{color:var(--gc)}
+  .gdots{display:flex;gap:6px}
+  .pdot{width:7px;height:7px;border-radius:50%;background:var(--gc);opacity:.22;transition:all .35s ease}
+  .pdot.done{opacity:.6}
+  .pdot.cur{opacity:1;transform:scale(1.7);box-shadow:0 0 0 3px color-mix(in srgb,var(--gc) 28%,transparent),0 0 12px color-mix(in srgb,var(--gc) 55%,transparent)}
+  .pageno{color:var(--muted);font-size:.82rem;min-width:56px;text-align:right;flex:none;font-variant-numeric:tabular-nums}
+  /* narrow pane: show only the current section's name (all seven show full-screen / on a projector) */
+  @media (max-width:1040px){.navgrp .glabel{display:none}.navgrp.on .glabel{display:block}.navrow{gap:clamp(10px,2.4vw,18px)}}
+  @media (max-width:720px){.foot .nau{display:none}}
+  .bar-prog{position:fixed;left:0;top:0;height:3px;background:var(--now,var(--teal));z-index:11;
+    box-shadow:0 0 12px color-mix(in srgb,var(--now,var(--teal)) 70%,transparent);transition:width .5s ease,background .7s ease}
+
+  .zone{position:fixed;top:0;bottom:var(--foot);width:20%;z-index:5;cursor:pointer}
+  .zone.l{left:0}.zone.r{right:0}
+  .nav{position:fixed;bottom:calc(var(--foot) + 10px);right:max(14px,env(safe-area-inset-right,0px));display:flex;gap:6px;z-index:20}
+  .nav button{font-family:var(--font-mono);font-size:.9rem;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:9px;width:36px;height:31px;cursor:pointer;transition:border-color .2s}
+  .nav button:hover{border-color:var(--teal)}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+
+  .notes-panel{position:fixed;left:0;right:0;bottom:0;max-height:46%;overflow-y:auto;z-index:30;background:#0b1512;border-top:3px solid var(--hl);
+    padding:16px max(22px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(22px,env(safe-area-inset-left,0px));
+    transform:translateY(100%);transition:transform .32s ease;box-shadow:0 -16px 44px rgba(0,0,0,.55)}
+  body.show-notes .notes-panel{transform:none}
+  .notes-panel .nh{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:7px;font-weight:600}
+  .notes-panel .nb{font-family:var(--font-body);font-size:1.04rem;line-height:1.6;color:var(--ink);max-width:90ch}
+  .notes-panel .nb p{margin:0 0 8px}
+  .aside{display:none}
+
+  @media (prefers-reduced-motion:reduce){
+    .bg{animation:none}
+    .a,.pop{opacity:1;transform:none;filter:none}
+    .slide.active .a,.slide.active .pop,.slide.active .draw,.slide.active .bar .col{animation:none}
+    .draw{stroke-dashoffset:0}.bar .col{transform:none}.key{background-size:100% 30%}
+    [data-step]{transition:opacity .2s ease}.slide{transition:none}
+  }
+
+  /* print / PDF export: one slide per page, backgrounds kept, controls hidden */
+  @media print{
+    @page{size:16in 9in;margin:0}
+    html,body{height:auto;overflow:visible;background:#07100e}
+    .bg,.tint{display:none}
+    .veil{position:absolute;background:#07100e}
+    .foot,.nav,.zone,.bar-prog,.notes-panel{display:none !important}
+    .deck{position:static;inset:auto}
+    .slide{position:relative;inset:auto;opacity:1 !important;visibility:visible !important;transform:none !important;
+      page-break-after:always;break-after:page;width:16in;height:9in;margin:0 auto;
+      -webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .slide .a,.slide .pop{opacity:1 !important;transform:none !important;filter:none !important;animation:none !important}
+    .draw{stroke-dashoffset:0 !important}.bar .col{transform:none !important}.key{background-size:100% 30% !important}
+    [data-step]{opacity:1 !important;transform:none !important}
+  }
+</style>
+</head><body>
+
+<div class="bg" aria-hidden="true"></div>
+<div class="veil" aria-hidden="true"></div>
+<div class="tint" aria-hidden="true"></div>
+<div class="bar-prog" id="prog"></div>
+
+<div class="deck" id="deck">
+
+  <!-- ==================== PROBLEM ==================== -->
+  <section class="slide" data-sec="0" data-cover>
+    <div class="stage">
+      <div class="eyebrow a">Comprehensive Exam · Oral Defense</div>
+      <h1 class="a">A scoping review of playful health technology for hypertension self-management in Indigenous communities</h1>
+      <div class="cover-sub a"><b>Hypertension care where Indigeneity and disability meet</b><span class="who">Pavan Prasad Gorintla · Playful Health Technology Lab · Northern Arizona University</span></div>
+      <div class="committee a">Committee: Dr. Jared Duval (Chair) · Dr. Ashish Amresh · Dr. Igor Steinmacher · Dr. Laia Turmo Vidal</div>
+    </div>
+    <aside class="aside"><p>Good morning, and thank you for being here.</p><p>My comprehensive exam is a scoping review of playful health technology for hypertension self-management in Indigenous communities: hypertension care where Indigeneity and disability meet.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="0">
+    <div class="stage">
+      <div class="eyebrow a">Land Acknowledgement</div>
+      <h2 class="a">Northern Arizona University sits at the base of the San Francisco Peaks, on homelands sacred to Native peoples of this region.</h2>
+      <p class="explain a">We honor their past, present, and future generations, who have lived here for millennia and will forever call this place home.</p>
+      <div class="cite a">The people at the center of this work are Native people living in Flagstaff, on this land.</div>
+    </div>
+    <aside class="aside"><p>Before I begin, I want to acknowledge the land. [Read slowly.]</p><p>This matters for this work, because the people at its center are Native people living in Flagstaff, on this land.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="0">
+    <div class="stage">
+      <div class="eyebrow a">A1 · What Is Hypertension</div>
+      <h2 class="a">Blood pressure that stays too high — and quietly raises cardiac risk.</h2>
+      <div class="grid2">
+        <div class="panel a"><div class="num"><span class="key">130 / 80</span></div><p>mmHg — systolic over diastolic, the US threshold (WHO uses 140/90).</p></div>
+        <div class="panel a"><div class="num">−10 → −20%</div><p>every <b>10 mmHg</b> lower in systolic pressure ≈ <b>20% lower</b> cardiovascular risk.</p></div>
+      </div>
+      <p class="explain a">Usually <b>no symptoms</b> — but over time it leads to heart attack, stroke, and heart failure.</p>
+      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Jones+2025+AHA+ACC+hypertension+guideline" target="_blank" rel="noopener">Jones et al. 2025</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=WHO+2023+global+report+hypertension" target="_blank" rel="noopener">WHO 2023</a></div>
+    </div>
+    <aside class="aside"><p>I want to start with what hypertension is, because not everyone works with it. It is blood pressure that stays too high. A reading has two numbers: systolic, when the heart beats, and diastolic, when it rests, in millimeters of mercury. In the US, hypertension starts at 130 over 80.</p><p>It is called a silent killer because it has no symptoms, but over time it leads to heart attack, stroke, and heart failure.</p><p>And small changes matter: every 10 points lower in systolic pressure means about 20 percent lower cardiovascular risk.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="0">
+    <div class="stage">
+      <div class="eyebrow a">A2 · Who Carries More of It</div>
+      <h2 class="a">Indigenous adults, and people with disabilities, carry more.</h2>
+      <div class="bars">
+        <div class="bar"><span class="v a" style="color:var(--teal)"><span data-count="33.7" data-dec="1">33.7</span>%</span><div class="col" style="--i:1;height:100%;background:linear-gradient(var(--teal),#1f9d92)"></div><span class="lb">AI/AN adults, diagnosed</span></div>
+        <div class="bar"><span class="v a" style="color:var(--muted)"><span data-count="28.7" data-dec="1">28.7</span>%</span><div class="col" style="--i:2;height:85%;background:var(--line)"></div><span class="lb">all US adults</span></div>
+        <div class="bar"><span class="v a" style="color:var(--green)"><span data-count="35.9" data-dec="1">35.9</span>%</span><div class="col" style="--i:3;height:107%;background:linear-gradient(var(--green),#3f9e5e)"></div><span class="lb">Navajo (Diné) adults, cohort</span></div>
+      </div>
+      <p class="explain a">In large urban areas, disability among AI/AN adults is <span class="key">18.9%</span> vs 7.9% — more than twice as common. Worldwide, 46% with hypertension do not know; in the US, more than half.</p>
+      <div class="cite a">AI/AN = American Indian and Alaska Native · <a class="lnk" href="https://scholar.google.com/scholar?q=Villarroel+2020+disability+American+Indian+Alaska+Native" target="_blank" rel="noopener">Villarroel 2020</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Harmon+2016+Navajo+hypertension+cohort" target="_blank" rel="noopener">Harmon 2016</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Percy+1997+Navajo+Health+Nutrition+Survey+blood+pressure" target="_blank" rel="noopener">Percy 1997</a></div>
+    </div>
+    <aside class="aside"><p>How common is it? Worldwide, 33 percent of adults 30–79 have hypertension — 1.3 billion people; in the US, 46.7 percent. These are measured, so they include people never diagnosed; worldwide 46 percent do not know they have it.</p><p>American Indian and Alaska Native adults carry more: 33.7 percent diagnosed, against 28.7 of all US adults — and these are self-reported, so the true number is likely higher. In large urban areas, disability is more than twice as common: 18.9 against 7.9.</p><p>For Navajo adults, a cohort study found 35.9 percent. Diné is the Navajo people's own name for themselves.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="0">
+    <div class="stage">
+      <div class="eyebrow a">A3 · Small Drops in Blood Pressure Matter</div>
+      <h2 class="a">A playful tool only has to aim for a few points.</h2>
+      <p class="explain a">Drop in systolic pressure (mmHg) reported for people with hypertension:</p>
+      <div class="row">
+        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>Less sodium · 6–8</span>
+        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>DASH diet · 5–8 (11.4 in trial)</span>
+        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>Aerobic activity · 4–8</span>
+        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>Weight loss · 6–8</span>
+        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>Slow breathing · ~5</span>
+        <span class="chip c a" style="--act:var(--gold)"><span class="dotc"></span>eSMART-HD game · ~7</span>
+      </div>
+      <p class="explain a" style="margin-top:16px">These are the sizes of change a playful tool can realistically target — including a <b>serious game</b>.</p>
+      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Jones+2025+hypertension+guideline+lifestyle+Table+12" target="_blank" rel="noopener">Jones et al. 2025</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Appel+1997+DASH+trial+blood+pressure" target="_blank" rel="noopener">Appel 1997</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Hickman+2015+eSMART-HD+serious+game+hypertension" target="_blank" rel="noopener">Hickman 2015</a></div>
+    </div>
+    <aside class="aside"><p>One point that comes up throughout: small drops matter. WHO estimates every 10 mmHg lower in systolic pressure means about 20 percent lower cardiovascular risk, and any sustained drop helps over the long term.</p><p>Here are the drops reported for people with hypertension — sodium 6 to 8, DASH 5 to 8 and 11.4 in the original trial, aerobic 4 to 8, weight loss 6 to 8, slow breathing about 5, and eSMART-HD, a serious game, about 7 in the game group. These are the sizes of change a playful tool can aim for.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="0">
+    <div class="stage">
+      <div class="eyebrow a">A4 · Intersectional Research in HCI</div>
+      <h2 class="a">Study the two identities as one population.</h2>
+      <div class="grid2">
+        <div class="panel a" style="--act:var(--muted)"><h3 style="color:var(--muted)">The usual approach</h3><p>Navajo people, and people with disabilities, studied as <b>two separate populations</b>, side by side.</p></div>
+        <div class="panel a" style="--act:var(--teal)"><h3 style="color:var(--teal)">This review instead</h3><p><b>Urban Diné adults with disabilities, and their supporters</b>, studied as <b>one population</b>.</p></div>
+      </div>
+      <p class="explain a">Crenshaw showed why side-by-side misses people: where identities meet, the experience is <b>different</b>, not added. HCI has mostly studied one identity at a time.</p>
+      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Crenshaw+1991+mapping+the+margins+intersectionality" target="_blank" rel="noopener">Crenshaw 1991</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Schlesinger+2017+intersectional+HCI+identity" target="_blank" rel="noopener">Schlesinger et al. 2017</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Sum+2022+disability+justice+ableism+colonialism" target="_blank" rel="noopener">Sum et al. 2022</a></div>
+    </div>
+    <aside class="aside"><p>This is where my framing comes in: intersectional research in HCI. The usual approach would take two populations — Navajo people and people with disabilities — and put them side by side. Crenshaw showed why that misses people: where identities meet, the experience is different, not added.</p><p>So this review treats them as one population: urban Diné adults with disabilities, and the people who support them, in Flagstaff. HCI has mostly studied one identity at a time, so studying both together is a contribution the field has been asking for.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="0">
+    <div class="stage">
+      <div class="eyebrow a">Guiding Questions</div>
+      <h2 class="a">Three questions shaped my reading.</h2>
+      <ol class="takes">
+        <li class="a"><span class="n t">1</span><div>How is hypertension lived and managed by <b>Indigenous people and people with disabilities</b>?</div></li>
+        <li class="a"><span class="n g">2</span><div>How are <b>games and play</b> used to support it?</div></li>
+        <li class="a"><span class="n b">3</span><div>How are these tools <b>designed with communities</b>?</div></li>
+      </ol>
+      <p class="explain a">From what I found, I derive preliminary research questions at the end.</p>
+    </div>
+    <aside class="aside"><p>Three guiding questions shaped my reading. One: how is hypertension lived and managed in Indigenous communities, and by people with disabilities? Two: how are games and play used to support it? Three: how are these tools designed with communities?</p><p>From what I found, I derive preliminary research questions at the end.</p></aside>
+  </section>
+
+  <!-- ==================== METHOD ==================== -->
+  <section class="slide" data-sec="1">
+    <div class="stage">
+      <div class="eyebrow a">Finding the Literature</div>
+      <div class="split">
+        <div>
+          <h2 class="a">From a wide net to a focused set.</h2>
+          <p class="explain a">Six concept blocks — <b>games, technology, hypertension, Indigenous, disability, design</b> — across PubMed (1,539), ACM DL (100), and Google Scholar (120). Searched 7 September 2026.</p>
+          <div class="cite a">Six queries combining the blocks · full strings in backup · <a class="lnk" href="https://scholar.google.com/scholar?q=scoping+review+methodology+Arksey+OMalley" target="_blank" rel="noopener">scoping-review method</a></div>
+        </div>
+        <div class="fig a" style="margin-top:0">
+        <svg viewBox="0 0 440 230" role="img" aria-label="Screening funnel from 1,759 records to 176 included">
+          <g font-size="14" text-anchor="middle">
+            <g class="a" style="--i:0"><rect x="5" y="6" width="430" height="34" rx="6" fill="rgba(86,167,230,.14)" stroke="#56a7e6" stroke-width="1.5"/><text x="220" y="28" fill="#eef4f2">1,759 records identified</text></g>
+            <g class="a" style="--i:1"><rect x="48" y="50" width="344" height="34" rx="6" fill="rgba(86,167,230,.14)" stroke="#56a7e6" stroke-width="1.5"/><text x="220" y="72" fill="#eef4f2">1,709 screened (50 duplicates removed)</text></g>
+            <g class="a" style="--i:2"><rect x="92" y="94" width="256" height="34" rx="6" fill="rgba(69,194,207,.14)" stroke="#45c2cf" stroke-width="1.5"/><text x="220" y="116" fill="#eef4f2">961 read in full text</text></g>
+            <g class="a" style="--i:3"><rect x="128" y="138" width="184" height="46" rx="8" fill="#f2b84b"/><text x="220" y="159" fill="#15201c" font-weight="700" font-size="16">176 included</text><text x="220" y="176" fill="#15201c" font-size="11">met the inclusion criteria</text></g>
+            <path class="draw" d="M220 40 L220 50 M220 84 L220 94 M220 128 L220 138" stroke="#7a8e8a" stroke-width="1.5"/>
+          </g>
+        </svg>
+        </div>
+      </div>
+    </div>
+    <aside class="aside"><p>I searched three databases on 7 September 2026, using six concept blocks: games, technology, hypertension, Indigenous, disability, and design. The full search strings are in the backup.</p><p>PubMed gave 1,539 records, the ACM Digital Library 100, and Google Scholar 120. After removing 50 duplicates, I screened 1,709 titles and abstracts, read 961 in full, and included 176 studies.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="1">
+    <div class="stage">
+      <div class="eyebrow a">A Hierarchical Thematic Analysis</div>
+      <h2 class="a">176 studies, coded and arranged into a hierarchy.</h2>
+      <div class="tree-mount" data-hl="none"></div>
+      <p class="cap a">This hierarchy is the structure of the rest of the talk. For each part: what the literature says, the design implications, and a great example of prior work.</p>
+    </div>
+    <aside class="aside"><p>To organize the 176 studies, I did a hierarchical thematic analysis. I coded every paper for its themes, population, self-management factors, form of play, and design approach, and arranged the themes into this hierarchy. The numbers are papers.</p><p>On the left is domain knowledge: hypertension, with its five factors and risk; and intersectionality, with a disability branch and an Indigenous branch. Only one study sits in both. On the right is theory: serious games and play; participatory, community-based research; and wicked problems with research through design.</p><p>This hierarchy is the structure of the rest of this talk. For each part, I show what the literature says, the design implications, and a great example of prior work.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="1">
+    <div class="stage">
+      <div class="eyebrow a">When the Studies Were Published</div>
+      <div class="big a"><span data-count="86">86</span></div>
+      <div class="big-sub a">of the 176 studies were published <b>from 2024 on</b> — this is an area growing right now.</div>
+      <p class="explain a">Only 10 studies appeared before 2016. The 2026 count is partial: the search was run in September 2026. That is one reason a review is useful at this point.</p>
+      <div class="cite a">Counts by year coded from the 176 included studies (this review).</div>
+    </div>
+    <aside class="aside"><p>Before the themes, one view of the 176 studies over time. The work is recent — only 10 studies were published before 2016.</p><p>About half, 86 of 176, were published from 2024 on. The 2026 count is partial, because I searched in September. So this is an area growing now, and that is one reason a review is useful at this point.</p></aside>
+  </section>
+
+  <!-- ==================== DOMAIN ==================== -->
+  <section class="slide" data-sec="2" data-grp="Hypertension">
+    <div class="stage">
+      <div class="eyebrow a">Where We Are · Domain Knowledge</div>
+      <span class="herelbl a">Guiding question 1 — how hypertension is lived and managed</span>
+      <div class="tree-mount" data-hl="htn"></div>
+    </div>
+    <aside class="aside"><p>We start with domain knowledge, and with hypertension: its five self-management factors, and its risk. This part answers my first guiding question: how hypertension is lived and managed.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="2" style="--act:var(--green)">
+    <div class="stage">
+      <div class="eyebrow a">Hypertension · Five Self-Management Factors</div>
+      <div class="three">
+        <div class="pane a"><span class="tag">What the literature says</span><h3>Most studies focus on activity.</h3><p>Of 176 papers: physical activity <b>73</b>, BP monitoring <b>65</b>, education <b>33</b>, medication <b>30</b>, diet <b>20</b>.</p></div>
+        <div class="pane a"><span class="tag">Design implications</span><h3>A game for each factor.</h3><p>A <b>calm, seated state</b> for measuring, and <b>movement</b> for exercise — the platform must do both.</p></div>
+        <div class="pane hero a"><span class="tag">Great example of prior work</span><h3>Graham et al. 2025 · our lab</h3><div class="fig"><img src="graham.png" alt="Graham 2025 workshop: Indigenous participants at tables, and a five-step process from choose-a-factor to share-out"><div class="src">Graham, Ikwunne & Duval 2025 — workshop → 5 prototypes</div></div><p>14 Indigenous participants in N. Arizona; 17 designs → <b>5 prototypes, one per factor</b>. Did not yet focus on disability.</p></div>
+      </div>
+      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Graham+2025+co-designing+culturally+grounded+hypertension+games+Indigenous" target="_blank" rel="noopener">Graham et al. 2025</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Jones+2025+hypertension+guideline" target="_blank" rel="noopener">Jones et al. 2025</a></div>
+    </div>
+    <aside class="aside"><p>Hypertension self-management rests on five factors: physical activity, blood pressure monitoring, education, medication, and diet. In my review, 73 papers covered activity, 65 monitoring, 33 education, 30 medication, 20 diet.</p><p>The design implications: one game per factor. And a tension — measuring blood pressure needs a still, seated body; exercise needs movement. The platform has to support both.</p><p>A great example comes from our own lab. Graham and colleagues held a workshop with 14 Indigenous participants in Northern Arizona. Their ideas became 17 designs, then 5 game prototypes, one per factor. It did not yet focus on people with disabilities.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="2" style="--act:var(--green)">
+    <div class="stage">
+      <div class="eyebrow a">Hypertension · Risk</div>
+      <div class="three">
+        <div class="pane a"><span class="tag">What the literature says</span><h3>Weight, age, and sitting raise the risk.</h3><p>In 833 adults with disabilities, obesity raised the odds of hypertension almost <b>7×</b>. In teenagers, seated video gaming was the only sitting habit linked to higher BP.</p></div>
+        <div class="pane a"><span class="tag">Design implications</span><h3>Move players; reveal the numbers.</h3><p>Encourage <b>movement during play</b>, and help people <b>learn their own blood-pressure numbers</b>.</p></div>
+        <div class="pane hero a"><span class="tag">Great example of prior work</span><h3>Percy et al. 1997 · Navajo Area IHS</h3><p>The Navajo Health &amp; Nutrition Survey measured BP in <b>780 adults</b> across the Navajo Nation. Only <span class="key">50 of 97</span> people with high BP had been told.</p><div class="cite" style="--act:var(--green)">Local, community-connected evidence.</div></div>
+      </div>
+      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Lin+2012+hypertension+adults+disabilities+Taiwan" target="_blank" rel="noopener">Lin et al. 2012</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Goldfield+2011+sedentary+video+games+blood+pressure+adolescents" target="_blank" rel="noopener">Goldfield et al. 2011</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Percy+1997+Navajo+Health+Nutrition+Survey" target="_blank" rel="noopener">Percy et al. 1997</a></div>
+    </div>
+    <aside class="aside"><p>What raises the risk? In 833 adults with disabilities, weight mattered most: obesity raised the odds almost 7 times, and age 65+ about 2.5 times. That sample was in Taiwan, so I use it as cross-population evidence. And in teenagers, seated video gaming was the only sitting habit linked to higher blood pressure, likely through snacking and the stress of play.</p><p>Design implications: move players during play, rather than seat them; and help people find out their numbers, because many do not know.</p><p>The example is local: Percy and colleagues at the Navajo Area IHS measured blood pressure in 780 Navajo adults. Only 50 of the 97 people with high blood pressure had been told.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="2" style="--act:var(--green)">
+    <div class="stage">
+      <div class="eyebrow a">Sitting · A Risk and a Requirement</div>
+      <h2 class="a">Sitting pulls the design in two directions.</h2>
+      <div class="grid2">
+        <div class="panel a" style="--act:var(--coral)"><h3 style="color:var(--coral)">A risk</h3><p>Seated video gaming was the only sitting habit linked to higher BP (282 teenagers) — likely snacking, and the stress and excitement of play. Light activity that breaks up sitting lowers BP.</p></div>
+        <div class="panel a" style="--act:var(--teal)"><h3 style="color:var(--teal)">A requirement</h3><p>A correct reading needs: rest 5 min · seated, back supported · feet flat · arm at heart level · no talking.</p></div>
+      </div>
+      <p class="explain a">In CardioCare Quest, <b>Dog Walking</b> is for movement, and <b>Quiet Minute</b> is slow breathing before a calm, seated reading — both sides, one platform.</p>
+      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Goldfield+2011+sedentary+gaming+blood+pressure" target="_blank" rel="noopener">Goldfield et al. 2011</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Shimbo+2020+home+blood+pressure+monitoring+AHA" target="_blank" rel="noopener">Shimbo et al. 2020</a></div>
+    </div>
+    <aside class="aside"><p>Sitting needs its own slide, because it pulls the design in two directions. On one side, sitting is a risk: in 282 teenagers, seated video gaming was the only sitting habit linked to higher blood pressure — the authors point to snacking, and the stress and excitement of play. The 2025 guideline adds that even light activity that breaks up sitting lowers BP.</p><p>On the other side, sitting is a requirement: a correct home reading needs five minutes of rest, seated, back supported, feet flat, arm at heart level, no talking.</p><p>So the design does both. In CardioCare Quest, Dog Walking is for movement, and Quiet Minute is slow breathing before a calm, seated reading.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="2" style="--act:var(--green)" data-grp="Intersectionality">
+    <div class="stage">
+      <div class="eyebrow a">Intersectionality</div>
+      <div class="split">
+        <div>
+          <h2 class="a">Only <span class="key">1 of 176</span> studies involved both groups.</h2>
+          <p class="explain a">33 involved Indigenous people, 47 involved people with disabilities — and only one involved both: a review of dementia care, not hypertension tools.</p>
+          <p class="explain a" style="margin-top:10px"><b>Design implications:</b> study both identities together; ask who a design leaves out, and who holds power.</p>
+          <div class="cite a">Prior work: <a class="lnk" href="https://scholar.google.com/scholar?q=Erete+Israni+Dillahunt+2018+intersectional+HCI+design+margins" target="_blank" rel="noopener">Erete, Israni &amp; Dillahunt 2018</a> — intersecting axes of privilege and oppression, with disability and non-European origin on one diagram.</div>
+        </div>
+        <div class="figcard a">
+          <img src="erete.png" alt="Erete 2018 figure: a radial diagram of intersecting axes of privilege, domination, and oppression, listing disability, race, gender, class, and more">
+          <div class="src">Erete, Israni &amp; Dillahunt 2018 · Fig 1 — intersecting axes of privilege &amp; oppression</div>
+        </div>
+      </div>
+    </div>
+    <aside class="aside"><p>Intersectionality, from Crenshaw: where identities meet, people face something different, not two problems added. In my 176 studies, 33 involved Indigenous people and 47 involved people with disabilities. Only one involved both — and it is a review of dementia care, not hypertension tools.</p><p>Design implications: study both identities together, and ask who each design leaves out, and who holds the power.</p><p>A great example is Erete and colleagues, 2018. Their figure shows the intersecting axes of privilege and oppression. Disability and non-European origin are on it, as one location, not two separate boxes.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="2" style="--act:var(--green)">
+    <div class="stage">
+      <div class="eyebrow a">Disability · Proxy Care</div>
+      <div class="three">
+        <div class="pane a"><span class="tag">What the literature says</span><h3>Support helps — but a proxy can replace the person.</h3><p>In an exergame study, the help adults needed dropped from <b>14.4 to 2.7</b> events per session. Sum warns of proxies used as <b>substitutes</b> for the person.</p></div>
+        <div class="pane a"><span class="tag">Design implications</span><h3>The supporter helps; the player decides.</h3><p><b>Partial participation</b> — like pressing the cuff button — counts as real participation.</p></div>
+        <div class="pane hero a"><span class="tag">Great example of prior work</span><h3>Bircanin et al. 2021</h3><p>Two years co-designing with adults with <b>severe intellectual disabilities</b>, using <b>Active Support</b>: short sessions, only the help needed, choice left with the person.</p><div class="cite" style="--act:var(--green)">The study I learn most from.</div></div>
+      </div>
+      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Caro+2018+exergame+adults+developmental+disabilities" target="_blank" rel="noopener">Caro et al. 2018</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Sum+2024+disability+proxies+inclusion" target="_blank" rel="noopener">Sum et al. 2024</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Bircanin+2021+co-design+severe+intellectual+disability+Active+Support" target="_blank" rel="noopener">Bircanin et al. 2021</a></div>
+    </div>
+    <aside class="aside"><p>The first disability theme is proxy care. People with disabilities often take part with a caregiver. That can help: in Caro's exergame study, the help adults needed dropped from 14.4 times in the first session to 2.7 in the third. But a proxy can also speak for the person — Sum warns about proxies used as substitutes under the guise of inclusion.</p><p>Design implications: the supporter scaffolds, and the player decides. And partial participation, like pressing the cuff button, counts as real participation.</p><p>The example I learn most from is Bircanin and colleagues. Over two years they co-designed with adults with severe intellectual disabilities using Active Support: little and often, only as much help as needed, and choice stays with the person.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="2" style="--act:var(--green)">
+    <div class="stage">
+      <div class="eyebrow a">Disability · Accessible Protocols</div>
+      <div class="three">
+        <div class="pane a"><span class="tag">What the literature says</span><h3>Few studies use accessibility standards.</h3><p>A 2026 review found only <b>7 of 25</b> co-design studies with people with intellectual disability used standards such as <b>Easy Read</b>.</p></div>
+        <div class="pane a"><span class="tag">Design implications</span><h3>Adapt the materials, and pay for time.</h3><p>Easy Read materials, short sessions, familiar places — and <b>fair pay</b> for people's time.</p></div>
+        <div class="pane hero a"><span class="tag">Great example of prior work</span><h3>Spencer González et al. 2020</h3><p>Three years with a <b>paid advisory panel</b> of adults with intellectual disability — easy-read text, adult (not childish) pictures, story-based activities, polished prototypes.</p></div>
+      </div>
+      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Johnstone+2026+co-design+intellectual+disability+accessibility+standards+review" target="_blank" rel="noopener">Johnstone et al. 2026</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Spencer+Gonzalez+2020+advisory+panel+intellectual+disability+easy+read" target="_blank" rel="noopener">Spencer González et al. 2020</a></div>
+    </div>
+    <aside class="aside"><p>The second disability theme is accessible research protocols. A 2026 review of 25 co-design studies with people with intellectual disability found only 7 used accessibility standards like Easy Read.</p><p>Design implications: easy-read materials, short and frequent sessions, familiar places, and fair pay.</p><p>A great example is Spencer González and colleagues. For three years they worked with an advisory panel of adults with intellectual disability, paid like staff. They used easy-read text, adult pictures rather than childish ones, story-based play, and polished prototypes, because rough wireframes confused people.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="2" style="--act:var(--green)">
+    <div class="stage">
+      <div class="eyebrow a">Disability · Technosolutionism</div>
+      <div class="three">
+        <div class="pane a"><span class="tag">What the literature says</span><h3>Technology is often built to fix the person.</h3><p>The <b>medical model</b> treats disability as a deficit; the <b>social model</b> puts the barrier in the environment and the design. Sum describes tools that solve problems disabled people never had.</p></div>
+        <div class="pane a"><span class="tag">Design implications</span><h3>Confirm the problem is real.</h3><p>Check the problem matters to the community, and <b>respect the choice not to use a tool</b> — opting out has no penalty.</p></div>
+        <div class="pane hero a"><span class="tag">Great example of prior work</span><h3>Hsueh et al. 2025</h3><p>Describes how families <b>resist institutions</b> in small ways, and argues design should make <b>choice easier</b> rather than only push adoption.</p></div>
+      </div>
+      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Mankoff+2010+disability+studies+HCI" target="_blank" rel="noopener">Mankoff et al. 2010</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Sum+2024+disability+dongles" target="_blank" rel="noopener">Sum et al. 2024</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Hsueh+2025+families+resist+institutions+disability+design" target="_blank" rel="noopener">Hsueh et al. 2025</a></div>
+    </div>
+    <aside class="aside"><p>The third disability theme is technosolutionism: the belief that a new technology will fix the problem. It starts with how we see disability. The medical model treats disability as a deficit in the person; the social model puts the barrier in the environment and the design. And Sum describes disability dongles: elegant solutions to problems disabled people never had.</p><p>Design implications: check the problem is real for the community, and treat not using a tool as a possible choice — opting out has no penalty.</p><p>The example is Hsueh and colleagues, 2025. They describe how schools, hospitals, and funders take agency from families, and how families resist. They argue design should lower the cost of choice.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="2" style="--act:var(--green)">
+    <div class="stage">
+      <div class="eyebrow a">Disability · DREEM · a method from our lab</div>
+      <div class="split">
+        <div>
+          <h2 class="a">Learn before asking people for their time.</h2>
+          <p class="explain a">DREEM starts from <b>media made by disabled creators</b> — building understanding without spending participants' <b>access labor</b>.</p>
+          <p class="explain a" style="margin-top:10px"><b>For this work:</b> start with media made by Diné and disabled creators, then bring better questions to the community.</p>
+          <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Baltaxe-Admony+2024+DREEM+disability+media+Duval+Ringland" target="_blank" rel="noopener">Baltaxe-Admony, Duval &amp; Ringland 2024</a> — the four steps: discover, close read, journal, aggregate.</div>
+        </div>
+        <div class="figcard a">
+          <img src="dreem.png" alt="DREEM four steps: 1 Discover media by disabled creators, 2 Close read, 3 Journal, 4 Aggregate">
+          <div class="src">Baltaxe-Admony, Duval &amp; Ringland 2024 — DREEM, four steps</div>
+        </div>
+      </div>
+    </div>
+    <aside class="aside"><p>The last disability theme is a method from our lab: DREEM. It says learn first, from media made by disabled creators, before asking anyone to give their time. That avoids spending participants' access labor — the extra work disabled people do just to take part — and it pushes back on saviorism.</p><p>For my work: start with media made by Diné creators and by disabled creators, then bring better questions to the community.</p><p>Here are its four steps: discover media, read it closely, keep a journal, and aggregate the insights.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="2" style="--act:var(--green)">
+    <div class="stage">
+      <div class="eyebrow a">Indigenous · Sovereignty</div>
+      <div class="split">
+        <div>
+          <h2 class="a">Data sovereignty is rarely addressed.</h2>
+          <p class="explain a">Only <span class="key">4 of 84</span> Indigenous health-technology studies engaged with who <b>owns and controls</b> community data. Historical trauma, from colonization and harmful research, shapes trust.</p>
+          <p class="explain a" style="margin-top:10px"><b>Design implications:</b> community control of data, results shared back, and a community advisory board.</p>
+          <div class="cite a">Prior work: <a class="lnk" href="https://scholar.google.com/scholar?q=Maar+2019+DREAM-GLOBAL+cultural+safety+First+Nations" target="_blank" rel="noopener">Maar et al. 2019 (DREAM-GLOBAL)</a> — six practices for cultural safety; <b>98%</b> would recommend the program.</div>
+        </div>
+        <div class="figcard dark a">
+          <img src="maar.png" alt="Maar 2019 figure: a cycle of building and maintaining the community research relationship before, during, and after a trial">
+          <div class="src">Maar et al. 2019 — building &amp; keeping the research relationship</div>
+        </div>
+      </div>
+    </div>
+    <aside class="aside"><p>Now the Indigenous branch. First, sovereignty. A critical review by Vigil-Hayes and colleagues found only 4 of 84 Indigenous health-technology studies engaged with data sovereignty: who owns and controls the community's data. And historical trauma, from colonization and harmful research, shapes the trust any study depends on.</p><p>Design implications: the community controls its data, following the CARE principles, and results go back. And a community advisory board guides the questions and approaches.</p><p>The example is Maar and colleagues, from DREAM-GLOBAL with First Nations communities. This figure is how they built and kept research relationships before, during, and after the trial. 98 percent of participants would recommend the program.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="2" style="--act:var(--green)">
+    <div class="stage">
+      <div class="eyebrow a">Indigenous · Cultural Grounding</div>
+      <div class="split">
+        <div>
+          <h2 class="a">Programs work when they build on culture.</h2>
+          <p class="explain a">In a trial with Native Hawaiian adults, <span class="key">42.7%</span> of the hula group reached healthy blood pressure, vs 21.2% of the comparison group.</p>
+          <p class="explain a" style="margin-top:10px"><b>Design implications:</b> start from what the community values; let the community decide what is shared.</p>
+          <div class="cite a">Prior work (NAU): <a class="lnk" href="https://scholar.google.com/scholar?q=Vigil-Hayes+2021+ARORA+Navajo+Hopi+youth+Flagstaff" target="_blank" rel="noopener">Vigil-Hayes et al. 2021 · ARORA</a> — advisory board set the design values (the butterfly; avoid coyote and lightning).</div>
+        </div>
+        <div class="figcard dark a">
+          <img src="arora.png" alt="ARORA app screenshots: a butterfly breathing exercise '10 Breaths', a feather, and a layered landscape">
+          <div class="src">Vigil-Hayes et al. 2021 — ARORA, designed with Navajo &amp; Hopi youth</div>
+        </div>
+      </div>
+    </div>
+    <aside class="aside"><p>The second Indigenous theme is cultural grounding: programs work when built into what a community already does. The strongest evidence is the hula trial with 263 Native Hawaiian adults: 42.7 percent reached healthy blood pressure, against 21.2. I use it because it is the only randomized trial of a cultural movement practice for blood pressure. The lesson is the approach, not the dance. Navajo Healthy Stores, run by local Navajo-speaking health workers, shows the same.</p><p>Design implications: start from what the community values, and the community decides what is shared, because some games and stories are only for certain seasons.</p><p>The great local example is ARORA, by Vigil-Hayes and colleagues at NAU, with Navajo and Hopi youth in Flagstaff. An advisory board set the design values: the butterfly as a positive symbol, and no coyote or lightning.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="2" style="--act:var(--green)">
+    <div class="stage">
+      <div class="eyebrow a">Diné Culture and This Work</div>
+      <h2 class="a">Things to learn <em>with</em> Diné collaborators — not to define alone.</h2>
+      <div class="grid2">
+        <div class="panel a" style="--act:var(--muted)"><h3 style="color:var(--muted)">What I have learned, from the literature</h3><p>Introductions by clan, hometown, lineage · activity through walking, herding, running before sunrise · the butterfly is positive, avoid coyote and lightning · some games and stories are seasonal · Diné bizaad, the Navajo language.</p></div>
+        <div class="panel a" style="--act:var(--teal)"><h3 style="color:var(--teal)">How it shapes this work</h3><p>Games explain the cultural meaning of what they show · the community decides seasonal content · materials in English and Diné bizaad · family is part of the design · k'é and hózhó are for Diné collaborators to define.</p></div>
+      </div>
+      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Bea+2018+Navajo+cancer+survivors+physical+activity+Flagstaff" target="_blank" rel="noopener">Bea et al. 2018</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Vigil-Hayes+2021+ARORA" target="_blank" rel="noopener">Vigil-Hayes et al. 2021</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Noe+Kirshenbaum+2024+Indigenous+research+waypoints" target="_blank" rel="noopener">Noe &amp; Kirshenbaum 2024</a></div>
+    </div>
+    <aside class="aside"><p>What have I learned about Diné culture, and how does it shape this work? I want to be careful here, because these are things to learn with Diné collaborators, not to define on my own.</p><p>From Bea and colleagues: people introduce themselves through clan, hometown, and lineage; activity comes through walking, herding sheep, and running before sunrise. From the ARORA advisory board: the butterfly is positive, the coyote and lightning should be avoided, and some games and stories belong only to certain seasons. And Diné bizaad, the Navajo language, matters.</p><p>So in this work: games explain the cultural meaning of what they show, seasonal content is decided by the community, materials are in both languages, and family is part of the design. Concepts like k'é, kinship, and hózhó, balance and beauty, are for Diné collaborators to define.</p></aside>
+  </section>
+
+  <!-- ==================== THEORY ==================== -->
+  <section class="slide" data-sec="3">
+    <div class="stage">
+      <div class="eyebrow a">Where We Are · Theory</div>
+      <span class="herelbl a">Guiding questions 2 and 3 — how games are used, and how tools are designed with communities</span>
+      <div class="tree-mount" data-hl="theory"></div>
+    </div>
+    <aside class="aside"><p>Now the theory side: serious games and play; participatory, community-based research; and wicked problems with research through design. This part answers the second and third guiding questions.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="3" style="--act:var(--cyan)">
+    <div class="stage">
+      <div class="eyebrow a">Serious Games and Play</div>
+      <div class="split">
+        <div>
+          <h2 class="a">Most health games are closed systems.</h2>
+          <p class="explain a">Of 70 game studies, <b>49</b> used closed games and only <b>3</b> used open-ended play. eSMART-HD lowered systolic pressure about <span class="key">7 mmHg</span>; MyHeartMate kept only 27% of players after 30 days.</p>
+          <p class="explain a" style="margin-top:10px"><b>Design implications:</b> room for <b>open, social play</b> in daily life, and engagement that <b>lasts</b> beyond the first weeks.</p>
+          <div class="cite a">Framework: <a class="lnk" href="https://scholar.google.com/scholar?q=Duval+2022+playful+health+technology+serious+play" target="_blank" rel="noopener">Duval 2022</a> — serious games are closed; serious play stays open, so people shape it to their lives. Chart: <a class="lnk" href="https://scholar.google.com/scholar?q=Hickman+2015+eSMART-HD+serious+game+hypertension" target="_blank" rel="noopener">Hickman et al. 2015</a>.</div>
+        </div>
+        <div class="figcard a">
+          <img src="esmart.jpg" alt="Line chart: systolic BP in the eSMART-HD intervention group falls from ~139.9 to ~132.8 mmHg across four waves">
+          <div class="src">Hickman et al. 2015 · Fig 1 — systolic BP, game group (139.9 → 132.8 mmHg)</div>
+        </div>
+      </div>
+    </div>
+    <aside class="aside"><p>On the theory side, first: serious games and play. A serious game is a game with a health aim besides fun. Among 70 game and play studies, 49 were closed games with fixed rules, 26 only added points and badges, and only 3 used open-ended play. The trials are mixed: eSMART-HD, where adults practice a medical visit, lowered systolic pressure about 7 points in the game group, but the difference from control was not significant; the study was small. MyHeartMate kept only 27 percent of its players after 30 days.</p><p>Design implications: leave room for open, social play that fits daily life, and design for engagement that lasts.</p><p>The framework comes from Duval: serious games for health are closed systems; serious play stays open, so people can shape it to their own lives.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="3" style="--act:var(--cyan)">
+    <div class="stage">
+      <div class="eyebrow a">Hypertension &amp; Heart Games Compared</div>
+      <table class="ctab a">
+        <thead><tr><th>Game</th><th>Who took part</th><th>Design</th><th>What they found</th></tr></thead>
+        <tbody>
+          <tr class="a"><td>eSMART-HD</td><td>116 adults w/ hypertension, Ohio</td><td>RCT, 4 sessions</td><td>~7 mmHg drop; not sig. vs control</td></tr>
+          <tr class="a"><td>MyHeartMate</td><td>390 heart patients, Sydney</td><td>RCT, 6 months</td><td>27% still playing after 30 days</td></tr>
+          <tr class="a"><td>BewARe</td><td>11 older adults w/ hypertension</td><td>Interviews w/ prototypes</td><td>safe, wireless, controller-based</td></tr>
+          <tr class="a"><td>Lumbee game</td><td>220 Lumbee adults (planned)</td><td>RCT protocol, step tracker</td><td class="flag">excludes people who use a walker</td></tr>
+          <tr class="a"><td>Graham et al.</td><td>14 Indigenous participants, AZ</td><td>Participatory workshop</td><td class="ok">5 prototypes, one per factor</td></tr>
+          <tr class="a"><td>Li et al. 2026</td><td>14 adults w/ prehypertension, China</td><td>Interviews</td><td>simple, social play preferred</td></tr>
+        </tbody>
+      </table>
+      <p class="cap a">Missing across all of them: <b style="color:var(--ink)">players with disabilities</b>, and <b style="color:var(--ink)">lasting engagement</b>.</p>
+    </div>
+    <aside class="aside"><p>Here are the hypertension and heart games side by side. eSMART-HD, with 116 adults, lowered systolic about 7 mmHg in the game group, but the trial was small and not significant vs control. MyHeartMate, with 390 heart patients, was used by almost everyone at first, but only 27 percent kept going after 30 days. Stamm asked 11 older adults what an exercise game should be: safe, wireless, controllers. The Lumbee game is the only one built with a Native tribe, and it excludes people who use a walker. Graham's workshop, from our lab, produced 5 prototypes. And Li found adults with prehypertension wanted simple, social play.</p><p>What is missing across all of them: players with disabilities, and lasting engagement.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="3" style="--act:var(--cyan)">
+    <div class="stage">
+      <div class="eyebrow a">Participatory, Community-Based Research</div>
+      <div class="split">
+        <div>
+          <h2 class="a">Few studies design <em>with</em> the community.</h2>
+          <p class="explain a">Only <b>15</b> studies used participatory or community-based design: <b>11</b> with Indigenous communities, <b>3</b> with people with disabilities. Workshops can also exclude people.</p>
+          <p class="explain a" style="margin-top:10px"><b>Design implications:</b> fair pay, respect for community assets, community goals, and support that <b>continues after funding</b>.</p>
+          <div class="cite a">Prior work: <a class="lnk" href="https://scholar.google.com/scholar?q=Radhakrishnan+2025+Lumbee+sensor+game+hypertension" target="_blank" rel="noopener">Lumbee game trial (Radhakrishnan et al. 2025)</a> — a paid community committee shaped it and removed a casino theme. <span class="flag" style="color:var(--coral)">It excludes people who use a walker</span> — exactly the gap for this population.</div>
+        </div>
+        <div class="figcard dark a">
+          <img src="lumbee.jpg" alt="Two phone screens from the Lumbee Tribe hypertension game: a trail map with Heart Quests, and a shop of regalia items">
+          <div class="src">Radhakrishnan et al. 2025 — Lumbee sensor-controlled hypertension game</div>
+        </div>
+      </div>
+    </div>
+    <aside class="aside"><p>Second: participatory, community-based research. 15 studies used it — 11 with Indigenous communities, only 3 with people with disabilities. And Harrington warns that design workshops can be an affluent and privileged activity.</p><p>Design implications: pay people, value what the community already has, let the community set the goals, and stay after the funding ends.</p><p>The example is the Lumbee game trial, the one hypertension game built with a Native tribe. A paid community committee shaped it, and removed a casino-themed game. But it excludes people who use a walker or have sensory impairments — which is exactly the gap for this population.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="3" style="--act:var(--cyan)">
+    <div class="stage">
+      <div class="eyebrow a">Wicked Problems and Research through Design</div>
+      <h2 class="a">A health game is a wicked problem — so you learn by building.</h2>
+      <p class="explain a">No single definition; solutions are <b>better or worse</b>, not right or wrong. Research through design learns by making.</p>
+      <div class="fig">
+      <svg viewBox="0 0 560 150" role="img" aria-label="A cycle: build, learn with the community, rebuild">
+        <defs><marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#45c2cf"/></marker></defs>
+        <path class="draw" d="M115 62 C 205 10, 355 10, 445 62" fill="none" stroke="#45c2cf" stroke-width="3" marker-end="url(#ah)"/>
+        <path class="draw" d="M445 90 C 355 142, 205 142, 115 90" fill="none" stroke="#45c2cf" stroke-width="3" marker-end="url(#ah)"/>
+        <g font-size="16" fill="#eef4f2" text-anchor="middle">
+          <g class="a"><rect x="35" y="54" width="118" height="42" rx="11" fill="rgba(255,255,255,.07)" stroke="#eef4f2" stroke-width="1.2"/><text x="94" y="80">build</text></g>
+          <g class="a"><rect x="192" y="0" width="176" height="38" rx="11" fill="rgba(255,255,255,.07)" stroke="#eef4f2" stroke-width="1.2"/><text x="280" y="25">learn with the community</text></g>
+          <g class="a"><rect x="407" y="54" width="118" height="42" rx="11" fill="#f2b84b"/><text x="466" y="80" fill="#15201c">rebuild</text></g>
+        </g>
+      </svg>
+      </div>
+      <p class="cap a"><b style="color:var(--ink)">Prior work — Situated Play Design (Duval 2022):</b> food traditions from many cultures studied as starting points for playful design.</p>
+      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Duval+2022+playful+health+technology+wicked+problem" target="_blank" rel="noopener">Duval 2022</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Altarriba+Bertran+2019+situated+play+design" target="_blank" rel="noopener">Altarriba Bertran et al. 2019</a></div>
+    </div>
+    <aside class="aside"><p>Third: wicked problems and research through design. No paper in my search used these words, so this comes from the theory literature. Duval calls designing a motivating health game a wicked problem: no single definition, and answers are better or worse, not right or wrong. Research through design answers this by learning through making.</p><p>Design implications: find the play people already do and build on it; and treat the platform as a probe to learn with, as well as a product.</p><p>The example is Situated Play Design. In this workshop, food traditions from many cultures became play potentials — starting points for playful design.</p></aside>
+  </section>
+
+  <!-- ==================== SYNTHESIS ==================== -->
+  <section class="slide" data-sec="4" style="--act:var(--gold)">
+    <div class="stage">
+      <div class="eyebrow a">Where Each Concern Was Studied</div>
+      <h2 class="a">Each concern stays inside one community.</h2>
+      <table class="ctab a">
+        <thead><tr><th>Theme</th><th>Indigenous</th><th>Disability</th><th>General</th></tr></thead>
+        <tbody>
+          <tr class="a"><td>Cultural grounding</td><td class="ok">19</td><td>2</td><td>1</td></tr>
+          <tr class="a"><td>Sovereignty</td><td class="ok">7</td><td>1</td><td>0</td></tr>
+          <tr class="a"><td>Proxy care</td><td class="flag">0</td><td class="ok">7</td><td>0</td></tr>
+          <tr class="a"><td>Accessible protocols</td><td class="flag">0</td><td class="ok">24</td><td>1</td></tr>
+          <tr class="a"><td>Technosolutionism</td><td class="flag">0</td><td>2</td><td>2</td></tr>
+        </tbody>
+      </table>
+      <p class="cap a">No study looked at proxy care or accessible protocols <b style="color:var(--coral)">with Indigenous people</b> — the gap an intersectional review is meant to show.</p>
+    </div>
+    <aside class="aside"><p>This table shows something that only appears when the two groups are looked at together. Each row is a theme; the columns show how many studies addressed it with Indigenous communities, with people with disabilities, and with general populations.</p><p>Cultural grounding and sovereignty were studied almost only with Indigenous communities. Proxy care and accessible protocols were studied only with people with disabilities. No study looked at proxy care or accessible protocols with Indigenous people. Each concern stays inside one community — which is the gap an intersectional review is meant to show.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="4" style="--act:var(--gold)">
+    <div class="stage">
+      <div class="eyebrow a">Synthesis Matrix</div>
+      <h2 class="a">Nothing does all of it — and three columns are nearly empty.</h2>
+      <div class="fig">
+      <svg viewBox="0 0 760 250" role="img" aria-label="Matrix of prior studies against what a tool for this community needs; three columns are mostly empty">
+        <g font-size="12.5" fill="#a9bdb8" text-anchor="end">
+          <text x="150" y="62">eSMART-HD</text><text x="150" y="86">MyHeartMate</text><text x="150" y="110">Lumbee trial</text>
+          <text x="150" y="134">Graham (NAU)</text><text x="150" y="158">Hula trial</text><text x="150" y="182">ARORA (NAU)</text>
+          <text x="150" y="206">Active Support</text><text x="150" y="230" fill="#f2b84b" font-weight="600">CardioCare Quest</text>
+        </g>
+        <g font-size="12" fill="#eef4f2" text-anchor="middle">
+          <text x="200" y="30">Indig.</text><text x="268" y="30">Disab.</text><text x="336" y="30">HTN</text><text x="404" y="30">Play</text>
+          <text x="480" y="30" font-weight="600">w/ comm.</text><text x="566" y="18">data</text><text x="566" y="32">control</text><text x="638" y="18">open</text><text x="638" y="32">play</text><text x="706" y="30">offline</text>
+        </g>
+        <!-- highlight the three thin columns -->
+        <g data-step>
+          <rect x="540" y="40" width="52" height="200" rx="6" fill="#e8805c" fill-opacity=".14" stroke="#e8805c" stroke-width="1.6" stroke-dasharray="5 4"/>
+          <rect x="612" y="40" width="52" height="200" rx="6" fill="#e8805c" fill-opacity=".14" stroke="#e8805c" stroke-width="1.6" stroke-dasharray="5 4"/>
+          <rect x="246" y="40" width="44" height="200" rx="6" fill="#e8805c" fill-opacity=".14" stroke="#e8805c" stroke-width="1.6" stroke-dasharray="5 4"/>
+        </g>
+        <g fill="#63d389" font-size="15" text-anchor="middle" font-weight="700">
+          <!-- indig, disab, htn, play, comm, data, open, offline per row -->
+          <text class="a" x="336" y="66">✓</text><text class="a" x="404" y="66">✓</text>
+          <text class="a" x="268" y="90">✓</text><text class="a" x="336" y="90">~</text>
+          <text class="a" x="200" y="114">✓</text><text class="a" x="268" y="114">✓</text><text class="a" x="336" y="114">✓</text><text class="a" x="404" y="114">✓</text><text class="a" x="480" y="114">✓</text>
+          <text class="a" x="200" y="138">✓</text><text class="a" x="336" y="138">✓</text><text class="a" x="404" y="138">✓</text><text class="a" x="480" y="138">✓</text>
+          <text class="a" x="200" y="162">✓</text><text class="a" x="336" y="162">✓</text><text class="a" x="404" y="162">✓</text><text class="a" x="480" y="162">✓</text><text class="a" x="706" y="162">✓</text>
+          <text class="a" x="200" y="186">✓</text><text class="a" x="336" y="186">✓</text><text class="a" x="480" y="186">✓</text><text class="a" x="638" y="186">✓</text><text class="a" x="706" y="186">✓</text>
+          <text class="a" x="268" y="210">✓</text><text class="a" x="404" y="210">✓</text>
+          <text class="a" x="200" y="234" fill="#f2b84b">✓</text><text class="a" x="336" y="234" fill="#f2b84b">✓</text><text class="a" x="404" y="234" fill="#f2b84b">✓</text><text class="a" x="480" y="234" fill="#f2b84b">✓</text>
+        </g>
+      </svg>
+      </div>
+      <p class="cap a">Hypertension and play are common; Indigenous studies are built with the community. The three thin columns — <b style="color:var(--coral)">disability · data control · open play</b> — are where the literature has least to offer, and where this work must contribute. <span style="color:var(--faint)">(click)</span></p>
+    </div>
+    <aside class="aside"><p>This synthesis matrix brings the great examples together. Each row is a study; each column is something a tool for this community needs. A check means the study does it.</p><p>Read down the columns. Hypertension and play are common, and the Indigenous studies are built with the community. But disability is almost empty wherever Indigenous is full. Data control and open play are mostly empty. Nothing does all of it, but many do some. The last row is where CardioCare Quest is heading.</p><p>(Click.) The three thin columns — disability, data control, and open play — are where the literature has the least to offer, and where this work has to contribute.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="4" style="--act:var(--gold)">
+    <div class="stage">
+      <div class="eyebrow a">From Themes to Design Requirements</div>
+      <h2 class="a">Each requirement comes from the review — not from a list I made up.</h2>
+      <table class="ctab a">
+        <thead><tr><th>From these parts of the review</th><th>comes this requirement</th></tr></thead>
+        <tbody>
+          <tr class="a"><td>Five factors &amp; risk</td><td><b>Movement</b> during play, and <b>calm</b> for measuring</td></tr>
+          <tr class="a"><td>Intersectionality, proxy care, protocols, DREEM</td><td>Designed <b>with players with disabilities</b>, with support that fades</td></tr>
+          <tr class="a"><td>Sovereignty &amp; cultural grounding</td><td><b>Culturally grounded</b>, community-led, with community-owned data</td></tr>
+          <tr class="a"><td>Games, community-based research, RtD</td><td><b>Open, situated play</b>, developed with the community</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <aside class="aside"><p>Each design requirement comes from the themes, not from a list I made up. From the five factors and risk: move players during play, and calm them for measuring. From intersectionality, proxy care, and accessible protocols: design with players with disabilities, with support that fades. From sovereignty and cultural grounding: culturally grounded, led by the community, with community control of data. From games, community-based research, and wicked problems: open, situated play, built and studied as a probe with the community.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="4" style="--act:var(--gold)">
+    <div class="stage">
+      <div class="eyebrow a">Preliminary Research Questions</div>
+      <h2 class="a">Four questions, from the guiding questions and requirements.</h2>
+      <div class="grid2" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))">
+        <div class="panel a" style="--act:var(--teal)"><div class="num">PRQ1</div><p><b>Design.</b> How do urban Diné adults with disabilities and their supporters co-design playful tools for daily blood-pressure care?</p></div>
+        <div class="panel a" style="--act:var(--green)"><div class="num">PRQ2</div><p><b>Support.</b> How can caregiver help be designed in, while keeping the player's own voice?</p></div>
+        <div class="panel a" style="--act:var(--cyan)"><div class="num">PRQ3</div><p><b>Culture.</b> How can cultural grounding and community data control be built in, and judged by the community?</p></div>
+        <div class="panel a" style="--act:var(--coral)"><div class="num">PRQ4</div><p><b>Play.</b> How do closed games and open, situated play differ in keeping people engaged?</p></div>
+      </div>
+    </div>
+    <aside class="aside"><p>From the guiding questions and these requirements come four preliminary research questions. PRQ1, design: how do urban Diné adults with disabilities and their supporters co-design playful tools for daily blood-pressure care? PRQ2, support: how can caregiver help be designed in, while keeping the player's own voice? PRQ3, culture and sovereignty: how can cultural grounding and community data control be built in, and judged by the community? PRQ4, play: how do closed games and open, situated play differ in keeping people engaged?</p></aside>
+  </section>
+
+  <!-- ==================== CARDIOCARE QUEST ==================== -->
+  <section class="slide" data-sec="5" style="--act:var(--coral)" data-grp="The Platform">
+    <div class="stage">
+      <div class="eyebrow a">Preliminary Work, in Order</div>
+      <h2 class="a">What I have already done toward these questions.</h2>
+      <ol class="takes">
+        <li class="a"><span class="n k">1</span><div><b>Cultural probe</b> — 31 Navajo adults over 7 days, in English and Diné bizaad, with Native Americans for Community Action.</div></li>
+        <li class="a"><span class="n k">2</span><div><b>Design session</b> — 36 adults with disabilities and caregivers created 23 game concepts.</div></li>
+        <li class="a"><span class="n k">3</span><div><b>Play session</b> — community members played CardioCare Quest, with and without support.</div></li>
+      </ol>
+      <div class="cite a">Both design and play papers: <a class="lnk" href="https://scholar.google.com/scholar?q=Gorintla+CardioCare+Quest+hypertension+Navajo" target="_blank" rel="noopener">Gorintla et al., under review</a>.</div>
+    </div>
+    <aside class="aside"><p>My preliminary work, in the order it happened. First, a cultural probe: 31 Navajo adults, for 7 days, in English and Diné bizaad, with Native Americans for Community Action. Then a design session: 36 adults with disabilities and their caregivers created 23 game concepts. Then a play session: community members played CardioCare Quest, with and without support. Both papers are under review.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">Design Catalog · From Community Sketches to Games</div>
+      <div class="fig a" style="margin-top:4px">
+        <img src="catalog.png" alt="Community-drawn sketches that became games: a bingo board, a dog walk, a food card system, salt sludge, a food key, and a vascular village" style="max-width:min(100%,840px);width:100%;max-height:54vh;object-fit:contain;border-radius:12px;box-shadow:0 16px 44px rgba(0,0,0,.5)">
+      </div>
+      <p class="cap a">Community members sketched these themselves → <b style="color:var(--ink)">Bingo Bash · Dog Walking · DASH Diet Game · Salt Sludge · Vascular Village</b>.</p>
+    </div>
+    <aside class="aside"><p>This is our design catalog. Community members sketched these ideas themselves. A bingo board became Bingo Bash. A walk with a dog became Dog Walking. A food key became the DASH Diet Game. And salt sludge and a village inside an artery became Salt Sludge and Vascular Village.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">CardioCare Quest Today</div>
+      <h2 class="a">A game for each factor — moving for exercise, still for measuring.</h2>
+      <div class="row">
+        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>Exercise · Dog Walking</span>
+        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>Diet · Diet Quest</span>
+        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>Education · Heart Smarts</span>
+        <span class="chip c a" style="--act:var(--green)"><span class="dotc"></span>Medication · Pill Path</span>
+        <span class="chip c a" style="--act:var(--teal)"><span class="dotc"></span>Measuring · Quiet Minute</span>
+      </div>
+      <p class="explain a" style="margin-top:16px">Built in <b>Flutter and Firebase</b>, with story games in <b>Twine</b>; works <b>offline</b>. Pill Path can mark a dose as caregiver-assisted; Quiet Minute is slow breathing before a calm, seated reading.</p>
+      <div class="placeholder a">▸ <b>Add:</b> 2–3 real CardioCare Quest app screenshots here (home, Dog Walking, Quiet Minute). <b>Not deployed yet</b> — next steps: accessibility work with players with disabilities, and a data plan with the community.</div>
+    </div>
+    <aside class="aside"><p>What is CardioCare Quest today? Games for each factor: Dog Walking for exercise, Diet Quest for diet, Heart Smarts for education, Pill Path for medication — where a dose can be marked caregiver-assisted — and Quiet Minute for measuring: slow breathing, then a calm, seated reading. That covers both sides: moving for exercise, still for measuring.</p><p>It is built in Flutter and Firebase, with story games in Twine, and it works offline. It is not deployed yet; the next steps are accessibility work with players with disabilities and a data plan with the community.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">CardioCare Quest · All Five Factors</div>
+      <div class="fig a" style="margin-top:4px">
+        <img src="ccqfactors.png" alt="CardioCare Quest architecture: a Navajo family with hypertension, five factors each with minigames, telemetry data, flowing to researchers and clinicians" style="max-width:min(100%,940px);width:100%;max-height:50vh;object-fit:contain;border-radius:12px;background:#fff;padding:10px;box-shadow:0 16px 44px rgba(0,0,0,.5)">
+      </div>
+      <p class="cap a">Each factor has its own minigames, and each game records what matters for that factor — connecting the platform to the first theme in the hierarchy.</p>
+    </div>
+    <aside class="aside"><p>This diagram shows how CardioCare Quest covers all five self-management factors. Each factor has its own games, and each game records what matters: steps and minutes for exercise, food choices for diet, quiz answers for education, doses for medication, and readings for blood-pressure monitoring. This is how the platform connects to the first theme in the hierarchy.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">How It Works · and Why It Is Community Action</div>
+      <div class="steps a">
+        <span class="st">1 · Player + supporter</span><span class="arw">→</span>
+        <span class="st">2 · Sign in</span><span class="arw">→</span>
+        <span class="st">3 · Games</span><span class="arw">→</span>
+        <span class="st">4 · Offline queue</span><span class="arw">→</span>
+        <span class="st hot">5 · Cloud</span>
+      </div>
+      <p class="explain a" style="margin-top:18px">A player, with a supporter through <b>Family Circle</b>, signs in and plays. Everything goes first into an <b>offline queue</b> on the phone — nothing lost without signal — and syncs when connected.</p>
+      <div class="grid2">
+        <div class="panel a" style="--act:var(--coral)"><h3 style="color:var(--coral)">Why community action</h3><p>The games came from the community's own designs, supporters take part through Family Circle, and the <b>community will control its data</b>.</p></div>
+      </div>
+    </div>
+    <aside class="aside"><p>Here is how it works. A player, with a supporter through Family Circle, signs in with a QR code or card and a fingerprint, and plays. Everything goes first into an offline queue on the phone, so nothing is lost without signal, and syncs to the cloud when connected.</p><p>Why community action? The games came from the community's own designs. Supporters take part through Family Circle. And the next step is community control of the data.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)" data-grp="Contribution">
+    <div class="stage">
+      <div class="eyebrow a">Beyond the Navajo Nation</div>
+      <h2 class="a">Transferable, not general.</h2>
+      <p class="explain a">There are <b>574</b> federally recognized tribal nations, <b>22</b> in Arizona. Findings from one do not carry over automatically — the Hopi Nation sits inside the Navajo Nation, yet culture, language, and governance differ.</p>
+      <div class="grid2">
+        <div class="panel a" style="--act:var(--teal)"><h3 style="color:var(--teal)">Careful transfer · waypoints</h3><p>Positionality, locality, sovereignty, responsibility, feedback — asked again with each community.</p><div class="cite"><a class="lnk" href="https://scholar.google.com/scholar?q=Noe+Kirshenbaum+2024+Indigenous+research+waypoints" target="_blank" rel="noopener">Noe &amp; Kirshenbaum 2024</a></div></div>
+        <div class="panel a" style="--act:var(--green)"><h3 style="color:var(--green)">A modular platform</h3><p>Games written in <b>Twine</b>, so each community can change the content.</p></div>
+      </div>
+    </div>
+    <aside class="aside"><p>Could this work reach beyond the Navajo Nation? I see it as transferable, not general. There are 574 federally recognized tribal nations, and findings from one do not carry over automatically. Arizona alone has 22. The Hopi Nation sits inside the Navajo Nation, so many risks are shared, but culture, language, and governance are not.</p><p>Two things support careful transfer. First, Noe and Kirshenbaum's waypoints: positionality, locality, sovereignty, responsibility, and feedback, asked again with each community. Second, the platform is modular: games are written in Twine, so each community can change the content.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">What This Review Adds</div>
+      <div class="grid2">
+        <div class="panel a" style="--act:var(--gold)"><h3 style="color:var(--gold)">This review adds</h3><p>An <b>intersectional synthesis</b> of 176 studies · a <b>hierarchy of themes</b> with design implications · <b>requirements traced to evidence</b>.</p></div>
+        <div class="panel a" style="--act:var(--coral)"><h3 style="color:var(--coral)">Next</h3><p>Design <b>with</b> urban Diné adults with disabilities · a community advisory board · a data sovereignty plan · new versions of CardioCare Quest.</p></div>
+      </div>
+      <p class="explain a">Only <b>one</b> of the 176 studies involved both Indigenous people and disability — this is the gap the work continues into.</p>
+    </div>
+    <aside class="aside"><p>To close. This review adds an intersectional synthesis of 176 studies, where only one involved both Indigenous people and disability; a hierarchy of themes for this area, each with design implications and examples; and design requirements traced to that evidence.</p><p>Next: participatory design with urban Diné adults with disabilities and their supporters, a community advisory board, a data sovereignty plan, and new versions of CardioCare Quest.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)" data-cover>
+    <div class="stage">
+      <div class="eyebrow a">Thank You</div>
+      <h1 class="a">Playful blood-pressure care, designed <em>together with</em> urban Diné adults with disabilities.</h1>
+      <div class="cover-sub a"><b>Ahéhee'. Questions?</b></div>
+      <div class="committee a">With thanks to Native Americans for Community Action, the Hozhoni Foundation, Northern Arizona Healthcare, the Playful Health Technology Lab, and my committee.</div>
+    </div>
+    <aside class="aside"><p>In one sentence: playful blood-pressure care, designed with urban Diné adults with disabilities, not for them.</p><p>Ahéhee. Thank you. I am happy to take questions.</p></aside>
+  </section>
+
+</div>
+
+<!-- footer -->
+<div class="foot">
+  <img class="pht" src="pht.png" alt="Playful Health Technology Lab logo">
+  <div class="navrow" id="navrow"></div>
+  <img class="nau" src="nau.jpg" alt="Northern Arizona University logo">
+  <div class="pageno" id="pageno">1 / 1</div>
+</div>
+
+<div class="zone l" id="zl" aria-label="Previous"></div>
+<div class="zone r" id="zr" aria-label="Next"></div>
+<div class="nav">
+  <button id="bp" aria-label="Previous slide">‹</button>
+  <button id="bnt" aria-label="Next slide">›</button>
+  <button id="bn" aria-label="Toggle speaker notes" title="Speaker notes (N)">N</button>
+</div>
+
+<div class="notes-panel" id="notes"><div class="nh" id="nhh">Speaker Notes</div><div class="nb" id="nbb"></div></div>
+
+<script>
+(function(){
+  "use strict";
+  var SECTIONS=[
+    {name:"Problem",         v:"--teal"},
+    {name:"Method",          v:"--blue"},
+    {name:"Domain",          v:"--green"},
+    {name:"Theory",          v:"--cyan"},
+    {name:"Synthesis",       v:"--gold"},
+    {name:"CardioCare Quest",v:"--coral"}
+  ];
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var N=slides.length, cur=0;
+
+  // default accent per slide from its section (unless slide set its own --act)
+  slides.forEach(function(s){
+    var sec=+s.getAttribute('data-sec')||0;
+    if(!s.style.getPropertyValue('--act')) s.style.setProperty('--act','var('+SECTIONS[sec].v+')');
+  });
+
+  // hierarchy / driver-diagram template
+  function tree(hl){
+    function leaf(txt,n,key){ return '<span'+(hl===key?' class="hot"':'')+'>'+txt+(n?' <b>'+n+'</b>':'')+'</span>'; }
+    var dimDomain = hl==='theory';
+    var dimTheory = (hl==='htn'||hl==='disab'||hl==='indig');
+    return ''+
+    '<div class="tree">'+
+      '<div class="branch'+(dimDomain?' dim':'')+(hl==='htn'||hl==='disab'||hl==='indig'?' on':'')+'">'+
+        '<div class="bh">Domain knowledge · 176 studies</div>'+
+        '<p class="node">Hypertension</p>'+
+        '<div class="leaf">'+leaf('Five factors','61','htn')+leaf('Risk','50','htn')+'</div>'+
+        '<p class="node">Intersectionality</p>'+
+        '<div class="leaf">'+leaf('Disability','47','disab')+leaf('Proxy care','7','disab')+leaf('Accessible protocols','25','disab')+leaf('Technosolutionism','4','disab')+leaf('DREEM','','disab')+'</div>'+
+        '<div class="leaf">'+leaf('Indigenous','33','indig')+leaf('Sovereignty','7','indig')+leaf('Cultural','21','indig')+'</div>'+
+      '</div>'+
+      '<div class="branch'+((hl==='htn'||hl==='disab'||hl==='indig')?' dim':'')+(hl==='theory'?' on':'')+'">'+
+        '<div class="bh">Theory</div>'+
+        '<div class="leaf">'+leaf('Serious games &amp; play','70','theory')+'</div>'+
+        '<div class="leaf">'+leaf('Participatory / community-based','15','theory')+'</div>'+
+        '<div class="leaf">'+leaf('Wicked problems &amp; RtD','','theory')+'</div>'+
+      '</div>'+
+    '</div>';
+  }
+  [].slice.call(document.querySelectorAll('.tree-mount')).forEach(function(m){
+    m.innerHTML=tree(m.getAttribute('data-hl'));
+  });
+
+  // build footer groups (consecutive slides sharing data-sec)
+  var navrow=document.getElementById('navrow');
+  var groups=[]; // {sec, start, count, el, dots[], label}
+  slides.forEach(function(s,i){
+    var sec=+s.getAttribute('data-sec')||0;
+    var grp=s.getAttribute('data-grp'); // optional: force a new, custom-labelled group within a section
+    var g=groups[groups.length-1];
+    if(!g||g.sec!==sec||grp){ g={sec:sec,start:i,count:0,dots:[],label:(grp||SECTIONS[sec].name)}; groups.push(g); }
+    g.count++;
+  });
+  groups.forEach(function(g){
+    var wrap=document.createElement('div'); wrap.className='navgrp';
+    wrap.style.setProperty('--gc','var('+SECTIONS[g.sec].v+')');
+    var lab=document.createElement('div'); lab.className='glabel'; lab.textContent=g.label;
+    var dots=document.createElement('div'); dots.className='gdots';
+    for(var k=0;k<g.count;k++){ var d=document.createElement('span'); d.className='pdot'; dots.appendChild(d); g.dots.push(d); }
+    wrap.appendChild(lab); wrap.appendChild(dots); navrow.appendChild(wrap); g.el=wrap;
+  });
+
+  // step-reveal engine (per slide)
+  function steps(s){ return [].slice.call(s.querySelectorAll('[data-step]')); }
+  function shownCount(s){ return steps(s).filter(function(e){return e.classList.contains('shown');}).length; }
+  function showStep(s,n){ steps(s).forEach(function(e,i){ e.classList.toggle('shown', i<n); }); }
+
+  function countUp(s){
+    [].slice.call(s.querySelectorAll('[data-count]')).forEach(function(el){
+      var tgt=parseFloat(el.getAttribute('data-count')), dec=+(el.getAttribute('data-dec')||0), t0=null, dur=900;
+      function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1); var e=1-Math.pow(1-p,3);
+        el.textContent=(tgt*e).toFixed(dec); if(p<1)requestAnimationFrame(step); else el.textContent=tgt.toFixed(dec); }
+      requestAnimationFrame(step);
+    });
+  }
+
+  var pageno=document.getElementById('pageno');
+  var prog=document.getElementById('prog');
+  var nbb=document.getElementById('nbb');
+
+  function renderNotes(s){
+    var a=s.querySelector('.aside');
+    nbb.innerHTML = a? a.innerHTML : '<p>(No notes.)</p>';
+  }
+
+  function go(i,opts){
+    opts=opts||{};
+    i=Math.max(0,Math.min(N-1,i));
+    var prev=cur; cur=i;
+    slides.forEach(function(s,k){ s.classList.toggle('active',k===i); });
+    var s=slides[i];
+    // shift the background glow to the current section's viridis hue
+    var secNow=+s.getAttribute('data-sec')||0;
+    var hexNow=getComputedStyle(document.documentElement).getPropertyValue(SECTIONS[secNow].v).trim();
+    if(hexNow) document.body.style.setProperty('--now', hexNow);
+    // steps: start collapsed unless we arrived going backwards (then show all)
+    if(opts.allSteps) showStep(s, steps(s).length); else showStep(s,0);
+    countUp(s);
+    renderNotes(s);
+    // footer dots
+    groups.forEach(function(g){
+      var active = (i>=g.start && i<g.start+g.count);
+      g.el.classList.toggle('on',active);
+      g.dots.forEach(function(d,k){
+        var gi=g.start+k; d.classList.toggle('done', gi<i); d.classList.toggle('cur', gi===i);
+      });
+    });
+    pageno.textContent=(i+1)+' / '+N;
+    prog.style.width=((i)/(N-1)*100)+'%';
+  }
+
+  function next(){
+    var s=slides[cur], st=steps(s), sc=shownCount(s);
+    if(sc<st.length){ showStep(s,sc+1); return; }
+    if(cur<N-1) go(cur+1);
+  }
+  function prev(){
+    var s=slides[cur], sc=shownCount(s);
+    if(sc>0){ showStep(s,sc-1); return; }
+    if(cur>0) go(cur-1,{allSteps:true});
+  }
+
+  document.getElementById('bnt').onclick=next;
+  document.getElementById('bp').onclick=prev;
+  document.getElementById('zr').onclick=next;
+  document.getElementById('zl').onclick=prev;
+  document.getElementById('bn').onclick=function(){ document.body.classList.toggle('show-notes'); };
+
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){ e.preventDefault(); next(); }
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); prev(); }
+    else if(e.key==='Home'){ e.preventDefault(); go(0); }
+    else if(e.key==='End'){ e.preventDefault(); go(N-1); }
+    else if(e.key==='n'||e.key==='N'){ document.body.classList.toggle('show-notes'); }
+    else if(e.key==='f'||e.key==='F'){ if(!document.fullscreenElement)document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen(); else document.exitFullscreen&&document.exitFullscreen(); }
+  });
+
+  // touch swipe
+  var tx=0,ty=0;
+  document.addEventListener('touchstart',function(e){ tx=e.touches[0].clientX; ty=e.touches[0].clientY; },{passive:true});
+  document.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){ dx<0?next():prev(); }
+  },{passive:true});
+
+  go(0);
+})();
+</script>
+</body></html>
