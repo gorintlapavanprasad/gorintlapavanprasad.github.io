@@ -362,7 +362,8 @@
   .slabel{font-family:var(--font-display);font-size:clamp(.7rem,1.05vw,.95rem);color:var(--faint);white-space:nowrap;
     padding-bottom:4px;border-bottom:1.5px solid rgba(255,255,255,.12);transition:color .3s ease,border-color .3s ease}
   .slabel.on{color:var(--green);border-bottom-color:var(--green);font-weight:700}
-  .pageno{display:none}
+  .pageno{color:var(--muted);font-size:.78rem;min-width:48px;text-align:right;flex:none;font-variant-numeric:tabular-nums;font-family:var(--font-display)}
+  .foot-prog{position:absolute;left:0;top:0;height:3px;width:0;background:var(--green);transition:width .5s ease;box-shadow:0 0 8px color-mix(in srgb,var(--green) 60%,transparent)}
   @media (max-width:860px){.slabel{font-size:.64rem}.navrow{gap:16px}}
   @media (max-width:620px){.slabel:not(.on){display:none}.foot .nau{display:none}}
   .bar-prog{position:fixed;left:0;top:0;height:3px;background:var(--green);z-index:11;transition:width .5s ease}
@@ -924,6 +925,7 @@
 
 <!-- footer -->
 <div class="foot">
+  <div class="foot-prog" id="fprog"></div>
   <img class="pht" src="pht.png" alt="Playful Health Technology Lab logo">
   <div class="navrow" id="navrow"></div>
   <img class="nau" src="nau.jpg" alt="Northern Arizona University logo">
@@ -1012,6 +1014,7 @@
 
   var pageno=document.getElementById('pageno');
   var prog=document.getElementById('prog');
+  var fprog=document.getElementById('fprog');
   var nbb=document.getElementById('nbb');
 
   function renderNotes(s){
@@ -1070,6 +1073,7 @@
     secEls.forEach(function(el,si){ el.classList.toggle('on', si===secNow); });
     pageno.textContent=(i+1)+' / '+N;
     prog.style.width=((i)/(N-1)*100)+'%';
+    if(fprog) fprog.style.width=((i)/(N-1)*100)+'%';
   }
 
   function next(){
