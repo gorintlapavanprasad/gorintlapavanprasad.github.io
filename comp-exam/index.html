@@ -16,11 +16,12 @@
   :root{
     --base:#0a0806; --ink:#f3f1ea; --muted:#a79f93; --faint:#7a746b;
     --line:rgba(255,255,255,.12); --card:rgba(22,17,12,.42); --cardbrd:rgba(255,255,255,.1);
-    /* fresh-pptx palette: yellow emphasis · green section · cool funnel tones · gray comparison */
-    --yellow:#f2d21a; --green:#5fc457; --blue:#3a6d9a; --teal2:#2a9d8f; --greybar:#7d7268;
-    --teal:#5fc457; --cyan:#2a9d8f; --gold:#f2d21a; --coral:#f2d21a;
-    --now:#5fc457;
-    --hl:#f2d21a;                  /* emphasis marker */
+    /* VIRIDIS palette on the dark canvas: purple → blue → teal → green → yellow */
+    --v-purple:#46337e; --v-blue:#3b528b; --v-teal:#21918c; --v-green:#5ec962; --v-yellow:#fde725;
+    --yellow:#fde725; --green:#5ec962; --blue:#3b528b; --teal2:#21918c; --purple:#46337e; --greybar:#6f6a63;
+    --teal:#5ec962; --cyan:#21918c; --gold:#fde725; --coral:#fde725;
+    --now:#5ec962;
+    --hl:#fde725;                  /* emphasis marker */
     --foot:72px;
     --font-display:"Cambria","Palatino Linotype","Book Antiqua",Georgia,serif;
     --font-body:"Cambria","Palatino Linotype","Book Antiqua",Georgia,serif;
@@ -228,8 +229,8 @@
 
   /* big blood-pressure number (slide: What Is Hypertension) */
   .bpnum{font-family:var(--font-display);font-weight:700;font-size:clamp(3.8rem,11vw,8.4rem);line-height:.92;color:#1fae8c;font-variant-numeric:tabular-nums;margin-top:clamp(10px,2.2vh,24px);text-align:center;text-shadow:0 0 56px rgba(31,174,140,.45)}
-  .bpnum .sys{color:#1fae8c}
-  .bpnum .dia{color:#46c56a}
+  .bpnum .sys{color:#fde725}
+  .bpnum .dia{color:#5ec962}
   .bpnum .sl{color:var(--faint);font-weight:400;margin:0 .02em}
   .bpnum .bpunit{font-family:var(--font-body);font-size:.24em;color:var(--muted);font-weight:400;margin-left:.2em;vertical-align:baseline}
   .bplabel{font-family:var(--font-body);color:var(--muted);font-size:clamp(.98rem,1.55vw,1.24rem);margin-top:clamp(8px,1.4vh,14px);max-width:52ch}
@@ -406,8 +407,8 @@
   <!-- ==================== PROBLEM ==================== -->
   <section class="slide cover" data-sec="0" data-cover>
     <div class="stage">
-      <h1 class="a">A Scoping Review of Playful Health Technology for Hypertension Self-Management in Indigenous Communities</h1>
-      <p class="cover-tag a">Hypertension care where Indigeneity and disability meet</p>
+      <h1 class="a">Playful Health Technology for Hypertension Management at the Intersection of Indigeneity and Disability</h1>
+      <p class="cover-tag a">A Scoping Review</p>
       <div class="cover-meta a">
         <div class="who">Pavan Prasad Gorintla</div>
         <div class="aff">Comprehensive Exam, Playful Health Technology Lab, Northern Arizona University</div>
@@ -461,11 +462,11 @@
         <svg class="venn" viewBox="0 0 760 400" role="img" aria-label="Venn diagram: Indigenous Dine adults and people with disabilities overlap in this review's population">
           <defs><clipPath id="vclip"><circle cx="300" cy="205" r="168"/></clipPath></defs>
           <g data-step>
-            <circle cx="300" cy="205" r="168" fill="#5fc457" fill-opacity=".17" stroke="#5fc457" stroke-width="2.5"/>
+            <circle cx="300" cy="205" r="168" fill="#5ec962" fill-opacity=".17" stroke="#5ec962" stroke-width="2.5"/>
             <text class="vlbl" x="186" y="198" text-anchor="middle"><tspan x="186">Indigenous</tspan><tspan x="186" dy="26">(Diné) adults</tspan></text>
           </g>
           <g data-step>
-            <circle cx="460" cy="205" r="168" fill="#f2d21a" fill-opacity=".15" stroke="#f2d21a" stroke-width="2.5"/>
+            <circle cx="460" cy="205" r="168" fill="#fde725" fill-opacity=".15" stroke="#fde725" stroke-width="2.5"/>
             <text class="vlbl" x="574" y="198" text-anchor="middle"><tspan x="574">People with</tspan><tspan x="574" dy="26">disabilities</tspan></text>
           </g>
           <g data-step>
@@ -502,9 +503,9 @@
         <div class="fbar" style="--fi:0;width:72%;background:var(--greybar)"><span class="fn" data-count="1759">1,759</span> <span class="fl">records</span></div>
         <div class="fbar" style="--fi:1;width:61%;background:var(--blue);color:#f3f1ea"><span class="fn" data-count="1709">1,709</span> <span class="fl">screened</span></div>
         <div class="fbar" style="--fi:2;width:49%;background:var(--teal2);color:#f3f1ea"><span class="fn" data-count="961">961</span> <span class="fl">read in full</span></div>
-        <div class="fbar" style="--fi:3;width:34%;background:var(--yellow)"><span class="fn" data-count="176">176</span> <span class="fl">included</span></div>
+        <div class="fbar" style="--fi:3;width:22%;background:var(--yellow)"><span class="fn" data-count="67">67</span> <span class="fl">included</span></div>
       </div>
-      <div class="cite a">50 duplicates removed · 748 excluded on title/abstract · 785 at full text · <a class="lnk" href="https://scholar.google.com/scholar?q=scoping+review+methodology+Arksey+OMalley" target="_blank" rel="noopener">scoping-review method</a></div>
+      <div class="cite a">50 duplicates · 748 excluded (title/abstract) · 894 at full text (425 not HTN/CVD · 9 clinician-education · 460 less-central) · <a class="lnk" href="https://scholar.google.com/scholar?q=scoping+review+methodology+Arksey+OMalley" target="_blank" rel="noopener">scoping-review method</a></div>
     </div>
     <aside class="aside"><p>I searched three databases on 7 September 2026, using six concept blocks: games, technology, hypertension, Indigenous, disability, and design. PubMed gave 1,539 records, the ACM Digital Library 100, and Google Scholar 120 — 1,759 in all.</p><p>After removing 50 duplicates, I screened 1,709 titles and abstracts, read 961 in full, and 176 met the inclusion criteria.</p></aside>
   </section>
