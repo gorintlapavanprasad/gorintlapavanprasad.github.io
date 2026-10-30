@@ -304,8 +304,8 @@
   .rval{font-family:var(--font-body);font-size:clamp(.9rem,1.35vw,1.18rem);color:var(--muted)}
   /* funnel (Finding the Literature) */
   .funnel{display:flex;flex-direction:column;align-items:center;gap:clamp(7px,1.5vh,15px);margin-top:clamp(14px,2.6vh,30px)}
-  .fbar{display:flex;align-items:baseline;justify-content:center;gap:12px;border-radius:4px;padding:clamp(8px,1.6vh,17px) 28px;color:#0c0a06}
-  .fbar.shown{animation:rise .5s cubic-bezier(.22,.61,.36,1) both}
+  .fbar{display:flex;align-items:baseline;justify-content:center;gap:12px;border-radius:4px;padding:clamp(8px,1.6vh,17px) 28px;color:#0c0a06;opacity:0;transform:translateY(12px)}
+  .slide.active .fbar{animation:rise .5s cubic-bezier(.22,.61,.36,1) both;animation-delay:calc(var(--fi,0)*.3s + .3s)}
   .fbar .fn{font-family:var(--font-display);font-weight:700;font-size:clamp(1.3rem,2.7vw,2.15rem);font-variant-numeric:tabular-nums}
   .fbar .fl{font-family:var(--font-body);font-size:clamp(.92rem,1.45vw,1.18rem)}
   /* centered text build (Intersectional) */
@@ -534,10 +534,10 @@
       <p class="explain a" style="max-width:none">Six concept blocks: games, technology, hypertension, Indigenous, disability, and design</p>
       <div class="glab a" style="font-weight:400;color:var(--muted)">PubMed (1,539), ACM Digital Library (100), and Google Scholar (120), searched on 7 September 2026</div>
       <div class="funnel">
-        <div class="fbar" data-step style="width:74%;background:var(--greybar)"><span class="fn" data-count="1759">1,759</span> <span class="fl">records</span></div>
-        <div class="fbar" data-step style="width:58%;background:var(--blue);color:#f3f1ea"><span class="fn" data-count="1709">1,709</span> <span class="fl">screened</span></div>
-        <div class="fbar" data-step style="width:34%;background:var(--teal2);color:#f3f1ea"><span class="fn" data-count="102">102</span> <span class="fl">read in full</span></div>
-        <div class="fbar" data-step style="width:22%;background:var(--yellow)"><span class="fn" data-count="67">67</span> <span class="fl">included</span></div>
+        <div class="fbar" style="--fi:0;width:74%;background:var(--greybar)"><span class="fn" data-count="1759">1,759</span> <span class="fl">records</span></div>
+        <div class="fbar" style="--fi:1;width:58%;background:var(--blue);color:#f3f1ea"><span class="fn" data-count="1709">1,709</span> <span class="fl">screened</span></div>
+        <div class="fbar" style="--fi:2;width:34%;background:var(--teal2);color:#f3f1ea"><span class="fn" data-count="102">102</span> <span class="fl">read in full</span></div>
+        <div class="fbar" style="--fi:3;width:22%;background:var(--yellow)"><span class="fn" data-count="67">67</span> <span class="fl">included</span></div>
       </div>
       <div class="cite a">50 duplicates removed · 1,607 excluded on title and abstract · 35 excluded at full text · <a class="lnk" href="https://scholar.google.com/scholar?q=scoping+review+methodology+Arksey+OMalley" target="_blank" rel="noopener">scoping-review method</a></div>
     </div>
