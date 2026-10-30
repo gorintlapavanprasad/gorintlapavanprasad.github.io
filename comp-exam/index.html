@@ -304,8 +304,8 @@
   .rval{font-family:var(--font-body);font-size:clamp(.9rem,1.35vw,1.18rem);color:var(--muted)}
   /* funnel (Finding the Literature) */
   .funnel{display:flex;flex-direction:column;align-items:center;gap:clamp(7px,1.5vh,15px);margin-top:clamp(14px,2.6vh,30px)}
-  .fbar{display:flex;align-items:baseline;justify-content:center;gap:12px;border-radius:4px;padding:clamp(8px,1.6vh,17px) 28px;color:#0c0a06;opacity:0;transform:translateY(10px)}
-  .slide.active .fbar{animation:rise .55s cubic-bezier(.22,.61,.36,1) both;animation-delay:calc(var(--fi,0)*.12s + .2s)}
+  .fbar{display:flex;align-items:baseline;justify-content:center;gap:12px;border-radius:4px;padding:clamp(8px,1.6vh,17px) 28px;color:#0c0a06}
+  .fbar.shown{animation:rise .5s cubic-bezier(.22,.61,.36,1) both}
   .fbar .fn{font-family:var(--font-display);font-weight:700;font-size:clamp(1.3rem,2.7vw,2.15rem);font-variant-numeric:tabular-nums}
   .fbar .fl{font-family:var(--font-body);font-size:clamp(.92rem,1.45vw,1.18rem)}
   /* centered text build (Intersectional) */
@@ -334,6 +334,13 @@
   @keyframes axfade{to{opacity:1}}
   @keyframes axpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
   @keyframes axringA{0%{opacity:.55;transform:scale(.7)}70%,100%{opacity:0;transform:scale(1.7)}}
+  /* five-factor flower: central hub, five petals revealed one per click */
+  .flower{max-width:min(100%,700px);height:auto;margin:0 auto;display:block}
+  .flr-lbl{font-family:var(--font-display);font-weight:700;text-anchor:middle}
+  [data-step] .flr-pet,[data-step] .flr-txt{opacity:0}
+  [data-step].shown .flr-pet{animation:popin .55s cubic-bezier(.3,1.3,.5,1) forwards;transform-box:fill-box;transform-origin:center}
+  [data-step].shown .flr-txt{animation:axfade .4s ease forwards .32s}
+  @keyframes popin{from{opacity:0;transform:scale(.25)}to{opacity:1;transform:scale(1)}}
   /* two-column "who carries more" */
   .who2{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(20px,4vw,64px);margin-top:clamp(14px,2.4vh,26px);align-items:start}
   .wbars{display:flex;flex-direction:column;gap:clamp(6px,1.2vh,12px)}
@@ -516,14 +523,14 @@
       <p class="explain a" style="max-width:none">Six concept blocks: games, technology, hypertension, Indigenous, disability, and design</p>
       <div class="glab a" style="font-weight:400;color:var(--muted)">PubMed (1,539), ACM Digital Library (100), and Google Scholar (120), searched on 7 September 2026</div>
       <div class="funnel">
-        <div class="fbar" style="--fi:0;width:72%;background:var(--greybar)"><span class="fn" data-count="1759">1,759</span> <span class="fl">records</span></div>
-        <div class="fbar" style="--fi:1;width:61%;background:var(--blue);color:#f3f1ea"><span class="fn" data-count="1709">1,709</span> <span class="fl">screened</span></div>
-        <div class="fbar" style="--fi:2;width:49%;background:var(--teal2);color:#f3f1ea"><span class="fn" data-count="961">961</span> <span class="fl">read in full</span></div>
-        <div class="fbar" style="--fi:3;width:22%;background:var(--yellow)"><span class="fn" data-count="67">67</span> <span class="fl">included</span></div>
+        <div class="fbar" data-step style="width:74%;background:var(--greybar)"><span class="fn" data-count="1759">1,759</span> <span class="fl">records</span></div>
+        <div class="fbar" data-step style="width:58%;background:var(--blue);color:#f3f1ea"><span class="fn" data-count="1709">1,709</span> <span class="fl">screened</span></div>
+        <div class="fbar" data-step style="width:34%;background:var(--teal2);color:#f3f1ea"><span class="fn" data-count="102">102</span> <span class="fl">read in full</span></div>
+        <div class="fbar" data-step style="width:22%;background:var(--yellow)"><span class="fn" data-count="67">67</span> <span class="fl">included</span></div>
       </div>
-      <div class="cite a">50 duplicates · 748 excluded (title/abstract) · 894 at full text (425 not HTN/CVD · 9 clinician-education · 460 less-central) · <a class="lnk" href="https://scholar.google.com/scholar?q=scoping+review+methodology+Arksey+OMalley" target="_blank" rel="noopener">scoping-review method</a></div>
+      <div class="cite a">50 duplicates removed · 1,607 excluded on title and abstract · 35 excluded at full text · <a class="lnk" href="https://scholar.google.com/scholar?q=scoping+review+methodology+Arksey+OMalley" target="_blank" rel="noopener">scoping-review method</a></div>
     </div>
-    <aside class="aside"><p>I searched three databases on 7 September 2026, using six concept blocks: games, technology, hypertension, Indigenous, disability, and design. PubMed gave 1,539 records, the ACM Digital Library 100, and Google Scholar 120, 1,759 in all.</p><p>After removing 50 duplicates, I screened 1,709 titles and abstracts, read 961 in full, and 67 met the inclusion criteria.</p></aside>
+    <aside class="aside"><p>I searched three databases on 7 September 2026, using six concept blocks: games, technology, hypertension, Indigenous, disability, and design. PubMed gave 1,539 records, the ACM Digital Library 100, and Google Scholar 120, 1,759 in all.</p><p>After removing 50 duplicates, I screened 1,709 titles and abstracts, read 102 in full, and 67 met the inclusion criteria.</p></aside>
   </section>
 
   <section class="slide" data-sec="1">
@@ -538,15 +545,22 @@
 
   <section class="slide" data-sec="2" style="--act:var(--green)">
     <div class="stage">
-      <div class="eyebrow a">Hypertension · Five Self-Management Factors</div>
-      <div class="three">
-        <div class="pane a"><span class="tag">What the literature says</span><h3>Five management factors.</h3><p>Physical activity, blood-pressure monitoring, education, medication, and diet.</p></div>
-        <div class="pane a"><span class="tag">Design implication</span><h3>Movement and stillness.</h3><p>Measuring needs a <b>calm, seated</b> body; exercise needs <b>movement</b>.</p></div>
-        <div class="pane hero a"><span class="tag">Great example of prior work</span><h3>Graham et al. 2025</h3><div class="fig"><img src="graham.png" alt="Graham 2025 workshop: Indigenous participants at tables, and a five-step process from choose-a-factor to share-out"><div class="src">Graham, Ikwunne & Duval 2025, workshop → 5 prototypes</div></div><p>14 Indigenous participants in N. Arizona; 17 designs → <b>5 prototypes, one per factor</b>. Did not yet focus on disability.</p></div>
+      <h2 class="a">Hypertension is managed through five daily behaviors.</h2>
+      <div class="fig a" style="margin-top:clamp(2px,1vh,12px)">
+        <svg class="flower" viewBox="0 0 760 450" role="img" aria-label="Five self-management factors around everyday blood-pressure care: diet, exercise, medication, blood-pressure monitoring, education">
+          <circle cx="380" cy="235" r="66" fill="#241a3d" stroke="#5ec962" stroke-width="2.5"/>
+          <text class="flr-lbl" x="380" y="229" font-size="17" fill="#f3f1ea"><tspan x="380">Everyday</tspan><tspan x="380" dy="21">BP care</tspan></text>
+          <g data-step><circle class="flr-pet" cx="380" cy="110" r="54" fill="#fde725"/><text class="flr-txt flr-lbl" x="380" y="117" font-size="20" fill="#0c0a06">Diet</text></g>
+          <g data-step><circle class="flr-pet" cx="499" cy="196" r="54" fill="#5ec962"/><text class="flr-txt flr-lbl" x="499" y="203" font-size="17" fill="#0c0a06">Exercise</text></g>
+          <g data-step><circle class="flr-pet" cx="454" cy="336" r="54" fill="#21918c"/><text class="flr-txt flr-lbl" x="454" y="342" font-size="15" fill="#f3f1ea">Medication</text></g>
+          <g data-step><circle class="flr-pet" cx="306" cy="336" r="54" fill="#3b528b"/><text class="flr-txt flr-lbl" x="306" y="330" font-size="15" fill="#f3f1ea"><tspan x="306">BP</tspan><tspan x="306" dy="19">Monitoring</tspan></text></g>
+          <g data-step><circle class="flr-pet" cx="261" cy="196" r="54" fill="#46337e"/><text class="flr-txt flr-lbl" x="261" y="203" font-size="16" fill="#f3f1ea">Education</text></g>
+        </svg>
       </div>
-      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Graham+2025+co-designing+culturally+grounded+hypertension+games+Indigenous" target="_blank" rel="noopener">Graham et al. 2025</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Jones+2025+hypertension+guideline" target="_blank" rel="noopener">Jones et al. 2025</a></div>
+      <p class="cap a">The review charts the literature by these five factors.</p>
+      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Carey+2022+hypertension+management+AHA" target="_blank" rel="noopener">Carey et al. 2022</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=ACC+AHA+2025+hypertension+guideline" target="_blank" rel="noopener">ACC/AHA 2025</a></div>
     </div>
-    <aside class="aside"><p>Hypertension self-management rests on five factors: physical activity, blood pressure monitoring, education, medication, and diet. In my review, 73 papers covered activity, 65 monitoring, 33 education, 30 medication, 20 diet.</p><p>The design implications: one game per factor. And a tension, measuring blood pressure needs a still, seated body; exercise needs movement. The platform has to support both.</p><p>A great example comes from our own lab. Graham and colleagues held a workshop with 14 Indigenous participants in Northern Arizona. Their ideas became 17 designs, then 5 game prototypes, one per factor. It did not yet focus on people with disabilities.</p></aside>
+    <aside class="aside"><p>Hypertension is managed through five daily behaviors. (click) Diet. (click) Exercise. (click) Medication. (click) Blood-pressure monitoring. (click) Education. Lifestyle change is first-line care, and even a 10 mmHg drop in systolic pressure lowers cardiovascular risk. The review charts the literature by these five factors.</p></aside>
   </section>
 
   <section class="slide" data-sec="2" style="--act:var(--green)">
