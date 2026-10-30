@@ -337,10 +337,19 @@
   /* five-factor flower: central hub, five petals revealed one per click */
   .flower{max-width:min(100%,700px);height:auto;margin:0 auto;display:block}
   .flr-lbl{font-family:var(--font-display);font-weight:700;text-anchor:middle}
-  [data-step] .flr-pet,[data-step] .flr-txt{opacity:0}
-  [data-step].shown .flr-pet{animation:popin .55s cubic-bezier(.3,1.3,.5,1) forwards;transform-box:fill-box;transform-origin:center}
-  [data-step].shown .flr-txt{animation:axfade .4s ease forwards .32s}
-  @keyframes popin{from{opacity:0;transform:scale(.25)}to{opacity:1;transform:scale(1)}}
+  .flower [data-step]{opacity:1;transform:none}
+  .flr-draw{fill:none;stroke-dasharray:340;stroke-dashoffset:340}
+  [data-step].shown .flr-draw{animation:axdraw .75s cubic-bezier(.25,.6,.3,1) forwards}
+  .flower [data-step] .flr-fill,.flower [data-step] .flr-txt{opacity:0}
+  [data-step].shown .flr-fill{animation:axfade .5s ease forwards .42s}
+  [data-step].shown .flr-txt{animation:axfade .4s ease forwards .62s}
+  /* Venn circles draw their outline, then fill + label fade in (no rise) */
+  .venn [data-step]{opacity:1;transform:none}
+  .vdraw{fill:none;stroke-dasharray:1058;stroke-dashoffset:1058}
+  [data-step].shown .vdraw{animation:axdraw 1.2s cubic-bezier(.25,.6,.3,1) forwards}
+  .venn [data-step] .vfill,.venn [data-step] .vtxt{opacity:0}
+  [data-step].shown .vfill{animation:axfade .7s ease forwards .55s}
+  [data-step].shown .vtxt{animation:axfade .5s ease forwards .95s}
   /* two-column "who carries more" */
   .who2{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(20px,4vw,64px);margin-top:clamp(14px,2.4vh,26px);align-items:start}
   .wbars{display:flex;flex-direction:column;gap:clamp(6px,1.2vh,12px)}
@@ -485,16 +494,18 @@
         <svg class="venn" viewBox="0 0 760 400" role="img" aria-label="Venn diagram: Indigenous Dine adults and people with disabilities overlap in this review's population">
           <defs><clipPath id="vclip"><circle cx="300" cy="205" r="168"/></clipPath></defs>
           <g data-step>
-            <circle cx="300" cy="205" r="168" fill="#5ec962" fill-opacity=".17" stroke="#5ec962" stroke-width="2.5"/>
-            <text class="vlbl" x="186" y="198" text-anchor="middle"><tspan x="186">Indigenous</tspan><tspan x="186" dy="26">(Diné) adults</tspan></text>
+            <circle class="vfill" cx="300" cy="205" r="168" fill="#5ec962" fill-opacity=".17"/>
+            <circle class="vdraw" cx="300" cy="205" r="168" stroke="#5ec962" stroke-width="2.5"/>
+            <text class="vlbl vtxt" x="186" y="198" text-anchor="middle"><tspan x="186">Indigenous</tspan><tspan x="186" dy="26">(Diné) adults</tspan></text>
           </g>
           <g data-step>
-            <circle cx="460" cy="205" r="168" fill="#fde725" fill-opacity=".15" stroke="#fde725" stroke-width="2.5"/>
-            <text class="vlbl" x="574" y="198" text-anchor="middle"><tspan x="574">People with</tspan><tspan x="574" dy="26">disabilities</tspan></text>
+            <circle class="vfill" cx="460" cy="205" r="168" fill="#fde725" fill-opacity=".15"/>
+            <circle class="vdraw" cx="460" cy="205" r="168" stroke="#fde725" stroke-width="2.5"/>
+            <text class="vlbl vtxt" x="574" y="198" text-anchor="middle"><tspan x="574">People with</tspan><tspan x="574" dy="26">disabilities</tspan></text>
           </g>
           <g data-step>
-            <circle cx="460" cy="205" r="168" fill="#efe9d6" fill-opacity=".92" clip-path="url(#vclip)"/>
-            <text class="voverlap" x="380" y="200" text-anchor="middle"><tspan x="380">This</tspan><tspan x="380" dy="22">review</tspan></text>
+            <circle class="vfill" cx="460" cy="205" r="168" fill="#efe9d6" fill-opacity=".92" clip-path="url(#vclip)"/>
+            <text class="voverlap vtxt" x="380" y="200" text-anchor="middle"><tspan x="380">This</tspan><tspan x="380" dy="22">review</tspan></text>
           </g>
         </svg>
       </div>
@@ -550,11 +561,11 @@
         <svg class="flower" viewBox="0 0 760 450" role="img" aria-label="Five self-management factors around everyday blood-pressure care: diet, exercise, medication, blood-pressure monitoring, education">
           <circle cx="380" cy="235" r="66" fill="#241a3d" stroke="#5ec962" stroke-width="2.5"/>
           <text class="flr-lbl" x="380" y="229" font-size="17" fill="#f3f1ea"><tspan x="380">Everyday</tspan><tspan x="380" dy="21">BP care</tspan></text>
-          <g data-step><circle class="flr-pet" cx="380" cy="110" r="54" fill="#fde725"/><text class="flr-txt flr-lbl" x="380" y="117" font-size="20" fill="#0c0a06">Diet</text></g>
-          <g data-step><circle class="flr-pet" cx="499" cy="196" r="54" fill="#5ec962"/><text class="flr-txt flr-lbl" x="499" y="203" font-size="17" fill="#0c0a06">Exercise</text></g>
-          <g data-step><circle class="flr-pet" cx="454" cy="336" r="54" fill="#21918c"/><text class="flr-txt flr-lbl" x="454" y="342" font-size="15" fill="#f3f1ea">Medication</text></g>
-          <g data-step><circle class="flr-pet" cx="306" cy="336" r="54" fill="#3b528b"/><text class="flr-txt flr-lbl" x="306" y="330" font-size="15" fill="#f3f1ea"><tspan x="306">BP</tspan><tspan x="306" dy="19">Monitoring</tspan></text></g>
-          <g data-step><circle class="flr-pet" cx="261" cy="196" r="54" fill="#46337e"/><text class="flr-txt flr-lbl" x="261" y="203" font-size="16" fill="#f3f1ea">Education</text></g>
+          <g data-step><circle class="flr-fill" cx="380" cy="110" r="54" fill="#fde725"/><circle class="flr-draw" cx="380" cy="110" r="54" stroke="#fde725" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="380" y="117" font-size="20" fill="#0c0a06">Diet</text></g>
+          <g data-step><circle class="flr-fill" cx="499" cy="196" r="54" fill="#5ec962"/><circle class="flr-draw" cx="499" cy="196" r="54" stroke="#5ec962" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="499" y="203" font-size="17" fill="#0c0a06">Exercise</text></g>
+          <g data-step><circle class="flr-fill" cx="454" cy="336" r="54" fill="#21918c"/><circle class="flr-draw" cx="454" cy="336" r="54" stroke="#21918c" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="454" y="342" font-size="15" fill="#f3f1ea">Medication</text></g>
+          <g data-step><circle class="flr-fill" cx="306" cy="336" r="54" fill="#3b528b"/><circle class="flr-draw" cx="306" cy="336" r="54" stroke="#3b528b" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="306" y="330" font-size="15" fill="#f3f1ea"><tspan x="306">BP</tspan><tspan x="306" dy="19">Monitoring</tspan></text></g>
+          <g data-step><circle class="flr-fill" cx="261" cy="196" r="54" fill="#46337e"/><circle class="flr-draw" cx="261" cy="196" r="54" stroke="#46337e" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="261" y="203" font-size="16" fill="#f3f1ea">Education</text></g>
         </svg>
       </div>
       <p class="cap a">The review charts the literature by these five factors.</p>
