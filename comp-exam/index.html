@@ -376,7 +376,7 @@
   .flower-side{flex:0 1 clamp(230px,30vw,360px);background:#0e1317;border:1px solid var(--cardbrd);border-radius:14px;padding:10px;box-shadow:0 16px 44px rgba(0,0,0,.5)}
   .flower-side img{width:100%;height:auto;display:block;border-radius:9px;max-height:48vh;object-fit:contain}
   .flower-side figcaption{font-family:var(--font-mono);font-size:.64rem;color:var(--faint);margin-top:8px;line-height:1.35}
-  .radial{max-width:min(100%,820px);height:auto;margin:0 auto;display:block}
+  .radial{max-width:min(100%,760px);max-height:52vh;height:auto;margin:0 auto;display:block}
   /* narrowing cascade to the empty intersection */
   .gaplist{display:flex;flex-direction:column;gap:clamp(12px,2.2vh,24px);margin-top:clamp(18px,3.4vh,44px);max-width:min(100%,900px);margin-left:auto;margin-right:auto}
   .gaprow{display:flex;align-items:center;gap:clamp(14px,2vw,26px)}
@@ -385,6 +385,19 @@
   .gaplabel b{color:var(--yellow);font-weight:700}
   .gaprow.zero .gapbar.zbar{width:clamp(40px,5vh,52px);height:clamp(40px,5vh,52px);border-radius:10px;border:2px dashed var(--yellow);
     display:flex;align-items:center;justify-content:center;color:var(--yellow);font-family:var(--font-display);font-weight:700;font-size:clamp(1.2rem,2.2vw,1.7rem);box-shadow:none}
+  .gapcount{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:clamp(1.3rem,2.4vw,2rem);min-width:1.5em;text-align:right;flex:none}
+  .gapcount.zc{color:var(--yellow)}
+  /* backup / appendix */
+  .prisma{display:flex;flex-direction:column;align-items:stretch;gap:0;max-width:430px}
+  .prow{background:var(--card);border:1px solid var(--cardbrd);border-radius:10px;padding:9px 14px;font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:clamp(.88rem,1.25vw,1.06rem)}
+  .prow span{display:block;font-family:var(--font-mono);font-weight:400;font-size:.64rem;color:var(--faint);margin-top:3px}
+  .prow.hl{border-color:var(--yellow);color:var(--yellow);box-shadow:0 0 16px color-mix(in srgb,var(--yellow) 20%,transparent)}
+  .parrow{font-family:var(--font-mono);font-size:.66rem;color:var(--muted);text-align:center;padding:4px 0}
+  .parrow::before{content:"\2193  "}
+  .bku-h{font-family:var(--font-display);font-size:clamp(1rem,1.45vw,1.18rem);color:var(--ink);margin:0 0 6px;font-weight:700}
+  .bku-h:not(:first-child){margin-top:14px}
+  .points.bku li{font-size:clamp(.88rem,1.3vw,1.08rem);padding-left:24px}
+  .points.bku li::before{top:.42em;width:9px;height:9px}
   .flr-lbl{font-family:var(--font-display);font-weight:700;text-anchor:middle}
   .flower [data-step]{opacity:1;transform:none}
   .flr-draw{fill:none;stroke-dasharray:340;stroke-dashoffset:340}
@@ -536,48 +549,48 @@
         <div class="thm-study a">
           <span class="tag">Why it matters here</span>
           <h3>A manageable, everyday condition</h3>
-          <p>Control comes from <b>daily behavior</b>, not a one-time cure, which makes hypertension a strong fit for <b>playful, everyday technology</b>, the focus of this review.</p>
+          <p>Control depends on <b>daily behavior</b>, not a one-time cure. This review examines <b>playful, everyday technology</b> as one form of daily support.</p>
         </div>
       </div>
     </div>
-    <aside class="aside"><p>First, what is hypertension? It is blood pressure that stays high, 130 over 80 or above. It usually has no symptoms, so it is often called the silent killer, yet over years it damages the heart, kidneys, and brain.</p><p>How many people? About 1.28 billion adults worldwide, roughly one in three aged 30 to 79; in the US, nearly half of adults. And close to half do not know they have it.</p><p>The hopeful part: it is manageable. Even a 10 mmHg drop in systolic pressure meaningfully lowers risk. Because control comes from daily behavior, it is a good fit for playful, everyday technology, which is what this review is about.</p></aside>
+    <aside class="aside"><p>First, what is hypertension? It is blood pressure that stays high, 130 over 80 or above. It usually has no symptoms, so it is often called the silent killer, yet over years it damages the heart, kidneys, and brain.</p><p>How many people? About 1.28 billion adults worldwide, roughly one in three aged 30 to 79; in the US, nearly half of adults. And close to half do not know they have it.</p><p>The hopeful part: it is manageable. Even a 10 mmHg drop in systolic pressure meaningfully lowers risk. Because control comes from daily behavior, this review examines playful, everyday technology as one form of daily support.</p></aside>
   </section>
 
   <section class="slide" data-sec="0">
     <div class="stage">
-      <h2 class="a">It falls unevenly. Indigenous adults carry more.</h2>
-      <div class="who2" style="grid-template-columns:1fr;max-width:none;margin-top:clamp(16px,3vh,38px)">
+      <h2 class="a">For urban Navajo (Diné) adults, it is under-recognized.</h2>
+      <div class="who2" style="grid-template-columns:1fr;max-width:none;margin-top:clamp(14px,2.6vh,32px)">
         <div>
           <div class="whd">Hypertension · self-reported</div>
           <div class="wbars">
-            <div class="hbar"><span class="hlb">All US adults</span><div class="htrack"><div class="hfill" style="width:60%;background:var(--greybar)"></div></div><span class="hval"><span data-count="28.7" data-dec="1">28.7</span>%</span></div>
-            <div class="hbar"><span class="hlb">AI/AN adults</span><div class="htrack"><div class="hfill" style="width:71%;background:var(--yellow)"></div></div><span class="hval"><span data-count="33.7" data-dec="1">33.7</span>%</span></div>
-            <div class="hbar"><span class="hlb">Navajo (Diné)</span><div class="htrack"><div class="hfill" style="width:59%;background:var(--yellow)"></div></div><span class="hval"><span data-count="28" data-dec="0">28</span>%</span></div>
+            <div class="hbar"><span class="hlb">All US adults</span><div class="htrack"><div class="hfill" style="width:58%;background:var(--greybar)"></div></div><span class="hval"><span data-count="28.7" data-dec="1">28.7</span>%</span></div>
+            <div class="hbar"><span class="hlb">Navajo (Diné)</span><div class="htrack"><div class="hfill" style="width:57%;background:var(--yellow)"></div></div><span class="hval"><span data-count="28" data-dec="0">28</span>%</span></div>
           </div>
         </div>
       </div>
-      <p class="explain a" style="max-width:72ch;margin-top:clamp(12px,2vh,22px)">Self-report sits near the US average, but <b>measured</b> studies run higher, and in one Navajo survey <b>only 50 of 97</b> people with high blood pressure had ever been told. The burden is real and under-recognized.</p>
-      <div class="cite a">AI/AN = American Indian and Alaska Native · Villarroel 2020 · Navajo Epidemiology Center, BRFSS · Percy et al. 1997</div>
+      <p class="explain a" style="max-width:78ch;margin-top:clamp(12px,2vh,22px)">Self-report sits near the US average, but <b>measured</b> studies run higher: in a Navajo survey, <b>only 50 of 97</b> adults with high blood pressure had ever been told. Heart disease was the <b>4th leading cause of death</b> on the New Mexico Navajo Nation, 2021 to 2024. The people at the center of this work are <b>urban Diné adults in Flagstaff</b>.</p>
+      <div class="cite a">Navajo Epidemiology Center, BRFSS (self-reported) · Percy et al. 1997 · Foley 2025</div>
     </div>
-    <aside class="aside"><p>And it falls unevenly. American Indian and Alaska Native adults carry more: 33.7 percent self-report hypertension, against 28.7 of all US adults.</p><p>The Navajo Nation's own survey, through the Navajo Epidemiology Center, puts self-reported hypertension at about 28 percent. On a like-for-like basis that is near the US average, but measured studies run higher, and in Percy's Navajo survey only 50 of 97 people with high blood pressure had ever been told. So the burden is real and under-recognized. Heart disease was the fourth leading cause of death on the New Mexico Navajo Nation from 2021 to 2024.</p></aside>
+    <aside class="aside"><p>I narrow from Indigenous people in general to the community this work is with: urban Navajo, or Diné, adults in Flagstaff.</p><p>Self-reported hypertension, through the Navajo Epidemiology Center, is about 28 percent, near the US average. But measured studies run higher, and in Percy's Navajo survey only 50 of 97 adults with high blood pressure had ever been told, so it is under-recognized. Heart disease was the fourth leading cause of death on the New Mexico Navajo Nation from 2021 to 2024.</p></aside>
   </section>
 
   <section class="slide" data-sec="0">
     <div class="stage">
-      <h2 class="a">And this community often lives with disability.</h2>
-      <div class="who2" style="grid-template-columns:1fr;max-width:none;margin-top:clamp(16px,3vh,38px)">
+      <h2 class="a">People with disabilities carry more hypertension, too.</h2>
+      <div class="who2" style="grid-template-columns:1fr;max-width:none;margin-top:clamp(14px,2.6vh,32px)">
         <div>
-          <div class="whd">Disability · large urban areas</div>
+          <div class="whd">Hypertension prevalence · roughly double the general rate</div>
           <div class="wbars">
-            <div class="hbar"><span class="hlb">All US adults</span><div class="htrack"><div class="hfill" style="width:22%;background:var(--greybar)"></div></div><span class="hval"><span data-count="7.9" data-dec="1">7.9</span>%</span></div>
-            <div class="hbar"><span class="hlb">AI/AN adults</span><div class="htrack"><div class="hfill" style="width:53%;background:var(--yellow)"></div></div><span class="hval"><span data-count="18.9" data-dec="1">18.9</span>%</span></div>
+            <div class="hbar"><span class="hlb">Adults with a disability (US)</span><div class="htrack"><div class="hfill" style="width:66%;background:var(--yellow)"></div></div><span class="hval"><span data-count="42.5" data-dec="1">42.5</span>%</span></div>
+            <div class="hbar"><span class="hlb">Adults with physical disability</span><div class="htrack"><div class="hfill" style="width:88%;background:var(--yellow)"></div></div><span class="hval"><span data-count="56.4" data-dec="1">56.4</span>%</span></div>
+            <div class="hbar"><span class="hlb">Deaf adults</span><div class="htrack"><div class="hfill" style="width:100%;background:var(--yellow)"></div></div><span class="hval"><span data-count="63.9" data-dec="1">63.9</span>%</span></div>
           </div>
         </div>
       </div>
-      <p class="explain a" style="max-width:72ch;margin-top:clamp(12px,2vh,22px)">In large urban areas, disability is <b>more than twice as common</b> among AI/AN adults. And disability and hypertension compound: among Deaf adults, for example, hypertension reaches <b>over half</b>.</p>
-      <div class="cite a">Villarroel 2020 · Choi et al. 2025 (hypertension in Deaf adults, 63.9%)</div>
+      <p class="explain a" style="max-width:78ch;margin-top:clamp(12px,2vh,22px)">And management is harder: inaccessible materials, proxy-dependent care, and few tools built for disabled players. This review treats <b>people with disabilities</b> broadly, as its own dimension.</p>
+      <div class="cite a">Wu et al. 2021 · Nam &amp; Yoon 2022 · Choi et al. 2025</div>
     </div>
-    <aside class="aside"><p>And this community often lives with disability. In large urban areas, disability is more than twice as common among AI/AN adults, 18.9 percent against 7.9.</p><p>Disability and hypertension also compound. Among Deaf adults, for instance, hypertension reaches over half, far above the general rate. So the people at the center of this work often live with both.</p></aside>
+    <aside class="aside"><p>The other dimension is disability, and I treat people with disabilities broadly, not as a subgroup of any one community.</p><p>Hypertension runs roughly double the general rate: 42.5 percent of US adults with a disability, 56.4 percent of adults with a physical disability in one Korean study, and 63.9 percent of Deaf adults. And it is harder to manage, because materials are often inaccessible, care can depend on a proxy, and almost no tools are built for disabled players.</p></aside>
   </section>
 
   <section class="slide" data-sec="0">
@@ -590,7 +603,7 @@
           <g data-step>
             <circle class="vfill" cx="300" cy="205" r="168" fill="#5ec962" fill-opacity=".17"/>
             <circle class="vdraw" cx="300" cy="205" r="168" stroke="#5ec962" stroke-width="2.5"/>
-            <text class="vlbl vtxt" x="186" y="198" text-anchor="middle"><tspan x="186">Indigenous</tspan><tspan x="186" dy="26">(Diné) adults</tspan></text>
+            <text class="vlbl vtxt" x="186" y="198" text-anchor="middle"><tspan x="186">Urban Diné</tspan><tspan x="186" dy="26">adults</tspan></text>
           </g>
           <g data-step>
             <circle class="vfill" cx="460" cy="205" r="168" fill="#fde725" fill-opacity=".15"/>
@@ -699,12 +712,11 @@
     <div class="stage">
       <h2 class="a">The literature narrows to an empty center.</h2>
       <div class="gaplist">
-        <div class="gaprow" data-step><div class="gapbar" style="width:46%;background:#21918c"></div><div class="gaplabel">Serious games &amp; playful tech <b>for hypertension</b></div></div>
-        <div class="gaprow" data-step><div class="gapbar" style="width:30%;background:#5ec962"></div><div class="gaplabel">&hellip; designed with an <b>Indigenous community</b></div></div>
-        <div class="gaprow" data-step><div class="gapbar" style="width:16%;background:#fde725"></div><div class="gaplabel">&hellip; and with <b>people with disabilities</b></div></div>
-        <div class="gaprow zero" data-step><div class="gapbar zbar">0</div><div class="gaplabel"><b>All four together, as one population:</b> no study.</div></div>
+        <div class="gaprow" data-step><div class="gapcount">22</div><div class="gapbar" style="width:44%;background:#21918c"></div><div class="gaplabel">serious games &amp; playful tech <b>for hypertension</b></div></div>
+        <div class="gaprow" data-step><div class="gapcount">2</div><div class="gapbar" style="width:8%;background:#5ec962"></div><div class="gaplabel">&hellip; designed <b>with an Indigenous community</b> <span style="color:var(--faint)">(Graham; the Lumbee game)</span></div></div>
+        <div class="gaprow zero" data-step><div class="gapcount zc">0</div><div class="gapbar zbar">0</div><div class="gaplabel">&hellip; and <b>with people with disabilities</b></div></div>
       </div>
-      <p class="venncap a" data-step>That empty center is the gap this review makes visible.</p>
+      <p class="venncap a" data-step>No study brings a game for hypertension to <b>both</b> an Indigenous community and people with disabilities.</p>
       <div class="cite a" style="text-align:center;border-left:none;padding-left:0;margin-left:auto;margin-right:auto"><a class="lnk" href="https://scholar.google.com/scholar?q=Crenshaw+1991+mapping+the+margins+intersectionality" target="_blank" rel="noopener">Crenshaw, 1991</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Erete+Israni+Dillahunt+2018" target="_blank" rel="noopener">Erete et al., 2018</a></div>
     </div>
     <aside class="aside"><p>This is the heart of the gap, and I build it up one condition at a time.</p><p>(click) There is a growing body of serious games and playful technology for hypertension. (click) A small number are designed with an Indigenous community. (click) Fewer still with people with disabilities. (click) And no study brings all four together: a game, for hypertension, with an Indigenous community, and with disability, as one population. (click) That empty center is the gap this review makes visible.</p></aside>
@@ -801,7 +813,7 @@
       <div class="split">
         <div>
           <h2 class="a">Data sovereignty is rarely addressed.</h2>
-          <p class="explain a">Only <span class="key">4 of 84</span> Indigenous health-technology studies engaged with who <b>owns and controls</b> community data. Historical trauma, from colonization and harmful research, shapes trust.</p>
+          <p class="explain a">In a critical review by Vigil-Hayes and colleagues, only <span class="key">4 of 84</span> Indigenous health-technology studies engaged with who <b>owns and controls</b> community data. Historical trauma, from colonization and harmful research, shapes trust.</p>
           <p class="explain a" style="margin-top:10px"><b>Design implications:</b> community control of data, results shared back, and a community advisory board.</p>
           <div class="cite a">Prior work: <a class="lnk" href="https://scholar.google.com/scholar?q=Maar+2019+DREAM-GLOBAL+cultural+safety+First+Nations" target="_blank" rel="noopener">Maar et al. 2019 (DREAM-GLOBAL)</a>, six practices for cultural safety; <b>98%</b> would recommend the program.</div>
         </div>
@@ -840,7 +852,7 @@
       <div class="split">
         <div>
           <h2 class="a">Most health games are closed systems.</h2>
-          <p class="explain a">Of 70 game studies, <b>49</b> used closed games and only <b>3</b> used open-ended play. eSMART-HD lowered systolic pressure about <span class="key">7 mmHg</span>; MyHeartMate kept only 27% of players after 30 days.</p>
+          <p class="explain a">Of the <b>22</b> games and playful tools for hypertension in this review, nearly all are closed, structured games; <b>open, situated play is rare</b>. Effects are real but short: eSMART-HD cut systolic pressure about <span class="key">7 mmHg</span>, yet MyHeartMate kept only <span class="key">27%</span> of players after 30 days.</p>
           <p class="explain a" style="margin-top:10px"><b>Design implications:</b> room for <b>open, social play</b> in daily life, and engagement that <b>lasts</b> beyond the first weeks.</p>
           <div class="cite a">Framework: <a class="lnk" href="https://scholar.google.com/scholar?q=Duval+2022+playful+health+technology+serious+play" target="_blank" rel="noopener">Duval 2022</a>, serious games are closed; serious play stays open, so people shape it to their lives. Chart: <a class="lnk" href="https://scholar.google.com/scholar?q=Hickman+2015+eSMART-HD+serious+game+hypertension" target="_blank" rel="noopener">Hickman et al. 2015</a>.</div>
         </div>
@@ -850,7 +862,7 @@
         </div>
       </div>
     </div>
-    <aside class="aside"><p>On the theory side, first: serious games and play. A serious game is a game with a health aim besides fun. Among 70 game and play studies, 49 were closed games with fixed rules, 26 only added points and badges, and only 3 used open-ended play. The trials are mixed: eSMART-HD, where adults practice a medical visit, lowered systolic pressure about 7 points in the game group, but the difference from control was not significant; the study was small. MyHeartMate kept only 27 percent of its players after 30 days.</p><p>Design implications: leave room for open, social play that fits daily life, and design for engagement that lasts.</p><p>The framework comes from Duval: serious games for health are closed systems; serious play stays open, so people can shape it to their own lives.</p></aside>
+    <aside class="aside"><p>On the theory side, first: serious games and play. A serious game is a game with a health aim besides fun. Of the 22 games and playful tools for hypertension in this review, nearly all are closed, structured games or simple gamification; open, situated play is rare. The trials are mixed: eSMART-HD, where adults practice a medical visit, lowered systolic pressure about 7 points in the game group, but the difference from control was not significant and the study was small. MyHeartMate kept only 27 percent of its players after 30 days.</p><p>Design implications: leave room for open, social play that fits daily life, and design for engagement that lasts.</p><p>The framework comes from Duval: serious games for health are closed systems; serious play stays open, so people can shape it to their own lives.</p></aside>
   </section>
 
   <section class="slide" data-sec="3" style="--act:var(--cyan)">
@@ -878,7 +890,7 @@
       <div class="split">
         <div>
           <h2 class="a">Few studies design <em>with</em> the community.</h2>
-          <p class="explain a">Only <b>15</b> studies used participatory or community-based design: <b>11</b> with Indigenous communities, <b>3</b> with people with disabilities. Workshops can also exclude people.</p>
+          <p class="explain a">About <b>13</b> studies designed <em>with</em> the community: <b>7</b> with Indigenous communities, <b>6</b> with people with disabilities. The two sets barely overlap, and workshops can themselves exclude people.</p>
           <p class="explain a" style="margin-top:10px"><b>Design implications:</b> fair pay, respect for community assets, community goals, and support that <b>continues after funding</b>.</p>
           <div class="cite a">Prior work: <a class="lnk" href="https://scholar.google.com/scholar?q=Radhakrishnan+2025+Lumbee+sensor+game+hypertension" target="_blank" rel="noopener">Lumbee game trial (Radhakrishnan et al. 2025)</a>, a paid community committee shaped it and removed a casino theme. <span class="flag" style="color:var(--coral)">It excludes people who use a walker</span>, exactly the gap for this population.</div>
         </div>
@@ -888,7 +900,7 @@
         </div>
       </div>
     </div>
-    <aside class="aside"><p>Second: participatory, community-based research. 15 studies used it, 11 with Indigenous communities, only 3 with people with disabilities. And Harrington warns that design workshops can be an affluent and privileged activity.</p><p>Design implications: pay people, value what the community already has, let the community set the goals, and stay after the funding ends.</p><p>The example is the Lumbee game trial, the one hypertension game built with a Native tribe. A paid community committee shaped it, and removed a casino-themed game. But it excludes people who use a walker or have sensory impairments, which is exactly the gap for this population.</p></aside>
+    <aside class="aside"><p>Second: participatory, community-based research. About 13 studies designed with the community, 7 with Indigenous communities and 6 with people with disabilities, and the two sets barely overlap. And Harrington warns that design workshops can themselves be an affluent and privileged activity.</p><p>Design implications: pay people, value what the community already has, let the community set the goals, and stay after the funding ends.</p><p>The example is the Lumbee game trial, the one hypertension game built with a Native tribe. A paid community committee shaped it, and removed a casino-themed game. But it excludes people who use a walker or have sensory impairments, which is exactly the gap for this population.</p></aside>
   </section>
 
   <section class="slide" data-sec="3" style="--act:var(--cyan)">
@@ -922,14 +934,14 @@
       <table class="ctab a">
         <thead><tr><th>Theme</th><th>Indigenous</th><th>Disability</th><th>General</th></tr></thead>
         <tbody>
-          <tr data-step><td>Cultural grounding</td><td class="ok">19</td><td>2</td><td>1</td></tr>
-          <tr data-step><td>Sovereignty</td><td class="ok">7</td><td>1</td><td>0</td></tr>
-          <tr data-step><td>Proxy care</td><td class="flag">0</td><td class="ok">7</td><td>0</td></tr>
-          <tr data-step><td>Accessible protocols</td><td class="flag">0</td><td class="ok">24</td><td>1</td></tr>
-          <tr data-step><td>Technosolutionism</td><td class="flag">0</td><td>2</td><td>2</td></tr>
+          <tr data-step><td>Cultural grounding</td><td class="ok">13</td><td>1</td><td>1</td></tr>
+          <tr data-step><td>Sovereignty</td><td class="ok">6</td><td>0</td><td>0</td></tr>
+          <tr data-step><td>Proxy care</td><td class="flag">0</td><td class="ok">6</td><td>0</td></tr>
+          <tr data-step><td>Accessible protocols</td><td class="flag">0</td><td class="ok">12</td><td>1</td></tr>
+          <tr data-step><td>Technosolutionism</td><td class="flag">0</td><td class="ok">4</td><td>2</td></tr>
         </tbody>
       </table>
-      <p class="cap a">No study looked at proxy care or accessible protocols <b style="color:var(--coral)">with Indigenous people</b>, the gap an intersectional review is meant to show.</p>
+      <p class="cap a">No study looked at proxy care or accessible protocols <b style="color:var(--coral)">with Indigenous people</b>, the gap an intersectional review is meant to show. <span style="color:var(--faint)">Counts are studies per theme; a study may address more than one.</span></p>
     </div>
     <aside class="aside"><p>This table shows something that only appears when the two groups are looked at together. Each row is a theme; the columns show how many studies addressed it with Indigenous communities, with people with disabilities, and with general populations.</p><p>Cultural grounding and sovereignty were studied almost only with Indigenous communities. Proxy care and accessible protocols were studied only with people with disabilities. No study looked at proxy care or accessible protocols with Indigenous people. Each concern stays inside one community, which is the gap an intersectional review is meant to show.</p></aside>
   </section>
@@ -968,7 +980,7 @@
         </g>
       </svg>
       </div>
-      <p class="cap a">Hypertension and play are common; Indigenous studies are built with the community. The three thin columns, <b style="color:var(--coral)">disability · data control · open play</b>, are where the literature has least to offer, and where this work must contribute. <span style="color:var(--faint)">(click)</span></p>
+      <p class="cap a">Hypertension and play are common, and Indigenous studies are built with the community. The three thin columns, <b style="color:var(--coral)">disability · data control · open play</b>, are where the literature has the least to offer. <span style="color:var(--faint)">(click)</span></p>
     </div>
     <aside class="aside"><p>This synthesis matrix brings the great examples together. Each row is a study; each column is something a tool for this community needs. A check means the study does it.</p><p>Read down the columns. Hypertension and play are common, and the Indigenous studies are built with the community. But disability is almost empty wherever Indigenous is full. Data control and open play are mostly empty. Nothing does all of it, but many do some. The last row is where CardioCare Quest is heading.</p><p>(Click.) The three thin columns, disability, data control, and open play, are where the literature has the least to offer, and where this work has to contribute.</p></aside>
   </section>
@@ -1074,13 +1086,20 @@
   <section class="slide" data-sec="5" style="--act:var(--coral)">
     <div class="stage">
       <div class="eyebrow a">What This Review Adds</div>
-      <h2 class="a">Across 67 studies, only <span style="color:var(--yellow)">one</span> involved both Indigenous people and disability, and none paired that with a game for hypertension.</h2>
-      <div class="grid2" style="margin-top:clamp(16px,2.6vh,30px)">
-        <div class="panel a"><h3>The review contributes</h3><p>An <b>intersectional synthesis</b> of 67 studies, a <b>hierarchy of themes</b> with design implications, and <b>requirements traced to the evidence</b>.</p></div>
-        <div class="panel a"><h3>What the gap opens</h3><p>Designing <b>with</b> urban Diné adults with disabilities and their supporters, a community advisory board, and a data-sovereignty plan.</p></div>
+      <h2 class="a">One study designed with both.</h2>
+      <div class="split">
+        <div>
+          <p class="explain a">Across the 67, only <b>one</b> designed technology with <b>both</b> an Indigenous community and attention to disability: <b>Graham et al. 2025</b>, from this lab. None paired that with a game for hypertension.</p>
+          <p class="explain a" style="margin-top:12px">The review contributes an <b>intersectional synthesis</b> of the 67 studies, a <b>hierarchy of themes</b> with design implications, and <b>requirements traced to the evidence</b>.</p>
+          <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Graham+2025+co-design+culturally+grounded+mobile+health+games+hypertension+Indigenous" target="_blank" rel="noopener">Graham et al. 2025</a>, co-design with Indigenous participants.</div>
+        </div>
+        <div class="figcard dark a">
+          <img src="graham.png" alt="Graham et al. 2025 co-design workshop with Indigenous participants and five game-prototype sketches">
+          <div class="src">Graham et al. 2025, the one study designing with both</div>
+        </div>
       </div>
     </div>
-    <aside class="aside"><p>To close, the takeaway. Across 67 studies, only one involved both Indigenous people and disability, and none paired that with a game for hypertension. That is the gap.</p><p>The review contributes an intersectional synthesis of those 67 studies, a hierarchy of themes with design implications, and design requirements traced to that evidence. The gap opens the work that follows: designing with urban Diné adults with disabilities and their supporters, a community advisory board, and a data-sovereignty plan.</p></aside>
+    <aside class="aside"><p>What the review adds. Across the 67 studies, only one designed technology with both an Indigenous community and attention to disability: Graham and colleagues, 2025, from this lab, shown here. None paired that with a game for hypertension.</p><p>The review contributes an intersectional synthesis of the 67 studies, a hierarchy of themes with design implications, and design requirements traced to that evidence.</p></aside>
   </section>
 
   <section class="slide" data-sec="5" style="--act:var(--coral)" data-grp="Future" data-ch="Future">
@@ -1110,10 +1129,10 @@
       <ul class="points">
         <li data-step>Across <b>67 studies</b>, playful technology for hypertension rarely reaches Indigenous communities and people with disabilities, and <b>no study</b> brings a game to both.</li>
         <li data-step>The review turns that pattern into <b>design requirements traced to the evidence</b>: move for exercise, calm for measuring, culturally grounded, community-owned, open and situated play, designed with disabled players.</li>
-        <li data-step>CardioCare Quest and the Hozhoni studies begin that work; the path ahead builds playful blood-pressure care <b>with</b> urban Diné adults with disabilities.</li>
+        <li data-step>CardioCare Quest and the Hozhoni studies are a first step; the work ahead is to design playful blood-pressure care <b>with</b> urban Diné adults with disabilities.</li>
       </ul>
     </div>
-    <aside class="aside"><p>To conclude. Across 67 studies, playful technology for hypertension rarely reaches Indigenous communities or people with disabilities, and no study brings a game to both. The review turns that into design requirements traced to the evidence. And CardioCare Quest, with the Hozhoni studies, begins the work, designed with urban Diné adults with disabilities.</p></aside>
+    <aside class="aside"><p>To conclude. Across 67 studies, playful technology for hypertension rarely reaches Indigenous communities or people with disabilities, and no study brings a game to both. The review turns that into design requirements traced to the evidence. And CardioCare Quest, with the Hozhoni studies, is a first step in that direction, designed with urban Diné adults with disabilities.</p></aside>
   </section>
 
   <section class="slide" data-sec="5" style="--act:var(--coral)" data-cover data-grp="Conclusion">
@@ -1124,6 +1143,127 @@
       <div class="committee a">With thanks to Native Americans for Community Action, the Hozhoni Foundation, Northern Arizona Healthcare, the Playful Health Technology Lab, and my committee.</div>
     </div>
     <aside class="aside"><p>In one sentence: playful blood-pressure care, designed with urban Diné adults with disabilities, not for them.</p><p>Ahéhee. Thank you. I am happy to take questions.</p></aside>
+  </section>
+
+  <!-- ==================== BACKUP / APPENDIX ==================== -->
+  <section class="slide" data-sec="5" style="--act:var(--coral)" data-ch="Backup">
+    <div class="stage">
+      <div class="eyebrow a">Backup · Methods</div>
+      <h2 class="a">Search and screening.</h2>
+      <div class="split">
+        <div>
+          <div class="prisma a">
+            <div class="prow">1,759 records identified<span>PubMed 1,539 · ACM DL 100 · Google Scholar 120 · searched 7 Sep 2026</span></div>
+            <div class="parrow">50 duplicates removed</div>
+            <div class="prow">1,709 screened on title &amp; abstract</div>
+            <div class="parrow">1,607 excluded</div>
+            <div class="prow">102 read in full</div>
+            <div class="parrow">35 excluded at full text</div>
+            <div class="prow hl">67 studies included</div>
+          </div>
+        </div>
+        <div>
+          <div class="bku-h">Inclusion</div>
+          <ul class="points bku">
+            <li>Serious games, gamification, or playful technology</li>
+            <li>For hypertension or blood-pressure self-management, <b>or</b> human-centered / participatory design with Indigenous communities or people with disabilities</li>
+            <li>Peer-reviewed; English</li>
+          </ul>
+          <div class="bku-h">Exclusion</div>
+          <ul class="points bku">
+            <li>No play or technology element; no self-management aim</li>
+            <li>Non-empirical with no design or review contribution</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <aside class="aside"><p>Backup. The search and screening: three databases on 7 September 2026, 1,759 records down to 67 included, with these inclusion and exclusion criteria.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">Backup · Search Strategy</div>
+      <h2 class="a">Six concept blocks, combined across three databases.</h2>
+      <div class="grid2" style="grid-template-columns:repeat(3,1fr)">
+        <div class="panel"><h3>Games &amp; play</h3><p>serious game, gamification, exergame, playful, game-based</p></div>
+        <div class="panel"><h3>Technology</h3><p>mHealth, app, digital health, mobile, wearable, sensor</p></div>
+        <div class="panel"><h3>Hypertension</h3><p>hypertension, blood pressure, BP self-management, cardiovascular</p></div>
+        <div class="panel"><h3>Indigenous</h3><p>Indigenous, Native American, American Indian, Navajo, Diné, First Nations, Aboriginal</p></div>
+        <div class="panel"><h3>Disability</h3><p>disability, accessible, Deaf, intellectual disability, impairment</p></div>
+        <div class="panel"><h3>Design</h3><p>co-design, participatory design, human-centered, community-based</p></div>
+      </div>
+      <p class="cap a">Blocks combined with AND across games/technology, condition, population, and method; terms shown are representative.</p>
+    </div>
+    <aside class="aside"><p>Backup. The six concept blocks used in the search, combined across the three databases. The terms shown are representative, not the full Boolean strings.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">Backup · Effect Sizes</div>
+      <h2 class="a">Blood-pressure effects from the game and exergame trials.</h2>
+      <table class="ctab">
+        <thead><tr><th>Study</th><th>Intervention</th><th>Sample</th><th>Systolic / Diastolic</th></tr></thead>
+        <tbody>
+          <tr><td>da Silva 2018</td><td>Dance video game, 1 session</td><td>15 hypertensive</td><td class="ok">−14.4 / −7.6 mmHg</td></tr>
+          <tr><td>Anggraini 2025</td><td>Handgrip exergame</td><td>50</td><td class="ok">−9.5 / −10.5 mmHg</td></tr>
+          <tr><td>Hickman 2015 (eSMART-HD)</td><td>Serious game, 4 months</td><td>116 RCT</td><td>−7 / −5 (within-group)</td></tr>
+          <tr><td>Kircher 2022 (ExerCube)</td><td>Exergame, acute</td><td>28 crossover</td><td>−6.3 / −4.8 mmHg</td></tr>
+          <tr><td>Gottlieb 2026 (Nuna)</td><td>Gamified mHealth</td><td>425 vs 425</td><td>SBP −4.6 vs −1.6</td></tr>
+          <tr><td>Mills 2017 (Work It Out)</td><td>Urban Aboriginal program</td><td>85</td><td class="ok">−11 (high-BP subgroup)</td></tr>
+          <tr><td>Zhu 2025 (meta-analysis)</td><td>Active video games, children</td><td>16 studies</td><td>SBP SMD −0.50</td></tr>
+          <tr><td>Hou 2023</td><td>Wii Sports, 16 weeks</td><td>128 RCT</td><td class="flag">no BP effect</td></tr>
+          <tr><td>Goldfield 2011</td><td>Seated gaming (observational)</td><td>282 teens</td><td class="flag">higher systolic</td></tr>
+        </tbody>
+      </table>
+      <p class="cap a">Effects are often acute or within-group; sustained, between-group reductions remain uncommon.</p>
+    </div>
+    <aside class="aside"><p>Backup. The blood-pressure effects across the trials. The strongest are acute, like da Silva's dance game at minus 14, and within-group, like eSMART at minus 7. Between-group, sustained reductions are still uncommon, and a couple of studies show no effect or, for seated gaming, higher pressure.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">Backup · Corpus Breakdown</div>
+      <h2 class="a">The 67 studies, by question and by source.</h2>
+      <div class="split">
+        <div>
+          <table class="ctab">
+            <thead><tr><th>Research question</th><th>Studies</th></tr></thead>
+            <tbody>
+              <tr><td>RQ1 · games / playful tech for hypertension</td><td class="ok">22</td></tr>
+              <tr><td>RQ1.1 · for Indigenous or disability</td><td class="ok">16</td></tr>
+              <tr><td>RQ2 · HCD methods for intersectional design</td><td class="ok">29</td></tr>
+              <tr><td><b>Total</b></td><td><b>67</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <table class="ctab">
+            <thead><tr><th>Source</th><th>Studies</th></tr></thead>
+            <tbody>
+              <tr><td>Database search</td><td>42</td></tr>
+              <tr><td>Intersectional HCI (targeted)</td><td>15</td></tr>
+              <tr><td>Reference / library</td><td>10</td></tr>
+              <tr><td><b>Total</b></td><td><b>67</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <aside class="aside"><p>Backup. The 67 studies by research question: 22 for RQ1, 16 for RQ1.1, and 29 for RQ2. And by source: 42 from the database search, 15 from targeted intersectional-HCI reading, and 10 from references.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">Backup · Preliminary Studies</div>
+      <h2 class="a">Three studies at the Hozhoni Gameorama.</h2>
+      <div class="grid2" style="grid-template-columns:repeat(3,1fr)">
+        <div class="panel"><div class="num">1</div><h3>Cultural probe</h3><p>31 Navajo adults, 7 days, in English and Diné bizaad, with Native Americans for Community Action.</p></div>
+        <div class="panel"><div class="num">2</div><h3>Co-design workshop</h3><p>36 adults with disabilities and caregivers produced <b>23 game concepts</b>.</p></div>
+        <div class="panel"><div class="num">3</div><h3>Play session</h3><p>Community members played <b>CardioCare Quest</b>, with and without caregiver support.</p></div>
+      </div>
+      <div class="cite a">IRB 1957455 · deployed 12 May 2026, Hozhoni Foundation · Gorintla et al., under review.</div>
+    </div>
+    <aside class="aside"><p>Backup. The three preliminary studies at the Hozhoni Gameorama: a seven-day cultural probe with 31 Navajo adults, a co-design workshop where 36 adults with disabilities and caregivers produced 23 game concepts, and a play session of CardioCare Quest with and without support.</p></aside>
   </section>
 
 </div>
