@@ -20,9 +20,10 @@
     --v-purple:#46337e; --v-blue:#3b528b; --v-teal:#21918c; --v-green:#5ec962; --v-yellow:#fde725;
     --yellow:#fde725; --green:#5ec962; --blue:#3b528b; --teal2:#21918c; --purple:#46337e; --greybar:#6f6a63;
     --hl2:#addd8e;
-    --teal:#5ec962; --cyan:#21918c; --gold:#fde725; --coral:#fde725;
+    --teal:#5ec962; --cyan:#21918c; --gold:#35b779; --coral:#8a74c4;
     --now:#5ec962;
-    --hl:#fde725;                  /* emphasis marker */
+    --hl:#addd8e;                  /* emphasis marker (viridis green; yellow is reserved for headings) */
+    --statc:#5ec962;               /* big data numbers / graphic accents (never yellow) */
     --foot:94px;
     --font-display:"Cambria","Palatino Linotype","Book Antiqua",Georgia,serif;
     --font-body:"Cambria","Palatino Linotype","Book Antiqua",Georgia,serif;
@@ -88,12 +89,13 @@
   .slide.cover h2,.cover h2{color:var(--ink)}
   .explain{font-family:var(--font-body);font-size:clamp(1rem,1.5vw,1.3rem);line-height:1.5;color:var(--ink);margin-top:clamp(10px,1.4vw,18px);max-width:54ch}
   .explain b{color:var(--hl2);font-weight:700}
+  .explain .src{color:var(--muted);font-weight:400;font-size:.86em}
   .wright p b{color:var(--hl2);font-weight:700}
   .k{color:var(--act,var(--teal))}
 
   /* emphasis marker (draws under key phrases) */
   /* emphasis = clean full-color word, NO partial marker box */
-  .key{font-weight:700;color:var(--yellow)}
+  .key{font-weight:700;color:var(--hl2)}
   @keyframes mark{to{}}
 
   .big{font-family:var(--font-display);font-weight:700;line-height:.9;font-size:clamp(3.4rem,9.6vw,7.6rem);
@@ -142,7 +144,7 @@
   /* creative theme layout: one big fact + a human quote, beside an inspiring-study card */
   .thm{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(18px,2.8vw,46px);align-items:center;margin-top:clamp(12px,2.2vh,28px)}
   @media (max-width:900px){.thm{grid-template-columns:1fr;gap:18px}}
-  .thm-stat{font-family:var(--font-display);font-weight:700;line-height:.9;color:var(--yellow);font-size:clamp(3.2rem,8.6vw,6.6rem);letter-spacing:-.01em}
+  .thm-stat{font-family:var(--font-display);font-weight:700;line-height:.9;color:var(--statc);font-size:clamp(3.2rem,8.6vw,6.6rem);letter-spacing:-.01em}
   .thm-stat .u{font-size:.34em;color:var(--muted);font-weight:600;letter-spacing:0}
   .thm-statlbl{font-family:var(--font-body);font-size:clamp(.98rem,1.55vw,1.28rem);color:var(--ink);line-height:1.32;margin-top:8px;max-width:30ch}
   .thm-statlbl .src{color:var(--faint)}
@@ -166,7 +168,7 @@
   .thm-study p b{color:var(--ink);font-weight:700}
   .thm-impl{margin-top:clamp(12px,2vh,22px);font-family:var(--font-body);font-size:clamp(.95rem,1.4vw,1.18rem);color:var(--ink);display:flex;gap:12px;align-items:baseline;line-height:1.4}
   .thm-impl .arr{color:var(--act,var(--green));font-weight:700;flex:none}
-  .thm-impl b{color:var(--yellow);font-weight:700}
+  .thm-impl b{color:var(--hl2);font-weight:700}
   /* proportion dot grid (e.g. 7 of 25) */
   .dotgrid{display:flex;flex-wrap:wrap;gap:clamp(7px,1vw,11px);max-width:clamp(230px,28vw,340px)}
   .dotgrid i{width:clamp(15px,1.9vw,24px);height:clamp(15px,1.9vw,24px);border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16)}
@@ -230,29 +232,28 @@
   .points li .s a.lnk{color:var(--muted)}
 
   /* hierarchy / driver diagram */
-  /* branching thematic-analysis tree (root -> two branches -> nested leaves, with connector lines) */
-  .tree{display:flex;flex-direction:column;align-items:center;gap:0;margin-top:clamp(8px,1.4vw,16px)}
-  .troot{font-family:var(--font-display);font-weight:700;color:var(--yellow);font-size:clamp(1.05rem,1.8vw,1.5rem);
-    padding:5px 24px;border:1.5px solid color-mix(in srgb,var(--yellow) 55%,transparent);border-radius:999px;background:color-mix(in srgb,var(--yellow) 10%,transparent)}
-  .tstem{width:2px;height:clamp(12px,2.2vh,24px);background:var(--treeln)}
-  .tcols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,54px);width:100%;position:relative}
-  .tcols::before{content:"";position:absolute;left:25%;right:25%;top:0;height:1.6px;background:var(--treeln)}
-  @media (max-width:820px){.tcols{grid-template-columns:1fr}.tcols::before{display:none}}
-  .tbranch{position:relative;padding-top:clamp(10px,2vh,22px)}
-  .tbranch::before{content:"";position:absolute;left:50%;top:0;width:2px;height:clamp(10px,2vh,22px);background:var(--treeln)}
-  .tbh{font-family:var(--font-display);color:var(--green);font-weight:700;font-size:clamp(1.05rem,1.6vw,1.42rem);text-align:center;
-    background:var(--card);border:1px solid var(--cardbrd);border-radius:12px;padding:8px 14px}
-  .ttree,.ttree ul{list-style:none;margin:0;padding:0}
-  .ttree{margin-top:clamp(6px,1.2vh,12px);padding-left:18px;border-left:1.6px solid var(--treeln)}
-  .ttree ul{padding-left:18px;border-left:1.6px solid var(--treeln);margin:2px 0}
-  .ttree li{position:relative;padding:clamp(3px,.7vh,6px) 0 clamp(3px,.7vh,6px) 15px;
-    font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:clamp(.95rem,1.35vw,1.18rem);line-height:1.2}
-  .ttree li::before{content:"";position:absolute;left:0;top:.82em;width:12px;height:1.6px;background:var(--treeln)}
-  .ttree li.lf{font-weight:600;font-size:.94em}
-  .ttree li.lf.c-htn{color:#7fe08a}
-  .ttree li.lf.c-dis{color:#6fd3cc}
-  .ttree li.lf.c-ind{color:#9fb4e6}
-  .ttree li.lf.c-th{color:#f2e4a0}
+  /* horizontal org-chart tree: root -> branches spread sideways -> vertical leaf lists */
+  .tree{display:flex;flex-direction:column;align-items:center;margin-top:clamp(8px,1.4vw,16px)}
+  .troot{font-family:var(--font-display);font-weight:700;color:var(--statc);font-size:clamp(1.05rem,1.8vw,1.5rem);
+    padding:5px 24px;border:1.5px solid color-mix(in srgb,var(--statc) 55%,transparent);border-radius:999px;background:color-mix(in srgb,var(--statc) 10%,transparent)}
+  .otree ul{display:flex;justify-content:center;padding-top:clamp(16px,2.6vh,28px);position:relative;list-style:none;margin:0}
+  .otree li{list-style:none;position:relative;padding:clamp(16px,2.6vh,28px) clamp(6px,1vw,14px) 0;display:flex;flex-direction:column;align-items:center}
+  .otree li::before,.otree li::after{content:'';position:absolute;top:0;right:50%;border-top:2px solid var(--treeln);width:50%;height:clamp(16px,2.6vh,28px)}
+  .otree li::after{right:auto;left:50%;border-left:2px solid var(--treeln)}
+  .otree li:only-child{padding-top:0}
+  .otree li:only-child::before,.otree li:only-child::after{display:none}
+  .otree li:first-child::before,.otree li:last-child::after{border:0}
+  .otree li:last-child::before{border-right:2px solid var(--treeln)}
+  .otree ul ul::before,.otree>ul::before{content:'';position:absolute;top:0;left:50%;border-left:2px solid var(--treeln);width:0;height:clamp(16px,2.6vh,28px)}
+  .onode{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:clamp(.95rem,1.35vw,1.18rem);white-space:nowrap;padding:3px 2px}
+  .onode.br{color:var(--green);font-size:clamp(1.05rem,1.6vw,1.4rem);background:var(--card);border:1px solid var(--cardbrd);border-radius:12px;padding:7px 16px}
+  .vleaf{display:flex;flex-direction:column;align-items:flex-start;margin-top:clamp(6px,1.2vh,12px);padding-left:16px;border-left:1.6px solid var(--treeln)}
+  .vleaf span{position:relative;padding:clamp(2px,.5vh,4px) 0 clamp(2px,.5vh,4px) 2px;font-family:var(--font-display);font-weight:600;font-size:clamp(.86rem,1.2vw,1.06rem);line-height:1.2;white-space:nowrap}
+  .vleaf span::before{content:'';position:absolute;left:-16px;top:.72em;width:12px;height:1.6px;background:var(--treeln)}
+  .vleaf.htn span{color:#7fe08a}
+  .vleaf.dis span{color:#6fd3cc}
+  .vleaf.ind span{color:#9fb4e6}
+  .vleaf.th span{color:#9fd8cf}
   .herelbl{display:inline-block;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--act);border:1px dashed var(--act);border-radius:7px;padding:.22em .55em;margin-bottom:9px}
 
   .placeholder{border:1px dashed var(--coral);border-radius:12px;padding:12px 15px;font-family:var(--font-mono);font-size:clamp(.76rem,1.15vw,.9rem);color:var(--muted);background:var(--card);margin-top:clamp(10px,1.6vw,18px)}
@@ -271,7 +272,7 @@
   .slide.cover .stage{position:relative;z-index:1;display:flex;flex-direction:column;height:100%}
   .slide.cover h1{font-size:clamp(1.35rem,2.95vw,2.5rem);margin-top:clamp(8px,1.6vh,18px);max-width:none;line-height:1.14;text-shadow:0 2px 26px rgba(0,0,0,.7)}
   .slide.cover h1 br{display:block}
-  .cover-tag{color:var(--yellow);text-shadow:0 2px 20px rgba(0,0,0,.6)}
+  .cover-tag{text-shadow:0 2px 20px rgba(0,0,0,.6)}
   .cover-tag{font-family:var(--font-display);font-style:italic;font-weight:600;font-size:clamp(1.15rem,2.4vw,1.95rem);color:var(--ink);margin:clamp(16px,2.6vh,30px) 0 0;line-height:1.25}
   .cover-tag .ig{color:var(--green);font-style:normal}
   .cover-tag .di{color:var(--teal);font-style:normal}
@@ -283,7 +284,7 @@
 
   /* big blood-pressure number (slide: What Is Hypertension) */
   .bpnum{font-family:var(--font-display);font-weight:700;font-size:clamp(3.8rem,11vw,8.4rem);line-height:.92;color:#1fae8c;font-variant-numeric:tabular-nums;margin-top:clamp(10px,2.2vh,24px);text-align:center;text-shadow:0 0 56px rgba(31,174,140,.45)}
-  .bpnum .sys{color:#fde725}
+  .bpnum .sys{color:var(--statc)}
   .bpnum .dia{color:#5ec962}
   .bpnum .sl{color:var(--faint);font-weight:400;margin:0 .02em}
   .bpnum .bpunit{font-family:var(--font-body);font-size:.24em;color:var(--muted);font-weight:400;margin-left:.2em;vertical-align:baseline}
@@ -335,7 +336,7 @@
   /* big one-per-click questions (Guiding Questions) */
   .qbig{list-style:none;margin:clamp(16px,4vh,44px) 0 0;padding:0;display:flex;flex-direction:column;gap:clamp(16px,3.6vh,40px)}
   .qbig li{display:flex;gap:clamp(16px,2.4vw,34px);align-items:center}
-  .qbig .qn{font-family:var(--font-display);font-weight:700;font-size:clamp(2.3rem,6vw,4.6rem);line-height:1;flex:none;min-width:1.5em;text-align:center;color:var(--yellow)}
+  .qbig .qn{font-family:var(--font-display);font-weight:700;font-size:clamp(2.3rem,6vw,4.6rem);line-height:1;flex:none;min-width:1.5em;text-align:center;color:var(--statc)}
   .qbig .qt{font-family:var(--font-display);font-size:clamp(1.25rem,2.8vw,2.25rem);line-height:1.22;color:var(--ink);font-weight:600}
   /* RQ variant: short RQ tags instead of big numerals, with a nested sub-question */
   .qbig.rq{gap:clamp(14px,3vh,34px)}
@@ -346,7 +347,7 @@
 
   /* === fresh-pptx Problem components === */
   .bpcenter{text-align:center;margin-top:clamp(4px,1.6vh,18px)}
-  .bpnum .sys{color:var(--yellow)}
+  .bpnum .sys{color:var(--statc)}
   .bpnum .dia{color:var(--green)}
   .bpfacts{display:flex;flex-direction:column;gap:clamp(12px,2.6vh,28px);margin-top:clamp(14px,3vh,34px);align-items:center}
   .bpfact{font-family:var(--font-body);font-size:clamp(1.05rem,1.95vw,1.6rem);line-height:1.38;color:var(--ink);max-width:44ch;margin:0}
@@ -358,7 +359,7 @@
   .rlb{font-family:var(--font-body);font-size:clamp(.95rem,1.45vw,1.22rem);color:var(--ink)}
   .rtrack{position:relative;height:clamp(15px,2.3vh,23px);background:rgba(255,255,255,.05);border-radius:4px}
   .rseg{position:absolute;top:0;bottom:0;background:var(--green);border-radius:3px;transform-origin:center;transform:scaleX(0)}
-  .rseg.game{background:var(--yellow)}
+  .rseg.game{background:var(--statc)}
   .slide.active .rseg{animation:rgrow .7s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:.35s}
   @keyframes rgrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
   .rval{font-family:var(--font-body);font-size:clamp(.9rem,1.35vw,1.18rem);color:var(--muted)}
@@ -372,13 +373,13 @@
   .build{display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(5px,1.2vh,14px);margin-top:clamp(16px,4vh,50px)}
   .build .bbig{font-family:var(--font-display);font-weight:700;font-size:clamp(1.55rem,3.6vw,3rem);line-height:1.12;color:var(--ink);max-width:26ch;margin:0}
   .build .bsm{font-family:var(--font-body);font-size:clamp(1rem,1.75vw,1.45rem);color:var(--muted);margin:0}
-  .build .byellow{color:var(--yellow);font-weight:700}
+  .build .byellow{color:var(--hl2);font-weight:700}
   /* Venn (Intersectionality) */
   .venn{max-width:min(100%,640px);height:auto;margin:0 auto;display:block}
   .venn .vlbl{font-family:var(--font-display);font-size:19px;font-weight:700;fill:var(--ink)}
   .venn .voverlap{font-family:var(--font-display);font-size:15px;font-weight:700;fill:#0c0a06}
   .venncap{font-family:var(--font-body);text-align:center;color:var(--ink);font-size:clamp(1rem,1.6vw,1.35rem);margin-top:clamp(10px,2vh,20px);max-width:60ch;margin-left:auto;margin-right:auto}
-  .venncap b{color:var(--yellow);font-weight:700}
+  .venncap b{color:var(--hl2);font-weight:700}
   /* intersecting-axes animation (Intersectionality): two axes meet at a point */
   .axsvg{max-width:min(100%,620px);height:auto;margin:0 auto;display:block}
   .axln{fill:none;stroke-width:3.5;stroke-linecap:round}
@@ -408,16 +409,16 @@
   .gaprow{display:flex;align-items:center;gap:clamp(14px,2vw,26px)}
   .gapbar{height:clamp(30px,4.8vh,46px);border-radius:8px;flex:none;box-shadow:0 4px 18px rgba(0,0,0,.4)}
   .gaplabel{font-family:var(--font-body);color:var(--ink);font-size:clamp(1rem,1.6vw,1.3rem);line-height:1.3}
-  .gaplabel b{color:var(--yellow);font-weight:700}
-  .gaprow.zero .gapbar.zbar{width:clamp(40px,5vh,52px);height:clamp(40px,5vh,52px);border-radius:10px;border:2px dashed var(--yellow);
-    display:flex;align-items:center;justify-content:center;color:var(--yellow);font-family:var(--font-display);font-weight:700;font-size:clamp(1.2rem,2.2vw,1.7rem);box-shadow:none}
+  .gaplabel b{color:var(--hl2);font-weight:700}
+  .gaprow.zero .gapbar.zbar{width:clamp(40px,5vh,52px);height:clamp(40px,5vh,52px);border-radius:10px;border:2px dashed var(--statc);
+    display:flex;align-items:center;justify-content:center;color:var(--statc);font-family:var(--font-display);font-weight:700;font-size:clamp(1.2rem,2.2vw,1.7rem);box-shadow:none}
   .gapcount{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:clamp(1.3rem,2.4vw,2rem);min-width:1.5em;text-align:right;flex:none}
-  .gapcount.zc{color:var(--yellow)}
+  .gapcount.zc{color:var(--statc)}
   /* backup / appendix */
   .prisma{display:flex;flex-direction:column;align-items:stretch;gap:0;max-width:430px}
   .prow{background:var(--card);border:1px solid var(--cardbrd);border-radius:10px;padding:9px 14px;font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:clamp(.88rem,1.25vw,1.06rem)}
   .prow span{display:block;font-family:var(--font-mono);font-weight:400;font-size:.64rem;color:var(--faint);margin-top:3px}
-  .prow.hl{border-color:var(--yellow);color:var(--yellow);box-shadow:0 0 16px color-mix(in srgb,var(--yellow) 20%,transparent)}
+  .prow.hl{border-color:var(--statc);color:var(--statc);box-shadow:0 0 16px color-mix(in srgb,var(--statc) 20%,transparent)}
   .parrow{font-family:var(--font-mono);font-size:.66rem;color:var(--muted);text-align:center;padding:4px 0}
   .parrow::before{content:"\2193  "}
   .bku-h{font-family:var(--font-display);font-size:clamp(1rem,1.45vw,1.18rem);color:var(--ink);margin:0 0 6px;font-weight:700}
@@ -462,7 +463,7 @@
   .ctab tr td:first-child{font-family:var(--font-display);font-weight:700;color:var(--ink)}
   .ctab .flag{color:var(--coral);font-weight:700}
   .ctab .ok{color:var(--green);font-weight:700}
-  .ctab td.found{color:var(--yellow);font-weight:600}
+  .ctab td.found{color:var(--statc);font-weight:600}
   .ctab td.conn{color:var(--faint);font-family:var(--font-mono);font-size:.85em;text-align:center;width:1px;white-space:nowrap}
   .sstr{display:flex;flex-direction:column;gap:clamp(7px,1.3vh,13px);margin-top:clamp(12px,2vh,22px)}
   .ssrow{display:grid;grid-template-columns:clamp(84px,9vw,128px) 1fr;gap:clamp(12px,1.6vw,22px);align-items:center}
@@ -483,7 +484,7 @@
   .reqarr{color:#0c1a12;background:var(--green);width:clamp(28px,3vw,38px);height:clamp(28px,3vw,38px);border-radius:50%;
     display:flex;align-items:center;justify-content:center;font-size:clamp(.95rem,1.7vw,1.3rem);font-weight:700;line-height:1;flex:none}
   .reqto{font-family:var(--font-body);color:var(--muted);font-size:clamp(1rem,1.6vw,1.32rem);line-height:1.3}
-  .reqto b{color:var(--yellow);font-weight:700}
+  .reqto b{color:var(--hl2);font-weight:700}
   @media(max-width:800px){.reqrow{grid-template-columns:1fr;gap:3px}.reqfrom{text-align:left}.reqarr{display:none}}
 
   /* ── footer: PHT logo · labelled per-slide dot groups · NAU logo · page ── */
@@ -580,7 +581,7 @@
   <section class="slide" data-sec="0">
     <div class="stage">
       <div class="eyebrow a">Land Acknowledgement</div>
-      <h2 class="a">Northern Arizona University sits at the base of the San Francisco Peaks, on homelands sacred to Native peoples of this region.</h2>
+      <h2 class="a">Northern Arizona University sits at the base of the San Francisco Peaks — Dook'o'oosłííd — on homelands sacred to Native peoples of this region.</h2>
       <p class="explain a">We honor their past, present, and future generations, who have lived here for millennia and will forever call this place home.</p>
       <div class="cite a">The people at the center of this work are Native people living in Flagstaff, on this land.</div>
     </div>
@@ -590,7 +591,7 @@
   <section class="slide" data-sec="0">
     <div class="stage">
       <h2 class="a">What is hypertension?</h2>
-      <p class="explain a" style="max-width:66ch">Blood pressure that stays high, <b>130 over 80</b> or above. It usually has no symptoms, yet over years it damages the heart, kidneys, and brain. It is <b>manageable</b>: even a <b>10 mmHg</b> drop in systolic pressure meaningfully lowers the risk of stroke and heart disease.</p>
+      <p class="explain a" style="max-width:66ch">Blood pressure that stays high, <b>130 over 80</b> or above. It usually has no symptoms, yet over years it damages the heart, kidneys, and brain. It is <b>manageable</b>: a <b>10 mmHg</b> drop in systolic pressure cuts major cardiovascular events about <b>20%</b>, stroke <b>27%</b>, and death <b>13%</b> <span class="src">(Ettehad et al. 2016)</span>.</p>
       <div data-step style="margin-top:clamp(12px,2.2vh,26px);max-width:42ch">
         <div class="thm-stat"><span data-count="1.28" data-dec="2">1.28</span><span class="u"> billion</span></div>
         <div class="thm-statlbl">adults live with hypertension worldwide, about <b>1 in 3</b> aged 30 to 79; in the US, <b>45.6%</b> of adults <span class="src">(WHO; US, measured BP)</span></div>
@@ -608,7 +609,7 @@
           <div class="whd">Hypertension · self-reported</div>
           <div class="wbars">
             <div class="hbar"><span class="hlb">All US adults</span><div class="htrack"><div class="hfill" style="width:58%;background:var(--greybar)"></div></div><span class="hval"><span data-count="28.7" data-dec="1">28.7</span>%</span></div>
-            <div class="hbar"><span class="hlb">Navajo (Diné)</span><div class="htrack"><div class="hfill" style="width:57%;background:var(--yellow)"></div></div><span class="hval"><span data-count="28" data-dec="0">28</span>%</span></div>
+            <div class="hbar"><span class="hlb">Navajo (Diné)</span><div class="htrack"><div class="hfill" style="width:57%;background:var(--statc)"></div></div><span class="hval"><span data-count="28" data-dec="0">28</span>%</span></div>
           </div>
         </div>
         <div class="wright">
@@ -627,9 +628,9 @@
         <div>
           <div class="whd">Hypertension prevalence · roughly double the general rate</div>
           <div class="wbars">
-            <div class="hbar"><span class="hlb">Adults with a disability (US)</span><div class="htrack"><div class="hfill" style="width:66%;background:var(--yellow)"></div></div><span class="hval"><span data-count="42.5" data-dec="1">42.5</span>%</span></div>
-            <div class="hbar"><span class="hlb">Adults with physical disability</span><div class="htrack"><div class="hfill" style="width:88%;background:var(--yellow)"></div></div><span class="hval"><span data-count="56.4" data-dec="1">56.4</span>%</span></div>
-            <div class="hbar"><span class="hlb">Deaf adults</span><div class="htrack"><div class="hfill" style="width:100%;background:var(--yellow)"></div></div><span class="hval"><span data-count="63.9" data-dec="1">63.9</span>%</span></div>
+            <div class="hbar"><span class="hlb">Adults with a disability (US)</span><div class="htrack"><div class="hfill" style="width:66%;background:var(--statc)"></div></div><span class="hval"><span data-count="42.5" data-dec="1">42.5</span>%</span></div>
+            <div class="hbar"><span class="hlb">Adults with physical disability</span><div class="htrack"><div class="hfill" style="width:88%;background:var(--statc)"></div></div><span class="hval"><span data-count="56.4" data-dec="1">56.4</span>%</span></div>
+            <div class="hbar"><span class="hlb">Deaf adults</span><div class="htrack"><div class="hfill" style="width:100%;background:var(--statc)"></div></div><span class="hval"><span data-count="63.9" data-dec="1">63.9</span>%</span></div>
           </div>
         </div>
         <div class="wright">
@@ -654,8 +655,8 @@
             <text class="vlbl vtxt" x="186" y="198" text-anchor="middle"><tspan x="186">Urban Diné</tspan><tspan x="186" dy="26">adults</tspan></text>
           </g>
           <g data-step>
-            <circle class="vfill" cx="460" cy="205" r="168" fill="#fde725" fill-opacity=".15"/>
-            <circle class="vdraw" cx="460" cy="205" r="168" stroke="#fde725" stroke-width="2.5"/>
+            <circle class="vfill" cx="460" cy="205" r="168" fill="#21918c" fill-opacity=".2"/>
+            <circle class="vdraw" cx="460" cy="205" r="168" stroke="#21918c" stroke-width="2.5"/>
             <text class="vlbl vtxt" x="574" y="198" text-anchor="middle"><tspan x="574">People with</tspan><tspan x="574" dy="26">disabilities</tspan></text>
           </g>
           <g data-step>
@@ -693,7 +694,7 @@
         <div class="fbar" style="--fi:0;width:74%;background:var(--greybar)"><span class="fn" data-count="1759">1,759</span> <span class="fl">records</span></div>
         <div class="fbar" style="--fi:1;width:58%;background:var(--blue);color:#f3f1ea"><span class="fn" data-count="1709">1,709</span> <span class="fl">screened</span></div>
         <div class="fbar" style="--fi:2;width:34%;background:var(--teal2);color:#f3f1ea"><span class="fn" data-count="102">102</span> <span class="fl">read in full</span></div>
-        <div class="fbar" style="--fi:3;width:22%;background:var(--yellow)"><span class="fn" data-count="67">67</span> <span class="fl">included</span></div>
+        <div class="fbar" style="--fi:3;width:22%;background:var(--statc)"><span class="fn" data-count="67">67</span> <span class="fl">included</span></div>
       </div>
       <div class="cite a">50 duplicates removed · 1,607 excluded on title and abstract · 35 excluded at full text · <a class="lnk" href="https://scholar.google.com/scholar?q=scoping+review+methodology+Arksey+OMalley" target="_blank" rel="noopener">scoping-review method</a></div>
     </div>
@@ -717,7 +718,7 @@
         <svg class="flower" viewBox="0 0 620 460" role="img" aria-label="Five self-management factors around everyday blood-pressure care: diet, exercise, medication, measurements, education">
           <circle cx="310" cy="235" r="76" fill="#1c2a24" stroke="#5ec962" stroke-width="2.5"/>
           <text class="flr-lbl" x="310" y="229" font-size="19" fill="#f3f1ea"><tspan x="310">Everyday</tspan><tspan x="310" dy="23">BP care</tspan></text>
-          <g data-step><circle class="flr-fill" cx="310" cy="85" r="63" fill="#fde725"/><circle class="flr-draw" cx="310" cy="85" r="63" stroke="#fde725" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="310" y="93" font-size="23" fill="#0c0a06">Diet</text></g>
+          <g data-step><circle class="flr-fill" cx="310" cy="85" r="63" fill="#90d743"/><circle class="flr-draw" cx="310" cy="85" r="63" stroke="#90d743" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="310" y="93" font-size="23" fill="#0c0a06">Diet</text></g>
           <g data-step><circle class="flr-fill" cx="453" cy="189" r="63" fill="#5ec962"/><circle class="flr-draw" cx="453" cy="189" r="63" stroke="#5ec962" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="453" y="197" font-size="20" fill="#0c0a06">Exercise</text></g>
           <g data-step><circle class="flr-fill" cx="398" cy="356" r="63" fill="#21918c"/><circle class="flr-draw" cx="398" cy="356" r="63" stroke="#21918c" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="398" y="363" font-size="17" fill="#f3f1ea">Medication</text></g>
           <g data-step><circle class="flr-fill" cx="222" cy="356" r="63" fill="#3b528b"/><circle class="flr-draw" cx="222" cy="356" r="63" stroke="#3b528b" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="222" y="362" font-size="15" fill="#f3f1ea">Measurements</text></g>
@@ -1096,14 +1097,13 @@
     <div class="stage">
       <div class="eyebrow a">CardioCare Quest Today</div>
       <h2 class="a">A game for each factor, moving for exercise, still for measuring.</h2>
-      <div class="split a" style="align-items:center;margin-top:clamp(4px,1.2vh,14px)">
-        <div class="fig" style="margin:0">
+      <div class="fig a" style="margin-top:clamp(4px,1.2vh,14px)">
         <svg class="radial" viewBox="0 0 820 460" role="img" aria-label="CardioCare Quest at the center, five factors around it, each connected to its game">
           <!-- spokes: factor -> game, one per click -->
           <g data-step>
-            <line x1="410" y1="240" x2="410" y2="30" stroke="#fde725" stroke-width="2" opacity=".4"/>
-            <circle cx="410" cy="125" r="40" fill="#fde725"/><text x="410" y="131" text-anchor="middle" font-size="14" font-weight="700" fill="#0c0a06" font-family="Cambria">Diet</text>
-            <rect x="348" y="13" width="124" height="34" rx="17" fill="#120f0a" stroke="#fde725" stroke-width="1.6"/><text x="410" y="35" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fde725" font-family="Cambria">DASH Diet</text>
+            <line x1="410" y1="240" x2="410" y2="30" stroke="#90d743" stroke-width="2" opacity=".4"/>
+            <circle cx="410" cy="125" r="40" fill="#90d743"/><text x="410" y="131" text-anchor="middle" font-size="14" font-weight="700" fill="#0c0a06" font-family="Cambria">Diet</text>
+            <rect x="348" y="13" width="124" height="34" rx="17" fill="#120f0a" stroke="#90d743" stroke-width="1.6"/><text x="410" y="35" text-anchor="middle" font-size="12.5" font-weight="700" fill="#90d743" font-family="Cambria">DASH Diet</text>
           </g>
           <g data-step>
             <line x1="410" y1="240" x2="610" y2="175" stroke="#5ec962" stroke-width="2" opacity=".4"/>
@@ -1126,13 +1126,11 @@
             <rect x="148" y="158" width="124" height="34" rx="17" fill="#120f0a" stroke="#6f5aa6" stroke-width="1.6"/><text x="210" y="180" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b3a0e8" font-family="Cambria">Heart Smarts</text>
           </g>
           <!-- center -->
-          <circle cx="410" cy="240" r="60" fill="#241a0e" stroke="#fde725" stroke-width="2.5"/>
-          <text x="410" y="235" text-anchor="middle" font-size="15" font-weight="700" fill="#fde725" font-family="Cambria"><tspan x="410">CardioCare</tspan><tspan x="410" dy="19">Quest</tspan></text>
+          <circle cx="410" cy="240" r="60" fill="#241a0e" stroke="#5ec962" stroke-width="2.5"/>
+          <text x="410" y="235" text-anchor="middle" font-size="15" font-weight="700" fill="#5ec962" font-family="Cambria"><tspan x="410">CardioCare</tspan><tspan x="410" dy="19">Quest</tspan></text>
         </svg>
-        </div>
-        <div class="figcard dark a"><img src="ccq_dogwalk.png" alt="Dog Walking game in CardioCare Quest: a GPS-tracked walking route on a phone screen"><div class="src">Dog Walking · the exercise game, a GPS-tracked walk</div></div>
       </div>
-      <p class="explain a" style="max-width:none;text-align:center;margin-left:auto;margin-right:auto;margin-top:clamp(8px,1.2vh,14px)">One game per factor, built in <b>Flutter + Firebase</b> with story games in <b>Twine</b>, works <b>offline</b>. <b>Not yet deployed</b>; next is accessibility work with players with disabilities and a community data plan.</p>
+      <p class="explain a" style="max-width:82ch;text-align:center;margin-left:auto;margin-right:auto;margin-top:clamp(8px,1.2vh,14px)">One game per factor, built in <b>Flutter + Firebase</b> with story games in <b>Twine</b>, works <b>offline</b>. <b>Not yet deployed</b>; next is accessibility work with players with disabilities and a community data plan.</p>
     </div>
     <aside class="aside"><p>What is CardioCare Quest today? A game for each factor: Dog Walking for exercise, DASH Diet for diet, Heart Smarts for education, Bingo Bash for medication, where a dose can be marked caregiver-assisted, and Vascular Village for measuring, which uses slow breathing before a calm, seated reading. That covers both sides: moving for exercise, still for measuring.</p><p>On the left is the in-app catalog, one game per factor; on the right is the Dog Walking exercise game, a GPS-tracked walk. It is built in Flutter and Firebase, with story games in Twine, and it works offline. It is not deployed yet; the next steps are accessibility work with players with disabilities, and a data plan with the community.</p></aside>
   </section>
@@ -1140,7 +1138,7 @@
   <section class="slide" data-sec="5" style="--act:var(--coral)">
     <div class="stage">
       <div class="eyebrow a">CardioCare Quest</div>
-      <h2 class="a">All five factors, end to end.</h2>
+      <h2 class="a">The CardioCare Quest project plan.</h2>
       <div class="a" style="background:#f4f3ee;border-radius:14px;padding:clamp(10px,1.4vw,18px);box-shadow:0 16px 44px rgba(0,0,0,.5);margin-top:clamp(10px,2vh,20px);max-width:min(100%,1200px);margin-left:auto;margin-right:auto">
         <img src="ccq_all.png" alt="CardioCare Quest flow: a Navajo family living with hypertension; five factors (Diet, Exercise, Medication, Education, Measurements) each with minigames; telemetry data collected; shared with researchers and clinicians" style="width:100%;height:auto;display:block;border-radius:6px">
       </div>
@@ -1474,33 +1472,30 @@
     if(!s.style.getPropertyValue('--act')) s.style.setProperty('--act','var('+SECTIONS[sec].v+')');
   });
 
-  // hierarchy tree: root -> two branches -> nested leaves, joined by connector lines
+  // horizontal org-chart: root -> branches spread sideways -> vertical leaf lists
   function tree(hl){
-    function L(txt,cls){ return '<li class="lf '+(cls||'')+'">'+txt+'</li>'; }
+    function vleaf(cls,items){ return '<div class="vleaf '+cls+'">'+items.map(function(t){return '<span>'+t+'</span>';}).join('')+'</div>'; }
     return ''+
     '<div class="tree">'+
       '<div class="troot">67 studies</div>'+
-      '<div class="tstem"></div>'+
-      '<div class="tcols">'+
-        '<div class="tbranch">'+
-          '<div class="tbh">Domain knowledge</div>'+
-          '<ul class="ttree">'+
-            '<li>Hypertension<ul>'+L('Five factors','c-htn')+L('Risk','c-htn')+'</ul></li>'+
-            '<li>Intersectionality<ul>'+
-              '<li>Disability<ul>'+L('Proxy care','c-dis')+L('Accessible protocols','c-dis')+L('Technosolutionism','c-dis')+L('DREEM','c-dis')+'</ul></li>'+
-              '<li>Indigenous<ul>'+L('Sovereignty','c-ind')+L('Cultural','c-ind')+'</ul></li>'+
-            '</ul></li>'+
+      '<div class="otree"><ul>'+
+        '<li>'+
+          '<div class="onode br">Domain knowledge</div>'+
+          '<ul>'+
+            '<li><div class="onode">Hypertension</div>'+vleaf('htn',['Five factors','Risk'])+'</li>'+
+            '<li><div class="onode">Intersectionality</div>'+
+              '<ul>'+
+                '<li><div class="onode">Disability</div>'+vleaf('dis',['Proxy care','Accessible protocols','Technosolutionism','DREEM'])+'</li>'+
+                '<li><div class="onode">Indigenous</div>'+vleaf('ind',['Sovereignty','Cultural'])+'</li>'+
+              '</ul>'+
+            '</li>'+
           '</ul>'+
-        '</div>'+
-        '<div class="tbranch">'+
-          '<div class="tbh">Theory</div>'+
-          '<ul class="ttree">'+
-            L('Serious games and play','c-th')+
-            L('Participatory research','c-th')+
-            L('Wicked problems and RtD','c-th')+
-          '</ul>'+
-        '</div>'+
-      '</div>'+
+        '</li>'+
+        '<li>'+
+          '<div class="onode br">Theory</div>'+
+          vleaf('th',['Serious games and play','Participatory research','Wicked problems and RtD'])+
+        '</li>'+
+      '</ul></div>'+
     '</div>';
   }
   [].slice.call(document.querySelectorAll('.tree-mount')).forEach(function(m){
