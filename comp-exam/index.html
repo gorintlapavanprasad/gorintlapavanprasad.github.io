@@ -323,7 +323,9 @@
   .hlb{font-family:var(--font-body);font-size:clamp(.84rem,1.2vw,1.02rem);color:var(--muted);text-align:right;line-height:1.18}
   .htrack{height:clamp(15px,2.3vh,23px);background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden}
   .hfill{height:100%;border-radius:6px;transform-origin:left;transform:scaleX(0)}
-  [data-step].shown .hfill,.slide.active .cmpblock:not([data-step]) .hfill,.slide.active .wbars .hfill{animation:hgrow .8s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:.25s}
+  [data-step].shown .hfill,.slide.active .cmpblock:not([data-step]) .hfill,.slide.active .wbars .hbar:not([data-step]) .hfill{animation:hgrow .8s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:.1s}
+  .hbar[data-step]{opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease}
+  .hbar[data-step].shown{opacity:1;transform:none}
   @keyframes hgrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
   .hval{font-family:var(--font-display);font-weight:700;font-size:clamp(1.05rem,1.9vw,1.55rem);color:var(--ink);font-variant-numeric:tabular-nums}
   .hval.k{color:var(--act,var(--teal))}
@@ -639,9 +641,9 @@
         <div>
           <div class="whd">Hypertension prevalence · roughly double the general rate</div>
           <div class="wbars">
-            <div class="hbar"><span class="hlb">Adults with a disability (US)</span><div class="htrack"><div class="hfill" style="width:66%;background:var(--statc)"></div></div><span class="hval"><span data-count="42.5" data-dec="1">42.5</span>%<span class="rm">[1]</span></span></div>
-            <div class="hbar"><span class="hlb">Adults with physical disability</span><div class="htrack"><div class="hfill" style="width:88%;background:var(--statc)"></div></div><span class="hval"><span data-count="56.4" data-dec="1">56.4</span>%<span class="rm">[2]</span></span></div>
-            <div class="hbar"><span class="hlb">Deaf adults</span><div class="htrack"><div class="hfill" style="width:100%;background:var(--statc)"></div></div><span class="hval"><span data-count="63.9" data-dec="1">63.9</span>%<span class="rm">[3]</span></span></div>
+            <div class="hbar" data-step><span class="hlb">Adults with a disability (US)</span><div class="htrack"><div class="hfill" style="width:66%;background:#5ec962"></div></div><span class="hval"><span data-count="42.5" data-dec="1">42.5</span>%<span class="rm">[1]</span></span></div>
+            <div class="hbar" data-step><span class="hlb">Adults with physical disability</span><div class="htrack"><div class="hfill" style="width:88%;background:#2db4a8"></div></div><span class="hval"><span data-count="56.4" data-dec="1">56.4</span>%<span class="rm">[2]</span></span></div>
+            <div class="hbar" data-step><span class="hlb">Deaf adults</span><div class="htrack"><div class="hfill" style="width:100%;background:#9b86d8"></div></div><span class="hval"><span data-count="63.9" data-dec="1">63.9</span>%<span class="rm">[3]</span></span></div>
           </div>
         </div>
         <div class="wright">
