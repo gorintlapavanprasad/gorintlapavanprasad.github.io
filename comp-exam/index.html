@@ -146,6 +146,9 @@
   .thm-quote{margin-top:clamp(14px,2.2vh,26px);padding-left:16px;border-left:3px solid var(--act,var(--green));
     font-family:var(--font-display);font-style:italic;font-size:clamp(1rem,1.65vw,1.36rem);line-height:1.34;color:var(--ink)}
   .thm-quote .who{display:block;font-style:normal;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:9px}
+  .footline{margin-top:clamp(18px,3vh,36px);padding-top:clamp(11px,1.7vh,20px);border-top:1px solid var(--cardbrd);
+    font-family:var(--font-display);font-style:italic;font-size:clamp(.95rem,1.5vw,1.3rem);line-height:1.3;color:var(--ink)}
+  .footline .who{font-style:normal;font-family:var(--font-mono);font-size:.6em;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-left:12px;white-space:nowrap}
   .thm-study{background:var(--card);border:1px solid color-mix(in srgb,var(--act,var(--green)) 50%,var(--cardbrd));border-left:4px solid var(--act,var(--green));
     border-radius:14px;padding:clamp(15px,1.8vw,22px);box-shadow:0 0 24px color-mix(in srgb,var(--act,var(--green)) 16%,transparent)}
   .thm-study .tag{font-family:var(--font-mono);font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;color:var(--act,var(--green));font-weight:600}
@@ -544,18 +547,11 @@
     <div class="stage">
       <h2 class="a">What is hypertension?</h2>
       <p class="explain a" style="max-width:66ch">Blood pressure that stays high, <b>130 over 80</b> or above. It usually has no symptoms, yet over years it damages the heart, kidneys, and brain. It is <b>manageable</b>: even a <b>10 mmHg</b> drop in systolic pressure meaningfully lowers the risk of stroke and heart disease.</p>
-      <div class="thm" style="margin-top:clamp(12px,2.2vh,26px)">
-        <div>
-          <div class="thm-stat a"><span data-count="1.28" data-dec="2">1.28</span><span class="u"> billion</span></div>
-          <div class="thm-statlbl a">adults live with hypertension worldwide, about <b>1 in 3</b> aged 30 to 79; in the US, nearly <b>half</b> of adults <span class="src">(WHO, measured BP)</span></div>
-          <div class="thm-quote a">Close to half of the people who have high blood pressure do not know it.<span class="who">WHO 2023 · the silent condition</span></div>
-        </div>
-        <div class="thm-study a">
-          <span class="tag">Why it matters here</span>
-          <h3>A manageable, everyday condition</h3>
-          <p>Control depends on <b>daily behavior</b>, not a one-time cure. This review examines <b>playful, everyday technology</b> as one form of daily support.</p>
-        </div>
+      <div data-step style="margin-top:clamp(12px,2.2vh,26px);max-width:42ch">
+        <div class="thm-stat"><span data-count="1.28" data-dec="2">1.28</span><span class="u"> billion</span></div>
+        <div class="thm-statlbl">adults live with hypertension worldwide, about <b>1 in 3</b> aged 30 to 79; in the US, nearly <b>half</b> of adults <span class="src">(WHO, measured BP)</span></div>
       </div>
+      <div class="footline a">Close to half of the people who have high blood pressure do not know it.<span class="who">WHO 2023 · the silent condition</span></div>
     </div>
     <aside class="aside"><p>First, what is hypertension? It is blood pressure that stays high, 130 over 80 or above. It usually has no symptoms, so it is often called the silent killer, yet over years it damages the heart, kidneys, and brain.</p><p>How many people? About 1.28 billion adults worldwide, roughly one in three aged 30 to 79; in the US, nearly half of adults. And close to half do not know they have it.</p><p>The hopeful part: it is manageable. Even a 10 mmHg drop in systolic pressure meaningfully lowers risk. Because control comes from daily behavior, this review examines playful, everyday technology as one form of daily support.</p></aside>
   </section>
@@ -1366,6 +1362,7 @@
   function fmtNum(v,dec){ return dec>0 ? v.toFixed(dec) : Math.round(v).toLocaleString('en-US'); }
   function countUp(s){
     [].slice.call(s.querySelectorAll('[data-count]')).forEach(function(el){
+      var hid=el.closest('[data-step]'); if(hid && !hid.classList.contains('shown')) return;
       var tgt=parseFloat(el.getAttribute('data-count')), dec=+(el.getAttribute('data-dec')||0), t0=null, dur=950;
       function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1); var e=1-Math.pow(1-p,3);
         el.textContent=fmtNum(tgt*e,dec); if(p<1)requestAnimationFrame(step); else el.textContent=fmtNum(tgt,dec); }
@@ -1440,7 +1437,7 @@
 
   function next(){
     var s=slides[cur], st=steps(s), sc=shownCount(s);
-    if(sc<st.length){ showStep(s,sc+1); return; }
+    if(sc<st.length){ showStep(s,sc+1); var ns=st[sc]; if(ns) countUp(ns); return; }
     if(cur<N-1) go(cur+1);
   }
   function prev(){
