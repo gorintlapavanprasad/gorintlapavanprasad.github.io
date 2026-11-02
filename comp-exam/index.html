@@ -876,6 +876,7 @@
   <section class="slide" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Indigenous Studies Compared</div>
+      <h2 class="a">Indigenous hypertension studies, side by side.</h2>
       <table class="ctab a">
         <thead><tr><th>Study</th><th>Who took part</th><th>Approach</th><th>What they found</th></tr></thead>
         <tbody>
@@ -916,6 +917,7 @@
   <section class="slide" data-sec="3" style="--act:var(--cyan)">
     <div class="stage">
       <div class="eyebrow a">Hypertension &amp; Heart Games Compared</div>
+      <h2 class="a">Hypertension and heart games, side by side.</h2>
       <table class="ctab a">
         <thead><tr><th>Game</th><th>Who took part</th><th>Design</th><th>What they found</th></tr></thead>
         <tbody>
@@ -1242,6 +1244,7 @@
   <section class="slide" data-sec="5" style="--act:var(--coral)">
     <div class="stage">
       <div class="eyebrow a">Backup · Search Strings</div>
+      <h2 class="a">The full search strings.</h2>
       <div class="sstr a">
         <div class="ssrow"><span class="sskey">GAMES</span><span class="ssval">"serious game" OR "serious games" OR gamification OR gamified OR "game-based" OR exergame OR exergaming OR "video game" OR "digital game" OR "games for health" OR playful</span></div>
         <div class="ssrow"><span class="sskey">TECH</span><span class="ssval">GAMES OR mHealth OR "mobile health" OR "digital health" OR ehealth OR telehealth OR "health technology" OR smartphone OR wearable OR "self-management"</span></div>
@@ -1327,6 +1330,7 @@
   <section class="slide" data-sec="5" style="--act:var(--coral)">
     <div class="stage">
       <div class="eyebrow a">Backup · Blood Pressure Categories</div>
+      <h2 class="a">The blood-pressure categories.</h2>
       <table class="ctab a">
         <thead><tr><th>Category</th><th>Systolic (mmHg)</th><th></th><th>Diastolic (mmHg)</th></tr></thead>
         <tbody>
@@ -1367,6 +1371,7 @@
   <section class="slide" data-sec="5" style="--act:var(--coral)">
     <div class="stage">
       <div class="eyebrow a">Backup · Selection Criteria</div>
+      <h2 class="a">Inclusion and exclusion criteria.</h2>
       <div class="twocol-lists a">
         <div>
           <h3>Include (all three)</h3>
@@ -1393,6 +1398,7 @@
   <section class="slide" data-sec="5" style="--act:var(--coral)">
     <div class="stage">
       <div class="eyebrow a">Backup · IRB Scope</div>
+      <h2 class="a">The IRB scope.</h2>
       <div class="irbgrid a">
         <div><h3>NAU IRB #2117583</h3><p>Urban Indigenous adults (Navajo people living in Flagstaff) and their supporters.</p></div>
         <div><h3>Tribal consultation</h3><p>NAU Tribal Liaison, approved 4 Dec 2023. Condition: courtesy letter and report back to any named nation.</p></div>
@@ -1407,6 +1413,7 @@
   <section class="slide" data-sec="5" style="--act:var(--coral)">
     <div class="stage">
       <div class="eyebrow a">Backup · From Themes to Research Questions</div>
+      <h2 class="a">Each theme maps to a research question.</h2>
       <table class="ctab a">
         <thead><tr><th>Theme</th><th>Requirement</th><th>Research question</th></tr></thead>
         <tbody>
@@ -1499,6 +1506,11 @@
     var c=s.getAttribute('data-ch');
     if(c) chapters.push({name:c});
     slideCh[i]=chapters.length-1;
+  });
+  // every slide's eyebrow shows its section (chapter) name, so the audience always knows where they are
+  slides.forEach(function(s,i){
+    var eb=s.querySelector('.eyebrow'); var ch=chapters[slideCh[i]];
+    if(eb && ch && s.querySelector('h1,h2')) eb.textContent=ch.name;
   });
   var dotFor=[];
   chapters.forEach(function(ch,ci){
