@@ -411,7 +411,8 @@
   .flower{max-width:min(100%,700px);height:auto;margin:0 auto;display:block}
   .flowerrow{display:flex;align-items:center;gap:clamp(16px,2.6vw,42px);margin-top:clamp(6px,1.4vh,16px)}
   @media(max-width:860px){.flowerrow{flex-direction:column}}
-  .flowerrow .flower{flex:1 1 58%;max-width:none;margin:0}
+  .flowerrow{justify-content:center}
+  .flowerrow .flower{flex:0 1 auto;max-width:min(100%,640px);margin:0 auto}
   .flower-side{flex:0 1 clamp(230px,30vw,360px);background:#0e1317;border:1px solid var(--cardbrd);border-radius:14px;padding:10px;box-shadow:0 16px 44px rgba(0,0,0,.5)}
   .flower-side img{width:100%;height:auto;display:block;border-radius:9px;max-height:48vh;object-fit:contain}
   .flower-side figcaption{font-family:var(--font-mono);font-size:.64rem;color:var(--faint);margin-top:8px;line-height:1.35}
@@ -737,15 +738,11 @@
           <g data-step><circle class="flr-fill" cx="222" cy="356" r="63" fill="#3b528b"/><circle class="flr-draw" cx="222" cy="356" r="63" stroke="#3b528b" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="222" y="362" font-size="15" fill="#f3f1ea">Measurements</text></g>
           <g data-step><circle class="flr-fill" cx="167" cy="189" r="63" fill="#46337e"/><circle class="flr-draw" cx="167" cy="189" r="63" stroke="#46337e" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="167" y="197" font-size="18" fill="#f3f1ea">Education</text></g>
         </svg>
-        <figure class="flower-side" data-step>
-          <img src="graham.png" alt="Graham et al. 2025 co-design workshop: participants and five game-prototype sketches, one for each hypertension factor">
-          <figcaption>Graham et al. 2025 co-designed five game prototypes with Indigenous participants, one per factor.</figcaption>
-        </figure>
       </div>
       <p class="cap a">The review charts the literature by these five factors.</p>
       <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Carey+2022+hypertension+management+AHA" target="_blank" rel="noopener">Carey et al. 2022</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=ACC+AHA+2025+hypertension+guideline" target="_blank" rel="noopener">ACC/AHA 2025</a></div>
     </div>
-    <aside class="aside"><p>Hypertension is managed through five daily behaviors. (click) Diet. (click) Exercise. (click) Medication. (click) Measurements. (click) Education. Lifestyle change is first-line care, and even a 10 mmHg drop in systolic pressure lowers cardiovascular risk. The review charts the literature by these five factors.</p><p>(click) And Graham and colleagues (2025) co-designed five game prototypes with Indigenous participants, one for each factor.</p></aside>
+    <aside class="aside"><p>Hypertension is managed through five daily behaviors. (click) Diet. (click) Exercise. (click) Medication. (click) Measurements. (click) Education. Lifestyle change is first-line care, and even a 10 mmHg drop in systolic pressure lowers cardiovascular risk. The review charts the literature by these five factors.</p></aside>
   </section>
 
   <section class="slide" data-sec="2" style="--act:var(--green)">
