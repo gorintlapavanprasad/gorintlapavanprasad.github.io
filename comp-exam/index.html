@@ -446,6 +446,7 @@
   .ctab tr td:first-child{font-family:var(--font-display);font-weight:700;color:var(--ink)}
   .ctab .flag{color:var(--coral);font-weight:700}
   .ctab .ok{color:var(--green);font-weight:700}
+  .ctab td.found{color:var(--yellow);font-weight:600}
   /* themes -> requirement rows, revealed one per click with a connecting arrow */
   .reqlist{display:flex;flex-direction:column;gap:clamp(12px,2vh,24px);margin-top:clamp(16px,2.6vh,34px)}
   .reqrow{display:grid;grid-template-columns:1fr auto 1.2fr;align-items:center;gap:clamp(16px,2.8vw,40px)}
@@ -763,21 +764,18 @@
   <section class="slide" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Disability · Accessible Protocols</div>
-      <h2 class="a">The method itself often leaves disabled participants out.</h2>
-      <div class="thm">
+      <div class="split">
         <div>
-          <div class="thm-stat a"><span data-count="7">7</span><span class="u"> of 25</span></div>
-          <div class="thm-statlbl a">co-design studies with people with intellectual disability used accessibility standards such as Easy Read <span class="src">(Johnstone et al. 2026)</span></div>
-          <div class="thm-quote a">Older Black participants called the markers-and-pencils ideation an elementary-school activity.<span class="who">Harrington et al. 2019 &middot; on "blue-sky" design workshops</span></div>
+          <h2 class="a">Few studies use accessibility standards.</h2>
+          <p class="explain a">A 2026 review found that only <span class="key">7 of 25</span> co-design studies with people with intellectual disability used standards such as <b>Easy Read</b>.</p>
+          <p class="explain a" style="margin-top:10px"><b>Design implications:</b> Easy Read materials, short sessions, and familiar places; and fair pay for people's time.</p>
+          <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Johnstone+2026+co-design+intellectual+disability+accessibility+standards+review" target="_blank" rel="noopener">Johnstone et al. 2026</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Spencer+Gonzalez+2020+advisory+panel+intellectual+disability+easy+read" target="_blank" rel="noopener">Spencer González et al. 2020</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Wu+2024+accessibility+disability+health+technology" target="_blank" rel="noopener">Wu et al. 2024</a></div>
         </div>
-        <div class="thm-study a">
-          <span class="tag">Study</span>
-          <h3>Spencer González et al. 2020</h3>
-          <p>Three years with a <b>paid advisory panel</b> of adults with intellectual disability, treated as experts by experience: easy-read text, adult (not childish) images, story-based activities, and polished prototypes rather than rough sketches.</p>
+        <div class="figcard a">
+          <img src="spencer.png" alt="Spencer González et al. 2020 co-design workshop: an advisory panel of adults with intellectual disability working hands-on with materials at a table">
+          <div class="src"><b>Spencer González et al. 2020.</b> Three years with a paid advisory panel of adults with intellectual disability: easy-read text, adult pictures, and story-based activities.</div>
         </div>
       </div>
-      <div class="thm-impl a"><span class="arr">&rarr;</span><div>Adapt the materials, meet in familiar places, keep sessions short, and <b>pay people for their time.</b></div></div>
-      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Johnstone+2026+co-design+intellectual+disability+accessibility+standards+review" target="_blank" rel="noopener">Johnstone et al. 2026</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Harrington+Erete+Piper+2019+deconstructing+community+based+design" target="_blank" rel="noopener">Harrington et al. 2019</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Spencer+Gonzalez+2020+advisory+panel+intellectual+disability+easy+read" target="_blank" rel="noopener">Spencer González et al. 2020</a></div>
     </div>
     <aside class="aside"><p>The second disability theme is accessible research protocols. A 2026 review of 25 co-design studies with people with intellectual disability found only 7 used accessibility standards like Easy Read.</p><p>Design implications: easy-read materials, short and frequent sessions, familiar places, and fair pay.</p><p>A great example is Spencer González and colleagues. For three years they worked with an advisory panel of adults with intellectual disability, paid like staff. They used easy-read text, adult pictures rather than childish ones, story-based play, and polished prototypes, because rough wireframes confused people.</p></aside>
   </section>
@@ -862,6 +860,27 @@
     <aside class="aside"><p>The second Indigenous theme is cultural grounding: programs work when built into what a community already does. The strongest evidence is the hula trial with 263 Native Hawaiian adults: 42.7 percent reached healthy blood pressure, against 21.2. I use it because it is the only randomized trial of a cultural movement practice for blood pressure. The lesson is the approach, not the dance. Navajo Healthy Stores, run by local Navajo-speaking health workers, shows the same.</p><p>Design implications: start from what the community values, and the community decides what is shared, because some games and stories are only for certain seasons.</p><p>The great local example is ARORA, by Vigil-Hayes and colleagues at NAU, with Navajo and Hopi youth in Flagstaff. An advisory board set the design values: the butterfly as a positive symbol, and no coyote or lightning.</p></aside>
   </section>
 
+  <section class="slide" data-sec="2" style="--act:var(--green)">
+    <div class="stage">
+      <div class="eyebrow a">Indigenous Studies Compared</div>
+      <table class="ctab a">
+        <thead><tr><th>Study</th><th>Who took part</th><th>Approach</th><th>What they found</th></tr></thead>
+        <tbody>
+          <tr class="a"><td>Percy et al. 1997</td><td>780 Navajo adults</td><td>Health survey</td><td class="found">Only 50 of 97 with high BP had been told</td></tr>
+          <tr class="a"><td>Harmon et al. 2016</td><td>Navajo adults</td><td>Cohort</td><td class="found">35.9% had hypertension</td></tr>
+          <tr class="a"><td>Bea et al. 2018</td><td>32 Navajo cancer survivors, 8 family; Flagstaff and a rural chapter</td><td>Focus groups, interviews</td><td class="found">Programs far away, often one day</td></tr>
+          <tr class="a"><td>Gittelsohn et al. 2013</td><td>Navajo Nation stores and shoppers</td><td>Store program, local staff</td><td class="found">Better food choices, lower BMI</td></tr>
+          <tr class="a"><td>Vigil-Hayes et al. 2021</td><td>Navajo and Hopi youth, Flagstaff</td><td>CBPR, 18 months</td><td class="found">Explain cultural meaning in the app</td></tr>
+          <tr class="a"><td>Kaholokula et al. 2021</td><td>263 Native Hawaiian adults</td><td>RCT, hula program</td><td class="found">42.7% vs 21.2% reached healthy BP</td></tr>
+          <tr class="a"><td>Tobe et al. 2019</td><td>First Nations communities, Canada</td><td>RCT, text messages</td><td class="found">Both arms dropped about 5 mmHg</td></tr>
+          <tr class="a"><td>Im et al. 2026</td><td>Lumbee Tribe committee</td><td>Virtual CBPR</td><td class="found">Casino theme removed from game</td></tr>
+        </tbody>
+      </table>
+      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Percy+1997+hypertension+Navajo+Health+Nutrition+Survey" target="_blank" rel="noopener">Percy et al., 1997</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Harmon+2016+hypertension+Navajo+cohort" target="_blank" rel="noopener">Harmon et al., 2016</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Bea+2018+Navajo+cancer+survivors+Flagstaff" target="_blank" rel="noopener">Bea et al., 2018</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Gittelsohn+2013+Navajo+healthy+stores" target="_blank" rel="noopener">Gittelsohn et al., 2013</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Vigil-Hayes+2021+ARORA+Navajo+Hopi+youth" target="_blank" rel="noopener">Vigil-Hayes et al., 2021</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Kaholokula+2021+hula+hypertension+Native+Hawaiian+trial" target="_blank" rel="noopener">Kaholokula et al., 2021</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Tobe+2019+DREAM-GLOBAL+First+Nations+text+messaging+blood+pressure" target="_blank" rel="noopener">Tobe et al., 2019</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Im+2026+Lumbee+virtual+CBPR+hypertension+game" target="_blank" rel="noopener">Im et al., 2026</a></div>
+    </div>
+    <aside class="aside"><p>Here are the Indigenous studies side by side. Percy measured blood pressure in 780 Navajo adults, and only 50 of the 97 with high blood pressure had been told. Harmon's cohort found 35.9 percent had hypertension. Bea heard from Navajo cancer survivors that programs were far away and often one day. Gittelsohn's store program led to better food choices and lower BMI. Vigil-Hayes, with Navajo and Hopi youth, built cultural meaning into the app. Kaholokula's hula trial reached a healthy blood pressure in 42.7 percent, against 21.2. Tobe's text-message trial dropped both arms about 5 mmHg. And Im, with the Lumbee committee, removed a casino theme from the game.</p></aside>
+  </section>
+
   <section class="slide" data-sec="3" style="--act:var(--cyan)">
     <div class="stage">
       <div class="eyebrow a">Serious Games and Play</div>
@@ -922,22 +941,18 @@
   <section class="slide" data-sec="3" style="--act:var(--cyan)">
     <div class="stage">
       <div class="eyebrow a">Wicked Problems and Research through Design</div>
-      <h2 class="a">A health game is a wicked problem, so you learn by building.</h2>
-      <p class="explain a">No single definition; solutions are <b>better or worse</b>, not right or wrong. Research through design learns by making.</p>
-      <div class="fig">
-      <svg viewBox="0 0 560 150" role="img" aria-label="A cycle: build, learn with the community, rebuild">
-        <defs><marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#45c2cf"/></marker></defs>
-        <path class="draw" d="M115 62 C 205 10, 355 10, 445 62" fill="none" stroke="#45c2cf" stroke-width="3" marker-end="url(#ah)"/>
-        <path class="draw" d="M445 90 C 355 142, 205 142, 115 90" fill="none" stroke="#45c2cf" stroke-width="3" marker-end="url(#ah)"/>
-        <g font-size="16" fill="#eef4f2" text-anchor="middle">
-          <g class="a"><rect x="35" y="54" width="118" height="42" rx="11" fill="rgba(255,255,255,.07)" stroke="#eef4f2" stroke-width="1.2"/><text x="94" y="80">build</text></g>
-          <g class="a"><rect x="192" y="0" width="67" height="38" rx="11" fill="rgba(255,255,255,.07)" stroke="#eef4f2" stroke-width="1.2"/><text x="280" y="25">learn with the community</text></g>
-          <g class="a"><rect x="407" y="54" width="118" height="42" rx="11" fill="#f2b84b"/><text x="466" y="80" fill="#15201c">rebuild</text></g>
-        </g>
-      </svg>
+      <div class="split">
+        <div>
+          <h2 class="a">A health game is a wicked problem.</h2>
+          <p class="explain a">It has no single definition, and solutions are <b>better or worse</b> rather than right or wrong. Research through design learns by making.</p>
+          <p class="explain a" style="margin-top:10px"><b>Design implications:</b> build on the play people already do; and treat the platform as a way to learn, as well as a product.</p>
+          <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Duval+2022+playful+health+technology+wicked+problem" target="_blank" rel="noopener">Duval, 2022</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Altarriba+Bertran+2019+situated+play+design" target="_blank" rel="noopener">Altarriba Bertran et al., 2019</a></div>
+        </div>
+        <div class="figcard a">
+          <img src="duval.png" alt="Situated Play Design workshop: printed food-tradition cards covered in sticky-note annotations spread across a table">
+          <div class="src"><b>Situated Play Design (Duval 2022).</b> Food traditions from many cultures studied as starting points for playful design.</div>
+        </div>
       </div>
-      <p class="explain a" style="max-width:none;margin-top:clamp(10px,1.6vh,18px)"><b style="color:var(--ink)">Study, Situated Play Design (Duval 2022):</b> food traditions from many cultures studied as starting points for playful design.</p>
-      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Duval+2022+playful+health+technology+wicked+problem" target="_blank" rel="noopener">Duval 2022</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Altarriba+Bertran+2019+situated+play+design" target="_blank" rel="noopener">Altarriba Bertran et al. 2019</a></div>
     </div>
     <aside class="aside"><p>Third: wicked problems and research through design. No paper in my search used these words, so this comes from the theory literature. Duval calls designing a motivating health game a wicked problem: no single definition, and answers are better or worse, not right or wrong. Research through design answers this by learning through making.</p><p>Design implications: find the play people already do and build on it; and treat the platform as a probe to learn with, as well as a product.</p><p>The example is Situated Play Design. In this workshop, food traditions from many cultures became play potentials, starting points for playful design.</p></aside>
   </section>
@@ -1097,6 +1112,18 @@
       <p class="explain a" style="max-width:82ch;text-align:center;margin-left:auto;margin-right:auto;margin-top:clamp(8px,1.2vh,14px)">One game per factor, built in <b>Flutter + Firebase</b> with story games in <b>Twine</b>, works <b>offline</b>. <b>Not yet deployed</b>; next is accessibility work with players with disabilities and a community data plan.</p>
     </div>
     <aside class="aside"><p>What is CardioCare Quest today? A game for each factor: Dog Walking for exercise, DASH Diet for diet, Heart Smarts for education, Bingo Bash for medication, where a dose can be marked caregiver-assisted, and Vascular Village for measuring, which uses slow breathing before a calm, seated reading. That covers both sides: moving for exercise, still for measuring.</p><p>On the left is the in-app catalog, one game per factor; on the right is the Dog Walking exercise game, a GPS-tracked walk. It is built in Flutter and Firebase, with story games in Twine, and it works offline. It is not deployed yet; the next steps are accessibility work with players with disabilities, and a data plan with the community.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">CardioCare Quest</div>
+      <h2 class="a">All five factors, end to end.</h2>
+      <div class="a" style="background:#f4f3ee;border-radius:14px;padding:clamp(10px,1.4vw,18px);box-shadow:0 16px 44px rgba(0,0,0,.5);margin-top:clamp(10px,2vh,20px);max-width:min(100%,1200px);margin-left:auto;margin-right:auto">
+        <img src="ccq_all.png" alt="CardioCare Quest flow: a Navajo family living with hypertension; five factors (Diet, Exercise, Medication, Education, Measurements) each with minigames; telemetry data collected; shared with researchers and clinicians" style="width:100%;height:auto;display:block;border-radius:6px">
+      </div>
+      <p class="cap a">From the family, through a game for each factor, to data the community controls.</p>
+    </div>
+    <aside class="aside"><p>This ties CardioCare Quest together. A Navajo family living with hypertension plays a game for each of the five factors: diet, exercise, medication, education, and measurements. Each minigame produces telemetry, from social interactions and dietary logs to blood-pressure measurements and medication schedules. That data can be shared, under community control, with researchers and clinicians.</p></aside>
   </section>
 
   <section class="slide" data-sec="5" style="--act:var(--coral)">
