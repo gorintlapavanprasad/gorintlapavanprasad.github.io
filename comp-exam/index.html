@@ -447,6 +447,19 @@
   .ctab .flag{color:var(--coral);font-weight:700}
   .ctab .ok{color:var(--green);font-weight:700}
   .ctab td.found{color:var(--yellow);font-weight:600}
+  .ctab td.conn{color:var(--faint);font-family:var(--font-mono);font-size:.85em;text-align:center;width:1px;white-space:nowrap}
+  .sstr{display:flex;flex-direction:column;gap:clamp(7px,1.3vh,13px);margin-top:clamp(12px,2vh,22px)}
+  .ssrow{display:grid;grid-template-columns:clamp(84px,9vw,128px) 1fr;gap:clamp(12px,1.6vw,22px);align-items:center}
+  .sskey{font-family:var(--font-mono);font-weight:700;letter-spacing:.08em;color:var(--green);background:color-mix(in srgb,var(--green) 14%,transparent);border:1px solid color-mix(in srgb,var(--green) 45%,transparent);border-radius:8px;padding:10px 6px;text-align:center;font-size:clamp(.78rem,1.05vw,.98rem)}
+  .ssval{font-family:var(--font-body);color:var(--ink);font-size:clamp(.8rem,1.1vw,1rem);line-height:1.4}
+  .twocol-lists{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,60px);margin-top:clamp(10px,2vh,20px)}
+  @media(max-width:820px){.twocol-lists{grid-template-columns:1fr}}
+  .twocol-lists h3{font-family:var(--font-display);color:var(--yellow);font-size:clamp(1.1rem,1.7vw,1.5rem);font-weight:700;margin:0 0 14px}
+  .twocol-lists ol,.twocol-lists ul{margin:0;padding-left:1.3em;font-family:var(--font-body);font-size:clamp(.95rem,1.4vw,1.2rem);line-height:1.6;color:var(--ink)}
+  .irbgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,44px) clamp(24px,5vw,70px);margin-top:clamp(10px,2vh,22px)}
+  @media(max-width:820px){.irbgrid{grid-template-columns:1fr}}
+  .irbgrid h3{font-family:var(--font-display);color:var(--yellow);font-size:clamp(1.05rem,1.55vw,1.38rem);font-weight:700;margin:0 0 6px}
+  .irbgrid p{font-family:var(--font-body);font-size:clamp(.92rem,1.3vw,1.14rem);line-height:1.42;color:var(--ink);margin:0}
   /* themes -> requirement rows, revealed one per click with a connecting arrow */
   .reqlist{display:flex;flex-direction:column;gap:clamp(12px,2vh,24px);margin-top:clamp(16px,2.6vh,34px)}
   .reqrow{display:grid;grid-template-columns:1fr auto 1.2fr;align-items:center;gap:clamp(16px,2.8vw,40px)}
@@ -1225,19 +1238,18 @@
 
   <section class="slide" data-sec="5" style="--act:var(--coral)">
     <div class="stage">
-      <div class="eyebrow a">Backup · Search Strategy</div>
-      <h2 class="a">Six concept blocks, combined across three databases.</h2>
-      <div class="grid2" style="grid-template-columns:repeat(3,1fr)">
-        <div class="panel"><h3>Games &amp; play</h3><p>serious game, gamification, exergame, playful, game-based</p></div>
-        <div class="panel"><h3>Technology</h3><p>mHealth, app, digital health, mobile, wearable, sensor</p></div>
-        <div class="panel"><h3>Hypertension</h3><p>hypertension, blood pressure, BP self-management, cardiovascular</p></div>
-        <div class="panel"><h3>Indigenous</h3><p>Indigenous, Native American, American Indian, Navajo, Diné, First Nations, Aboriginal</p></div>
-        <div class="panel"><h3>Disability</h3><p>disability, accessible, Deaf, intellectual disability, impairment</p></div>
-        <div class="panel"><h3>Design</h3><p>co-design, participatory design, human-centered, community-based</p></div>
+      <div class="eyebrow a">Backup · Search Strings</div>
+      <div class="sstr a">
+        <div class="ssrow"><span class="sskey">GAMES</span><span class="ssval">"serious game" OR "serious games" OR gamification OR gamified OR "game-based" OR exergame OR exergaming OR "video game" OR "digital game" OR "games for health" OR playful</span></div>
+        <div class="ssrow"><span class="sskey">TECH</span><span class="ssval">GAMES OR mHealth OR "mobile health" OR "digital health" OR ehealth OR telehealth OR "health technology" OR smartphone OR wearable OR "self-management"</span></div>
+        <div class="ssrow"><span class="sskey">HTN</span><span class="ssval">hypertension OR "blood pressure"</span></div>
+        <div class="ssrow"><span class="sskey">INDIG</span><span class="ssval">Indigenous OR "Native American" OR Navajo OR "American Indian" OR "Alaska Native"</span></div>
+        <div class="ssrow"><span class="sskey">DISAB</span><span class="ssval">disability OR "intellectual disability" OR "developmental disability"</span></div>
+        <div class="ssrow"><span class="sskey">DESIGN</span><span class="ssval">"human-centered design" OR "participatory design" OR "co-design" OR codesign OR "user-centered design" OR "community-based participatory"</span></div>
       </div>
-      <p class="cap a">Blocks combined with AND across games/technology, condition, population, and method; terms shown are representative.</p>
+      <p class="cap a">Six queries: GAMES AND HTN, GAMES AND DISAB, GAMES AND INDIG, TECH AND HTN AND INDIG, TECH AND HTN AND DISAB, DESIGN AND TECH AND (INDIG OR DISAB). Semantic Scholar was not searched; it would be an easy check in an update.</p>
     </div>
-    <aside class="aside"><p>Backup. The six concept blocks used in the search, combined across the three databases. The terms shown are representative, not the full Boolean strings.</p></aside>
+    <aside class="aside"><p>Backup. The full search strings, by concept block, combined into six queries across the three databases. Semantic Scholar was not searched, and would be an easy check in an update.</p></aside>
   </section>
 
   <section class="slide" data-sec="5" style="--act:var(--coral)">
@@ -1307,6 +1319,103 @@
       <div class="cite a">IRB 1957455 · deployed 12 May 2026, Hozhoni Foundation · Gorintla et al., under review.</div>
     </div>
     <aside class="aside"><p>Backup. The three preliminary studies at the Hozhoni Gameorama: a seven-day cultural probe with 31 Navajo adults, a co-design workshop where 36 adults with disabilities and caregivers produced 23 game concepts, and a play session of CardioCare Quest with and without support.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">Backup · Blood Pressure Categories</div>
+      <table class="ctab a">
+        <thead><tr><th>Category</th><th>Systolic (mmHg)</th><th></th><th>Diastolic (mmHg)</th></tr></thead>
+        <tbody>
+          <tr class="a"><td>Normal</td><td>below 120</td><td class="conn">and</td><td class="found">below 80</td></tr>
+          <tr class="a"><td>Elevated</td><td>120–129</td><td class="conn">and</td><td class="found">below 80</td></tr>
+          <tr class="a"><td>Stage 1 hypertension</td><td>130–139</td><td class="conn">or</td><td class="found">80–89</td></tr>
+          <tr class="a"><td>Stage 2 hypertension</td><td>140 or higher</td><td class="conn">or</td><td class="found">90 or higher</td></tr>
+        </tbody>
+      </table>
+      <p class="cap a">Moving the line from 140/90 to 130/80 raised US prevalence from 31.9% to 45.6% (+31 million adults). WHO still uses 140/90, so WHO and US numbers differ.</p>
+      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Jones+2025+hypertension+guideline+blood+pressure+categories" target="_blank" rel="noopener">Jones et al., 2025</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Muntner+2018+hypertension+prevalence+2017+ACC+AHA+guideline" target="_blank" rel="noopener">Muntner et al., 2018</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Mills+2020+global+disparities+hypertension+prevalence" target="_blank" rel="noopener">Mills et al., 2020</a></div>
+    </div>
+    <aside class="aside"><p>Backup. The blood-pressure categories. Normal is below 120 and below 80. Elevated is 120 to 129. Stage 1 is 130 to 139 or 80 to 89; Stage 2 is 140 or higher, or 90 or higher. Moving the line from 140 over 90 to 130 over 80 raised US prevalence from about 32 percent to 46 percent, 31 million more adults. WHO still uses 140 over 90, so the two numbers differ.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">Backup · Lifestyle Effects</div>
+      <h2 class="a">How much each lifestyle change lowers systolic BP (mmHg).</h2>
+      <table class="ctab a">
+        <thead><tr><th>Change</th><th>With hypertension</th><th>Without hypertension</th><th>Target</th></tr></thead>
+        <tbody>
+          <tr class="a"><td>Less sodium</td><td>−6 to −8</td><td>−1 to −4</td><td class="found">up to 2,300 mg/day; ideally 1,500</td></tr>
+          <tr class="a"><td>DASH diet</td><td>−5 to −8</td><td>−3 to −7</td><td class="found">fruit, vegetables, low-fat dairy</td></tr>
+          <tr class="a"><td>Weight loss</td><td>−6 to −8</td><td>−3 to −5</td><td class="found">about 1 mmHg per kg</td></tr>
+          <tr class="a"><td>Aerobic activity</td><td>−4 to −8</td><td>−2 to −7</td><td class="found">90–150 min/week</td></tr>
+          <tr class="a"><td>Potassium</td><td>−6</td><td>−3 to −6</td><td class="found">3,500–5,000 mg/day</td></tr>
+          <tr class="a"><td>Slow breathing</td><td>−5</td><td>−5</td><td class="found">&lt;10 breaths/min, 15 min/day</td></tr>
+          <tr class="a"><td>Less alcohol</td><td>−4 to −6</td><td>−3</td><td class="found">fewer drinks per day</td></tr>
+        </tbody>
+      </table>
+      <p class="cap a">2025 guideline, Table 12. DASH trial: −11.4 / −5.5 mmHg in people with hypertension (n = 133).</p>
+      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Jones+2025+hypertension+guideline+lifestyle+blood+pressure" target="_blank" rel="noopener">Jones et al., 2025</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Whelton+2018+lifestyle+blood+pressure+reduction" target="_blank" rel="noopener">Whelton et al., 2018</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Appel+1997+DASH+diet+trial+blood+pressure" target="_blank" rel="noopener">Appel et al., 1997</a></div>
+    </div>
+    <aside class="aside"><p>Backup. How much each lifestyle change lowers systolic pressure, in people with and without hypertension. The effects are larger in people who already have hypertension. Less sodium, the DASH diet, and weight loss each lower systolic pressure about 6 to 8 points. The targets are on the right. From the 2025 guideline, Table 12.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">Backup · Selection Criteria</div>
+      <div class="twocol-lists a">
+        <div>
+          <h3>Include (all three)</h3>
+          <ol>
+            <li>A playful or technological intervention</li>
+            <li>Targets hypertension or blood pressure</li>
+            <li>Involves an Indigenous or disability population, or a method for building with one</li>
+          </ol>
+        </div>
+        <div>
+          <h3>Exclude</h3>
+          <ul>
+            <li>"Game" only as a figure of speech (e.g., "a game changer")</li>
+            <li>No tie to hypertension</li>
+            <li>Teaches clinicians, not self-management</li>
+          </ul>
+          <p class="explain" style="margin-top:14px">Included: journal and conference papers, theses, preprints.</p>
+        </div>
+      </div>
+    </div>
+    <aside class="aside"><p>Backup. The selection criteria. To be included, a study had to meet all three: a playful or technological intervention; a focus on hypertension or blood pressure; and an Indigenous or disability population, or a method for building with one. Excluded: game only as a figure of speech, no tie to hypertension, or teaching clinicians rather than self-management. Journal and conference papers, theses, and preprints were all eligible.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">Backup · IRB Scope</div>
+      <div class="irbgrid a">
+        <div><h3>NAU IRB #2117583</h3><p>Urban Indigenous adults (Navajo people living in Flagstaff) and their supporters.</p></div>
+        <div><h3>Tribal consultation</h3><p>NAU Tribal Liaison, approved 4 Dec 2023. Condition: courtesy letter and report back to any named nation.</p></div>
+        <div><h3>Not the Navajo Nation HRRB</h3><p>No work on the reservation. In ARORA, the board said it had no jurisdiction off tribal lands.</p></div>
+        <div><h3>If the work moves onto the Nation</h3><p>Navajo Nation HRRB review first.</p></div>
+      </div>
+      <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Vigil-Hayes+2021+ARORA+Navajo+Hopi+youth+Flagstaff" target="_blank" rel="noopener">Vigil-Hayes et al., 2021</a></div>
+    </div>
+    <aside class="aside"><p>Backup. The IRB scope. NAU IRB number 2117583 covers urban Indigenous adults, Navajo people living in Flagstaff, and their supporters. The NAU Tribal Liaison approved it in December 2023, with the condition of a courtesy letter and a report back to any named nation. It is not under the Navajo Nation HRRB, because there is no work on the reservation; in ARORA, the board said it had no jurisdiction off tribal lands. If the work moves onto the Nation, it would go to the Navajo Nation HRRB first.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">Backup · From Themes to Research Questions</div>
+      <table class="ctab a">
+        <thead><tr><th>Theme</th><th>Requirement</th><th>Research question</th></tr></thead>
+        <tbody>
+          <tr class="a"><td>Five factors, Risk</td><td>Move players; calm for measurement</td><td class="found">PRQ4 · Play form</td></tr>
+          <tr class="a"><td>Cultural grounding, Sovereignty</td><td>Culturally grounded, community-led</td><td class="found">PRQ3 · Culture and sovereignty</td></tr>
+          <tr class="a"><td>Supported participation, Protocols, DREEM</td><td>Designed with players with disabilities</td><td class="found">PRQ2 · Supported participation</td></tr>
+          <tr class="a"><td>Access</td><td>Works where access is thin</td><td class="found">PRQ1 · Design (requirements)</td></tr>
+          <tr class="a"><td>Intersectionality (1 of 176)</td><td>One population, studied together</td><td class="found">PRQ1 · Design</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <aside class="aside"><p>Backup. How each theme maps to a research question. The five factors and risk give PRQ4, the play form. Cultural grounding and sovereignty give PRQ3. Supported participation, protocols, and DREEM give PRQ2. Access gives the requirements in PRQ1. And intersectionality, the one study of 176 that sits in both, gives PRQ1: one population, studied together.</p></aside>
   </section>
 
 </div>
