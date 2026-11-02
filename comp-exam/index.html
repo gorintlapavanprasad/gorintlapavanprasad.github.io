@@ -47,8 +47,8 @@
   .slide{position:absolute;inset:0;margin:auto;z-index:1;
     width:min(calc(100vw - 26px), calc((100vh - var(--foot) - 26px) * 16 / 9));
     height:min(calc(100vh - var(--foot) - 26px), calc((100vw - 26px) * 9 / 16));
-    display:flex;flex-direction:column;justify-content:center;overflow:hidden;
-    padding:clamp(22px,3vw,52px) clamp(30px,4.8vw,78px);
+    display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;
+    padding:clamp(26px,3.8vh,52px) clamp(30px,4.8vw,78px) clamp(22px,3vh,44px);
     opacity:0;visibility:hidden;transform:translate3d(5.5%,0,0) scale(.985);
     transition:opacity .5s ease, transform .64s cubic-bezier(.22,.61,.36,1), visibility 0s linear .64s;
     will-change:opacity,transform}
@@ -58,7 +58,12 @@
   .slide.leaving{opacity:0;visibility:visible;z-index:2;transform:translate3d(-6.5%,0,0) scale(.99);
     transition:opacity .44s ease, transform .56s cubic-bezier(.4,0,.6,1)}
   #deck[data-dir="back"] .slide.leaving{transform:translate3d(6.5%,0,0) scale(.99)}
-  .stage{width:100%;min-width:0}
+  .stage{width:100%;min-width:0;display:flex;flex-direction:column;min-height:100%}
+  /* references / captions pinned to the very bottom of the slide */
+  .stage>.cite,.stage>.footcite{margin-top:auto}
+  .slide.cover .stage>.cite{margin-top:0}
+  /* two-column (image+text) slides fill the height so their references reach the bottom */
+  .stage>.split,.stage>.who2{flex:1 1 auto;min-height:0}
 
   /* entrance: choreographed cascade, JS sets --i per element so content builds in sequence */
   .a{opacity:0;transform:translateY(16px)}
@@ -85,9 +90,9 @@
   .eyebrow::before{content:"";width:30px;height:2px;border-radius:2px;background:var(--act,var(--teal));flex:none;
     box-shadow:0 0 12px color-mix(in srgb,var(--act,var(--teal)) 75%,transparent)}
   h1{font-family:var(--font-display);font-weight:700;line-height:1.07;text-wrap:balance;margin:0;font-size:clamp(1.7rem,4.2vw,3.4rem);letter-spacing:.004em}
-  h2{font-family:var(--font-display);font-weight:700;line-height:1.1;text-wrap:balance;margin:0;font-size:clamp(1.45rem,3.3vw,2.55rem);letter-spacing:.004em;color:var(--yellow)}
+  h2{font-family:var(--font-display);font-weight:700;line-height:1.14;text-wrap:balance;margin:0;font-size:clamp(1.5rem,2.7vw,2.1rem);letter-spacing:.004em;color:var(--yellow)}
   .slide.cover h2,.cover h2{color:var(--ink)}
-  .explain{font-family:var(--font-body);font-size:clamp(1rem,1.5vw,1.3rem);line-height:1.5;color:var(--ink);margin-top:clamp(10px,1.4vw,18px);max-width:54ch}
+  .explain{font-family:var(--font-body);font-size:clamp(1.02rem,1.45vw,1.26rem);line-height:1.5;color:var(--ink);margin-top:clamp(16px,2.6vh,28px);max-width:58ch}
   .explain b{color:var(--hl2);font-weight:700}
   .explain .src{color:var(--muted);font-weight:400;font-size:.86em}
   .wright p b{color:var(--hl2);font-weight:700}
@@ -105,7 +110,7 @@
   .big.c{color:var(--coral);text-shadow:0 0 46px color-mix(in srgb,var(--coral) 45%,transparent)}
   .big-sub{font-family:var(--font-body);font-size:clamp(1rem,1.85vw,1.42rem);color:var(--ink);max-width:36ch;margin-top:14px;line-height:1.42}
 
-  .cite{font-family:var(--font-mono);font-size:clamp(.72rem,1vw,.86rem);color:var(--muted);margin-top:clamp(10px,1.5vw,18px);
+  .cite{font-family:var(--font-mono);font-size:clamp(.72rem,1vw,.86rem);color:var(--muted);margin-top:clamp(16px,2.6vh,28px);
     border-left:2px solid var(--act,var(--line));padding-left:12px;max-width:72ch;line-height:1.5;letter-spacing:.01em}
   .cite b{color:var(--ink);font-weight:600}
   a.lnk{color:var(--act,var(--teal));text-decoration:none;border-bottom:1px dotted currentColor;font-weight:600}
@@ -160,6 +165,9 @@
     font-family:var(--font-mono);font-size:clamp(.72rem,1vw,.88rem);color:var(--muted);letter-spacing:.02em;line-height:1.5}
   .footcite a{color:var(--muted);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--muted) 50%,transparent);text-underline-offset:3px;transition:color .2s ease}
   .footcite a:hover{color:var(--green);text-decoration-color:var(--green)}
+  /* inline citation markers [1] [2] at the point of the claim */
+  .rm{font-family:var(--font-mono);font-size:.62em;vertical-align:.4em;color:var(--statc);font-weight:700;margin-left:2px;white-space:nowrap}
+  .footcite .rn{font-weight:700;color:var(--statc);margin-right:3px}
   .thm-study{background:var(--card);border:1px solid color-mix(in srgb,var(--act,var(--green)) 50%,var(--cardbrd));border-left:4px solid var(--act,var(--green));
     border-radius:14px;padding:clamp(15px,1.8vw,22px);box-shadow:0 0 24px color-mix(in srgb,var(--act,var(--green)) 16%,transparent)}
   .thm-study .tag{font-family:var(--font-mono);font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;color:var(--act,var(--green));font-weight:600}
@@ -269,7 +277,8 @@
 
   /* title (cover) slide, title big, to the top; meta + logos below */
   .slide.cover::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:none}
-  .slide.cover .stage{position:relative;z-index:1;display:flex;flex-direction:column;height:100%}
+  .slide.cover{justify-content:center;padding-top:clamp(24px,3.5vh,52px)}
+  .slide.cover .stage{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;height:100%}
   .slide.cover h1{font-size:clamp(1.35rem,2.95vw,2.5rem);margin-top:clamp(8px,1.6vh,18px);max-width:none;line-height:1.14;text-shadow:0 2px 26px rgba(0,0,0,.7)}
   .slide.cover h1 br{display:block}
   .cover-tag{text-shadow:0 2px 20px rgba(0,0,0,.6)}
@@ -501,8 +510,8 @@
   .slabel.on{color:var(--green);font-weight:700}
   .cdots{display:flex;gap:clamp(2px,.36vw,4px);align-items:center;justify-content:center;flex-wrap:nowrap}
   .pdot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.17);flex:none;transition:background .3s ease,transform .3s ease}
-  .pdot.done{background:color-mix(in srgb,var(--green) 52%,transparent)}
-  .pdot.cur{background:var(--green);transform:scale(1.55);box-shadow:0 0 7px color-mix(in srgb,var(--green) 70%,transparent)}
+  .pdot.done{background:color-mix(in srgb,#8a74c4 55%,transparent)}
+  .pdot.cur{background:#8a74c4;transform:scale(1.55);box-shadow:0 0 7px color-mix(in srgb,#8a74c4 75%,transparent)}
   .pageno{color:var(--muted);font-size:.78rem;min-width:48px;text-align:right;flex:none;font-variant-numeric:tabular-nums;font-family:var(--font-display)}
   .foot-prog{display:none}
   @media (max-width:860px){.slabel{font-size:.64rem}.navrow{gap:16px}}
@@ -606,17 +615,17 @@
       <h2 class="a">For urban Navajo (Diné) adults, hypertension is under-diagnosed.</h2>
       <div class="who2 a" style="margin-top:clamp(14px,2.6vh,32px)">
         <div>
-          <div class="whd">Hypertension · self-reported</div>
+          <div class="whd">Hypertension · self-reported<span class="rm">[1]</span></div>
           <div class="wbars">
             <div class="hbar"><span class="hlb">All US adults</span><div class="htrack"><div class="hfill" style="width:58%;background:var(--greybar)"></div></div><span class="hval"><span data-count="28.7" data-dec="1">28.7</span>%</span></div>
             <div class="hbar"><span class="hlb">Navajo (Diné)</span><div class="htrack"><div class="hfill" style="width:57%;background:var(--statc)"></div></div><span class="hval"><span data-count="28" data-dec="0">28</span>%</span></div>
           </div>
         </div>
         <div class="wright">
-          <p>Self-report sits near the US average, but <b>measured</b> studies run higher: in a Navajo survey, <b>only 50 of 97</b> adults with high blood pressure had ever been told. Heart disease was the <b>4th leading cause of death</b> on the New Mexico Navajo Nation, 2021 to 2024. The people at the center of this work are <b>urban Diné adults in Flagstaff</b>.</p>
+          <p>Self-report sits near the US average, but <b>measured</b> studies run higher: in a Navajo survey, <b>only 50 of 97</b> adults with high blood pressure had ever been told<span class="rm">[2]</span>. Heart disease was the <b>4th leading cause of death</b> on the New Mexico Navajo Nation, 2021 to 2024<span class="rm">[3]</span>. The people at the center of this work are <b>urban Diné adults in Flagstaff</b>.</p>
         </div>
       </div>
-      <div class="footcite a"><a href="https://www.nec.navajo-nsn.gov/" target="_blank" rel="noopener">Navajo Epidemiology Center, BRFSS (self-reported)</a> · <a href="https://scholar.google.com/scholar?q=Percy+1997+Prevalence+of+hypertension+among+Navajo+Indians+Navajo+Health+and+Nutrition+Survey" target="_blank" rel="noopener">Percy et al. 1997</a> · <a href="https://scholar.google.com/scholar?q=Foley+2025+Navajo+Nation+heart+disease+leading+cause+of+death+New+Mexico" target="_blank" rel="noopener">Foley 2025</a></div>
+      <div class="footcite a"><span class="rn">[1]</span><a href="https://www.nec.navajo-nsn.gov/" target="_blank" rel="noopener">Navajo Epidemiology Center, BRFSS (self-reported)</a> &nbsp; <span class="rn">[2]</span><a href="https://scholar.google.com/scholar?q=Percy+1997+Prevalence+of+hypertension+among+Navajo+Indians+Navajo+Health+and+Nutrition+Survey" target="_blank" rel="noopener">Percy et al. 1997</a> &nbsp; <span class="rn">[3]</span><a href="https://scholar.google.com/scholar?q=Foley+2025+Navajo+Nation+heart+disease+leading+cause+of+death+New+Mexico" target="_blank" rel="noopener">Foley 2025</a></div>
     </div>
     <aside class="aside"><p>I narrow from Indigenous people in general to the community this work is with: urban Navajo, or Diné, adults in Flagstaff.</p><p>Self-reported hypertension, through the Navajo Epidemiology Center, is about 28 percent, near the US average. But measured studies run higher, and in Percy's Navajo survey only 50 of 97 adults with high blood pressure had ever been told, so much of it is under-diagnosed. Heart disease was the fourth leading cause of death on the New Mexico Navajo Nation from 2021 to 2024.</p></aside>
   </section>
@@ -1564,7 +1573,7 @@
     var availW=s.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
     var h=st.scrollHeight, w=st.scrollWidth;
     var sc=Math.min(1, availH/(h||1), availW/(w||1));
-    st.style.transformOrigin='center center';
+    st.style.transformOrigin='top center';
     st.style.transform = sc<0.998 ? 'scale('+(Math.floor(sc*1000)/1000)+')' : 'none';
   }
 
