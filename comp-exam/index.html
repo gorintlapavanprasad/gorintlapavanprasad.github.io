@@ -19,6 +19,7 @@
     /* VIRIDIS palette on the dark canvas: purple → blue → teal → green → yellow */
     --v-purple:#46337e; --v-blue:#3b528b; --v-teal:#21918c; --v-green:#5ec962; --v-yellow:#fde725;
     --yellow:#fde725; --green:#5ec962; --blue:#3b528b; --teal2:#21918c; --purple:#46337e; --greybar:#6f6a63;
+    --hl2:#addd8e;
     --teal:#5ec962; --cyan:#21918c; --gold:#fde725; --coral:#fde725;
     --now:#5ec962;
     --hl:#fde725;                  /* emphasis marker */
@@ -86,7 +87,8 @@
   h2{font-family:var(--font-display);font-weight:700;line-height:1.1;text-wrap:balance;margin:0;font-size:clamp(1.45rem,3.3vw,2.55rem);letter-spacing:.004em;color:var(--green)}
   .slide.cover h2,.cover h2{color:var(--ink)}
   .explain{font-family:var(--font-body);font-size:clamp(1rem,1.5vw,1.3rem);line-height:1.5;color:var(--muted);margin-top:clamp(10px,1.4vw,18px);max-width:54ch}
-  .explain b{color:var(--ink);font-weight:700}
+  .explain b{color:var(--hl2);font-weight:700}
+  .wright p b{color:var(--hl2);font-weight:700}
   .k{color:var(--act,var(--teal))}
 
   /* emphasis marker (draws under key phrases) */
@@ -152,6 +154,10 @@
   .footline .who{font-style:normal;font-family:var(--font-mono);font-size:.6em;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-left:12px;white-space:nowrap}
   .footline a.who{text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--muted) 55%,transparent);text-underline-offset:3px;transition:color .2s ease}
   .footline a.who:hover{color:var(--green);text-decoration-color:var(--green)}
+  .footcite{margin-top:clamp(16px,2.6vh,30px);padding-top:clamp(10px,1.6vh,18px);border-top:1px solid var(--cardbrd);
+    font-family:var(--font-mono);font-size:clamp(.72rem,1vw,.88rem);color:var(--muted);letter-spacing:.02em;line-height:1.5}
+  .footcite a{color:var(--muted);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--muted) 50%,transparent);text-underline-offset:3px;transition:color .2s ease}
+  .footcite a:hover{color:var(--green);text-decoration-color:var(--green)}
   .thm-study{background:var(--card);border:1px solid color-mix(in srgb,var(--act,var(--green)) 50%,var(--cardbrd));border-left:4px solid var(--act,var(--green));
     border-radius:14px;padding:clamp(15px,1.8vw,22px);box-shadow:0 0 24px color-mix(in srgb,var(--act,var(--green)) 16%,transparent)}
   .thm-study .tag{font-family:var(--font-mono);font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;color:var(--act,var(--green));font-weight:600}
@@ -224,18 +230,21 @@
   .points li .s a.lnk{color:var(--muted)}
 
   /* hierarchy / driver diagram */
-  .tree{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,28px);margin-top:clamp(12px,1.6vw,20px)}
-  @media (max-width:820px){.tree{grid-template-columns:1fr}}
+  .tree{display:flex;flex-direction:column;gap:clamp(10px,1.8vh,20px);margin-top:clamp(10px,1.6vw,18px)}
+  .troot{align-self:center;font-family:var(--font-display);font-weight:700;color:var(--green);font-size:clamp(1.1rem,1.9vw,1.55rem);
+    padding:5px 22px;border:1.5px solid color-mix(in srgb,var(--green) 55%,transparent);border-radius:999px;background:color-mix(in srgb,var(--green) 10%,transparent)}
+  .tcols{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(12px,2vw,30px)}
+  @media (max-width:820px){.tcols{grid-template-columns:1fr}}
   .branch{background:var(--card);border:1px solid var(--cardbrd);border-radius:14px;padding:clamp(12px,1.5vw,18px);transition:all .4s ease;box-shadow:0 10px 30px rgba(0,0,0,.26)}
   .branch.dim{opacity:.32;filter:saturate(.35)}
   .branch.on{border-color:var(--act);box-shadow:0 0 0 1.5px var(--act), 0 16px 44px rgba(0,0,0,.4)}
-  .branch>.bh{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:10px}
+  .branch>.bh{font-family:var(--font-display);font-size:clamp(1rem,1.5vw,1.3rem);letter-spacing:0;text-transform:none;color:var(--green);font-weight:700;margin-bottom:10px}
   .node{font-family:var(--font-display);font-size:clamp(.98rem,1.4vw,1.16rem);color:var(--ink);font-weight:700;margin:0 0 4px}
   .leaf{display:flex;flex-wrap:wrap;gap:6px;margin:5px 0 12px}
   .leaf span{font-family:var(--font-mono);font-size:clamp(.72rem,1.05vw,.84rem);color:var(--muted);background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:8px;padding:.3em .6em}
   .leaf span b{color:var(--ink);font-weight:700}
   .leaf span.hot{border-color:var(--act);color:var(--ink);background:color-mix(in srgb,var(--act) 16%,transparent)}
-  .subl{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:9px 0 4px;font-weight:600}
+  .subl{font-family:var(--font-display);font-size:clamp(.95rem,1.3vw,1.14rem);letter-spacing:0;text-transform:none;color:var(--ink);margin:10px 0 5px;font-weight:700}
   .leaf span.c-htn{border-color:#5ec962;color:#cfeecd;background:color-mix(in srgb,#5ec962 12%,transparent)}
   .leaf span.c-dis{border-color:#21918c;color:#bfe7e3;background:color-mix(in srgb,#21918c 14%,transparent)}
   .leaf span.c-ind{border-color:#3b6fd0;color:#c3d4f2;background:color-mix(in srgb,#3b6fd0 14%,transparent)}
@@ -562,7 +571,7 @@
   <section class="slide" data-sec="0">
     <div class="stage">
       <h2 class="a">For urban Navajo (Diné) adults, it is under-recognized.</h2>
-      <div class="who2" style="grid-template-columns:1fr;max-width:none;margin-top:clamp(14px,2.6vh,32px)">
+      <div class="who2 a" style="margin-top:clamp(14px,2.6vh,32px)">
         <div>
           <div class="whd">Hypertension · self-reported</div>
           <div class="wbars">
@@ -570,9 +579,11 @@
             <div class="hbar"><span class="hlb">Navajo (Diné)</span><div class="htrack"><div class="hfill" style="width:57%;background:var(--yellow)"></div></div><span class="hval"><span data-count="28" data-dec="0">28</span>%</span></div>
           </div>
         </div>
+        <div class="wright">
+          <p>Self-report sits near the US average, but <b>measured</b> studies run higher: in a Navajo survey, <b>only 50 of 97</b> adults with high blood pressure had ever been told. Heart disease was the <b>4th leading cause of death</b> on the New Mexico Navajo Nation, 2021 to 2024. The people at the center of this work are <b>urban Diné adults in Flagstaff</b>.</p>
+        </div>
       </div>
-      <p class="explain a" style="max-width:78ch;margin-top:clamp(12px,2vh,22px)">Self-report sits near the US average, but <b>measured</b> studies run higher: in a Navajo survey, <b>only 50 of 97</b> adults with high blood pressure had ever been told. Heart disease was the <b>4th leading cause of death</b> on the New Mexico Navajo Nation, 2021 to 2024. The people at the center of this work are <b>urban Diné adults in Flagstaff</b>.</p>
-      <div class="cite a">Navajo Epidemiology Center, BRFSS (self-reported) · Percy et al. 1997 · Foley 2025</div>
+      <div class="footcite a"><a href="https://www.nec.navajo-nsn.gov/" target="_blank" rel="noopener">Navajo Epidemiology Center, BRFSS (self-reported)</a> · <a href="https://scholar.google.com/scholar?q=Percy+1997+Prevalence+of+hypertension+among+Navajo+Indians+Navajo+Health+and+Nutrition+Survey" target="_blank" rel="noopener">Percy et al. 1997</a> · <a href="https://scholar.google.com/scholar?q=Foley+2025+Navajo+Nation+heart+disease+leading+cause+of+death+New+Mexico" target="_blank" rel="noopener">Foley 2025</a></div>
     </div>
     <aside class="aside"><p>I narrow from Indigenous people in general to the community this work is with: urban Navajo, or Diné, adults in Flagstaff.</p><p>Self-reported hypertension, through the Navajo Epidemiology Center, is about 28 percent, near the US average. But measured studies run higher, and in Percy's Navajo survey only 50 of 97 adults with high blood pressure had ever been told, so it is under-recognized. Heart disease was the fourth leading cause of death on the New Mexico Navajo Nation from 2021 to 2024.</p></aside>
   </section>
@@ -580,7 +591,7 @@
   <section class="slide" data-sec="0">
     <div class="stage">
       <h2 class="a">People with disabilities carry more hypertension, too.</h2>
-      <div class="who2" style="grid-template-columns:1fr;max-width:none;margin-top:clamp(14px,2.6vh,32px)">
+      <div class="who2 a" style="margin-top:clamp(14px,2.6vh,32px)">
         <div>
           <div class="whd">Hypertension prevalence · roughly double the general rate</div>
           <div class="wbars">
@@ -589,9 +600,11 @@
             <div class="hbar"><span class="hlb">Deaf adults</span><div class="htrack"><div class="hfill" style="width:100%;background:var(--yellow)"></div></div><span class="hval"><span data-count="63.9" data-dec="1">63.9</span>%</span></div>
           </div>
         </div>
+        <div class="wright">
+          <p>And management is harder: inaccessible materials, proxy-dependent care, and few tools built for disabled players. This review treats <b>people with disabilities</b> broadly, as its own dimension.</p>
+        </div>
       </div>
-      <p class="explain a" style="max-width:78ch;margin-top:clamp(12px,2vh,22px)">And management is harder: inaccessible materials, proxy-dependent care, and few tools built for disabled players. This review treats <b>people with disabilities</b> broadly, as its own dimension.</p>
-      <div class="cite a">Wu et al. 2021 · Nam &amp; Yoon 2022 · Choi et al. 2025</div>
+      <div class="footcite a"><a href="https://scholar.google.com/scholar?q=Wu+2021+hypertension+prevalence+adults+with+disabilities" target="_blank" rel="noopener">Wu et al. 2021</a> · <a href="https://scholar.google.com/scholar?q=Nam+Yoon+2022+hypertension+physical+disability+Korea" target="_blank" rel="noopener">Nam &amp; Yoon 2022</a> · <a href="https://scholar.google.com/scholar?q=Choi+2025+Deaf+adults+hypertension+prevalence" target="_blank" rel="noopener">Choi et al. 2025</a></div>
     </div>
     <aside class="aside"><p>The other dimension is disability, and I treat people with disabilities broadly, not as a subgroup of any one community.</p><p>Hypertension runs roughly double the general rate: 42.5 percent of US adults with a disability, 56.4 percent of adults with a physical disability in one Korean study, and 63.9 percent of Deaf adults. And it is harder to manage, because materials are often inaccessible, care can depend on a proxy, and almost no tools are built for disabled players.</p></aside>
   </section>
@@ -658,27 +671,27 @@
   <section class="slide" data-sec="1">
     <div class="stage">
       <div class="eyebrow a">A Hierarchical Thematic Analysis</div>
-      <h2 class="a">67 studies, coded and arranged into a hierarchy.</h2>
+      <h2 class="a">Every study coded, then arranged into a hierarchy.</h2>
       <div class="tree-mount" data-hl="none"></div>
       <p class="cap a">This hierarchy is the structure of the rest of the talk. For each part: what the literature says, the design implications, and a great example of prior work.</p>
     </div>
-    <aside class="aside"><p>To organize the 67 studies, I did a hierarchical thematic analysis. I coded every paper for its themes, population, self-management factors, form of play, and design approach, and arranged the themes into this hierarchy. The numbers are papers.</p><p>On the left is domain knowledge: hypertension, with its five factors and risk; and intersectionality, with a disability branch and an Indigenous branch. Only one study sits in both. On the right is theory: serious games and play; participatory, community-based research; and wicked problems with research through design.</p><p>This hierarchy is the structure of the rest of this talk. For each part, I show what the literature says, the design implications, and a great example of prior work.</p></aside>
+    <aside class="aside"><p>To organize the studies, I did a hierarchical thematic analysis. I coded every paper for its themes, population, self-management factors, form of play, and design approach, and arranged the themes into this hierarchy. The numbers in parentheses are papers.</p><p>On the left is domain knowledge: hypertension, with its five factors and risk; and intersectionality, with a disability branch and an Indigenous branch. Only one study sits in both. On the right is theory: serious games and play; participatory, community-based research; and wicked problems with research through design.</p><p>This hierarchy is the structure of the rest of this talk. For each part, I show what the literature says, the design implications, and a great example of prior work.</p></aside>
   </section>
 
   <section class="slide" data-sec="2" style="--act:var(--green)" data-ch="Background">
     <div class="stage">
       <h2 class="a">Hypertension is managed through five daily behaviors.</h2>
       <div class="flowerrow a">
-        <svg class="flower" viewBox="0 0 620 460" role="img" aria-label="Five self-management factors around everyday blood-pressure care: diet, exercise, medication, blood-pressure monitoring, education">
+        <svg class="flower" viewBox="0 0 620 460" role="img" aria-label="Five self-management factors around everyday blood-pressure care: diet, exercise, medication, measurements, education">
           <circle cx="310" cy="235" r="76" fill="#1c2a24" stroke="#5ec962" stroke-width="2.5"/>
           <text class="flr-lbl" x="310" y="229" font-size="19" fill="#f3f1ea"><tspan x="310">Everyday</tspan><tspan x="310" dy="23">BP care</tspan></text>
           <g data-step><circle class="flr-fill" cx="310" cy="85" r="63" fill="#fde725"/><circle class="flr-draw" cx="310" cy="85" r="63" stroke="#fde725" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="310" y="93" font-size="23" fill="#0c0a06">Diet</text></g>
           <g data-step><circle class="flr-fill" cx="453" cy="189" r="63" fill="#5ec962"/><circle class="flr-draw" cx="453" cy="189" r="63" stroke="#5ec962" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="453" y="197" font-size="20" fill="#0c0a06">Exercise</text></g>
           <g data-step><circle class="flr-fill" cx="398" cy="356" r="63" fill="#21918c"/><circle class="flr-draw" cx="398" cy="356" r="63" stroke="#21918c" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="398" y="363" font-size="17" fill="#f3f1ea">Medication</text></g>
-          <g data-step><circle class="flr-fill" cx="222" cy="356" r="63" fill="#3b528b"/><circle class="flr-draw" cx="222" cy="356" r="63" stroke="#3b528b" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="222" y="350" font-size="16" fill="#f3f1ea"><tspan x="222">BP</tspan><tspan x="222" dy="20">Monitoring</tspan></text></g>
+          <g data-step><circle class="flr-fill" cx="222" cy="356" r="63" fill="#3b528b"/><circle class="flr-draw" cx="222" cy="356" r="63" stroke="#3b528b" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="222" y="362" font-size="15" fill="#f3f1ea">Measurements</text></g>
           <g data-step><circle class="flr-fill" cx="167" cy="189" r="63" fill="#46337e"/><circle class="flr-draw" cx="167" cy="189" r="63" stroke="#46337e" stroke-width="3.5"/><text class="flr-txt flr-lbl" x="167" y="197" font-size="18" fill="#f3f1ea">Education</text></g>
         </svg>
-        <figure class="flower-side">
+        <figure class="flower-side" data-step>
           <img src="graham.png" alt="Graham et al. 2025 co-design workshop: participants and five game-prototype sketches, one for each hypertension factor">
           <figcaption>Graham et al. 2025 co-designed five game prototypes with Indigenous participants, one per factor.</figcaption>
         </figure>
@@ -686,7 +699,7 @@
       <p class="cap a">The review charts the literature by these five factors.</p>
       <div class="cite a"><a class="lnk" href="https://scholar.google.com/scholar?q=Carey+2022+hypertension+management+AHA" target="_blank" rel="noopener">Carey et al. 2022</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=ACC+AHA+2025+hypertension+guideline" target="_blank" rel="noopener">ACC/AHA 2025</a></div>
     </div>
-    <aside class="aside"><p>Hypertension is managed through five daily behaviors. (click) Diet. (click) Exercise. (click) Medication. (click) Blood-pressure monitoring. (click) Education. Lifestyle change is first-line care, and even a 10 mmHg drop in systolic pressure lowers cardiovascular risk. The review charts the literature by these five factors.</p></aside>
+    <aside class="aside"><p>Hypertension is managed through five daily behaviors. (click) Diet. (click) Exercise. (click) Medication. (click) Measurements. (click) Education. Lifestyle change is first-line care, and even a 10 mmHg drop in systolic pressure lowers cardiovascular risk. The review charts the literature by these five factors.</p><p>(click) And one study from our own lab worked in exactly these terms: Graham and colleagues, in 2025, co-designed five game prototypes with Indigenous participants, one for each factor.</p></aside>
   </section>
 
   <section class="slide" data-sec="2" style="--act:var(--green)">
@@ -1006,7 +1019,7 @@
     <div class="stage">
       <div class="eyebrow a">Preliminary Research Questions</div>
       <h2 class="a">Four questions, from the guiding questions and requirements.</h2>
-      <div class="grid2" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))">
+      <div class="grid2" style="grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.4vw,18px);align-items:stretch">
         <div class="panel" data-step style="--act:var(--teal)"><div class="num">PRQ1</div><p><b>Design.</b> How do urban Diné adults with disabilities and their supporters co-design playful tools for daily blood-pressure care?</p></div>
         <div class="panel" data-step style="--act:var(--green)"><div class="num">PRQ2</div><p><b>Support.</b> How can caregiver help be designed in, while keeping the player's own voice?</p></div>
         <div class="panel" data-step style="--act:var(--cyan)"><div class="num">PRQ3</div><p><b>Culture.</b> How can cultural grounding and community data control be built in, and judged by the community?</p></div>
@@ -1068,7 +1081,7 @@
           </g>
           <g data-step>
             <line x1="410" y1="240" x2="286" y2="410" stroke="#3b528b" stroke-width="2" opacity=".45"/>
-            <circle cx="342" cy="333" r="40" fill="#3b528b"/><text x="342" y="338" text-anchor="middle" font-size="11" font-weight="700" fill="#f3f1ea" font-family="Cambria">Monitoring</text>
+            <circle cx="342" cy="333" r="40" fill="#3b528b"/><text x="342" y="337" text-anchor="middle" font-size="9.5" font-weight="700" fill="#f3f1ea" font-family="Cambria">Measurements</text>
             <rect x="224" y="393" width="124" height="34" rx="17" fill="#120f0a" stroke="#3b528b" stroke-width="1.6"/><text x="286" y="415" text-anchor="middle" font-size="11.5" font-weight="700" fill="#8fa9e0" font-family="Cambria">Vascular Village</text>
           </g>
           <g data-step>
@@ -1117,7 +1130,7 @@
         <div class="thm-study a">
           <span class="tag">Next</span>
           <h3>Develop a game for each factor, with the community</h3>
-          <p>Turn those ideas into playable games across <b>diet, exercise, medication, monitoring, and education</b>, add accessibility work with players with disabilities and a community data-sovereignty plan, then evaluate in a <b>user study</b>.</p>
+          <p>Turn those ideas into playable games across <b>diet, exercise, medication, measurements, and education</b>, add accessibility work with players with disabilities and a community data-sovereignty plan, then evaluate in a <b>user study</b>.</p>
         </div>
       </div>
       <div class="thm-impl a"><span class="arr">&rarr;</span><div>Built <b>with</b> urban Diné adults with disabilities and their supporters.</div></div>
@@ -1315,24 +1328,24 @@
     function chip(txt,cls){ return '<span class="'+(cls||'')+'">'+txt+'</span>'; }
     return ''+
     '<div class="tree">'+
-      '<div class="branch">'+
-        '<div class="bh">Domain knowledge &middot; what the condition and communities need</div>'+
-        '<p class="node">Hypertension</p>'+
-        '<div class="leaf">'+chip('Five factors','c-htn')+chip('Risk','c-htn')+'</div>'+
-        '<p class="node">Intersectionality</p>'+
-        '<div class="subl">Disability</div>'+
-        '<div class="leaf">'+chip('Proxy care','c-dis')+chip('Accessible protocols','c-dis')+chip('Technosolutionism','c-dis')+chip('DREEM','c-dis')+'</div>'+
-        '<div class="subl">Indigenous</div>'+
-        '<div class="leaf">'+chip('Sovereignty','c-ind')+chip('Cultural grounding','c-ind')+'</div>'+
-      '</div>'+
-      '<div class="branch">'+
-        '<div class="bh">Theory &amp; method &middot; how play and design work</div>'+
-        '<p class="node">Serious games &amp; play</p>'+
-        '<div class="leaf">'+chip('Closed games vs open, situated play','c-th')+'</div>'+
-        '<p class="node">Participatory, community-based research</p>'+
-        '<div class="leaf">'+chip('Designing with the community','c-th')+'</div>'+
-        '<p class="node">Wicked problems &amp; research through design</p>'+
-        '<div class="leaf">'+chip('Learn by building','c-th')+'</div>'+
+      '<div class="troot">176 studies</div>'+
+      '<div class="tcols">'+
+        '<div class="branch">'+
+          '<div class="bh">Domain knowledge</div>'+
+          '<p class="node">Hypertension</p>'+
+          '<div class="leaf">'+chip('Five factors (61)','c-htn')+chip('Risk (50)','c-htn')+'</div>'+
+          '<p class="node">Intersectionality</p>'+
+          '<div class="subl">Disability (47)</div>'+
+          '<div class="leaf">'+chip('Proxy care (7)','c-dis')+chip('Accessible protocols (25)','c-dis')+chip('Technosolutionism (4)','c-dis')+chip('DREEM','c-dis')+'</div>'+
+          '<div class="subl">Indigenous (33)</div>'+
+          '<div class="leaf">'+chip('Sovereignty (7)','c-ind')+chip('Cultural (21)','c-ind')+'</div>'+
+        '</div>'+
+        '<div class="branch">'+
+          '<div class="bh">Theory</div>'+
+          '<p class="node">Serious games and play (70)</p>'+
+          '<p class="node">Participatory research (15)</p>'+
+          '<p class="node">Wicked problems and RtD</p>'+
+        '</div>'+
       '</div>'+
     '</div>';
   }
