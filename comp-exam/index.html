@@ -487,10 +487,10 @@
   .pdot.done{background:color-mix(in srgb,var(--green) 52%,transparent)}
   .pdot.cur{background:var(--green);transform:scale(1.55);box-shadow:0 0 7px color-mix(in srgb,var(--green) 70%,transparent)}
   .pageno{color:var(--muted);font-size:.78rem;min-width:48px;text-align:right;flex:none;font-variant-numeric:tabular-nums;font-family:var(--font-display)}
-  .foot-prog{position:absolute;left:0;top:0;height:3px;width:0;background:var(--green);transition:width .5s ease;box-shadow:0 0 8px color-mix(in srgb,var(--green) 60%,transparent)}
+  .foot-prog{display:none}
   @media (max-width:860px){.slabel{font-size:.64rem}.navrow{gap:16px}}
   @media (max-width:620px){.slabel:not(.on){display:none}.foot .nau{display:none}}
-  .bar-prog{position:fixed;left:0;top:0;height:3px;background:var(--green);z-index:11;transition:width .5s ease}
+  .bar-prog{display:none}
 
   .zone{position:fixed;top:0;bottom:var(--foot);width:20%;z-index:5;cursor:pointer}
   .zone.l{left:0}.zone.r{right:0}
@@ -1089,7 +1089,8 @@
     <div class="stage">
       <div class="eyebrow a">CardioCare Quest Today</div>
       <h2 class="a">A game for each factor, moving for exercise, still for measuring.</h2>
-      <div class="fig a" style="margin-top:clamp(4px,1.2vh,14px)">
+      <div class="split a" style="align-items:center;margin-top:clamp(4px,1.2vh,14px)">
+        <div class="fig" style="margin:0">
         <svg class="radial" viewBox="0 0 820 460" role="img" aria-label="CardioCare Quest at the center, five factors around it, each connected to its game">
           <!-- spokes: factor -> game, one per click -->
           <g data-step>
@@ -1121,8 +1122,10 @@
           <circle cx="410" cy="240" r="60" fill="#241a0e" stroke="#fde725" stroke-width="2.5"/>
           <text x="410" y="235" text-anchor="middle" font-size="15" font-weight="700" fill="#fde725" font-family="Cambria"><tspan x="410">CardioCare</tspan><tspan x="410" dy="19">Quest</tspan></text>
         </svg>
+        </div>
+        <div class="figcard dark a"><img src="ccq_dogwalk.png" alt="Dog Walking game in CardioCare Quest: a GPS-tracked walking route on a phone screen"><div class="src">Dog Walking · the exercise game, a GPS-tracked walk</div></div>
       </div>
-      <p class="explain a" style="max-width:82ch;text-align:center;margin-left:auto;margin-right:auto;margin-top:clamp(8px,1.2vh,14px)">One game per factor, built in <b>Flutter + Firebase</b> with story games in <b>Twine</b>, works <b>offline</b>. <b>Not yet deployed</b>; next is accessibility work with players with disabilities and a community data plan.</p>
+      <p class="explain a" style="max-width:none;text-align:center;margin-left:auto;margin-right:auto;margin-top:clamp(8px,1.2vh,14px)">One game per factor, built in <b>Flutter + Firebase</b> with story games in <b>Twine</b>, works <b>offline</b>. <b>Not yet deployed</b>; next is accessibility work with players with disabilities and a community data plan.</p>
     </div>
     <aside class="aside"><p>What is CardioCare Quest today? A game for each factor: Dog Walking for exercise, DASH Diet for diet, Heart Smarts for education, Bingo Bash for medication, where a dose can be marked caregiver-assisted, and Vascular Village for measuring, which uses slow breathing before a calm, seated reading. That covers both sides: moving for exercise, still for measuring.</p><p>On the left is the in-app catalog, one game per factor; on the right is the Dog Walking exercise game, a GPS-tracked walk. It is built in Flutter and Firebase, with story games in Twine, and it works offline. It is not deployed yet; the next steps are accessibility work with players with disabilities, and a data plan with the community.</p></aside>
   </section>
@@ -1181,11 +1184,11 @@
   <section class="slide" data-sec="5" style="--act:var(--coral)" data-grp="Conclusion" data-ch="Conclusion">
     <div class="stage">
       <div class="eyebrow a">Conclusion</div>
-      <h2 class="a">A mapped field, one empty intersection, and a way forward.</h2>
+      <h2 class="a">One field, one empty intersection, one way forward.</h2>
       <ul class="points">
-        <li data-step>Across <b>67 studies</b>, playful technology for hypertension rarely reaches Indigenous communities and people with disabilities, and <b>no study</b> brings a game to both.</li>
-        <li data-step>The review turns that pattern into <b>design requirements traced to the evidence</b>: move for exercise, calm for measuring, culturally grounded, community-owned, open and situated play, designed with disabled players.</li>
-        <li data-step>CardioCare Quest and the Hozhoni studies are a first step; the work ahead is to design playful blood-pressure care <b>with</b> urban Diné adults with disabilities.</li>
+        <li data-step>Playful technology for hypertension rarely reaches Indigenous communities or people with disabilities — and <b>no study reaches both</b>.</li>
+        <li data-step>The review turns that gap into <b>design requirements traced to the evidence</b>.</li>
+        <li data-step>The way forward: design playful blood-pressure care <b>with</b> urban Diné adults with disabilities.</li>
       </ul>
     </div>
     <aside class="aside"><p>To conclude. Across 67 studies, playful technology for hypertension rarely reaches Indigenous communities or people with disabilities, and no study brings a game to both. The review turns that into design requirements traced to the evidence. And CardioCare Quest, with the Hozhoni studies, is a first step in that direction, designed with urban Diné adults with disabilities.</p></aside>
@@ -1310,15 +1313,15 @@
   <section class="slide" data-sec="5" style="--act:var(--coral)">
     <div class="stage">
       <div class="eyebrow a">Backup · Preliminary Studies</div>
-      <h2 class="a">Three studies at the Hozhoni Gameorama.</h2>
-      <div class="grid2" style="grid-template-columns:repeat(3,1fr)">
-        <div class="panel"><div class="num">1</div><h3>Cultural probe</h3><p>31 Navajo adults, 7 days, in English and Diné bizaad, with Native Americans for Community Action.</p></div>
-        <div class="panel"><div class="num">2</div><h3>Co-design workshop</h3><p>36 adults with disabilities and caregivers produced <b>23 game concepts</b>.</p></div>
-        <div class="panel"><div class="num">3</div><h3>Play session</h3><p>Community members played <b>CardioCare Quest</b>, with and without caregiver support.</p></div>
+      <h2 class="a">Two studies at the Hozhoni Gameorama.</h2>
+      <div class="grid2" style="grid-template-columns:repeat(2,1fr)">
+        <div class="panel"><div class="num">1</div><h3>Co-design workshop</h3><p>36 adults with disabilities and caregivers produced <b>23 game concepts</b>.</p></div>
+        <div class="panel"><div class="num">2</div><h3>Play session</h3><p>Community members played <b>CardioCare Quest</b>, with and without caregiver support.</p></div>
       </div>
+      <p class="cap a">A separate <b style="color:var(--ink)">7-day cultural probe</b> with 31 Navajo adults (English and Diné bizaad, with Native Americans for Community Action) came earlier, not at the Gameorama.</p>
       <div class="cite a">IRB 1957455 · deployed 12 May 2026, Hozhoni Foundation · Gorintla et al., under review.</div>
     </div>
-    <aside class="aside"><p>Backup. The three preliminary studies at the Hozhoni Gameorama: a seven-day cultural probe with 31 Navajo adults, a co-design workshop where 36 adults with disabilities and caregivers produced 23 game concepts, and a play session of CardioCare Quest with and without support.</p></aside>
+    <aside class="aside"><p>Backup. Two studies ran at the Hozhoni Gameorama: a co-design workshop where 36 adults with disabilities and caregivers produced 23 game concepts, and a play session of CardioCare Quest with and without support. The seven-day cultural probe with 31 Navajo adults was a separate, earlier study, not at the Gameorama.</p></aside>
   </section>
 
   <section class="slide" data-sec="5" style="--act:var(--coral)">
