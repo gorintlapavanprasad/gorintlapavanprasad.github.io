@@ -257,12 +257,16 @@
   .cover-sub{font-family:var(--font-body);margin-top:clamp(16px,2.5vw,30px);font-size:clamp(.95rem,1.6vw,1.22rem);color:var(--muted);line-height:1.52}
   .cover-sub b{display:block;color:var(--ink);font-family:var(--font-display);font-size:1.3em;font-weight:700;margin-bottom:6px}
   .cover-sub .who{color:var(--ink)}
-  .committee{font-family:var(--font-mono);font-size:clamp(.72rem,1vw,.84rem);color:var(--faint);margin-top:16px;letter-spacing:.02em}
+  .committee{font-family:var(--font-body);font-size:clamp(.92rem,1.38vw,1.16rem);color:var(--muted);margin-top:16px;letter-spacing:0;line-height:1.45}
+  .committee .clab{font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.12em;font-size:.76em;color:var(--faint)}
+  .committee b{color:var(--ink);font-weight:700}
+  .committee .chair{color:var(--yellow);font-weight:700}
 
   /* title (cover) slide, title big, to the top; meta + logos below */
   .slide.cover::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:none}
   .slide.cover .stage{position:relative;z-index:1;display:flex;flex-direction:column;height:100%}
-  .slide.cover h1{font-size:clamp(1.85rem,4.4vw,3.55rem);margin-top:clamp(8px,1.6vh,18px);max-width:21ch;text-shadow:0 2px 26px rgba(0,0,0,.7)}
+  .slide.cover h1{font-size:clamp(1.35rem,2.95vw,2.5rem);margin-top:clamp(8px,1.6vh,18px);max-width:none;line-height:1.14;text-shadow:0 2px 26px rgba(0,0,0,.7)}
+  .slide.cover h1 br{display:block}
   .cover-tag{color:var(--yellow);text-shadow:0 2px 20px rgba(0,0,0,.6)}
   .cover-tag{font-family:var(--font-display);font-style:italic;font-weight:600;font-size:clamp(1.15rem,2.4vw,1.95rem);color:var(--ink);margin:clamp(16px,2.6vh,30px) 0 0;line-height:1.25}
   .cover-tag .ig{color:var(--green);font-style:normal}
@@ -547,12 +551,12 @@
   <!-- ==================== PROBLEM ==================== -->
   <section class="slide cover" data-sec="0" data-cover data-ch="Problem">
     <div class="stage">
-      <h1 class="a">Playful Health Technology for Hypertension Management at the Intersection of Indigeneity and Disability</h1>
+      <h1 class="a">Playful Health Technology for Hypertension Management<br>at the Intersection of Indigeneity and Disability</h1>
       <p class="cover-tag a">A Scoping Review</p>
       <div class="cover-meta a">
         <div class="who">Pavan Prasad Gorintla</div>
         <div class="aff">Comprehensive Exam, Playful Health Technology Lab, Northern Arizona University</div>
-        <div class="committee">Committee: Dr. Jared Duval (Chair), Dr. Ashish Amresh, Dr. Igor Steinmacher, Dr. Laia Turmo Vidal</div>
+        <div class="committee"><span class="clab">Committee</span> &nbsp; <span class="chair">Dr. Jared Duval</span> (Chair) &nbsp;·&nbsp; <b>Dr. Ashish Amresh</b> &nbsp;·&nbsp; <b>Dr. Igor Steinmacher</b> &nbsp;·&nbsp; <b>Dr. Laia Turmo Vidal</b></div>
       </div>
       <div class="cover-logos a"><img src="pht.png" alt="Playful Health Technology Lab"><img src="nau.jpg" alt="Northern Arizona University"></div>
     </div>
