@@ -263,6 +263,12 @@
   .vleaf.dis span{color:#6fd3cc}
   .vleaf.ind span{color:#9fb4e6}
   .vleaf.th span{color:#9fd8cf}
+  /* branch highlighting: dim everything except the active branch (used on the section map slides) */
+  .otree li{transition:opacity .5s ease}
+  .tree.hl-htn .b-int,.tree.hl-htn .b-th,
+  .tree.hl-dis .b-htn,.tree.hl-dis .b-ind,.tree.hl-dis .b-th,
+  .tree.hl-ind .b-htn,.tree.hl-ind .b-dis,.tree.hl-ind .b-th,
+  .tree.hl-th  .b-dom{opacity:.16}
   .herelbl{display:inline-block;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--act);border:1px dashed var(--act);border-radius:7px;padding:.22em .55em;margin-bottom:9px}
 
   .placeholder{border:1px dashed var(--coral);border-radius:12px;padding:12px 15px;font-family:var(--font-mono);font-size:clamp(.76rem,1.15vw,.9rem);color:var(--muted);background:var(--card);margin-top:clamp(10px,1.6vw,18px)}
@@ -737,6 +743,16 @@
 
   <section class="slide" data-sec="2" style="--act:var(--green)" data-ch="Background">
     <div class="stage">
+      <div class="eyebrow a">Hypertension</div>
+      <h2 class="a">Where we are: the hypertension branch.</h2>
+      <div class="tree-mount" data-hl="htn" style="margin-top:clamp(12px,2.6vh,32px)"></div>
+    </div>
+    <aside class="aside"><p>A quick map before I go on. We are in the hypertension branch: the five factors, and risk. The rest is dimmed, so you can see where we are.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="2" style="--act:var(--green)">
+    <div class="stage">
+      <div class="eyebrow a">Hypertension &middot; Five factors</div>
       <h2 class="a">Hypertension is managed through five daily behaviors.</h2>
       <div class="flowerrow a">
         <svg class="flower" viewBox="0 0 620 460" role="img" aria-label="Five self-management factors around everyday blood-pressure care: diet, exercise, medication, measurements, education">
@@ -779,6 +795,7 @@
 
   <section class="slide" data-sec="2" style="--act:var(--green)" data-grp="Intersectionality">
     <div class="stage">
+      <div class="eyebrow a">Intersectionality &middot; The gap</div>
       <h2 class="a">The literature narrows to an empty center.</h2>
       <div class="gaplist">
         <div class="gaprow" data-step><div class="gapcount">22</div><div class="gapbar" style="width:44%;background:#21918c"></div><div class="gaplabel">serious games &amp; playful tech <b>for hypertension</b></div></div>
@@ -789,6 +806,15 @@
       <div class="cite a" style="text-align:center;border-left:none;padding-left:0;margin-left:auto;margin-right:auto"><a class="lnk" href="https://scholar.google.com/scholar?q=Crenshaw+1991+mapping+the+margins+intersectionality" target="_blank" rel="noopener">Crenshaw, 1991</a> · <a class="lnk" href="https://scholar.google.com/scholar?q=Erete+Israni+Dillahunt+2018" target="_blank" rel="noopener">Erete et al., 2018</a></div>
     </div>
     <aside class="aside"><p>This is the heart of the gap, and I build it up one condition at a time.</p><p>(click) There is a growing body of serious games and playful technology for hypertension. (click) A small number are designed with an Indigenous community. (click) Fewer still with people with disabilities. (click) And no study brings all four together: a game, for hypertension, with an Indigenous community, and with disability, as one population. (click) That empty center is the gap this review makes visible.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="2" style="--act:var(--green)">
+    <div class="stage">
+      <div class="eyebrow a">Disability</div>
+      <h2 class="a">Where we are: the disability branch.</h2>
+      <div class="tree-mount" data-hl="dis" style="margin-top:clamp(12px,2.6vh,32px)"></div>
+    </div>
+    <aside class="aside"><p>Now the disability branch of intersectionality: proxy care, accessible protocols, technosolutionism, and DREEM.</p></aside>
   </section>
 
   <section class="slide" data-sec="2" style="--act:var(--green)">
@@ -875,6 +901,15 @@
 
   <section class="slide" data-sec="2" style="--act:var(--green)">
     <div class="stage">
+      <div class="eyebrow a">Indigenous</div>
+      <h2 class="a">Where we are: the Indigenous branch.</h2>
+      <div class="tree-mount" data-hl="ind" style="margin-top:clamp(12px,2.6vh,32px)"></div>
+    </div>
+    <aside class="aside"><p>Now the Indigenous branch: sovereignty, and cultural grounding.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="2" style="--act:var(--green)">
+    <div class="stage">
       <div class="eyebrow a">Indigenous · Sovereignty</div>
       <div class="split">
         <div>
@@ -932,6 +967,15 @@
       <div class="cite a"><span class="rn">[1]</span><a class="lnk" href="https://scholar.google.com/scholar?q=Percy+1997+hypertension+Navajo+Health+Nutrition+Survey" target="_blank" rel="noopener">Percy et al., 1997</a> &nbsp; <span class="rn">[2]</span><a class="lnk" href="https://scholar.google.com/scholar?q=Harmon+2016+hypertension+Navajo+cohort" target="_blank" rel="noopener">Harmon et al., 2016</a> &nbsp; <span class="rn">[3]</span><a class="lnk" href="https://scholar.google.com/scholar?q=Bea+2018+Navajo+cancer+survivors+Flagstaff" target="_blank" rel="noopener">Bea et al., 2018</a> &nbsp; <span class="rn">[4]</span><a class="lnk" href="https://scholar.google.com/scholar?q=Gittelsohn+2013+Navajo+healthy+stores" target="_blank" rel="noopener">Gittelsohn et al., 2013</a> &nbsp; <span class="rn">[5]</span><a class="lnk" href="https://scholar.google.com/scholar?q=Vigil-Hayes+2021+ARORA+Navajo+Hopi+youth" target="_blank" rel="noopener">Vigil-Hayes et al., 2021</a> &nbsp; <span class="rn">[6]</span><a class="lnk" href="https://scholar.google.com/scholar?q=Kaholokula+2021+hula+hypertension+Native+Hawaiian+trial" target="_blank" rel="noopener">Kaholokula et al., 2021</a> &nbsp; <span class="rn">[7]</span><a class="lnk" href="https://scholar.google.com/scholar?q=Tobe+2019+DREAM-GLOBAL+First+Nations+text+messaging+blood+pressure" target="_blank" rel="noopener">Tobe et al., 2019</a> &nbsp; <span class="rn">[8]</span><a class="lnk" href="https://scholar.google.com/scholar?q=Im+2026+Lumbee+virtual+CBPR+hypertension+game" target="_blank" rel="noopener">Im et al., 2026</a></div>
     </div>
     <aside class="aside"><p>Here are the Indigenous studies side by side. Percy measured blood pressure in 780 Navajo adults, and only 50 of the 97 with high blood pressure had been told. Harmon's cohort found 35.9 percent had hypertension. Bea heard from Navajo cancer survivors that programs were far away and often one day. Gittelsohn's store program led to better food choices and lower BMI. Vigil-Hayes, with Navajo and Hopi youth, built cultural meaning into the app. Kaholokula's hula trial reached a healthy blood pressure in 42.7 percent, against 21.2. Tobe's text-message trial dropped both arms about 5 mmHg. And Im, with the Lumbee committee, removed a casino theme from the game.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="3" style="--act:var(--cyan)">
+    <div class="stage">
+      <div class="eyebrow a">Theory</div>
+      <h2 class="a">Where we are: the theory branch.</h2>
+      <div class="tree-mount" data-hl="th" style="margin-top:clamp(12px,2.6vh,32px)"></div>
+    </div>
+    <aside class="aside"><p>Now the theory branch: serious games and play, participatory research, and wicked problems with research through design.</p></aside>
   </section>
 
   <section class="slide" data-sec="3" style="--act:var(--cyan)">
@@ -1511,22 +1555,22 @@
   function tree(hl){
     function vleaf(cls,items){ return '<div class="vleaf '+cls+'">'+items.map(function(t){return '<span>'+t+'</span>';}).join('')+'</div>'; }
     return ''+
-    '<div class="tree">'+
+    '<div class="tree hl-'+(hl||'none')+'">'+
       '<div class="troot">67 studies</div>'+
       '<div class="otree"><ul>'+
-        '<li>'+
+        '<li class="b-dom">'+
           '<div class="onode br">Domain knowledge</div>'+
           '<ul>'+
-            '<li><div class="onode">Hypertension</div>'+vleaf('htn',['Five factors','Risk'])+'</li>'+
-            '<li><div class="onode">Intersectionality</div>'+
+            '<li class="b-htn"><div class="onode">Hypertension</div>'+vleaf('htn',['Five factors','Risk'])+'</li>'+
+            '<li class="b-int"><div class="onode">Intersectionality</div>'+
               '<ul>'+
-                '<li><div class="onode">Disability</div>'+vleaf('dis',['Proxy care','Accessible protocols','Technosolutionism','DREEM'])+'</li>'+
-                '<li><div class="onode">Indigenous</div>'+vleaf('ind',['Sovereignty','Cultural'])+'</li>'+
+                '<li class="b-dis"><div class="onode">Disability</div>'+vleaf('dis',['Proxy care','Accessible protocols','Technosolutionism','DREEM'])+'</li>'+
+                '<li class="b-ind"><div class="onode">Indigenous</div>'+vleaf('ind',['Sovereignty','Cultural'])+'</li>'+
               '</ul>'+
             '</li>'+
           '</ul>'+
         '</li>'+
-        '<li>'+
+        '<li class="b-th">'+
           '<div class="onode br">Theory</div>'+
           vleaf('th',['Serious games and play','Participatory research','Wicked problems and RtD'])+
         '</li>'+
@@ -1548,7 +1592,10 @@
   // every slide's eyebrow shows its section (chapter) name, so the audience always knows where they are
   slides.forEach(function(s,i){
     var eb=s.querySelector('.eyebrow'); var ch=chapters[slideCh[i]];
-    if(eb && ch && s.querySelector('h1,h2')) eb.textContent=ch.name;
+    if(eb && ch && s.querySelector('h1,h2')){
+      var detail=(eb.textContent||'').trim();
+      eb.textContent=(detail && detail!==ch.name)? ch.name+' · '+detail : ch.name;
+    }
   });
   var dotFor=[];
   chapters.forEach(function(ch,ci){
