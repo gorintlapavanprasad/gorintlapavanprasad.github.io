@@ -1007,7 +1007,7 @@
         <thead><tr><th>Game</th><th>Who took part</th><th>Design</th><th>What they found</th></tr></thead>
         <tbody>
           <tr class="a"><td>eSMART-HD<span class="rm">[1]</span></td><td>116 adults w/ hypertension, Ohio</td><td>RCT, 4 sessions</td><td>~7 mmHg drop; not sig. vs control</td></tr>
-          <tr class="a"><td>MyHeartMate<span class="rm">[2]</span></td><td>390 heart patients, Sydney</td><td>RCT, 6 months</td><td>27% still playing after 30 days</td></tr>
+          <tr class="a"><td>MyHeartMate<span class="rm">[2]</span></td><td>390 heart patients, Sydney</td><td>RCT, 6 months</td><td>27% still engaged after 30 days</td></tr>
           <tr class="a"><td>BewARe<span class="rm">[3]</span></td><td>11 older adults w/ hypertension</td><td>Interviews w/ prototypes</td><td>safe, wireless, controller-based</td></tr>
           <tr class="a"><td>Lumbee game<span class="rm">[4]</span></td><td>220 Lumbee adults (planned)</td><td>RCT protocol, step tracker</td><td class="flag">excludes people who use a walker</td></tr>
           <tr class="a"><td>Graham et al.<span class="rm">[5]</span></td><td>14 Indigenous participants, AZ</td><td>Participatory workshop</td><td class="ok">5 prototypes, one per factor</td></tr>
@@ -1240,7 +1240,7 @@
         </div>
         <div class="figcard dark a">
           <img src="graham.png" alt="Graham et al. 2025 co-design workshop with Indigenous participants and five game-prototype sketches">
-          <div class="src">Graham et al. 2025, the one study designing with both</div>
+          <div class="src">Graham et al. 2025, the closest: Indigenous co-design, no disability axis</div>
         </div>
       </div>
     </div>
@@ -1596,7 +1596,9 @@
     var eb=s.querySelector('.eyebrow'); var ch=chapters[slideCh[i]];
     if(eb && ch && s.querySelector('h1,h2')){
       var detail=(eb.textContent||'').trim();
-      eb.textContent=(detail && detail!==ch.name)? ch.name+' · '+detail : ch.name;
+      if(!detail || detail===ch.name) eb.textContent=ch.name;
+      else if(detail.indexOf(ch.name)===0) eb.textContent=detail;      // already starts with the chapter (e.g. "Backup · …"): no double-prefix
+      else eb.textContent=ch.name+' · '+detail;
     }
   });
   var dotFor=[];
