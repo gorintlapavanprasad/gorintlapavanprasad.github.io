@@ -61,12 +61,14 @@
     transition:opacity .44s ease, transform .56s cubic-bezier(.4,0,.6,1)}
   #deck[data-dir="back"] .slide.leaving{transform:translate3d(6.5%,0,0) scale(.99)}
   .stage{width:100%;min-width:0;display:flex;flex-direction:column;min-height:100%}
+  /* never squeeze a block (it would spill over the next one); fit() scales the whole stage instead */
+  .stage>*{flex-shrink:0}
   /* references / captions pinned to the very bottom of the slide */
   .stage>.cite,.stage>.footcite,.stage>.footline{margin-top:auto}
   .stage>.footline+.footcite{margin-top:clamp(10px,1.6vh,18px)}
   .slide.cover .stage>.cite{margin-top:0}
   /* two-column (image+text) slides fill the height so their references reach the bottom */
-  .stage>.split,.stage>.who2{flex:1 1 auto;min-height:0}
+  .stage>.split,.stage>.who2{flex:1 0 auto}
 
   /* entrance: choreographed cascade, JS sets --i per element so content builds in sequence */
   .a{opacity:0;transform:translateY(16px)}
