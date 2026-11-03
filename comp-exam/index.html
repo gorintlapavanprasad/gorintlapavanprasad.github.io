@@ -248,6 +248,15 @@
   .points.sm li::before{top:.42em;width:9px;height:9px}
   .points.ctr{max-width:74ch;margin-left:auto;margin-right:auto}
   .points.wide li{max-width:none}
+  /* mini tree in the top-right corner of Background slides: where we are in the thematic tree */
+  .minitree{position:absolute;top:clamp(8px,1.2vh,14px);right:clamp(10px,1.2vw,18px);width:clamp(150px,14vw,220px);pointer-events:none;z-index:3;opacity:.95}
+  .slide[data-leaf] .stage>h2,.slide[data-leaf] .stage>.eyebrow,.slide[data-leaf] .split>div:first-child>h2{padding-right:clamp(150px,15vw,230px)}
+  .slide[data-leaf] .stage>h2+ul{padding-right:clamp(150px,15vw,230px)}
+  .slide[data-leaf] .split>.figcard,.slide[data-leaf] .split>div:last-child{margin-top:clamp(40px,8vh,90px)}
+  .minitree .tree{transform:scale(.3);transform-origin:top right;width:333%;position:relative;right:0;float:right}
+  .minitree .vleaf span.cur{color:#0c0a06;background:var(--hl2);border-radius:4px;padding:0 4px;opacity:1}
+  .minitree .vleaf span:not(.cur){opacity:.45}
+  body.presenter .minitree{display:none}
   /* a figure marked "cued" waits for the point that introduces it (li.figcue) */
   .figcard.cued{transition:opacity .5s ease,transform .5s ease}
   .split:has(.figcue:not(.shown)) .figcard.cued{opacity:0;transform:translateY(11px)}
@@ -307,15 +316,15 @@
   .slide.cover::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:none}
   .slide.cover{justify-content:center;padding-top:clamp(24px,3.5vh,52px)}
   .slide.cover .stage{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;height:100%}
-  .slide.cover h1{font-size:clamp(1.35rem,2.95vw,2.5rem);margin-top:clamp(8px,1.6vh,18px);max-width:none;line-height:1.14;text-shadow:0 2px 26px rgba(0,0,0,.7)}
+  .slide.cover h1{font-size:clamp(1.7rem,3.6vw,3.1rem);margin-top:clamp(8px,1.6vh,18px);max-width:none;line-height:1.14;text-shadow:0 2px 26px rgba(0,0,0,.7)}
   .slide.cover h1 br{display:block}
   .cover-tag{text-shadow:0 2px 20px rgba(0,0,0,.6)}
   .cover-tag{font-family:var(--font-display);font-style:italic;font-weight:600;font-size:clamp(1.15rem,2.4vw,1.95rem);color:var(--ink);margin:clamp(16px,2.6vh,30px) 0 0;line-height:1.25}
   .cover-tag .ig{color:var(--green);font-style:normal}
   .cover-tag .di{color:var(--teal);font-style:normal}
   .cover-meta{margin-top:clamp(18px,3vh,36px)}
-  .cover-meta .who{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:clamp(1.05rem,1.9vw,1.5rem)}
-  .cover-meta .aff{color:var(--muted);font-size:clamp(.92rem,1.4vw,1.14rem);margin-top:4px;font-family:var(--font-body)}
+  .cover-meta .who{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:clamp(1.2rem,2.2vw,1.75rem)}
+  .cover-meta .aff{color:var(--muted);font-size:clamp(1.02rem,1.6vw,1.3rem);margin-top:4px;font-family:var(--font-body)}
   .cover-logos{margin-top:auto;display:flex;align-items:center;gap:clamp(22px,3.2vw,36px);padding-top:clamp(14px,3vh,34px)}
   .cover-logos img{height:clamp(34px,4.8vh,56px);width:auto;opacity:.96}
 
@@ -437,11 +446,11 @@
   @keyframes axpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
   @keyframes axringA{0%{opacity:.55;transform:scale(.7)}70%,100%{opacity:0;transform:scale(1.7)}}
   /* five-factor flower: central hub, five petals revealed one per click */
-  .flower{max-width:min(100%,700px);height:auto;margin:0 auto;display:block}
+  .flower{max-width:min(100%,900px);height:auto;margin:0 auto;display:block}
   .flowerrow{display:flex;align-items:center;gap:clamp(16px,2.6vw,42px);margin-top:clamp(6px,1.4vh,16px)}
   @media(max-width:860px){.flowerrow{flex-direction:column}}
   .flowerrow{justify-content:center}
-  .flowerrow .flower{flex:0 1 auto;max-width:min(100%,640px);margin:0 auto}
+  .flowerrow .flower{flex:0 1 auto;max-width:min(100%,860px);margin:0 auto}
   .flower-side{flex:0 1 clamp(230px,30vw,360px);background:#0e1317;border:1px solid var(--cardbrd);border-radius:14px;padding:10px;box-shadow:0 16px 44px rgba(0,0,0,.5)}
   .flower-side img{width:100%;height:auto;display:block;border-radius:9px;max-height:48vh;object-fit:contain}
   .flower-side figcaption{font-family:var(--font-mono);font-size:.64rem;color:var(--faint);margin-top:8px;line-height:1.35}
@@ -498,7 +507,7 @@
   .wright p{font-family:var(--font-body);font-size:clamp(1.05rem,1.8vw,1.5rem);line-height:1.46;color:var(--ink);margin:10px 0 0}
 
   /* comparison table */
-  .ctab{width:100%;border-collapse:collapse;margin-top:clamp(12px,1.6vw,20px);font-family:var(--font-body);font-size:clamp(.78rem,1.12vw,.98rem)}
+  .ctab{width:100%;border-collapse:collapse;margin-top:clamp(12px,1.6vw,20px);font-family:var(--font-body);font-size:clamp(.9rem,1.35vw,1.16rem)}
   .ctab th,.ctab td{text-align:left;padding:.58em .74em;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.46}
   .ctab th{font-family:var(--font-mono);font-size:.8em;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600}
   .ctab td b{color:var(--ink);font-weight:700}
@@ -656,7 +665,7 @@
       <h2 class="a">What is hypertension?</h2>
       <ul class="points">
         <li data-step>Blood pressure that stays high, <b>130/80</b> or above.</li>
-        <li data-step>It usually has <b>no symptoms</b>, yet over years it damages the heart, kidneys, and brain.</li>
+        <li data-step>It usually has <b>no symptoms</b>.</li>
       </ul>
       <div data-step style="margin-top:clamp(12px,2.2vh,26px);max-width:42ch">
         <div class="thm-stat"><span data-count="1.28" data-dec="2">1.28</span><span class="u"> billion</span></div>
@@ -670,7 +679,7 @@
       <ul class="points"><li data-step>It is <b>manageable</b>: a <b>10 mmHg</b> drop in systolic pressure cuts major cardiovascular events about <b>20%</b>, stroke <b>27%</b>, and death <b>13%</b><span class="rm">[2]</span>.</li></ul>
       <div class="footcite a"><span class="rn">[1]</span><a href="https://www.who.int/news-room/fact-sheets/detail/hypertension" target="_blank" rel="noopener">WHO 2023, hypertension fact sheet</a> &nbsp; <span class="rn">[2]</span><a href="https://doi.org/10.1016/S0140-6736(15)01225-8" target="_blank" rel="noopener">Ettehad et al. 2016, Lancet</a> &nbsp; <span class="rn">[3]</span><a href="https://doi.org/10.1161/circulationaha.117.032582" target="_blank" rel="noopener">Muntner et al. 2018 (US 45.6%)</a></div>
     </div>
-    <aside class="aside"><p>Let me start with the health problem. What is hypertension?</p><p>(click) It is blood pressure that stays at 130 over 80 or higher.</p><p>(click) It usually has no symptoms. But over many years, it damages the heart, the kidneys, and the brain.</p><p>(click) It is common. The World Health Organization reports 1.28 billion adults with hypertension.</p><p>(click) That is about one in three adults between 30 and 79.</p><p>(click) In the United States, Muntner [MUNT-ner] and colleagues used national survey data. They found 45.6 percent of adults have it.</p><p>(click) Many people do not know they have it. The WHO reports 600 million people, 44 percent, are not aware.</p><p>(click) It can be controlled. Ettehad [et-teh-HAHD] and colleagues combined many trials. A 10-point drop in the top number lowered heart problems by about 20 percent and stroke by 27 percent. Much of this control comes from daily habits.</p></aside>
+    <aside class="aside"><p>Let me start with the health problem. What is hypertension?</p><p>(click) It is blood pressure that stays at 130 over 80 or higher.</p><p>(click) It usually has no symptoms, which is why it is called the silent killer.</p><p>(click) It is common. The World Health Organization reports 1.28 billion adults with hypertension.</p><p>(click) That is about one in three adults between 30 and 79.</p><p>(click) In the United States, Muntner [MUNT-ner] and colleagues used national survey data. They found 45.6 percent of adults have it.</p><p>(click) Many people do not know they have it. The WHO reports 600 million people, 44 percent, are not aware.</p><p>(click) It can be controlled. Ettehad [et-teh-HAHD] and colleagues combined many trials. A 10-point drop in the top number lowered heart problems by about 20 percent and stroke by 27 percent. Much of this control comes from daily habits.</p></aside>
   </section>
 
   <section class="slide" data-sec="0">
@@ -687,14 +696,14 @@
         <div class="wright">
           <ul class="points">
             <li data-step>Self-report sits near the US average, but <b>measured</b> studies run higher: in a Navajo survey, <b>only 50 of 97</b> adults with high blood pressure had ever been told<span class="rm">[2]</span>.</li>
-            <li data-step>Heart disease was the <b>4th leading cause of death</b> on the New Mexico Navajo Nation, 2021 to 2024<span class="rm">[3]</span>.</li>
-            <li data-step>These numbers describe Navajo people broadly, not urban Flagstaff specifically. This work is with <b>urban Diné adults in Flagstaff</b>.</li>
+            <li data-step>Heart disease was the <b>4th leading cause of death</b> on the New Mexico Navajo Nation, 2021 to 2024<span class="rm">[3]</span>; earlier data named it the <b>leading non-accidental cause</b><span class="rm">[4]</span>.</li>
+            <li data-step>These numbers describe Navajo people broadly. This work is with <b>urban Diné adults in Flagstaff</b>, where my IRB approval and community partners are.</li>
           </ul>
         </div>
       </div>
-      <div class="footcite a"><span class="rn">[1]</span><a href="https://www.nec.navajo-nsn.gov/" target="_blank" rel="noopener">Navajo Epidemiology Center, BRFSS (self-reported)</a> &nbsp; <span class="rn">[2]</span><a href="https://doi.org/10.1093/jn/127.10.2114s" target="_blank" rel="noopener">Percy et al. 1997</a> &nbsp; <span class="rn">[3]</span><a href="https://nec.navajo-nsn.gov/Portals/0/Reports/NM%20Navajo%20Nation%20Mortality%20Report%202018%20through%202024.pdf" target="_blank" rel="noopener">Navajo Nation Mortality Report 2018–2024 (NEC)</a></div>
+      <div class="footcite a"><span class="rn">[1]</span><a href="https://www.nec.navajo-nsn.gov/" target="_blank" rel="noopener">Navajo Epidemiology Center, BRFSS (self-reported)</a> &nbsp; <span class="rn">[2]</span><a href="https://doi.org/10.1093/jn/127.10.2114s" target="_blank" rel="noopener">Percy et al. 1997</a> &nbsp; <span class="rn">[3]</span><a href="https://nec.navajo-nsn.gov/Portals/0/Reports/NM%20Navajo%20Nation%20Mortality%20Report%202018%20through%202024.pdf" target="_blank" rel="noopener">Navajo Nation Mortality Report 2018–2024 (NEC)</a> &nbsp; <span class="rn">[4]</span><a href="https://doi.org/10.1371/journal.pone.0143102" target="_blank" rel="noopener">Harmon et al. 2016</a></div>
     </div>
-    <aside class="aside"><p>Now, who does this affect in my work? First, Navajo, or Diné [dih-NAY], adults.</p><p>(click) The Navajo Epidemiology Center asked people if they have high blood pressure. About 28 percent said yes. That is close to the US average. But this only counts people who already know.</p><p>(click) Percy [PUR-see] and colleagues measured blood pressure directly. Out of 97 adults with high blood pressure, only 50 had ever been told.</p><p>(click) The Navajo Epidemiology Center's mortality report lists diseases of the heart as the fourth leading cause of death on the New Mexico Navajo Nation, from 2021 to 2024. This category is only diseases of the heart, and it includes heart disease caused by high blood pressure. Stroke is counted separately. High blood pressure is a main cause of both.</p><p>(click) These numbers are for Navajo people in general, not only Flagstaff. My work is with Diné adults living in Flagstaff. My university approval covers Flagstaff, and my community partners are here. Work on the Navajo Nation itself would first need approval from the Navajo Nation's research review board.</p></aside>
+    <aside class="aside"><p>Now, who does this affect in my work? First, Navajo, or Diné [dih-NAY], adults.</p><p>(click) The Navajo Epidemiology Center asked people if they have high blood pressure. About 28 percent said yes. That is close to the US average. But this only counts people who already know.</p><p>(click) Percy [PUR-see] and colleagues measured blood pressure directly. Out of 97 adults with high blood pressure, only 50 had ever been told.</p><p>(click) The Navajo Epidemiology Center's mortality report lists diseases of the heart as the fourth leading cause of death on the New Mexico Navajo Nation, from 2021 to 2024. This category is only diseases of the heart, and it includes heart disease caused by high blood pressure. Stroke is counted separately. High blood pressure is a main cause of both. Earlier data, reported by Harmon [HAR-mun] and colleagues, named heart disease the leading cause of death that is not from an accident.</p><p>(click) These numbers are for Navajo people in general, not only Flagstaff. My work is with Diné adults living in Flagstaff. My university approval covers Flagstaff, and my community partners are here. Work on the Navajo Nation itself would first need approval from the Navajo Nation's research review board.</p></aside>
   </section>
 
   <section class="slide" data-sec="0">
@@ -721,7 +730,7 @@
       </div>
       <div class="footcite a"><span class="rn">[1]</span><a href="https://doi.org/10.2147/CLEP.S322791" target="_blank" rel="noopener">Wu et al. 2021</a> &nbsp; <span class="rn">[2]</span><a href="https://doi.org/10.1186/s12889-022-13482-5" target="_blank" rel="noopener">Nam &amp; Yoon 2022</a> &nbsp; <span class="rn">[3]</span><a href="https://doi.org/10.1002/nur.70022" target="_blank" rel="noopener">Choi et al. 2025</a></div>
     </div>
-    <aside class="aside"><p>(click) The second group is people with disabilities. I look at disability broadly.</p><p>Hypertension is more common among people with disabilities.</p><p>(click) Wu [woo] and colleagues studied 7,348 adults with disabilities in Shanghai, China. 42.5 percent had hypertension.</p><p>(click) Nam [nahm] and Yoon [yoon] studied adults with a physical disability in Korea. 56.4 percent had it.</p><p>(click) Choi [choy] and colleagues worked with Deaf adults in South Korea. Deaf adults often have low health literacy, so the team built a self-management program in sign language. 63.9 percent had hypertension. These are different groups, so I do not add these numbers together.</p><p>(click) It is also harder to manage.</p><p>(click) Health information is often not accessible.</p><p>(click) Care often depends on a caregiver.</p><p>(click) And very few games or tools are made for disabled players.</p></aside>
+    <aside class="aside"><p>(click) The second group is people with disabilities. I look at disability broadly.</p><p>Hypertension is more common among people with disabilities.</p><p>(click) Wu [woo] and colleagues studied 7,348 adults with disabilities in Shanghai, China. 42.5 percent had hypertension.</p><p>(click) Nam [nahm] and Yoon [yoon] studied adults with a physical disability in Korea. 56.4 percent had it.</p><p>(click) Choi [choy] and colleagues worked with Deaf adults in South Korea. Deaf adults often have low health literacy, so the team built a self-management program in sign language. 63.9 percent had hypertension. These are different groups, so I do not add these numbers together.</p><p>(click) It is also harder to manage. This is one reason this review looks at games and play, as a way to support daily care.</p><p>(click) Health information is often not accessible.</p><p>(click) Care often depends on a caregiver.</p><p>(click) And very few games or tools are made for disabled players.</p></aside>
   </section>
 
   <section class="slide" data-sec="0">
@@ -759,7 +768,7 @@
 
   <section class="slide" data-sec="0">
     <div class="stage">
-      <h2 class="a">Research Questions</h2>
+      <h2 class="a">Guiding Questions for this Review</h2>
       <p class="explain a" style="margin-top:4px">To study that intersection in playful health technology, I ask three questions.</p>
       <ol class="qbig rq">
         <li data-step><span class="qn">RQ1</span><div class="qt">How are serious games and playful health technologies used for hypertension self-management?</div></li>
@@ -767,10 +776,31 @@
         <li data-step><span class="qn">RQ2</span><div class="qt">What human-centered design methods support intersectional design of playful health technologies with Indigenous communities and people with disabilities?</div></li>
       </ol>
     </div>
-    <aside class="aside"><p>To study Diné adults with disabilities, I asked three questions.</p><p>(click) RQ1: How are serious games and playful health tools used to manage high blood pressure?</p><p>(click) RQ1.1: How many of them are made for Indigenous communities and people with disabilities?</p><p>(click) RQ2: Which design methods help us design these tools with Indigenous communities and people with disabilities?</p><p>So RQ1 asks what exists. RQ1.1 asks who it reaches. RQ2 asks how to build it.</p></aside>
+    <aside class="aside"><p>To study Diné adults with disabilities, three guiding questions shaped this review.</p><p>(click) RQ1: How are serious games and playful health tools used to manage high blood pressure?</p><p>(click) RQ1.1: How many of them are made for Indigenous communities and people with disabilities?</p><p>(click) RQ2: Which design methods help us design these tools with Indigenous communities and people with disabilities?</p><p>So RQ1 asks what exists. RQ1.1 asks who it reaches. RQ2 asks how to build it.</p></aside>
   </section>
 
   <!-- ==================== METHOD ==================== -->
+  <section class="slide" data-sec="0">
+    <div class="stage">
+      <div class="eyebrow a">CardioCare Quest</div>
+      <div class="split">
+        <div>
+          <h2 class="a">CardioCare Quest: the lab project behind this review.</h2>
+          <ul class="points">
+            <li data-step>Our lab is building <b>CardioCare Quest</b>, a game app for daily blood-pressure care, with games for the five factors.</li>
+            <li data-step class="figcue">The screens: Dog Walking, a GPS walk, and Vascular Village, where players can log their blood pressure.</li>
+            <li data-step>This review asks what the research says about tools like this, and <b>whom they reach</b>.</li>
+          </ul>
+        </div>
+        <div class="figcard cued dark" style="display:flex;gap:10px;justify-content:center;background:#16120c;padding:12px">
+          <img src="ccq_dogwalk.png" alt="CardioCare Quest Dog Walking screen: a patterned dog, a Keep going button for a 500-step quick walk, and GPS progress" style="width:46%;border-radius:12px">
+          <img src="ccq_vascular.png" alt="CardioCare Quest Vascular Village screen: a village lives inside your blood vessels; buttons to start a quest or log blood pressure first" style="width:46%;border-radius:12px">
+        </div>
+      </div>
+    </div>
+    <aside class="aside"><p>Before the review, a short note on why I am asking these questions.</p><p>(click) Our lab is building CardioCare Quest, a game app for daily blood pressure care. It has games for each of the five factors, which I explain soon.</p><p>(click) Here are two screens: Dog Walking, a GPS walk, and Vascular Village, where players can log their blood pressure.</p><p>(click) This review asks what the research says about tools like this, and whom they reach. I come back to the app briefly at the end.</p></aside>
+  </section>
+
   <section class="slide" data-sec="1" data-ch="Scoping Review">
     <div class="stage">
       <h2 class="a">Finding the Literature</h2>
@@ -804,7 +834,7 @@
     <aside class="aside"><p>We start with hypertension: the five factors, and risk.</p></aside>
   </section>
 
-  <section class="slide" data-sec="2" style="--act:var(--green)">
+  <section data-leaf="htn|Five factors" class="slide" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Hypertension &middot; Five factors</div>
       <h2 class="a">Hypertension is managed through five daily behaviors.</h2>
@@ -825,7 +855,7 @@
     <aside class="aside"><p>How do people manage blood pressure day to day? Through five behaviors.</p><p>(click) Diet,</p><p>(click) exercise,</p><p>(click) medication,</p><p>(click) measurement, which means checking your own blood pressure,</p><p>(click) and education, which means understanding the condition.</p><p>These come from the clinical guidelines. Changing daily habits is the first step of treatment.</p><p>(click) I use these five factors to sort every hypertension study in the review. Our lab's game app, CardioCare Quest, also follows them, with games for each factor. I will show it near the end.</p></aside>
   </section>
 
-  <section class="slide" data-sec="2" style="--act:var(--green)">
+  <section data-leaf="htn|Risk" class="slide" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Hypertension · Risk</div>
       <h2 class="a">Extra weight and seated gaming raise blood pressure.</h2>
@@ -838,6 +868,7 @@
             <img src="lin_t8_bmi.png" alt="Lin et al. 2012, Table 8 BMI rows: underweight 1 (reference); normal O.R. 3.41; overweight O.R. 6.72; obese O.R. 6.76" style="width:100%;display:block;margin-top:4px">
           </div>
           <p style="margin-top:10px">Compared with underweight adults, overweight and obese adults had about <b>7 times</b> the odds of hypertension.</p>
+          <p style="margin-top:4px;color:var(--faint)">One-time snapshot: a link, not proof of cause.</p>
         </div>
         <div class="panel" data-step style="--act:var(--cyan)">
           <h3>Goldfield et al. 2011<span class="rm">[2]</span></h3>
@@ -846,11 +877,12 @@
             <img src="goldfield_t3.png" alt="Goldfield et al. 2011, Table 3, systolic blood pressure row: TV 0.48 (not significant), computer -0.77 (not significant), video games 1.1 (significant), screen time 0.34, physical activity intensity -2.3 (significant)" style="width:100%;display:block">
           </div>
           <p style="margin-top:10px">TV = television, CT = computer, VG = video games. Only <b>video games</b> were linked to higher systolic blood pressure.</p>
+          <p style="margin-top:4px;color:var(--faint)">One survey: a link, not proof that gaming causes it.</p>
         </div>
       </div>
       <div class="cite a"><span class="rn">[1]</span><a class="lnk" href="https://doi.org/10.1016/j.ridd.2012.03.027" target="_blank" rel="noopener">Lin et al. 2012</a> &nbsp; <span class="rn">[2]</span><a class="lnk" href="https://doi.org/10.1371/journal.pone.0026643" target="_blank" rel="noopener">Goldfield et al. 2011</a></div>
     </div>
-    <aside class="aside"><p>So what raises the risk? Two studies point to the same answer.</p><p>(click) Lin [lin] and colleagues checked health records of 833 adults with disabilities in Taiwan. This is their table. Compared with underweight adults, overweight and obese adults had about seven times the odds of hypertension.</p><p>(click) Goldfield [GOLD-feeld] and colleagues asked 282 overweight teenagers in Canada about screen time. In their table, TV and computer time were not linked to blood pressure. Only video games, marked VG, were linked to higher blood pressure.</p><p>So for design: the game should ask people to move, not to sit for a long time.</p></aside>
+    <aside class="aside"><p>So what raises the risk? Two studies point to the same answer.</p><p>(click) Lin [lin] and colleagues checked health records of 833 adults with disabilities in Taiwan. This is their table. Compared with underweight adults, overweight and obese adults had about seven times the odds of hypertension. This was a snapshot at one point in time, so it shows a link, not proof that weight causes it.</p><p>(click) Goldfield [GOLD-feeld] and colleagues asked 282 overweight teenagers in Canada about screen time. In their table, TV and computer time were not linked to blood pressure. Only video games, marked VG, were linked to higher blood pressure. Again, this is a link from one survey, not proof that gaming causes it. The authors say snacking or stress during play may explain it.</p><p>So for design: the game should ask people to move, not to sit for a long time.</p></aside>
   </section>
 
   <section class="slide" data-sec="2" style="--act:var(--green)" data-grp="Intersectionality">
@@ -859,13 +891,13 @@
       <h2 class="a">Few hypertension games reach Indigenous communities or people with disabilities, and none reach both.</h2>
       <div class="gaplist">
         <div class="gaprow" data-step><div class="gapcount">22</div><div class="gapbar" style="width:44%;background:#21918c"></div><div class="gaplabel">serious games &amp; playful tech <b>for hypertension</b></div></div>
-        <div class="gaprow" data-step><div class="gapcount">2</div><div class="gapbar" style="width:8%;background:#5ec962"></div><div class="gaplabel">&hellip; designed <b>with an Indigenous community</b> <span style="color:var(--faint)">(Graham; the Lumbee game)</span></div></div>
+        <div class="gaprow" data-step><div class="gapcount">2</div><div class="gapbar" style="width:8%;background:#5ec962"></div><div class="gaplabel">&hellip; designed <b>with an Indigenous community</b> <span style="color:var(--faint)">(Graham et al. 2025 workshop; the Lumbee step-tracker game)</span></div></div>
         <div class="gaprow zero" data-step><div class="gapcount zc">0</div><div class="gapbar zbar">0</div><div class="gaplabel">&hellip; and <b>with people with disabilities</b></div></div>
       </div>
       <p class="venncap" data-step>No study brings a game for hypertension to <b>both</b> an Indigenous community and people with disabilities.</p>
       <div class="cite a" style="text-align:center;border-left:none;padding-left:0;margin-left:auto;margin-right:auto"><a class="lnk" href="https://doi.org/10.2307/1229039" target="_blank" rel="noopener">Crenshaw, 1991</a> · <a class="lnk" href="https://doi.org/10.1145/3194349" target="_blank" rel="noopener">Erete et al., 2018</a></div>
     </div>
-    <aside class="aside"><p>Now let me show what I found when I put the groups together.</p><p>(click) I found 22 games and playful tools for hypertension.</p><p>(click) Only 2 were made with an Indigenous community: Graham's [GRAY-um] work and the Lumbee game.</p><p>(click) None were made with people with disabilities.</p><p>(click) No study made a hypertension game for both Indigenous people and people with disabilities.</p></aside>
+    <aside class="aside"><p>Now let me show what I found when I put the groups together.</p><p>(click) I found 22 games and playful tools for hypertension.</p><p>(click) Only 2 were made with an Indigenous community. One is Graham [GRAY-um] and colleagues, from our lab: a workshop where Indigenous participants designed game ideas for each factor. The other is the Lumbee game, a step-tracker game being tested with the Lumbee Tribe in North Carolina.</p><p>(click) None were made with people with disabilities.</p><p>(click) No study made a hypertension game for both Indigenous people and people with disabilities.</p></aside>
   </section>
 
   <section class="slide" data-sec="2" style="--act:var(--green)">
@@ -877,7 +909,7 @@
     <aside class="aside"><p>Next, what do disability studies tell us? Four themes: caregivers, accessible methods, technosolutionism, and DREEM.</p></aside>
   </section>
 
-  <section class="slide" data-sec="2" style="--act:var(--green)">
+  <section data-leaf="dis|Proxy care" class="slide" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Disability · Proxy Care</div>
       <h2 class="a">A caregiver can help a player, or take over for them.</h2>
@@ -902,7 +934,7 @@
     <aside class="aside"><p>The first theme is caregiver support. Many people with disabilities take part with a caregiver. This help can go two ways.</p><p>(click) Caro [KAH-roh] and colleagues changed a Kinect game called FroggyBobby for 10 adults with developmental disabilities. An exergame is a video game you play by moving your body. I use it here because the study counted how much caregiver help players needed. In the photo, a player reaches up to move the frog. In the first session, players needed help 14.4 times. By the third session, only 2.7 times.</p><p>(click) Bircanin [BEER-chah-nin] and colleagues worked for two years with adults with severe intellectual disability in Australia. They used Active Support: give only the help that is needed, and let the person choose. The left photo shows a helper guiding a hand on the device.</p><p>(click) Sum [sum] and colleagues point out a risk. The helper can start speaking and acting for the person.</p><p>(click) What this means for design: the helper supports, and the player makes the choices.</p></aside>
   </section>
 
-  <section class="slide" data-sec="2" style="--act:var(--green)">
+  <section data-leaf="dis|Accessible protocols" class="slide" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Disability · Accessible Protocols</div>
       <div class="split">
@@ -925,7 +957,7 @@
     <aside class="aside"><p>The second theme is about how we run research sessions. Are they accessible? Often, they are not.</p><p>(click) Johnstone [JON-stun] and colleagues reviewed 25 studies that designed technology with people with intellectual disability. Only 7 used accessibility standards, like Easy Read.</p><p>(click) One example is Spencer González [SPEN-ser gon-SAH-les] and colleagues. For three years in Chile [CHEE-leh], they worked with a paid panel of 10 adults with intellectual disability.</p><p>(click) In the photo, the panel is working hands-on. They used easy-to-read text, adult pictures instead of childish ones, and stories.</p><p>(click) What this means for design: use Easy Read materials, short sessions in familiar places, and pay people for their time.</p></aside>
   </section>
 
-  <section class="slide" data-sec="2" style="--act:var(--green)">
+  <section data-leaf="dis|Technosolutionism" class="slide" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Disability · Technosolutionism</div>
       <h2 class="a">Most accessible-tech work still treats disability as a deficit to fix.</h2>
@@ -947,7 +979,7 @@
     <aside class="aside"><p>The third theme is technosolutionism. This is the belief that new technology will fix the problem.</p><p>(click) Hassan [hah-SAHN] reviewed 162 papers on accessible games from 2016 to 2020. Only 13 used disability studies theory. The rest treated disability as a problem to fix.</p><p>(click) Sum [sum] and colleagues describe the same pattern: research often treats disabled people as problems that need fixing.</p><p>(click) Ymous [IM-us (a made-up name, from "anonymous")] and colleagues wrote a paper with seven disabled researchers. They describe how research wrote about them as burdens. The title is "I am just terrified of my future."</p><p>(click) What this means for design: first ask Diné adults with disabilities if this is a problem for them. Some may choose not to use the tool, and that is fine.</p></aside>
   </section>
 
-  <section class="slide" data-sec="2" style="--act:var(--green)">
+  <section data-leaf="dis|DREEM" class="slide" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Disability · DREEM</div>
       <div class="split">
@@ -979,7 +1011,7 @@
     <aside class="aside"><p>Now, what do Indigenous health studies tell us? Two themes: data ownership and culture.</p></aside>
   </section>
 
-  <section class="slide" data-sec="2" style="--act:var(--green)">
+  <section data-leaf="ind|Sovereignty" class="slide" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Indigenous · Sovereignty</div>
       <div class="split">
@@ -1003,7 +1035,7 @@
     <aside class="aside"><p>The first theme is data sovereignty. This means: who owns and controls an Indigenous community's data. It links to RQ2: a design method for Indigenous communities has to say who controls the data.</p><p>(click) Vigil-Hayes [VEE-hil HAYZ] and colleagues here at NAU reviewed Indigenous health technology studies from 2012 to 2022. Only 4 out of 84 talked about who owns the data.</p><p>(click) Past harm, from colonization and harmful research, still affects trust today.</p><p>(click) One example is Maar [mar] and colleagues. They studied five years of the DREAM-GLOBAL trial with six First Nations communities in Canada. 98 percent of participants said they would recommend it.</p><p>(click) This figure shows how they built and kept trust before, during, and after the study.</p><p>(click) What this means for design: the Diné community controls its data, results go back to the Diné community, and a Diné advisory board guides the work.</p></aside>
   </section>
 
-  <section class="slide" data-sec="2" style="--act:var(--green)">
+  <section data-leaf="ind|Sovereignty" class="slide" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Indigenous · Data Governance</div>
       <h2 class="a">CARE, FAIR, and OCAP: who decides about Indigenous data?</h2>
@@ -1019,7 +1051,7 @@
     <aside class="aside"><p>How can Indigenous communities set rules for their data? Three frameworks help.</p><p>(click) CARE, from Carroll and colleagues, has four principles: collective benefit, authority to control, responsibility, and ethics. It asks: who has the right to decide about this data, and who benefits?</p><p>(click) FAIR asks a different question: how should data be managed so others can find and reuse it? Findable, accessible, interoperable, and reusable.</p><p>(click) OCAP [OH-cap] was made by First Nations in Canada: ownership, control, access, and possession.</p><p>(click) They work together. CARE and OCAP come first: the community decides if and how data is shared. FAIR comes second, only inside those limits. FAIR without CARE can go against a tribe's sovereignty.</p><p>(click) What this means for design: the Diné community decides what is shared, then FAIR keeps the shared data usable. This links to RQ2, and to PRQ3 later.</p></aside>
   </section>
 
-  <section class="slide" data-sec="2" style="--act:var(--green)">
+  <section data-leaf="ind|Cultural" class="slide" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Indigenous · Cultural Grounding</div>
       <div class="split">
@@ -1046,7 +1078,7 @@
     <aside class="aside"><p>The second theme is culture. Do programs work better when they build on culture?</p><p>(click) Kaholokula [kah-HO-lo-KOO-lah] and colleagues tested this in a trial called Ola Hou i ka Hula [OH-lah HOH-oo ee kah HOO-lah]. It was a hula dance program with 263 Native Hawaiian adults.</p><p>(click) In the hula group, 42.7 percent reached a healthy blood pressure. In the comparison group, 21.2 percent.</p><p>(click) A local example is ARORA, an app by Vigil-Hayes [VEE-hil HAYZ] and colleagues at NAU. It was built with Navajo and Hopi youth. A community advisory board chose the design values.</p><p>(click) In these screens, you can see the butterfly. The board chose it as a positive symbol. It is used in a breathing exercise.</p><p>(click) What this means for design: start from what the Diné community values, and let Diné community members decide what to share.</p></aside>
   </section>
 
-  <section class="slide" data-sec="2" style="--act:var(--green)">
+  <section data-leaf="ind|" class="slide" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Indigenous Studies Compared</div>
       <h2 class="a">Indigenous hypertension studies, side by side.</h2>
@@ -1064,7 +1096,7 @@
         </tbody>
       </table>
       <p class="cap" data-step><b style="color:var(--hl2)">Taken together:</b> high blood pressure is often missed; local, cultural, community-led programs worked best; none of these studies focused on people with disabilities.</p>
-      <div class="cite a"><span class="rn">[1]</span><a class="lnk" href="https://doi.org/10.1093/jn/127.10.2114s" target="_blank" rel="noopener">Percy et al., 1997</a> &nbsp; <span class="rn">[2]</span><a class="lnk" href="https://doi.org/10.1371/journal.pone.0143102" target="_blank" rel="noopener">Harmon et al., 2016</a> &nbsp; <span class="rn">[3]</span><a class="lnk" href="https://doi.org/10.5820/aian.2502.2018.54" target="_blank" rel="noopener">Bea et al., 2018</a> &nbsp; <span class="rn">[4]</span><a class="lnk" href="https://doi.org/10.3945/jn.112.165266" target="_blank" rel="noopener">Gittelsohn et al., 2013</a> &nbsp; <span class="rn">[5]</span><a class="lnk" href="https://doi.org/10.1145/3449239" target="_blank" rel="noopener">Vigil-Hayes et al., 2021</a> &nbsp; <span class="rn">[6]</span><a class="lnk" href="https://doi.org/10.1093/abm/kaaa127" target="_blank" rel="noopener">Kaholokula et al., 2021</a> &nbsp; <span class="rn">[7]</span><a class="lnk" href="https://doi.org/10.1111/jch.13434" target="_blank" rel="noopener">Tobe et al., 2019</a> &nbsp; <span class="rn">[8]</span>Im et al., 2026</div>
+      <div class="cite a"><span class="rn">[1]</span><a class="lnk" href="https://doi.org/10.1093/jn/127.10.2114s" target="_blank" rel="noopener">Percy et al., 1997</a> &nbsp; <span class="rn">[2]</span><a class="lnk" href="https://doi.org/10.1371/journal.pone.0143102" target="_blank" rel="noopener">Harmon et al., 2016</a> &nbsp; <span class="rn">[3]</span><a class="lnk" href="https://doi.org/10.5820/aian.2502.2018.54" target="_blank" rel="noopener">Bea et al., 2018</a> &nbsp; <span class="rn">[4]</span><a class="lnk" href="https://doi.org/10.3945/jn.112.165266" target="_blank" rel="noopener">Gittelsohn et al., 2013</a> &nbsp; <span class="rn">[5]</span><a class="lnk" href="https://doi.org/10.1145/3449239" target="_blank" rel="noopener">Vigil-Hayes et al., 2021</a> &nbsp; <span class="rn">[6]</span><a class="lnk" href="https://doi.org/10.1093/abm/kaaa127" target="_blank" rel="noopener">Kaholokula et al., 2021</a> &nbsp; <span class="rn">[7]</span><a class="lnk" href="https://doi.org/10.1111/jch.13434" target="_blank" rel="noopener">Tobe et al., 2019</a> &nbsp; <span class="rn">[8]</span><span style="color:color-mix(in srgb,var(--act,var(--teal)) 50%,#fff);font-weight:600">Im et al., 2026 (in press)</span></div>
     </div>
     <aside class="aside"><p>Here are the Indigenous studies side by side, one at a time.</p><p>(click) Percy [PUR-see] and colleagues measured blood pressure in 780 Navajo adults in the early 1990s. Of 97 people with high blood pressure, only 50 had been told.</p><p>(click) Harmon [HAR-mun] and colleagues surveyed adults from 20 Navajo communities. 35.9 percent said they had hypertension. Diabetes and obesity were also common.</p><p>(click) Bea [bee] and colleagues talked with 32 Navajo cancer survivors and 8 family members, in Flagstaff and a rural area. Programs were far away and often only one day long. Family and tradition helped people stay active.</p><p>(click) Gittelsohn [GIT-ul-sun] and colleagues ran Navajo Healthy Stores for 14 months. Stores sold and promoted healthier food. People who saw more of the program had lower BMI and made better food choices.</p><p>(click) Vigil-Hayes [VEE-hil HAYZ] and colleagues worked 18 months with a Navajo and Hopi advisory board to build ARORA. The youth said the app felt too general. They wanted the app to explain the cultural meaning.</p><p>(click) Kaholokula's [kah-HO-lo-KOO-lah] hula trial had 263 Native Hawaiian adults. 42.7 percent reached a healthy blood pressure, compared with 21.2 percent. The results lasted to 12 months.</p><p>(click) In DREAM-GLOBAL, Tobe [TOH-bee] and colleagues trained community health workers in First Nations communities in Canada to measure blood pressure. Both trial groups dropped about 5 points.</p><p>(click) Im [eem] and colleagues worked with a paid Lumbee committee to change a hypertension game. The app had a small casino-style mini-game. It was not about blood pressure; it was one of the fun extras, like the matching and word games that replaced it. Lumbee participants felt it was a stereotype, so it was removed.</p><p>(click) Taken together: high blood pressure is often missed, local and cultural programs led by the community worked best, and none of these studies focused on people with disabilities.</p></aside>
   </section>
@@ -1078,7 +1110,7 @@
     <aside class="aside"><p>So far, I talked about the health problem, and about Indigenous communities and people with disabilities. Now the theory side: serious games and play, working with community members, and wicked problems.</p></aside>
   </section>
 
-  <section class="slide" data-sec="3" style="--act:var(--cyan)">
+  <section data-leaf="th|Serious games and play" class="slide" data-sec="3" style="--act:var(--cyan)">
     <div class="stage">
       <div class="eyebrow a">Serious Games and Play</div>
       <h2 class="a">What is a serious game, and what is serious play?</h2>
@@ -1086,16 +1118,16 @@
         <li data-step><b>Wattanasoontorn et al. 2013</b><span class="rm">[1]</span>: a serious game has two aims, to entertain and to build a skill or improve health. Their survey of <b>108</b> health games sorted them by purpose, player, and stage of disease.</li>
       </ul>
       <div class="grid2" style="grid-template-columns:repeat(2,1fr)">
-        <div class="panel" data-step style="--act:var(--cyan)"><h3>Serious games for health</h3><p><b>Closed systems</b> with rigid rules; the technology mediates the whole experience<span class="rm">[2]</span>.</p></div>
-        <div class="panel" data-step style="--act:var(--green)"><h3>Serious play for health</h3><p>Aimed at a health outcome but <b>left open</b>, so people can shape it to their own lives<span class="rm">[2]</span>, starting from play they already do<span class="rm">[3]</span>.</p></div>
+        <div class="panel" data-step style="--act:var(--cyan)"><h3>Closed games</h3><p>The <b>rules are fixed</b>, and the game decides what counts as success. Players follow the path the designers set<span class="rm">[2]</span>.</p><p>Example: eSMART-HD, a set clinic scenario.</p></div>
+        <div class="panel" data-step style="--act:var(--green)"><h3>Open play</h3><p>There is still a health goal, but <b>players can shape the rules</b> and fit the play into daily life<span class="rm">[2]</span>, starting from play they already do<span class="rm">[3]</span>.</p></div>
       </div>
       <div class="thm-impl" data-step><span class="arr">&rarr;</span><div><b>Next:</b> which kind are the hypertension games, and do they work?</div></div>
       <div class="cite a"><span class="rn">[1]</span><a class="lnk" href="https://doi.org/10.1016/j.entcom.2013.09.002" target="_blank" rel="noopener">Wattanasoontorn et al. 2013</a> &nbsp; <span class="rn">[2]</span><a class="lnk" href="https://escholarship.org/uc/item/1xz4701q" target="_blank" rel="noopener">Duval 2022</a> &nbsp; <span class="rn">[3]</span><a class="lnk" href="https://doi.org/10.1145/3363384.3363400" target="_blank" rel="noopener">Altarriba Bertran et al. 2019</a></div>
     </div>
-    <aside class="aside"><p>First, what is a serious game?</p><p>(click) Wattanasoontorn [waht-tah-nah-SOON-torn] and colleagues say a serious game has two goals: to be fun, and to teach a skill or improve health. They studied 108 health games.</p><p>(click) Duval [doo-VAL] describes two kinds. Serious games for health are closed. They have fixed rules, and the game controls everything.</p><p>(click) Serious play for health also has a health goal, but it stays open. People can shape it to fit their own lives, starting from play they already do.</p><p>(click) So, which kind are the hypertension games, and do they work?</p></aside>
+    <aside class="aside"><p>First, what is a serious game?</p><p>(click) Wattanasoontorn [waht-tah-nah-SOON-torn] and colleagues say a serious game has two goals: to be fun, and to teach a skill or improve health. They studied 108 health games.</p><p>(click) Duval [doo-VAL] describes two kinds. Closed games: the rules are fixed, and the game decides what counts as success. Players follow the path the designers set, like a set clinic scenario.</p><p>(click) Open play: there is still a health goal, but players can shape the rules and fit the play into their daily life, starting from play they already do.</p><p>(click) So, which kind are the hypertension games, and do they work?</p></aside>
   </section>
 
-  <section class="slide" data-sec="3" style="--act:var(--cyan)">
+  <section data-leaf="th|Serious games and play" class="slide" data-sec="3" style="--act:var(--cyan)">
     <div class="stage">
       <div class="eyebrow a">Serious Games and Play</div>
       <h2 class="a">Most health games are closed systems.</h2>
@@ -1120,7 +1152,7 @@
     <aside class="aside"><p>Let us look at two of them.</p><p>(click) On the left, Hickman [HIK-mun] and colleagues built eSMART-HD. It is a virtual clinic where adults with hypertension practice talking with their doctor. The figure shows the game group. The top number fell from about 140 to 133, about 7 points. But compared with the control group, the difference was not significant.</p><p>(click) On the right, Gallagher [GAL-uh-her] and colleagues tested MyHeartMate with 390 heart patients in Sydney. These are screens from the app. Players take care of a heart character and earn coins. Almost everyone used it at first, but only 27 percent were still using it after 30 days. The paper says people stopped when the effort no longer felt worth it, or when they found other apps. Some stopped early because they did not understand the app or did not like the game idea. They had also just left hospital, which is a stressful time.</p><p>(click) Both are closed games. Of the 22 hypertension games and tools, almost all are closed. Open play is rare.</p><p>(click) What this means for design: allow open, social play, and plan for people to keep using it after the first month.</p></aside>
   </section>
 
-  <section class="slide" data-sec="3" style="--act:var(--cyan)">
+  <section data-leaf="th|Serious games and play" class="slide" data-sec="3" style="--act:var(--cyan)">
     <div class="stage">
       <div class="eyebrow a">Hypertension &amp; Heart Games Compared</div>
       <h2 class="a">Hypertension and heart games, side by side.</h2>
@@ -1141,7 +1173,7 @@
     <aside class="aside"><p>Here are all the hypertension and heart games, one at a time.</p><p>(click) Hickman's [HIK-mun] eSMART-HD was tested with 116 adults in Ohio. Blood pressure dropped about 7 points, but it was not significant compared with control.</p><p>(click) Gallagher's [GAL-uh-her] MyHeartMate was tested with 390 heart patients in Sydney. Most players stopped within a month.</p><p>(click) Stamm [shtahm] and colleagues talked with 11 older adults with hypertension about exercise games. They wanted games that are safe, wireless, and use a controller.</p><p>(click) Radhakrishnan's [raa-dhaa-KRISH-nun] Lumbee game uses a step tracker. It is a planned trial with 220 adults. But it does not allow people who use a walker.</p><p>(click) Graham [GRAY-um] and colleagues, from our lab, ran a workshop with Indigenous participants in Arizona. They made five prototypes, one for each factor.</p><p>(click) Li [lee] and colleagues talked with 14 adults with prehypertension in China. They wanted simple, social games.</p><p>(click) Taken together: effects on blood pressure were small or short, most players stopped within weeks, and no game included players with disabilities.</p></aside>
   </section>
 
-  <section class="slide" data-sec="3" style="--act:var(--cyan)">
+  <section data-leaf="th|Participatory research" class="slide" data-sec="3" style="--act:var(--cyan)">
     <div class="stage">
       <div class="eyebrow a">Participatory, Community-Based Research</div>
       <div class="split">
@@ -1166,29 +1198,29 @@
     <aside class="aside"><p>The next theory theme is designing with the people who will use the tool. How often does this happen?</p><p>(click) About 13 studies did it: 7 with Indigenous communities and 6 with people with disabilities.</p><p>(click) The Indigenous studies and the disability studies barely overlap. And workshops themselves can leave some people out.</p><p>(click) One example is Radhakrishnan [raa-dhaa-KRISH-nun] and colleagues' Lumbee game. It is a step-based hypertension game, tested in a trial with the Lumbee Tribe. A paid community committee shaped it, and removed a casino-style mini-game because it felt like a stereotype.</p><p>(click) In these screens, real steps move the player up a trail, and coins buy cultural items in the shop.</p><p>(click) But it does not allow people who use a walker. So people with mobility disabilities cannot take part.</p><p>(click) What this means for design: pay participants, let Diné community members set the goals, and keep supporting them after the funding ends.</p></aside>
   </section>
 
-  <section class="slide" data-sec="3" style="--act:var(--cyan)">
+  <section data-leaf="th|Wicked problems and RtD" class="slide" data-sec="3" style="--act:var(--cyan)">
     <div class="stage">
       <div class="eyebrow a">Wicked Problems and Research through Design</div>
       <div class="split">
         <div>
           <h2 class="a">A health game is a wicked problem.</h2>
           <ul class="points">
-            <li data-step><b>Duval 2022</b><span class="rm">[1]</span>, a dissertation on playful health technology: it has <b>no single definition</b>.</li>
+            <li data-step><b>Rittel &amp; Webber 1973</b><span class="rm">[1]</span> named wicked problems: problems with <b>no single definition</b>.</li>
             <li data-step>Solutions are <b>better or worse</b> rather than right or wrong.</li>
-            <li data-step>Research through design <b>learns by making</b><span class="rm">[1]</span>.</li>
-            <li data-step><b>Altarriba Bertran et al. 2019</b><span class="rm">[2]</span>, Situated Play Design: start from the play already in people's lives.</li>
+            <li data-step><b>Zimmerman et al. 2007</b><span class="rm">[2]</span>: research through design <b>learns by making</b>, a way to work on wicked problems.</li>
+            <li data-step><b>Altarriba Bertran et al. 2019</b><span class="rm">[3]</span>, Situated Play Design: start from the play already in people's lives.</li>
             <li data-step class="figcue">The photo: a workshop where food traditions from many cultures became starting points for play.</li>
           </ul>
           <div class="thm-impl" data-step><span class="arr">&rarr;</span><div><b>What this means for design:</b> start from the play people already do, and use the tool to learn, not only as a product.</div></div>
-          <div class="cite a"><span class="rn">[1]</span><a class="lnk" href="https://escholarship.org/uc/item/1xz4701q" target="_blank" rel="noopener">Duval, 2022</a> &nbsp; <span class="rn">[2]</span><a class="lnk" href="https://doi.org/10.1145/3363384.3363400" target="_blank" rel="noopener">Altarriba Bertran et al., 2019</a></div>
+          <div class="cite a"><span class="rn">[1]</span><a class="lnk" href="https://doi.org/10.1007/BF01405730" target="_blank" rel="noopener">Rittel &amp; Webber, 1973</a> &nbsp; <span class="rn">[2]</span><a class="lnk" href="https://doi.org/10.1145/1240624.1240704" target="_blank" rel="noopener">Zimmerman et al., 2007</a> &nbsp; <span class="rn">[3]</span><a class="lnk" href="https://doi.org/10.1145/3363384.3363400" target="_blank" rel="noopener">Altarriba Bertran et al., 2019</a> &nbsp; <span class="rn">[4]</span><a class="lnk" href="https://escholarship.org/uc/item/1xz4701q" target="_blank" rel="noopener">Duval, 2022</a></div>
         </div>
         <div class="figcard cued">
           <img src="duval.png" alt="Situated Play Design workshop: printed food-tradition cards covered in sticky-note annotations spread across a table">
-          <div class="src"><b>Situated Play Design<span class="rm">[2]</span> (Duval 2022).</b> Food traditions from many cultures studied as starting points for playful design.</div>
+          <div class="src"><b>Situated Play Design workshop<span class="rm">[3]</span> (photo: Duval 2022<span class="rm">[4]</span>).</b> Food traditions from many cultures studied as starting points for playful design.</div>
         </div>
       </div>
     </div>
-    <aside class="aside"><p>The last theory theme: a health game is a wicked problem. What does that mean?</p><p>(click) Duval [doo-VAL], in his dissertation, explains it like this. There is no single correct way to define the problem,</p><p>(click) and answers are better or worse, not right or wrong.</p><p>(click) Research through design means learning by making. You build something, try it with people, and learn from it.</p><p>(click) An example is Situated Play Design by Altarriba Bertran [al-tah-REE-bah ber-TRAHN], Márquez Segura [MAR-kes seh-GOO-rah], Duval, and Isbister [IZ-bis-ter]. It starts from the play that is already in people's lives.</p><p>(click) This photo is from a workshop where food traditions from many cultures became ideas for play.</p><p>(click) What this means for design: start from the play people already do, and use the tool to learn, not only as a product.</p></aside>
+    <aside class="aside"><p>The last theory theme: a health game is a wicked problem. Duval [doo-VAL] applies this idea to health games in his dissertation. But where does the idea come from?</p><p>(click) Rittel [RIT-ul] and Webber [WEB-er] named wicked problems in 1973. There is no single correct way to define the problem,</p><p>(click) and answers are better or worse, not right or wrong.</p><p>(click) Zimmerman [ZIM-er-mun] and colleagues proposed research through design as a way to work on problems like this: learning by making. You build something, try it with people, and learn from it.</p><p>(click) An example is Situated Play Design by Altarriba Bertran [al-tah-REE-bah ber-TRAHN], Márquez Segura [MAR-kes seh-GOO-rah], Duval, and Isbister [IZ-bis-ter]. It starts from the play that is already in people's lives.</p><p>(click) This photo is from a workshop where food traditions from many cultures became ideas for play.</p><p>(click) What this means for design: start from the play people already do, and use the tool to learn, not only as a product.</p></aside>
   </section>
 
   <!-- ==================== SYNTHESIS ==================== -->
@@ -1736,6 +1768,12 @@
       '</ul></div>'+
     '</div>';
   }
+  // mini tree on each Background slide, with its current leaf highlighted
+  [].slice.call(document.querySelectorAll('.slide[data-leaf]')).forEach(function(s){
+    var p=s.getAttribute('data-leaf').split('|'), d=document.createElement('div'); d.className='minitree'; d.setAttribute('aria-hidden','true');
+    d.innerHTML=tree(p[0]); [].slice.call(d.querySelectorAll('.vleaf span')).forEach(function(x){ if(p[1] && x.textContent===p[1]) x.classList.add('cur'); });
+    s.appendChild(d);
+  });
   [].slice.call(document.querySelectorAll('.tree-mount')).forEach(function(m){
     m.innerHTML=tree(m.getAttribute('data-hl'));
   });
