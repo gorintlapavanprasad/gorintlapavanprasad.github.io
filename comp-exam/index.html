@@ -567,6 +567,27 @@
   .notes-panel .nclose:hover{background:rgba(255,255,255,.18)}
   .notes-panel .nb{font-family:var(--font-body);font-size:1.04rem;line-height:1.6;color:var(--ink);max-width:90ch}
   .notes-panel .nb p{margin:0 0 8px}
+  /* presenter view (index.html?presenter): slides on the left, notes column on the right; the audience window never shows it */
+  .pvhead{display:none}
+  body.presenter .deck,body.presenter .foot{right:36vw}
+  body.presenter .slide{width:min(calc(64vw - 26px), calc((100vh - var(--foot) - 26px) * 16 / 9));height:min(calc(100vh - var(--foot) - 26px), calc((64vw - 26px) * 9 / 16))}
+  body.presenter .navrow{visibility:hidden}
+  body.presenter .zone{display:none}
+  body.presenter .nav{right:calc(36vw + 14px)}
+  body.presenter .notes-panel{left:auto;right:0;top:0;bottom:0;width:36vw;max-height:none;transform:none;border-top:0;border-left:3px solid var(--hl);display:flex;flex-direction:column;padding-top:14px}
+  body.presenter .notes-panel .nclose{display:none}
+  body.presenter .pvhead{display:block;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .pvrow{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .pvtime{font-family:var(--font-mono);font-size:2.1rem;font-weight:700;color:var(--hl2);letter-spacing:.02em}
+  .pvclock{font-family:var(--font-mono);font-size:1rem;color:var(--muted)}
+  .pvbtn{background:rgba(255,255,255,.08);border:1px solid var(--line);color:var(--ink);border-radius:7px;padding:3px 10px;font-size:.8rem;cursor:pointer}
+  .pvpos{font-family:var(--font-mono);font-size:.85rem;color:var(--ink);margin-top:8px}
+  .pvnext{font-family:var(--font-body);font-size:.92rem;color:var(--muted);margin-top:6px;line-height:1.4}
+  .pvnext b{color:var(--hl2)}
+  body.presenter .notes-panel .nb{font-size:1.2rem;line-height:1.55;overflow-y:auto;max-width:none;flex:1}
+  body.presenter .notes-panel .nb p{opacity:.5;padding:4px 8px;border-radius:6px;margin:0 0 6px}
+  body.presenter .notes-panel .nb p.now{opacity:1;background:rgba(94,201,98,.13);border-left:3px solid var(--hl2)}
+  body.presenter .notes-panel .nb p.done{opacity:.35}
   .aside{display:none}
 
   @media (prefers-reduced-motion:reduce){
@@ -1802,16 +1823,67 @@
     pageno.textContent=(i+1)+' / '+N;
     prog.style.width=((i)/(N-1)*100)+'%';
     if(fprog) fprog.style.width=((i)/(N-1)*100)+'%';
+    share();
   }
+
+  // ── presenter view: a second window (?presenter) that mirrors this one, with notes, timer and what's next ──
+  var PRESENTER=/[?&]presenter\b/.test(location.search);
+  var chan=('BroadcastChannel' in window)? new BroadcastChannel('comp-exam-deck') : null;
+  var applying=false;
+  function share(){ if(chan && !applying) chan.postMessage({i:cur,k:shownCount(slides[cur])}); presenterUpdate(); }
+  if(chan) chan.onmessage=function(ev){
+    var d=ev.data||{};
+    if(d.hello){ share(); return; }                 // a new window asks where we are
+    if(typeof d.i!=='number') return;
+    applying=true;
+    if(d.i!==cur) go(d.i);
+    var s=slides[cur]; showStep(s,d.k); countUp(s);
+    applying=false; presenterUpdate();
+  };
+  var t0=null, tick=null;
+  function fmt(ms){ var t=Math.floor(ms/1000), m=Math.floor(t/60), x=t%60; return (m<10?'0':'')+m+':'+(x<10?'0':'')+x; }
+  function stepText(el){ var t=(el.textContent||'').replace(/\[\d+\]/g,'').replace(/\s+/g,' ').trim(); return t.length>90? t.slice(0,90)+'…' : (t||'(figure)'); }
+  function presenterUpdate(){
+    if(!PRESENTER) return;
+    var s=slides[cur], st=steps(s), sc=shownCount(s);
+    document.getElementById('pvpos').textContent='Slide '+(cur+1)+' / '+N+(st.length?' · click '+sc+' of '+st.length:'');
+    var nx;
+    if(sc<st.length) nx='<b>Next click:</b> '+stepText(st[sc]);
+    else if(cur<N-1){ var h=slides[cur+1].querySelector('h1,h2'); nx='<b>Next slide:</b> '+(cur+2)+' · '+(h?stepText(h):''); }
+    else nx='<b>End of deck.</b>';
+    document.getElementById('pvnext').innerHTML=nx;
+    // highlight the notes paragraph for the current click (each "(click)" line is the next reveal)
+    var k=0; [].slice.call(nbb.querySelectorAll('p')).forEach(function(p){
+      if(/^\s*\(click\)/i.test(p.textContent)) k++;
+      p.classList.toggle('now', k===sc); p.classList.toggle('done', k<sc);
+    });
+    var cur_p=nbb.querySelector('p.now'); if(cur_p && cur_p.scrollIntoView) cur_p.scrollIntoView({block:'nearest'});
+  }
+  if(PRESENTER){
+    document.body.classList.add('presenter','show-notes');
+    document.title='Presenter · '+document.title;
+    var head=document.createElement('div'); head.className='pvhead';
+    head.innerHTML='<div class="pvrow"><span class="pvtime" id="pvtime">00:00</span><span class="pvclock" id="pvclock"></span>'+
+      '<button class="pvbtn" id="pvgo">Start timer</button><button class="pvbtn" id="pvreset">Reset</button></div>'+
+      '<div class="pvpos" id="pvpos"></div><div class="pvnext" id="pvnext"></div>';
+    document.getElementById('notes').insertBefore(head, document.getElementById('nhh'));
+    setInterval(function(){
+      document.getElementById('pvclock').textContent=new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+      if(t0) document.getElementById('pvtime').textContent=fmt(Date.now()-t0);
+    },500);
+    document.getElementById('pvgo').onclick=function(){ if(!t0) t0=Date.now(); this.textContent='Running'; };
+    document.getElementById('pvreset').onclick=function(){ t0=null; document.getElementById('pvtime').textContent='00:00'; document.getElementById('pvgo').textContent='Start timer'; };
+  }
+  function openPresenter(){ window.open(location.pathname+'?presenter','comp-exam-presenter','width=1280,height=800'); }
 
   function next(){
     var s=slides[cur], st=steps(s), sc=shownCount(s);
-    if(sc<st.length){ showStep(s,sc+1); var ns=st[sc]; if(ns) countUp(ns); return; }
+    if(sc<st.length){ showStep(s,sc+1); var ns=st[sc]; if(ns) countUp(ns); share(); return; }
     if(cur<N-1) go(cur+1);
   }
   function prev(){
     var s=slides[cur], sc=shownCount(s);
-    if(sc>0){ showStep(s,sc-1); return; }
+    if(sc>0){ showStep(s,sc-1); share(); return; }
     if(cur>0) go(cur-1,{allSteps:true});
   }
 
@@ -1819,7 +1891,7 @@
   document.getElementById('bp').onclick=prev;
   document.getElementById('zr').onclick=next;
   document.getElementById('zl').onclick=prev;
-  document.getElementById('bn').onclick=function(){ document.body.classList.toggle('show-notes'); };
+  document.getElementById('bn').onclick=function(){ if(!PRESENTER) document.body.classList.toggle('show-notes'); };
   document.getElementById('nclose').onclick=function(){ document.body.classList.remove('show-notes'); };
 
   document.addEventListener('keydown',function(e){
@@ -1827,7 +1899,8 @@
     else if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); prev(); }
     else if(e.key==='Home'){ e.preventDefault(); go(0); }
     else if(e.key==='End'){ e.preventDefault(); go(N-1); }
-    else if(e.key==='n'||e.key==='N'){ document.body.classList.toggle('show-notes'); }
+    else if(e.key==='n'||e.key==='N'){ if(!PRESENTER) document.body.classList.toggle('show-notes'); }
+    else if(e.key==='p'||e.key==='P'){ if(!PRESENTER) openPresenter(); }
     else if(e.key==='f'||e.key==='F'){ if(!document.fullscreenElement)document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen(); else document.exitFullscreen&&document.exitFullscreen(); }
   });
 
@@ -1843,7 +1916,8 @@
   window.addEventListener('resize',function(){ clearTimeout(rzT); rzT=setTimeout(function(){ fit(slides[cur]); },120); });
   window.addEventListener('load',function(){ fit(slides[cur]); });
 
-  go(0,{first:true});
+  applying=true; go(0,{first:true}); applying=false;   // a new window must not move the others back to slide 1
+  if(chan) chan.postMessage({hello:true});   // join an open deck at its current slide and click
 })();
 </script>
 </body></html>
