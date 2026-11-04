@@ -252,6 +252,7 @@
   .minitree{position:absolute;top:clamp(8px,1.2vh,14px);right:clamp(10px,1.2vw,18px);width:clamp(150px,14vw,220px);pointer-events:none;z-index:3;opacity:.95}
   .slide[data-leaf] .stage>h2,.slide[data-leaf] .stage>.eyebrow,.slide[data-leaf] .split>div:first-child>h2{padding-right:clamp(150px,15vw,230px)}
   .slide[data-leaf] .stage>h2+ul{padding-right:clamp(150px,15vw,230px)}
+  .slide[data-leaf] .stage>h2+table{width:calc(100% - clamp(150px,15vw,230px))}
   .slide[data-leaf] .split>.figcard,.slide[data-leaf] .split>div:last-child{margin-top:clamp(40px,8vh,90px)}
   .minitree .tree{transform:scale(.3);transform-origin:top right;width:333%;position:relative;right:0;float:right}
   .minitree .vleaf span.cur{color:#0c0a06;background:var(--hl2);border-radius:4px;padding:0 4px;opacity:1}
@@ -779,7 +780,6 @@
     <aside class="aside"><p>To study Diné adults with disabilities, three guiding questions shaped this review.</p><p>(click) RQ1: How are serious games and playful health tools used to manage high blood pressure?</p><p>(click) RQ1.1: How many of them are made for Indigenous communities and people with disabilities?</p><p>(click) RQ2: Which design methods help us design these tools with Indigenous communities and people with disabilities?</p><p>So RQ1 asks what exists. RQ1.1 asks who it reaches. RQ2 asks how to build it.</p></aside>
   </section>
 
-  <!-- ==================== METHOD ==================== -->
   <section class="slide" data-sec="0">
     <div class="stage">
       <div class="eyebrow a">CardioCare Quest</div>
@@ -801,6 +801,16 @@
     <aside class="aside"><p>Before the review, a short note on why I am asking these questions.</p><p>(click) Our lab is building CardioCare Quest, a game app for daily blood pressure care. It has games for each of the five factors, which I explain soon.</p><p>(click) Here are two screens: Dog Walking, a GPS walk, and Vascular Village, where players can log their blood pressure.</p><p>(click) This review asks what the research says about tools like this, and whom they reach. I come back to the app briefly at the end.</p></aside>
   </section>
 
+  <section class="slide" data-sec="1">
+    <div class="stage">
+      <div class="eyebrow a">How This Talk Is Organized</div>
+      <h2 class="a">The review's themes form a tree, and the talk follows it.</h2>
+      <div class="tree-mount" data-hl="none"></div>
+      <p class="cap" data-step style="margin-top:auto">One branch at a time: first a <b>table of the studies</b> in that branch, then <b>examples</b> from the papers, then <b>what it means for design</b>. The small tree in the top corner shows where we are.</p>
+    </div>
+    <aside class="aside"><p>Before the review itself, here is how my talk is organized. I read and coded all 67 studies, and grouped the themes into this tree. Next, I explain how I found the studies.</p><p>(click) The left side is about the health problem, and about Indigenous communities and people with disabilities. Under hypertension: the five daily factors, and risk. Under disability: caregivers, accessible methods, technosolutionism, and DREEM. Under Indigenous: data ownership and culture.</p><p>(click) The right side is theory: serious games and play, working with community members, and wicked problems with research through design.</p><p>(click) I go one branch at a time. For each branch, I first show a table of the studies, then examples from the papers, then what it means for design. The small tree in the top corner shows where we are.</p></aside>
+  </section>
+
   <section class="slide" data-sec="1" data-ch="Scoping Review">
     <div class="stage">
       <h2 class="a">Finding the Literature</h2>
@@ -815,23 +825,13 @@
     <aside class="aside"><p>Next, how did I find the studies? I used six groups of search words: games, technology, hypertension, Indigenous, disability, and design. I searched three databases on 7 September 2026: PubMed, the ACM Digital Library, and Google Scholar.</p><p>(click) That gave 1,759 records.</p><p>(click) I removed 50 duplicates, and read the titles and abstracts of 1,709.</p><p>(click) I removed 1,607 that did not fit, and read 102 papers in full. I kept studies about games or playful technology for blood pressure, or about design methods with Indigenous communities or people with disabilities. I removed studies with no play or technology, or no self-management goal.</p><p>(click) I removed 35 more. 67 studies were included. I followed PRISMA-ScR, the standard guide for scoping reviews.</p></aside>
   </section>
 
-  <section class="slide" data-sec="1">
-    <div class="stage">
-      <div class="eyebrow a">A Hierarchical Thematic Analysis</div>
-      <h2 class="a">Every study coded, then arranged into a hierarchy.</h2>
-      <div class="tree-mount" data-hl="none"></div>
-      <p class="cap" data-step style="margin-top:auto">This hierarchy is the structure of the rest of the talk. For each part: what the literature says, the design implications, and an example of prior work.</p>
-    </div>
-    <aside class="aside"><p>I read and coded all 67 studies, and grouped the themes into this tree.</p><p>(click) The left side is about the health problem, and about Indigenous communities and people with disabilities. Under hypertension: the five daily factors, and risk. Under disability: caregivers, accessible methods, technosolutionism, and DREEM. Under Indigenous: data ownership and culture.</p><p>(click) The right side is theory: serious games and play, working with community members, and wicked problems with research through design.</p><p>(click) The rest of my talk follows this tree. For each part, I share what the studies found, what it means for design, and one example.</p></aside>
-  </section>
-
-  <section class="slide" data-sec="2" style="--act:var(--green)" data-ch="Background">
+  <section class="slide" data-ch="Hypertension" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Hypertension</div>
-      <h2 class="a">Where we are: the hypertension branch.</h2>
-      <div class="tree-mount" data-hl="htn" style="margin-top:clamp(12px,2.6vh,32px)"></div>
+      <h2 class="a">The hypertension branch: the big picture first.</h2>
+      <div class="branchtree"><div class="tree-mount" data-hl="htn" style="margin-top:clamp(12px,2.6vh,32px)"></div></div><table class="ctab a leaftab" style="margin-top:clamp(10px,1.8vh,20px)"><thead><tr><th>Leaf</th><th>Studies</th><th>What the studies show</th><th>Examples next</th></tr></thead><tbody data-step><tr><td class="ok">Five factors</td><td>Clinical guidelines</td><td>Blood pressure is managed through diet, exercise, medication, measurement, and education.</td><td>Carey et al. 2022; ACC/AHA 2025</td></tr></tbody><tbody data-step><tr><td class="ok">Risk</td><td>2 studies</td><td>Extra weight and seated gaming are <b>linked</b> to higher blood pressure (a link, not a cause).</td><td>Lin et al. 2012; Goldfield et al. 2011</td></tr></tbody><tbody data-step><tr><td class="ok">The gap</td><td>22 games and tools</td><td>2 were made with an Indigenous community; <b>0</b> with people with disabilities.</td><td>Graham et al. 2025; the Lumbee game</td></tr></tbody></table>
     </div>
-    <aside class="aside"><p>We start with hypertension: the five factors, and risk.</p></aside>
+    <aside class="aside"><p>We start with the hypertension branch. This table gives the big picture first. Then we look at examples.</p><p>(click) Five factors: clinical guidelines say blood pressure is managed through diet, exercise, medication, measurement, and education.</p><p>(click) Risk: two studies link extra weight and seated gaming to higher blood pressure. These are links, not causes.</p><p>(click) The gap: of 22 hypertension games and playful tools, 2 were made with an Indigenous community, and none with people with disabilities.</p><p>Now, the examples.</p></aside>
   </section>
 
   <section data-leaf="htn|Five factors" class="slide" data-sec="2" style="--act:var(--green)">
@@ -900,13 +900,13 @@
     <aside class="aside"><p>Now let me show what I found when I put the groups together.</p><p>(click) I found 22 games and playful tools for hypertension.</p><p>(click) Only 2 were made with an Indigenous community. One is Graham [GRAY-um] and colleagues, from our lab: a workshop where Indigenous participants designed game ideas for each factor. The other is the Lumbee game, a step-tracker game being tested with the Lumbee Tribe in North Carolina.</p><p>(click) None were made with people with disabilities.</p><p>(click) No study made a hypertension game for both Indigenous people and people with disabilities.</p></aside>
   </section>
 
-  <section class="slide" data-sec="2" style="--act:var(--green)">
+  <section class="slide" data-ch="Disability" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Disability</div>
-      <h2 class="a">Where we are: the disability branch.</h2>
-      <div class="tree-mount" data-hl="dis" style="margin-top:clamp(12px,2.6vh,32px)"></div>
+      <h2 class="a">The disability branch: the big picture first.</h2>
+      <div class="branchtree"><div class="tree-mount" data-hl="dis" style="margin-top:clamp(12px,2.6vh,32px)"></div></div><table class="ctab a leaftab" style="margin-top:clamp(10px,1.8vh,20px)"><thead><tr><th>Leaf</th><th>Studies</th><th>What the studies show</th><th>Examples next</th></tr></thead><tbody data-step><tr><td class="ok">Proxy care</td><td>6 disability</td><td>A caregiver can help a player, or take over for them.</td><td>Caro et al. 2018; Bircanin et al. 2021</td></tr></tbody><tbody data-step><tr><td class="ok">Accessible protocols</td><td>12 disability, 1 general</td><td>Few studies use accessibility standards such as <b>Easy Read</b>.</td><td>Johnstone et al. 2026; Spencer González et al. 2020</td></tr></tbody><tbody data-step><tr><td class="ok">Technosolutionism</td><td>4 disability, 2 general</td><td>Most work treats disability as a <b>deficit to fix</b>.</td><td>Hassan 2024; Ymous et al. 2020</td></tr></tbody><tbody data-step><tr><td class="ok">DREEM</td><td>A method from our lab</td><td>Learn from media made by disabled creators <b>before</b> asking people for their time.</td><td>Baltaxe-Admony et al. 2024</td></tr></tbody></table><p class="cap" style="margin-top:6px;color:var(--faint)">Counts are studies per theme; a study may address more than one.</p>
     </div>
-    <aside class="aside"><p>Next, what do disability studies tell us? Four themes: caregivers, accessible methods, technosolutionism, and DREEM.</p></aside>
+    <aside class="aside"><p>Next, the disability branch. Again, the big picture first.</p><p>(click) Proxy care, 6 studies: a caregiver can help a player, or take over for them.</p><p>(click) Accessible protocols, 13 studies: few use accessibility standards such as Easy Read.</p><p>(click) Technosolutionism, 6 studies: most work treats disability as a deficit to fix.</p><p>(click) DREEM, a method from our lab: learn from media made by disabled creators before asking people for their time.</p><p>Now, the examples.</p></aside>
   </section>
 
   <section data-leaf="dis|Proxy care" class="slide" data-sec="2" style="--act:var(--green)">
@@ -1002,13 +1002,13 @@
     <aside class="aside"><p>The last disability theme is a method from our lab. The idea is: learn first, before asking people for their time.</p><p>(click) DREEM, by Baltaxe-Admony [BAHL-tax AD-moh-nee], Duval [doo-VAL], and Ringland [RING-land], starts with videos and posts made by disabled creators.</p><p>(click) This way, the researcher learns without asking participants for extra effort. Disabled people already spend extra effort just to take part.</p><p>(click) The figure shows its four steps: find the media, read it closely, write notes, and combine the ideas.</p><p>(click) For my work: first learn from media made by Diné and disabled creators, then go to the Diné community with better questions.</p></aside>
   </section>
 
-  <section class="slide" data-sec="2" style="--act:var(--green)">
+  <section class="slide" data-ch="Indigenous" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Indigenous</div>
-      <h2 class="a">Where we are: the Indigenous branch.</h2>
-      <div class="tree-mount" data-hl="ind" style="margin-top:clamp(12px,2.6vh,32px)"></div>
+      <h2 class="a">The Indigenous branch: the big picture first.</h2>
+      <div class="branchtree"><div class="tree-mount" data-hl="ind" style="margin-top:clamp(12px,2.6vh,32px)"></div></div><table class="ctab a leaftab" style="margin-top:clamp(10px,1.8vh,20px)"><thead><tr><th>Leaf</th><th>Studies</th><th>What the studies show</th><th>Examples next</th></tr></thead><tbody data-step><tr><td class="ok">Data sovereignty</td><td>6 Indigenous</td><td>Few studies address <b>who owns and controls</b> community data.</td><td>Vigil-Hayes et al. 2024; Maar et al. 2019; CARE, FAIR, OCAP, 4 R's</td></tr></tbody><tbody data-step><tr><td class="ok">Cultural grounding</td><td>13 Indigenous, 1 disability, 1 general</td><td>Programs work when they <b>build on culture</b>.</td><td>Kaholokula et al. 2021; Vigil-Hayes et al. 2021; Belarde-Lewis 2011; Dirks et al. 2025</td></tr></tbody></table><p class="cap" style="margin-top:6px;color:var(--faint)">Counts are studies per theme; a study may address more than one.</p>
     </div>
-    <aside class="aside"><p>Now, what do Indigenous health studies tell us? Two themes: data ownership and culture.</p></aside>
+    <aside class="aside"><p>Now the Indigenous branch. The big picture first.</p><p>(click) Data sovereignty, 6 studies, all with Indigenous communities: few studies address who owns and controls community data.</p><p>(click) Cultural grounding, 15 studies, 13 of them with Indigenous communities: programs work when they build on culture.</p><p>Now, the examples.</p></aside>
   </section>
 
   <section data-leaf="ind|Sovereignty" class="slide" data-sec="2" style="--act:var(--green)">
@@ -1038,17 +1038,18 @@
   <section data-leaf="ind|Sovereignty" class="slide" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Indigenous · Data Governance</div>
-      <h2 class="a">CARE, FAIR, and OCAP: who decides about Indigenous data?</h2>
-      <div class="grid2" style="grid-template-columns:repeat(3,1fr);margin-top:clamp(14px,2.6vh,30px)">
+      <h2 class="a">CARE, FAIR, OCAP, and the 4 R's: who decides about Indigenous data?</h2>
+      <div class="grid2" style="grid-template-columns:repeat(4,1fr);margin-top:clamp(14px,2.6vh,30px)">
         <div class="panel" data-step style="--act:var(--green)"><h3>CARE<span class="rm">[1]</span></h3><p><b>Collective benefit · Authority to control · Responsibility · Ethics</b></p><p>Who has the right to decide about this data, and who benefits?</p></div>
         <div class="panel" data-step style="--act:var(--cyan)"><h3>FAIR<span class="rm">[2]</span></h3><p><b>Findable · Accessible · Interoperable · Reusable</b></p><p>How should data be managed so it can be found and reused?</p></div>
         <div class="panel" data-step style="--act:var(--teal)"><h3>OCAP®<span class="rm">[3]</span></h3><p><b>Ownership · Control · Access · Possession</b></p><p>First Nations' own rules for their data, from Canada.</p></div>
+        <div class="panel" data-step style="--act:var(--gold)"><h3>The 4 R's<span class="rm">[5]</span></h3><p><b>Respect · Relevance · Reciprocity · Responsibility</b></p><p>How should researchers work with the community?</p></div>
       </div>
-      <ul class="points wide" style="margin-top:clamp(14px,2.4vh,24px)"><li data-step><b>CARE and OCAP come first:</b> the community decides if and how data is shared. <b>FAIR comes second</b>, only inside those limits<span class="rm">[4]</span>.</li></ul>
+      <ul class="points wide" style="margin-top:clamp(14px,2.4vh,24px)"><li data-step><b>CARE and OCAP come first:</b> the community decides if and how data is shared. <b>FAIR comes second</b>, only inside those limits<span class="rm">[4]</span>. <b>The 4 R's</b> guide the relationship the whole time.</li></ul>
       <div class="thm-impl" data-step><span class="arr">&rarr;</span><div><b>What this means for design:</b> the Diné community decides what is shared, then FAIR keeps the shared data usable. This links to RQ2 and to PRQ3.</div></div>
-      <div class="cite a"><span class="rn">[1]</span><a class="lnk" href="https://doi.org/10.5334/dsj-2020-043" target="_blank" rel="noopener">Carroll et al. 2020</a> &nbsp; <span class="rn">[2]</span><a class="lnk" href="https://doi.org/10.1038/sdata.2016.18" target="_blank" rel="noopener">Wilkinson et al. 2016</a> &nbsp; <span class="rn">[3]</span><a class="lnk" href="https://fnigc.ca/ocap-training/" target="_blank" rel="noopener">First Nations Information Governance Centre</a> &nbsp; <span class="rn">[4]</span><a class="lnk" href="https://doi.org/10.1038/s41597-021-00892-0" target="_blank" rel="noopener">Carroll et al. 2021</a></div>
+      <div class="cite a"><span class="rn">[1]</span><a class="lnk" href="https://doi.org/10.5334/dsj-2020-043" target="_blank" rel="noopener">Carroll et al. 2020</a> &nbsp; <span class="rn">[2]</span><a class="lnk" href="https://doi.org/10.1038/sdata.2016.18" target="_blank" rel="noopener">Wilkinson et al. 2016</a> &nbsp; <span class="rn">[3]</span><a class="lnk" href="https://fnigc.ca/ocap-training/" target="_blank" rel="noopener">First Nations Information Governance Centre</a> &nbsp; <span class="rn">[4]</span><a class="lnk" href="https://doi.org/10.1038/s41597-021-00892-0" target="_blank" rel="noopener">Carroll et al. 2021</a></div> &nbsp; <span class="rn">[5]</span>Kirkness &amp; Barnhardt 1991
     </div>
-    <aside class="aside"><p>How can Indigenous communities set rules for their data? Three frameworks help.</p><p>(click) CARE, from Carroll and colleagues, has four principles: collective benefit, authority to control, responsibility, and ethics. It asks: who has the right to decide about this data, and who benefits?</p><p>(click) FAIR asks a different question: how should data be managed so others can find and reuse it? Findable, accessible, interoperable, and reusable.</p><p>(click) OCAP [OH-cap] was made by First Nations in Canada: ownership, control, access, and possession.</p><p>(click) They work together. CARE and OCAP come first: the community decides if and how data is shared. FAIR comes second, only inside those limits. FAIR without CARE can go against a tribe's sovereignty.</p><p>(click) What this means for design: the Diné community decides what is shared, then FAIR keeps the shared data usable. This links to RQ2, and to PRQ3 later.</p></aside>
+    <aside class="aside"><p>How can Indigenous communities set rules for their data, and for the research relationship? Four frameworks help.</p><p>(click) CARE, from Carroll and colleagues, has four principles: collective benefit, authority to control, responsibility, and ethics. It asks: who has the right to decide about this data, and who benefits?</p><p>(click) FAIR asks a different question: how should data be managed so others can find and reuse it? Findable, accessible, interoperable, and reusable.</p><p>(click) OCAP [OH-cap] was made by First Nations in Canada: ownership, control, access, and possession.</p><p>(click) The 4 R's, from Kirkness [KURK-ness] and Barnhardt [BARN-hart], are about how researchers work with a community: respect, relevance, reciprocity, and responsibility.</p><p>(click) They work together. CARE and OCAP come first: the community decides if and how data is shared. FAIR comes second, only inside those limits. FAIR without CARE can go against a tribe's sovereignty. And the 4 R's guide how we work with the Diné community the whole time.</p><p>(click) What this means for design: the Diné community decides what is shared, then FAIR keeps the shared data usable. This links to RQ2, and to PRQ3 later.</p></aside>
   </section>
 
   <section data-leaf="ind|Cultural" class="slide" data-sec="2" style="--act:var(--green)">
@@ -1078,6 +1079,22 @@
     <aside class="aside"><p>The second theme is culture. Do programs work better when they build on culture?</p><p>(click) Kaholokula [kah-HO-lo-KOO-lah] and colleagues tested this in a trial called Ola Hou i ka Hula [OH-lah HOH-oo ee kah HOO-lah]. It was a hula dance program with 263 Native Hawaiian adults.</p><p>(click) In the hula group, 42.7 percent reached a healthy blood pressure. In the comparison group, 21.2 percent.</p><p>(click) A local example is ARORA, an app by Vigil-Hayes [VEE-hil HAYZ] and colleagues at NAU. It was built with Navajo and Hopi youth. A community advisory board chose the design values.</p><p>(click) In these screens, you can see the butterfly. The board chose it as a positive symbol. It is used in a breathing exercise.</p><p>(click) What this means for design: start from what the Diné community values, and let Diné community members decide what to share.</p></aside>
   </section>
 
+  <section data-leaf="ind|Cultural" class="slide" data-sec="2" style="--act:var(--green)">
+    <div class="stage">
+      <div class="eyebrow a">Indigenous · Cultural Grounding</div>
+      <h2 class="a">Culture belongs to the community: what to share, and how to show strengths.</h2>
+      <ul class="points">
+        <li data-step><b>Belarde-Lewis 2011</b><span class="rm">[1]</span>, a Zuni and Tlingit scholar: <b>cultural intellectual property</b>, like songs, ceremonies, and masks, is easy to take once it is shared online.</li>
+        <li data-step>Zuni and Hopi communities forbid photos and recordings of ceremonies; at Tribal Journeys, the Ahousaht asked visitors <b>not to post</b> their ancestor masks online.</li>
+        <li data-step><b>Dirks, Belarde-Lewis &amp; Pratt 2025</b><span class="rm">[2]</span>, with Alaska Native communities: <b>collaborative photo-elicitation</b>, searching for images together, brought out cultural values while designing how to share health research results.</li>
+        <li data-step>A <b>strengths-based</b> approach: start from community, health and wellness, and storytelling, not from deficits.</li>
+      </ul>
+      <div class="thm-impl" data-step><span class="arr">&rarr;</span><div><b>What this means for design:</b> Diné community members decide which cultural content goes into a game and where it is shared, and the game shows Diné strengths, not only health problems.</div></div>
+      <div class="cite a"><span class="rn">[1]</span><a class="lnk" href="https://doi.org/10.1145/1940761.1940764" target="_blank" rel="noopener">Belarde-Lewis 2011</a> &nbsp; <span class="rn">[2]</span><a class="lnk" href="https://doi.org/10.1145/3715336.3735688" target="_blank" rel="noopener">Dirks et al. 2025</a></div>
+    </div>
+    <aside class="aside"><p>Two more papers add to cultural grounding. They are about what to share, and how.</p><p>(click) Belarde-Lewis [beh-LAR-day LOO-iss], a Zuni [ZOO-nee] and Tlingit [KLING-kit] scholar, wrote about cultural intellectual property. Songs, ceremonies, and masks are easy to take once someone puts them online.</p><p>(click) For example, Zuni and Hopi communities do not allow photos or recordings of ceremonies. At the Tribal Journeys canoe event, the Ahousaht [uh-HOW-saht] people asked visitors not to post their ancestor masks on the internet.</p><p>(click) Dirks [DURKS], Belarde-Lewis, and Pratt [PRAT] worked with Alaska Native communities. They used photo-elicitation: people searched for images online together and talked about them. This brought out cultural values while they designed how to share health research results.</p><p>(click) Their approach is strengths-based. It starts from community, health and wellness, and storytelling, not from problems.</p><p>(click) What this means for design: Diné community members decide which cultural content goes into a game and where it is shared, and the game shows Diné strengths, not only health problems.</p></aside>
+  </section>
+
   <section data-leaf="ind|" class="slide" data-sec="2" style="--act:var(--green)">
     <div class="stage">
       <div class="eyebrow a">Indigenous Studies Compared</div>
@@ -1101,13 +1118,13 @@
     <aside class="aside"><p>Here are the Indigenous studies side by side, one at a time.</p><p>(click) Percy [PUR-see] and colleagues measured blood pressure in 780 Navajo adults in the early 1990s. Of 97 people with high blood pressure, only 50 had been told.</p><p>(click) Harmon [HAR-mun] and colleagues surveyed adults from 20 Navajo communities. 35.9 percent said they had hypertension. Diabetes and obesity were also common.</p><p>(click) Bea [bee] and colleagues talked with 32 Navajo cancer survivors and 8 family members, in Flagstaff and a rural area. Programs were far away and often only one day long. Family and tradition helped people stay active.</p><p>(click) Gittelsohn [GIT-ul-sun] and colleagues ran Navajo Healthy Stores for 14 months. Stores sold and promoted healthier food. People who saw more of the program had lower BMI and made better food choices.</p><p>(click) Vigil-Hayes [VEE-hil HAYZ] and colleagues worked 18 months with a Navajo and Hopi advisory board to build ARORA. The youth said the app felt too general. They wanted the app to explain the cultural meaning.</p><p>(click) Kaholokula's [kah-HO-lo-KOO-lah] hula trial had 263 Native Hawaiian adults. 42.7 percent reached a healthy blood pressure, compared with 21.2 percent. The results lasted to 12 months.</p><p>(click) In DREAM-GLOBAL, Tobe [TOH-bee] and colleagues trained community health workers in First Nations communities in Canada to measure blood pressure. Both trial groups dropped about 5 points.</p><p>(click) Im [eem] and colleagues worked with a paid Lumbee committee to change a hypertension game. The app had a small casino-style mini-game. It was not about blood pressure; it was one of the fun extras, like the matching and word games that replaced it. Lumbee participants felt it was a stereotype, so it was removed.</p><p>(click) Taken together: high blood pressure is often missed, local and cultural programs led by the community worked best, and none of these studies focused on people with disabilities.</p></aside>
   </section>
 
-  <section class="slide" data-sec="3" style="--act:var(--cyan)">
+  <section class="slide" data-ch="Theory" data-sec="3" style="--act:var(--cyan)">
     <div class="stage">
       <div class="eyebrow a">Theory</div>
-      <h2 class="a">Where we are: the theory branch.</h2>
-      <div class="tree-mount" data-hl="th" style="margin-top:clamp(12px,2.6vh,32px)"></div>
+      <h2 class="a">The theory branch: the big picture first.</h2>
+      <div class="branchtree"><div class="tree-mount" data-hl="th" style="margin-top:clamp(12px,2.6vh,32px)"></div></div><table class="ctab a leaftab" style="margin-top:clamp(10px,1.8vh,20px)"><thead><tr><th>Leaf</th><th>Studies</th><th>What the studies show</th><th>Examples next</th></tr></thead><tbody data-step><tr><td class="ok">Serious games and play</td><td>22 games and tools</td><td>Nearly all are <b>closed</b> games; open play is rare.</td><td>Wattanasoontorn et al. 2013; Hickman et al. 2015; Gallagher et al. 2023</td></tr></tbody><tbody data-step><tr><td class="ok">Participatory research</td><td>About 13: 7 Indigenous, 6 disability</td><td>Few studies design <b>with</b> the people who will use the tool, and the two sets barely overlap.</td><td>Radhakrishnan et al. 2025</td></tr></tbody><tbody data-step><tr><td class="ok">Wicked problems and RtD</td><td>Theory papers</td><td>A health game has no single right answer, so we <b>learn by making</b>.</td><td>Rittel &amp; Webber 1973; Zimmerman et al. 2007; Altarriba Bertran et al. 2019</td></tr></tbody></table>
     </div>
-    <aside class="aside"><p>So far, I talked about the health problem, and about Indigenous communities and people with disabilities. Now the theory side: serious games and play, working with community members, and wicked problems.</p></aside>
+    <aside class="aside"><p>So far, I talked about the health problem, and about Indigenous communities and people with disabilities. Now the theory branch, with the big picture first.</p><p>(click) Serious games and play: of the 22 hypertension games and playful tools, nearly all are closed games. Open play is rare.</p><p>(click) Participatory research: about 13 studies designed with the people who would use the tool, 7 with Indigenous communities and 6 with people with disabilities. The two sets barely overlap.</p><p>(click) Wicked problems and research through design: a health game has no single right answer, so we learn by making.</p><p>Now, the examples.</p></aside>
   </section>
 
   <section data-leaf="th|Serious games and play" class="slide" data-sec="3" style="--act:var(--cyan)">
@@ -1143,6 +1160,7 @@
           <p>An app where players care for a heart character; <b>390 heart patients</b>, Sydney</p>
           <div style="background:#fff;border-radius:8px;padding:6px;margin-top:10px"><img src="myheartmate.jpg" alt="Gallagher et al. 2023: three MyHeartMate app screens, a heart character, the heart riding a bike, and a reward screen saying you've earned 10 coins" style="width:100%;max-height:clamp(190px,36vh,340px);object-fit:contain;display:block"></div>
           <p style="margin-top:10px">Almost everyone used it at first; only <b>27%</b> kept going past 30 days.</p>
+          <p style="margin-top:4px;font-size:.88em;color:var(--faint)">Why, from interviews: the effort stopped feeling worth it, or other apps fit better; some never understood the app or the game idea.</p>
         </div>
       </div>
       <ul class="points sm wide" style="margin-top:clamp(12px,2vh,20px)"><li data-step>Both are closed games. Of the <b>22</b> hypertension games and playful tools, nearly all are closed; <b>open, situated play is rare</b><span class="rm">[3]</span>.</li></ul>
@@ -1223,7 +1241,32 @@
     <aside class="aside"><p>The last theory theme: a health game is a wicked problem. Duval [doo-VAL] applies this idea to health games in his dissertation. But where does the idea come from?</p><p>(click) Rittel [RIT-ul] and Webber [WEB-er] named wicked problems in 1973. There is no single correct way to define the problem,</p><p>(click) and answers are better or worse, not right or wrong.</p><p>(click) Zimmerman [ZIM-er-mun] and colleagues proposed research through design as a way to work on problems like this: learning by making. You build something, try it with people, and learn from it.</p><p>(click) An example is Situated Play Design by Altarriba Bertran [al-tah-REE-bah ber-TRAHN], Márquez Segura [MAR-kes seh-GOO-rah], Duval, and Isbister [IZ-bis-ter]. It starts from the play that is already in people's lives.</p><p>(click) This photo is from a workshop where food traditions from many cultures became ideas for play.</p><p>(click) What this means for design: start from the play people already do, and use the tool to learn, not only as a product.</p></aside>
   </section>
 
-  <!-- ==================== SYNTHESIS ==================== -->
+  <section data-leaf="th|Wicked problems and RtD" class="slide" data-sec="3" style="--act:var(--cyan)">
+    <div class="stage">
+      <div class="eyebrow a">Wicked Problems · The Ten Characteristics</div>
+      <h2 class="a">Rittel and Webber's ten characteristics of a wicked problem.</h2>
+      <div class="grid2" style="grid-template-columns:repeat(2,1fr);margin-top:clamp(12px,2.2vh,26px)">
+        <div class="panel" data-step style="--act:var(--cyan)"><ol class="points sm" start="1" style="margin:0"><li><b>No definitive formulation</b>: you cannot fully define the problem</li><li><b>No stopping rule</b>: you never know when you are done</li><li><b>Good or bad, not true or false</b>: solutions are judged, not proven</li><li><b>No immediate or final test</b>: effects keep showing up over time</li><li><b>Every try is a one-shot operation</b>: each attempt has real consequences</li></ol></div>
+        <div class="panel" data-step style="--act:var(--teal)"><ol class="points sm" start="6" style="margin:0"><li><b>No full list of solutions</b>: there is always another option</li><li><b>Every wicked problem is unique</b>: what worked elsewhere may not fit</li><li><b>A symptom of another problem</b>: problems sit inside other problems</li><li><b>The explanation decides the solution</b>: how you frame it shapes what you do</li><li><b>No right to be wrong</b>: designers are responsible for the results</li></ol></div>
+      </div>
+      <div class="thm-impl" data-step><span class="arr">&rarr;</span><div><b>Daily blood-pressure care fits:</b> it has no end point, and what works differs from family to family. So a health game cannot be solved once; it is designed, tried, and changed.</div></div>
+      <div class="cite a"><span class="rn">[1]</span><a class="lnk" href="https://doi.org/10.1007/BF01405730" target="_blank" rel="noopener">Rittel &amp; Webber, 1973</a></div>
+    </div>
+    <aside class="aside"><p>What makes a problem wicked? Rittel [RIT-ul] and Webber [WEB-er] gave ten characteristics.</p><p>(click) First: there is no definitive formulation, so you cannot fully define the problem. There is no stopping rule, so you never know when you are done. Solutions are good or bad, not true or false. There is no immediate or final test of a solution. And every try is a one-shot operation, with real consequences.</p><p>(click) Next: there is no full list of possible solutions. Every wicked problem is unique. Each one is a symptom of another problem. How you explain the problem decides how you solve it. And the designer has no right to be wrong, because they are responsible for the results.</p><p>(click) Daily blood pressure care fits this. It has no end point, and what works differs from family to family. So a health game cannot be solved once. It is designed, tried, and changed.</p></aside>
+  </section>
+
+  <section data-leaf="th|Wicked problems and RtD" class="slide" data-sec="3" style="--act:var(--cyan)">
+    <div class="stage">
+      <div class="eyebrow a">Research through Design · Choosing Methods</div>
+      <h2 class="a">Which design methods, and why these?</h2>
+      <table class="ctab a leaftab" style="margin-top:clamp(10px,1.8vh,20px)"><thead><tr><th>Method</th><th>What it means</th><th>In this work</th></tr></thead><tbody data-step><tr><td class="ok">Research through design<span class="rm">[1]</span></td><td>Learn by making things and testing them with people</td><td>The frame</td></tr></tbody><tbody data-step><tr><td class="ok">Participatory design</td><td>Started with workers in Scandinavia in the 1970s; the people affected <b>share power</b> in decisions</td><td>Used: attention to power</td></tr></tbody><tbody data-step><tr><td class="ok">Co-design<span class="rm">[2]</span></td><td>Designers and people without design training <b>create together</b> through the whole process</td><td>Used: the design sessions</td></tr></tbody><tbody data-step><tr><td class="ok">Community-based participatory research</td><td>Community partners share the research, from the question to the results</td><td>Used: the partnership</td></tr></tbody><tbody data-step><tr><td class="ok">User-centered design</td><td>Designers study users, but designers still decide</td><td>Not chosen: users are not partners</td></tr></tbody></table>
+      <ul class="points sm wide" style="margin-top:clamp(10px,1.8vh,18px)"><li data-step><b>A critique:</b> Harrington, Erete &amp; Piper 2019<span class="rm">[3]</span> show that design workshops can repeat inequities: who is invited, where it happens, and who benefits.</li></ul>
+      <div class="thm-impl" data-step><span class="arr">&rarr;</span><div><b>For this work:</b> research through design as the frame, co-design sessions that pay attention to power, and a community-based partnership with the Diné community.</div></div>
+      <div class="cite a"><span class="rn">[1]</span><a class="lnk" href="https://doi.org/10.1145/1240624.1240704" target="_blank" rel="noopener">Zimmerman et al., 2007</a> &nbsp; <span class="rn">[2]</span><a class="lnk" href="https://doi.org/10.1080/15710880701875068" target="_blank" rel="noopener">Sanders &amp; Stappers, 2008</a> &nbsp; <span class="rn">[3]</span><a class="lnk" href="https://doi.org/10.1145/3359318" target="_blank" rel="noopener">Harrington et al., 2019</a></div>
+    </div>
+    <aside class="aside"><p>So which design methods fit a wicked problem like this? I looked at five.</p><p>(click) Research through design, from Zimmerman [ZIM-er-mun] and colleagues: learn by making things and testing them with people. This is my frame.</p><p>(click) Participatory design started with workers in Scandinavia in the 1970s. Its focus is power: the people affected share in the decisions.</p><p>(click) Co-design, as Sanders [SAN-derz] and Stappers [STAP-erz] describe it, is designers and people without design training creating together, through the whole design process. So participatory design asks who has the power, and co-design asks how we create together.</p><p>(click) Community-based participatory research is a research partnership. Community partners share the work, from the question to the results. The Lumbee team used it.</p><p>(click) User-centered design studies users, but the designers still decide. I did not choose it, because users are not partners.</p><p>(click) There are also critiques. Harrington [HAIR-ing-tun], Erete [eh-REH-teh], and Piper [PIE-per] show that design workshops can repeat inequities: who is invited, where it happens, and who benefits.</p><p>(click) So for this work: research through design as the frame, co-design sessions that pay attention to power, and a community-based partnership with the Diné community.</p></aside>
+  </section>
+
   <section class="slide" data-sec="4" style="--act:var(--gold)" data-ch="Synthesis">
     <div class="stage">
       <div class="eyebrow a">Where Each Concern Was Studied</div>
@@ -1288,23 +1331,66 @@
 
   <section class="slide" data-sec="4" style="--act:var(--gold)">
     <div class="stage">
-      <div class="eyebrow a">From Themes to Design Requirements</div>
-      <h2 class="a">Each requirement traces to the reviewed evidence.</h2>
-      <div class="reqlist">
-        <div class="reqrow" data-step><div class="reqfrom">Five factors &amp; risk</div><div class="reqarr">&rarr;</div><div class="reqto"><b>Movement</b> during play, and <b>calm</b> for measuring</div></div>
-        <div class="reqrow" data-step><div class="reqfrom">Intersectionality, proxy care, protocols, DREEM</div><div class="reqarr">&rarr;</div><div class="reqto">Designed <b>with players with disabilities</b>, with support that fades</div></div>
-        <div class="reqrow" data-step><div class="reqfrom">Sovereignty &amp; cultural grounding</div><div class="reqarr">&rarr;</div><div class="reqto"><b>Culturally grounded</b>, led by the Diné community, with data the Diné community owns</div></div>
-        <div class="reqrow" data-step><div class="reqfrom">Games, community-based research, RtD</div><div class="reqarr">&rarr;</div><div class="reqto"><b>Open, situated play</b>, developed with urban Diné adults with disabilities</div></div>
+      <div class="eyebrow a">What This Review Adds</div>
+      <h2 class="a">The closest study, and what it leaves out.</h2>
+      <div class="split">
+        <div>
+          <ul class="points">
+            <li data-step>Across the 67, the closest is <b>Graham et al. 2025</b>, an ASSETS paper from this lab: Indigenous participants co-designed hypertension game prototypes.</li>
+            <li data-step class="figcue">The photos: the workshop and its five steps, from choosing a factor to sharing out.</li>
+            <li data-step>But disability was <b>not part of the sample</b>.</li>
+            <li data-step><b>No study</b> brings a game for hypertension to both an Indigenous community and people with disabilities.</li>
+          </ul>
+          <p class="explain" data-step style="margin-top:clamp(12px,2vh,20px)">The review contributes:</p>
+          <ul class="points sm">
+            <li data-step>an <b>intersectional synthesis</b> of the 67 studies,</li>
+            <li data-step>a <b>hierarchy of themes</b> with design implications,</li>
+            <li data-step>and <b>requirements traced to the evidence</b>.</li>
+          </ul>
+          <div class="cite a"><a class="lnk" href="https://doi.org/10.1145/3663547.3746321" target="_blank" rel="noopener">Graham et al. 2025</a>, co-design with Indigenous participants.</div>
+        </div>
+        <div class="figcard dark cued">
+          <img src="graham.png" alt="Graham et al. 2025 co-design workshop with Indigenous participants and five game-prototype sketches">
+          <div class="src">Graham et al. 2025, co-design workshop with Indigenous participants</div>
+        </div>
       </div>
     </div>
-    <aside class="aside"><p>From these themes, I wrote four design requirements. Each one comes from the studies.</p><p>(click) From the five factors and risk: movement during play, and calm when measuring.</p><p>(click) From disability, caregivers, accessible methods, and DREEM: design with disabled players, with help that becomes less over time.</p><p>(click) From data ownership and culture: grounded in culture, led by the Diné community, with data the Diné community owns.</p><p>(click) From games, community research, and research through design: open play, made with urban Diné adults with disabilities.</p></aside>
+    <aside class="aside"><p>So, what does this review add?</p><p>(click) The closest study is Graham [GRAY-um] and colleagues, 2025, from our lab. Indigenous participants designed hypertension game ideas in a workshop.</p><p>(click) These photos show the workshop and its five steps.</p><p>(click) But people with disabilities were not part of that study.</p><p>(click) In all 67 studies, none covers both Indigenous communities and people with disabilities.</p><p>(click) This review adds three things:</p><p>(click) a review that looks at Indigenous communities and people with disabilities together,</p><p>(click) a set of themes, with what each means for design,</p><p>(click) and design requirements that come from the studies.</p></aside>
   </section>
 
   <section class="slide" data-sec="4" style="--act:var(--gold)">
     <div class="stage">
-      <div class="eyebrow a">Preliminary Research Questions</div>
+      <div class="eyebrow a">From Themes to Design Requirements</div>
+      <h2 class="a">Each requirement traces to the reviewed evidence.</h2>
+      <div class="reqlist">
+        <div class="reqrow" data-step><div class="reqfrom">Five factors &amp; risk</div><div class="reqarr">&rarr;</div><div class="reqto"><b>Movement</b> during play, and <b>calm</b> for measuring</div></div>
+        <div class="reqrow" data-step><div class="reqfrom">Intersectionality, proxy care, protocols, DREEM</div><div class="reqarr">&rarr;</div><div class="reqto">Designed <b>with players with disabilities</b>, with <b>support that fades</b>: help that becomes less as the player learns</div></div>
+        <div class="reqrow" data-step><div class="reqfrom">Sovereignty &amp; cultural grounding</div><div class="reqarr">&rarr;</div><div class="reqto"><b>Culturally grounded</b>, led by the Diné community, with data the Diné community owns</div></div>
+        <div class="reqrow" data-step><div class="reqfrom">Games, community-based research, RtD</div><div class="reqarr">&rarr;</div><div class="reqto"><b>Open, situated play</b>, developed with urban Diné adults with disabilities</div></div>
+      </div>
+    </div>
+    <aside class="aside"><p>From these themes, I wrote four design requirements. Each one comes from the studies.</p><p>(click) From the five factors and risk: movement during play, and calm when measuring.</p><p>(click) From disability, caregivers, accessible methods, and DREEM: design with disabled players, with help that becomes less over time, as the player learns. In Caro's [KAH-roh] exergame, for example, the help needed fell from about 14 times to about 3.</p><p>(click) From data ownership and culture: grounded in culture, led by the Diné community, with data the Diné community owns.</p><p>(click) From games, community research, and research through design: open play, made with urban Diné adults with disabilities.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="4" style="--act:var(--gold)">
+    <div class="stage">
+      <div class="eyebrow a">Answers to the Guiding Questions</div>
+      <h2 class="a">What the review found, question by question.</h2>
+      <div class="reqlist">
+        <div class="reqrow" data-step><div class="reqfrom">RQ1 · How are games used for hypertension self-management?</div><div class="reqarr">&rarr;</div><div class="reqto"><b>22</b> games and playful tools; nearly all <b>closed</b>. Effects on blood pressure were small or short, and most players stopped within weeks.</div></div>
+        <div class="reqrow" data-step><div class="reqfrom">RQ1.1 · What portion is for Indigenous communities and people with disabilities?</div><div class="reqarr">&rarr;</div><div class="reqto"><b>2 of 22</b> made with an Indigenous community; <b>0</b> with people with disabilities; none reach both.</div></div>
+        <div class="reqrow" data-step><div class="reqfrom">RQ2 · Which design methods support intersectional design?</div><div class="reqarr">&rarr;</div><div class="reqto">Participatory, community-based methods, in <b>about 13</b> studies (7 Indigenous, 6 disability) that barely overlap. Practices: paid community committees, community data control, Easy Read, and help that fades.</div></div>
+      </div>
+      <p class="cap" data-step style="margin-top:clamp(10px,2vh,22px)">Looking forward: these answers lead to four <b>preliminary</b> research questions.</p>
+    </div>
+    <aside class="aside"><p>Before looking forward, here are the answers to the three guiding questions.</p><p>(click) RQ1, how are games used? I found 22 hypertension games and playful tools. Nearly all are closed games. Effects on blood pressure were small or short, and most players stopped within weeks.</p><p>(click) RQ1.1, whom do they reach? Only 2 of the 22 were made with an Indigenous community, and none with people with disabilities. None reach both.</p><p>(click) RQ2, which design methods help? Participatory, community-based methods. About 13 studies used them, 7 with Indigenous communities and 6 with people with disabilities, and the two sets barely overlap. Useful practices include paid community committees, community data control, Easy Read materials, and help that fades.</p><p>(click) These answers lead to my next questions.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="4" style="--act:var(--gold)">
+    <div class="stage">
+      <div class="eyebrow a">Looking Forward · Preliminary Research Questions</div>
       <h2 class="a">Four questions for my dissertation.</h2>
-      <p class="explain a" style="margin-top:6px">RQ1, RQ1.1, and RQ2 guided this review. These four questions come from its findings and guide the next study.</p>
+      <p class="explain a" style="margin-top:6px">Informed by those answers, four preliminary questions guide the next study.</p>
       <div class="grid2" style="grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.4vw,18px);align-items:stretch">
         <div class="panel" data-step style="--act:var(--teal)"><div class="num">PRQ1</div><p><b>Design.</b> How do urban Diné adults with disabilities and their supporters co-design playful tools for daily blood-pressure care?</p></div>
         <div class="panel" data-step style="--act:var(--green)"><div class="num">PRQ2</div><p><b>Support.</b> How can caregiver help be designed in, while keeping the player's own voice?</p></div>
@@ -1312,25 +1398,10 @@
         <div class="panel" data-step style="--act:var(--coral)"><div class="num">PRQ4</div><p><b>Play.</b> How do closed games and open, situated play differ in keeping people engaged?</p></div>
       </div>
     </div>
-    <aside class="aside"><p>RQ1, RQ1.1, and RQ2 guided this review. From its findings come four new questions for my dissertation.</p><p>(click) PRQ1, Design: How do Diné adults with disabilities and their supporters design playful tools for daily blood pressure care together?</p><p>(click) PRQ2, Support: How can we include caregiver help, but keep the player's own voice?</p><p>(click) PRQ3, Culture: How can we build in culture and community data control, and let the Diné community judge it?</p><p>(click) PRQ4, Play: How do closed games and open play compare in keeping people engaged?</p></aside>
+    <aside class="aside"><p>Looking forward: informed by these answers, four preliminary questions guide my next study.</p><p>(click) PRQ1, Design: How do Diné adults with disabilities and their supporters design playful tools for daily blood pressure care together?</p><p>(click) PRQ2, Support: How can we include caregiver help, but keep the player's own voice?</p><p>(click) PRQ3, Culture: How can we build in culture and community data control, and let the Diné community judge it?</p><p>(click) PRQ4, Play: How do closed games and open play compare in keeping people engaged?</p></aside>
   </section>
 
-  <section class="slide" data-sec="4" style="--act:var(--gold)">
-    <div class="stage">
-      <div class="eyebrow a">Limitations</div>
-      <h2 class="a">What this review does not do.</h2>
-      <ul class="points">
-        <li data-step>A scoping review <b>maps</b> the literature; it does not rate study quality or combine results.</li>
-        <li data-step>Three databases, in English, searched <b>once</b>, so some work is missed.</li>
-        <li data-step>Screening and coding by a <b>single reviewer</b>, so the hierarchy is one fair reading.</li>
-        <li data-step>The counts show <b>where attention sits</b>, not what works.</li>
-      </ul>
-    </div>
-    <aside class="aside"><p>Before I move on, here is what this review does not do.</p><p>(click) A scoping review maps the research. It does not rate study quality or combine the results.</p><p>(click) I searched three databases, in English, one time. So I may have missed some studies.</p><p>(click) One person did the screening and coding. So this is one reading, not the only one.</p><p>(click) The numbers show where research attention is, not what works.</p></aside>
-  </section>
-
-  <!-- ==================== CARDIOCARE QUEST ==================== -->
-  <section class="slide" data-sec="5" style="--act:var(--coral)" data-grp="The Platform" data-ch="Proposed Work">
+  <section class="slide" data-sec="5" style="--act:var(--coral)" data-grp="The Platform" data-ch="Next Steps">
     <div class="stage">
       <div class="eyebrow a">Preliminary Work, in Order</div>
       <h2 class="a">Preliminary work toward these questions.</h2>
@@ -1390,55 +1461,14 @@
     <aside class="aside"><p>This is CardioCare Quest today. It has games for each of the five factors.</p><p>(click) For diet, two games: DASH Diet and Salt Sludge.</p><p>(click) For exercise, Dog Walking, which uses a GPS walk.</p><p>(click) For medication, Pill Path.</p><p>(click) For measurement, the Daily Check-In.</p><p>(click) For education, two games: Vascular Village and Bingo Bash.</p><p>This follows the risk finding: exercise gets people moving, and measuring needs sitting still.</p><p>(click) It is built with Flutter and Firebase, with story games in Twine. It works offline.</p><p>(click) People have played it in a supervised session. It is not yet ready for daily use at home.</p><p>(click) The next steps are accessibility work with players with disabilities, and a data plan with the Diné community.</p></aside>
   </section>
 
-  <section class="slide" data-sec="5" style="--act:var(--coral)">
-    <div class="stage">
-      <div class="eyebrow a">CardioCare Quest</div>
-      <h2 class="a">The CardioCare Quest project plan.</h2>
-      <div class="a" style="background:#f4f3ee;border-radius:14px;padding:clamp(12px,1.6vw,22px);box-shadow:0 16px 44px rgba(0,0,0,.5);margin-top:auto;max-width:min(100%,1360px);margin-left:auto;margin-right:auto">
-        <img src="ccq_all.png" alt="CardioCare Quest flow: a Navajo family living with hypertension; five factors (Diet, Exercise, Medication, Education, Measurements) each with minigames; telemetry data collected; shared with researchers and clinicians" style="width:100%;height:auto;display:block;border-radius:6px">
-      </div>
-      <p class="cap a" style="margin-bottom:auto">From the family, through a game for each factor, to data the Diné community controls.</p>
-    </div>
-    <aside class="aside"><p>This figure shows the full project plan.</p><p>It starts with a Navajo family living with hypertension, and their supporters. They play one game for each factor. Each game creates data, like food logs, activity, medicine times, and blood pressure readings.</p><p>On the right, this data is shared with researchers and clinicians only if the Diné community agrees.</p></aside>
-  </section>
-
-  <section class="slide" data-sec="5" style="--act:var(--coral)">
-    <div class="stage">
-      <div class="eyebrow a">What This Review Adds</div>
-      <h2 class="a">The closest study, and what it leaves out.</h2>
-      <div class="split">
-        <div>
-          <ul class="points">
-            <li data-step>Across the 67, the closest is <b>Graham et al. 2025</b>, an ASSETS paper from this lab: Indigenous participants co-designed hypertension game prototypes.</li>
-            <li data-step class="figcue">The photos: the workshop and its five steps, from choosing a factor to sharing out.</li>
-            <li data-step>But disability was <b>not part of the sample</b>.</li>
-            <li data-step><b>No study</b> brings a game for hypertension to both an Indigenous community and people with disabilities.</li>
-          </ul>
-          <p class="explain" data-step style="margin-top:clamp(12px,2vh,20px)">The review contributes:</p>
-          <ul class="points sm">
-            <li data-step>an <b>intersectional synthesis</b> of the 67 studies,</li>
-            <li data-step>a <b>hierarchy of themes</b> with design implications,</li>
-            <li data-step>and <b>requirements traced to the evidence</b>.</li>
-          </ul>
-          <div class="cite a"><a class="lnk" href="https://doi.org/10.1145/3663547.3746321" target="_blank" rel="noopener">Graham et al. 2025</a>, co-design with Indigenous participants.</div>
-        </div>
-        <div class="figcard dark cued">
-          <img src="graham.png" alt="Graham et al. 2025 co-design workshop with Indigenous participants and five game-prototype sketches">
-          <div class="src">Graham et al. 2025, co-design workshop with Indigenous participants</div>
-        </div>
-      </div>
-    </div>
-    <aside class="aside"><p>So, what does this review add?</p><p>(click) The closest study is Graham [GRAY-um] and colleagues, 2025, from our lab. Indigenous participants designed hypertension game ideas in a workshop.</p><p>(click) These photos show the workshop and its five steps.</p><p>(click) But people with disabilities were not part of that study.</p><p>(click) In all 67 studies, none covers both Indigenous communities and people with disabilities.</p><p>(click) This review adds three things:</p><p>(click) a review that looks at Indigenous communities and people with disabilities together,</p><p>(click) a set of themes, with what each means for design,</p><p>(click) and design requirements that come from the studies.</p></aside>
-  </section>
-
-  <section class="slide" data-sec="5" style="--act:var(--coral)" data-grp="Future" data-ch="Future">
+  <section class="slide" data-sec="5" style="--act:var(--coral)" data-grp="Future">
     <div class="stage">
       <div class="eyebrow a">Future Work</div>
       <h2 class="a">From the Hozhoni Gameorama to a game for every factor.</h2>
       <div class="thm">
         <div>
           <div data-step><div class="thm-stat"><span data-count="23">23</span><span class="u"> game ideas</span></div>
-          <div class="thm-statlbl">came from the co-design workshop at the Hozhoni Gameorama, with 36 adults with disabilities and their caregivers, alongside feedback from the play session <span class="src">(Gorintla et al., under review)</span></div></div>
+          <div class="thm-statlbl">came from the co-design workshop at the <b>Hozhoni Gameorama</b>, a game day on 12 May 2026 hosted by Hozhoni, our Flagstaff partner that supports people with disabilities, with 36 adults with disabilities and their caregivers, alongside feedback from the play session <span class="src">(Gorintla et al., under review)</span></div></div>
         </div>
         <div class="thm-study" data-step>
           <span class="tag">Next</span>
@@ -1453,7 +1483,7 @@
       </div>
       <div class="thm-impl" data-step><span class="arr">&rarr;</span><div>Done with urban Diné adults with disabilities and their supporters.</div></div>
     </div>
-    <aside class="aside"><p>What comes next?</p><p>(click) At the Hozhoni [hoh-ZHOH-nee] Gameorama, 36 adults with disabilities and their caregivers created 23 game ideas. The play session also gave us feedback on CardioCare Quest.</p><p>(click) Next, I will build a game for each factor with the Diné community, using those ideas.</p><p>(click) I will also do accessibility work with players with disabilities,</p><p>(click) make a data plan with the Diné community,</p><p>(click) and then test it in a user study.</p><p>(click) All of this will be done with Diné adults with disabilities and their supporters.</p></aside>
+    <aside class="aside"><p>What comes next?</p><p>(click) Hozhoni [hoh-ZHOH-nee] is our partner in Flagstaff that supports people with disabilities. On 12 May 2026, it hosted a game day called the Gameorama. There, 36 adults with disabilities and their caregivers created 23 game ideas. The play session also gave us feedback on CardioCare Quest.</p><p>(click) Next, I will build a game for each factor with the Diné community, using those ideas.</p><p>(click) I will also do accessibility work with players with disabilities,</p><p>(click) make a data plan with the Diné community,</p><p>(click) and then test it in a user study.</p><p>(click) All of this will be done with Diné adults with disabilities and their supporters.</p></aside>
   </section>
 
   <section class="slide" data-sec="5" style="--act:var(--coral)" data-grp="Conclusion" data-ch="Conclusion">
@@ -1477,7 +1507,6 @@
     <aside class="aside"><p>Thank you. I am happy to take your questions.</p></aside>
   </section>
 
-  <!-- ==================== BACKUP / APPENDIX ==================== -->
   <section class="slide" data-sec="5" style="--act:var(--coral)" data-ch="Backup">
     <div class="stage">
       <div class="eyebrow a">Backup · Methods</div>
@@ -1510,6 +1539,20 @@
       </div>
     </div>
     <aside class="aside"><p>Backup. The search and screening: three databases on 7 September 2026, 1,759 records down to 67 included, with these inclusion and exclusion criteria.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">Backup · Limitations</div>
+      <h2 class="a">What this review does not do.</h2>
+      <ul class="points">
+        <li>A scoping review <b>maps</b> the literature; it does not rate study quality or combine results.</li>
+        <li>Three databases, in English, searched <b>once</b>, so some work is missed.</li>
+        <li>Screening and coding by a <b>single reviewer</b>, so the hierarchy is one fair reading.</li>
+        <li>The counts show <b>where attention sits</b>, not what works.</li>
+      </ul>
+    </div>
+    <aside class="aside"><p>Before I move on, here is what this review does not do.</p><p>(click) A scoping review maps the research. It does not rate study quality or combine the results.</p><p>(click) I searched three databases, in English, one time. So I may have missed some studies.</p><p>(click) One person did the screening and coding. So this is one reading, not the only one.</p><p>(click) The numbers show where research attention is, not what works.</p></aside>
   </section>
 
   <section class="slide" data-sec="5" style="--act:var(--coral)">
@@ -1596,6 +1639,18 @@
       <div class="cite a">IRB 1957455 · run 12 May 2026 at the Hozhoni Gameorama · Gorintla et al., under review.</div>
     </div>
     <aside class="aside"><p>Backup. Two studies ran at the Hozhoni Gameorama: a co-design workshop where 36 adults with disabilities and caregivers produced 23 game concepts, and a play session of CardioCare Quest with and without support. The seven-day cultural probe with 31 Navajo adults was a separate, earlier study, run by my former colleagues, not at the Gameorama.</p></aside>
+  </section>
+
+  <section class="slide" data-sec="5" style="--act:var(--coral)">
+    <div class="stage">
+      <div class="eyebrow a">Backup · CardioCare Quest</div>
+      <h2 class="a">The CardioCare Quest project plan.</h2>
+      <div class="a" style="background:#f4f3ee;border-radius:14px;padding:clamp(12px,1.6vw,22px);box-shadow:0 16px 44px rgba(0,0,0,.5);margin-top:auto;max-width:min(100%,1360px);margin-left:auto;margin-right:auto">
+        <img src="ccq_all.png" alt="CardioCare Quest flow: a Navajo family living with hypertension; five factors (Diet, Exercise, Medication, Education, Measurements) each with minigames; telemetry data collected; shared with researchers and clinicians" style="width:100%;height:auto;display:block;border-radius:6px">
+      </div>
+      <p class="cap a" style="margin-bottom:auto">From the family, through a game for each factor, to data the Diné community controls.</p>
+    </div>
+    <aside class="aside"><p>This figure shows the full project plan.</p><p>It starts with a Navajo family living with hypertension, and their supporters. They play one game for each factor. Each game creates data, like food logs, activity, medicine times, and blood pressure readings.</p><p>On the right, this data is shared with researchers and clinicians only if the Diné community agrees.</p></aside>
   </section>
 
   <section class="slide" data-sec="5" style="--act:var(--coral)">
