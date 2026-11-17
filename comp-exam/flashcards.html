@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comp Exam Flashcards</title>
+<style>
+  :root{
+    --bg:#f4f5f6; --ink:#1a1a1a; --muted:#5b6b72; --card:#ffffff; --line:#dfe4e7;
+    --b0:#21918c; --b1:#440154; --b2:#3b528b; --b3:#2a9d6f;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Segoe UI',Helvetica,Arial,sans-serif;}
+  .wrap{max-width:760px;margin:0 auto;padding:20px 16px 60px;}
+  h1{font-size:22px;margin:4px 0 2px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 16px;}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+  .filters button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:20px;padding:6px 13px;font-size:13px;cursor:pointer;}
+  .filters button.active{color:#fff;border-color:transparent;font-weight:700;}
+  .filters button.active[data-b="all"]{background:#1a1a1a;}
+  .filters button.active[data-b="0"]{background:var(--b0);}
+  .filters button.active[data-b="1"]{background:var(--b1);}
+  .filters button.active[data-b="2"]{background:var(--b2);}
+  .filters button.active[data-b="3"]{background:var(--b3);}
+  .scene{perspective:1600px;}
+  .card{position:relative;width:100%;min-height:330px;cursor:pointer;transform-style:preserve-3d;transition:transform .5s;}
+  .card.flipped{transform:rotateY(180deg);}
+  .face{position:absolute;inset:0;backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 24px;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .back{transform:rotateY(180deg);}
+  .tag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#fff;border-radius:6px;padding:3px 9px;margin-bottom:16px;}
+  .cite{font-size:26px;font-weight:700;line-height:1.2;}
+  .pron{font-size:15px;font-weight:600;margin-top:6px;}
+  .topic{font-size:18px;color:var(--muted);margin-top:8px;}
+  .hint{margin-top:auto;color:#9aa6ac;font-size:12px;}
+  .backlabel{font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+  .backtext{font-size:17px;line-height:1.5;}
+  .mnem{margin-top:16px;padding:11px 14px;background:#fffbe6;border-left:4px solid #e0a800;border-radius:8px;font-size:15px;line-height:1.45;}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px;}
+  .nav button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 18px;font-size:15px;cursor:pointer;}
+  .nav button:hover{background:#f0f2f3;}
+  .count{color:var(--muted);font-size:14px;min-width:92px;text-align:center;}
+  .keys{color:#9aa6ac;font-size:12px;text-align:center;margin-top:12px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Comprehensive Exam — Core Paper Flashcards</h1>
+  <p class="sub">Click the card (or press Space) to flip. Arrow keys move. Facts match the defense deck.</p>
+  <div class="filters" id="filters"></div>
+
+  <div class="scene">
+    <div class="card" id="card" onclick="flip()">
+      <div class="face front">
+        <span class="tag" id="ftag"></span>
+        <div class="cite" id="fcite"></div>
+        <div class="pron" id="fpron"></div>
+        <div class="topic" id="ftopic"></div>
+        <div class="hint">tap to reveal</div>
+      </div>
+      <div class="face back">
+        <span class="tag" id="btag"></span>
+        <div class="backlabel">Who · Method · Finding</div>
+        <div class="backtext" id="bback"></div>
+        <div class="mnem" id="bmnem"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button onclick="prev()">&larr; Prev</button>
+    <span class="count" id="count"></span>
+    <button onclick="shuffle()">Shuffle</button>
+    <button onclick="next()">Next &rarr;</button>
+  </div>
+  <p class="keys">Space = flip &nbsp;·&nbsp; &larr; / &rarr; = prev / next &nbsp;·&nbsp; S = shuffle</p>
+</div>
+
+<script>
+const BRANCHES = [
+  "Hypertension in Native communities",
+  "Disability in Native communities",
+  "Designing with Native communities",
+  "Serious games & methods"
+];
+const CARDS = [
+  // 0 — Hypertension in Native communities
+  {b:0,c:"Sharlin et al. 1993",t:"Blood-pressure awareness, Northern Plains",back:"418 adults of one South Dakota tribe (1986); cross-sectional household survey scored like a screening test. Only 50% with high measured BP knew it; just 27% of ages 18–39 (71% at 60+). → Measurement, Education."},
+  {b:0,c:"Percy et al. 1997",t:"Navajo Health & Nutrition Survey",back:"780 Navajo adults, 20–91 (1991–92); population-based cross-sectional, BP measured 3×. 19% had HTN. Of 97 with high measured BP, only 50 had been told (47 didn't know). → Measurement."},
+  {b:0,c:"Jolly et al. 2015",t:"WATCH study, western Alaska",back:"Alaska Native adults, 4 study groups; pooled cross-sectional. 30% had HTN; of them 64% aware, 61% treated, 39% controlled."},
+  {b:0,c:"Schaefer et al. 2021",t:"Home blood-pressure cuff accuracy",back:"100 AN/AI adults with HTN, Anchorage; method-comparison (device validation). Arm cuff ≈ reference; wrist cuff read +4.8 systolic, +3.6 diastolic. → Measurement."},
+  {b:0,c:"Railey et al. 2022",t:"Which home cuff people choose",back:"Same 100 adults (81 complete); randomized crossover pilot. 66% chose the wrist cuff for comfort/ease; 75% were willing to switch to the more accurate cuff."},
+  {b:0,c:"Schaefer et al. 2022",t:"Patient vs provider views of HTN",back:"16 AN/AI patients + 5 providers; qualitative focus groups, thematic analysis. Patients saw HTN as a short-term state (stress); providers as a long-term condition."},
+  {b:0,c:"Mendlein et al. 1997",t:"Risk factors cluster (Navajo)",back:"788 Navajo adults (Navajo Health & Nutrition Survey) with lab tests. Adults with obesity were ~4× as likely to have diabetes, HTN, or a poor cholesterol level. → Diet, Exercise."},
+  {b:0,c:"Jernigan et al. 2010",t:"Risk-factor trends, AI/AN",back:"Repeated cross-sectional (BRFSS). HTN rose 28.1%→29.5% (1995–96 to 2005–06); 79% had ≥1 of 6 heart risk factors, ~20% had ≥3."},
+  {b:0,c:"Rawal et al. 2023",t:"Which factor carries the most CVD",back:"8,497 AI/AN adults (2017 BRFSS); population attributable fractions. HTN linked to 42% of heart disease/stroke — the largest share (cholesterol 27%, diabetes 18%)."},
+  {b:0,c:"Zamora-Kapoor et al. 2024",t:"Mediation: teen smoking → BP",back:"312 AI/AN (Add Health), adolescence→adulthood; longitudinal cohort + mediation. Teen smoking raised adult high-BP risk ~14%; BMI did NOT mediate as it does in White/Black adults."},
+  {b:0,c:"Rhoades & Buchwald 2003",t:"Urban Native elders, control",back:"524 urban Native elders 50+, Seattle Indian Health Board; retrospective cohort (chart review). 38% had diagnosed HTN; 83% on medicine but only 36% controlled; counseling 27% each. → Medication, Diet, Exercise."},
+  {b:0,c:"Eberly et al. 2023",t:"Medicare burden, AI/AN",back:"220,598 AI/AN Medicare beneficiaries 65+ (2015–19); retrospective cohort (claims). 72.2% had HTN — the most prevalent CVD risk factor; 38.8% in the most distressed communities."},
+  {b:0,c:"Breathett et al. 2020",t:"AHA scientific statement",back:"Expert scientific statement. Describes talking circles as shared decision-making; 14.7% of AI/AN adults meet activity recs; 573 tribes; 71% live in urban areas."},
+  {b:0,c:"Eberly et al. 2024",t:"Hózhó trial (care at home)",back:"Heart-failure adults, Gallup / Tohatchi, Navajo Nation; stepped-wedge RCT. A team starts and titrates medicines by phone using home-cuff readings. (Design paper.)"},
+  {b:0,c:"Sinclair et al. 2023",t:"NOSH protocol (DASH diet)",back:"370 urban AI/AN adults planned; cultural adaptation of DASH, wait-list RCT. Both groups get $30/week groceries (isolates the counseling). Outcome: home systolic BP. → Diet."},
+  // 1 — Disability in Native communities
+  {b:1,c:"Hodge 1989",t:"Tribal rehabilitation needs",back:"170 clients of 3 tribal VR programs (Navajo, Chippewa-Cree, Shoshone-Bannock), 1987; collaborative needs assessment. High BP the 2nd most common problem (31.8%); #1 among Navajo clients (42.2%)."},
+  {b:1,c:"Okoro et al. 2007",t:"AI/AN disability + chronic conditions",back:"434,972 adults 50+ (BRFSS 2003–05). Disability prevalence 38.4% among older AIAN — highest of any group. Among those with a disability, 62.0% of women and 55.5% of men had HTN. → Burden."},
+  {b:1,c:"Sanderson et al. 1998",t:"Tribal disability needs (NAU)",back:"32 Navajo/Zuni/Laguna adults with disabilities. HTN among the 3 most common; 59% did not get needed food help; 63% limited in driving. → Diet, Measurement."},
+  {b:1,c:"Mashinchi et al. 2022",t:"Place, rurality & disability",back:"3,220 US counties (ACS 2015–19); ecological (county-level) analysis + GIS. Where more Native people live, Native disability was LOWER (16.4% at every rurality) vs 21–24% elsewhere — read as belonging/cultural ties."},
+  {b:1,c:"Reisinger & Ripat 2014",t:"Assistive technology, Navajo Nation",back:"28 AT users + 7 providers, Chinle; talking-circle focus groups (CBPR). Main theme: feeling understood (or not). 57% lived >20 miles from town; poor roads/housing disabled them most."},
+  {b:1,c:"Weaver 2015",t:"Native views of disability",back:"Theoretical essay + literature synthesis. Most Native languages have no word equal to 'disability'; a person is in balance when they fill a role in family and community."},
+  {b:1,c:"Frankland et al. 2004",t:"Self-determination & Diné culture",back:"Theoretical essay, cross-cultural comparison. All four parts of the self-determination model fit Diné culture, expressed through interdependence and decisions made with family."},
+  {b:1,c:"Rabang et al. 2023",t:"Oyáte Circle (ownership)",back:"Position paper with program cases. Moving from university branding to its own logo, language and colors changed how communities received the program."},
+  {b:1,c:"Yellowhorse 2022",t:"A Diné way of judging worth",back:"Critical autoethnography. Proposes a Diné measure of worth — life, people, community, land, language, teachings — rather than by how much someone produces."},
+  {b:1,c:"Yellowhorse 2018",t:"K'é (kinship) & special education",back:"Critical historical / discourse analysis. K'é (kinship) as the base of Diné special education: people are relatives first, before any label."},
+  {b:1,c:"Nozadi et al. 2019",t:"Navajo infant development",back:"530 Navajo infants (Navajo Birth Cohort Study); compared with national norms + estimated accuracy. Community reviewed every item first; at 10mo, 64.8% of mothers said 'not yet' to walking by furniture (cradle boards)."},
+  {b:1,c:"Rennie et al. 2023",t:"Diné child assessment in context",back:"138 Diné children ~4 (Navajo Birth Cohort Study); several tests, then a team agreed on the diagnosis. Diné-speaking staff clarified items; verbal scores were lower; four explanations held open, including test bias."},
+  // 2 — Designing with Native communities
+  {b:2,c:"Billey et al. 2024",t:"+Language is Medicine (adaptation)",back:"23-member community advisory board (95% Diné), Shiprock; cultural adaptation of two evidence-based programs. Nine adaptation steps → a 5-lesson program with a map of daily routines (e.g., talking while making frybread)."},
+  {b:2,c:"Kaholokula et al. 2015",t:"Hula pilot trial",back:"55 Native Hawaiian / Pacific Islander adults (≥140 systolic), Honolulu; CBPR pilot RCT, wait-list. Systolic fell 18.3 mmHg after 12 weeks of hula + self-care, vs 7.6 in the wait-list. → Exercise, Education."},
+  {b:2,c:"Kaholokula et al. 2021",t:"Hula full RCT",back:"263 Native Hawaiian adults, uncontrolled HTN; CBPR RCT with education-only wait-list. At 6 months, 42.7% in the hula group were <130/80 vs 21.2% in education-only; gains held at 12 months."},
+  {b:2,c:"Vigil-Hayes et al. 2021",t:"ARORA (culture in an app)",back:"Advisory board (4 Navajo, 2 Hopi professionals) + 10 Native youth 12–18, Flagstaff; CBPR + tribal participatory research, co-design with grounded theory. Board asked for audio instructions, little text, cooperative games."},
+  {b:2,c:"Hagemann et al. 2024",t:"Hopi program sets requirements",back:"15 Hopi Behavioral Health staff (2023); participatory design within PAR. Many clients prefer documents read to them; 'information mediators' (parents, grandparents) will be major users."},
+  {b:2,c:"Hagemann et al. 2026",t:"Hopi youth usability test",back:"9 Hopi/Tewa youth 16–24, over Zoom; remote usability testing within PAR. Wanted to use the app again (4.55/5); asked for Hopi-specific images (the mesas) and a first-run tutorial."},
+  // 3 — Serious games & methods
+  {b:3,c:"Clochesy et al. 2015",t:"eSMART — designing the game",back:"Participatory serious-game design; 11 focus groups with adults who had diabetes + HTN → scripts for three virtual clinic staff. Captions, first added for hearing loss, helped every player and became the default. → Education."},
+  {b:3,c:"Hickman et al. 2021",t:"eSMART — pilot RCT",back:"109 adults with HTN, Ohio (not a Native sample); pilot RCT. One group practiced a virtual clinic visit monthly, the other watched a video. Talks with providers improved in the game group over 3 months; health literacy did not change."},
+  {b:3,c:"Graham, Ikwunne & Duval 2025",t:"Co-designing HTN games",back:"14 Indigenous participants (Hopi, Navajo, Diné), 2-hour workshop, N. Arizona; Research through Design + participatory design. 17 designs → 5 prototypes (one per factor); 5 strategies: rewards, familiar formats, cultural stories, step-by-step progress, open play."},
+  {b:3,c:"Radhakrishnan et al. 2025",t:"Heart Health Mountain (Lumbee)",back:"220 Lumbee adults planned, Robeson County NC; CBPR then an RCT (trial plan). Fitbit steps move the player up a trail to cultural landmarks; outcome = daily steps. Excludes anyone who can't walk without an aid or another person."},
+  {b:3,c:"Wattanasoontorn et al. 2013",t:"Serious games for health (taxonomy)",back:"Classifies serious games for health by purpose, player, and stage of disease. A serious game keeps the rules/challenges/rewards of a game while adding a health aim."},
+  {b:3,c:"Rittel & Webber 1973",t:"Wicked problems",back:"A problem with no single correct answer; solutions are better or worse, not right or wrong. HTN self-management with urban Diné adults with disabilities is such a problem."},
+  {b:3,c:"Altarriba Bertran et al. 2019",t:"Situated Play Design",back:"Three steps: find the play that already happens in daily life, design something that supports it, and test it in daily life. Basis for 'open play' vs a 'closed game'."},
+  {b:3,c:"Crenshaw 1991",t:"Intersectionality",back:"When two or more identities meet in one person, the experience differs from either one alone. Here: Indigeneity × disability in urban Diné adults with disabilities."}
+];
+
+const PRON = {
+  "Sharlin et al. 1993":"SHAR-lin","Percy et al. 1997":"PUR-see","Jolly et al. 2015":"JOL-ee",
+  "Schaefer et al. 2021":"SHAY-fer","Railey et al. 2022":"RAY-lee","Schaefer et al. 2022":"SHAY-fer",
+  "Mendlein et al. 1997":"MEND-line","Jernigan et al. 2010":"JUR-nih-gun","Rawal et al. 2023":"ruh-WAHL",
+  "Zamora-Kapoor et al. 2024":"zuh-MOR-uh kuh-POOR","Rhoades & Buchwald 2003":"ROHDS & BOOK-wald",
+  "Eberly et al. 2023":"EB-er-lee","Breathett et al. 2020":"BRETH-it","Eberly et al. 2024":"EB-er-lee",
+  "Sinclair et al. 2023":"sin-KLAIR","Hodge 1989":"HOJ","Okoro et al. 2007":"oh-KOR-oh",
+  "Sanderson et al. 1998":"SAN-der-sun","Mashinchi et al. 2022":"muh-SHIN-chee",
+  "Reisinger & Ripat 2014":"RYE-sing-er & RIP-at","Weaver 2015":"WEE-ver","Frankland et al. 2004":"FRANK-lund",
+  "Rabang et al. 2023":"ruh-BANG","Yellowhorse 2022":"YEL-oh-horss","Yellowhorse 2018":"YEL-oh-horss",
+  "Nozadi et al. 2019":"noh-ZAH-dee","Rennie et al. 2023":"REN-ee","Billey et al. 2024":"BILL-ee",
+  "Kaholokula et al. 2015":"kah-ho-lo-KOO-lah","Kaholokula et al. 2021":"kah-ho-lo-KOO-lah",
+  "Vigil-Hayes et al. 2021":"vih-HEEL HAYZ","Hagemann et al. 2024":"HAH-guh-mun","Hagemann et al. 2026":"HAH-guh-mun",
+  "Clochesy et al. 2015":"kluh-CHESS-ee","Hickman et al. 2021":"HIK-mun",
+  "Graham, Ikwunne & Duval 2025":"GRAY-um, ik-WOON-eh & doo-VAHL","Radhakrishnan et al. 2025":"RAH-duh-KRISH-nun",
+  "Wattanasoontorn et al. 2013":"waht-tuh-nuh-SOON-torn","Rittel & Webber 1973":"RIT-el & WEB-er",
+  "Altarriba Bertran et al. 2019":"al-tuh-REE-buh ber-TRAHN","Crenshaw 1991":"KREN-shaw"
+};
+const MNEM = {
+  "Sharlin et al. 1993":"\"SHARE-lin\" = who SHARED/knew? Only half; the youngest knew least (27%).",
+  "Percy et al. 1997":"Percy's 9-7: of 97 with high BP, 47 didn't know; 19% HTN.",
+  "Jolly et al. 2015":"WATCH the drop in Alaska: aware 64 &rarr; treated 61 &rarr; controlled 39.",
+  "Schaefer et al. 2021":"Schaefer '21 = the CUFF test: the wrist cuff reads too HIGH (+4.8).",
+  "Railey et al. 2022":"Railey = people pick the comfy WRIST cuff (66%), not the accurate one.",
+  "Schaefer et al. 2022":"Schaefer '22 = the STORY: patients say 'short-term stress', providers say 'long-term'.",
+  "Mendlein et al. 1997":"Obesity MEDDLES (Mendlein) with everything: 4&times; diabetes, HTN, bad lipids.",
+  "Jernigan et al. 2010":"Jernigan = the JOURNEY over time: 28&rarr;29%, and 79% had &ge;1 risk factor.",
+  "Rawal et al. 2023":"Rawal = the RANKING: HTN is the #1 driver of CVD (42%).",
+  "Zamora-Kapoor et al. 2024":"Zamora = TEEN SMOKE &rarr; adult high BP (weight doesn't carry it for AI/AN).",
+  "Rhoades & Buchwald 2003":"Rhoades = 'ROADS' to the city: urban elders on meds (83%) but few controlled (36%).",
+  "Eberly et al. 2023":"Eberly '23 = the ELDERLY Medicare paper: 72% have HTN (age 65+).",
+  "Breathett et al. 2020":"Breathett = the AHA statement: talking circles; 71% urban.",
+  "Eberly et al. 2024":"Eberly '24 = Hózhó: meds managed by PHONE at home (stepped-wedge).",
+  "Sinclair et al. 2023":"Sinclair = NOSH: DASH diet + traditional foods; urban; both arms get groceries.",
+  "Hodge 1989":"Hodge = the OLDEST (1989): HTN is #1 among Navajo rehab clients (42.2%).",
+  "Okoro et al. 2007":"Okoro = the KEY disability+HTN numbers: 38.4% disabled; HTN 62% women / 55.5% men.",
+  "Sanderson et al. 1998":"Sanderson = the NAU 32: HTN common, plus food (59%) & driving (63%) barriers.",
+  "Mashinchi et al. 2022":"Mashinchi = the MAP: more Native neighbors &rarr; LESS disability (belonging protects).",
+  "Reisinger & Ripat 2014":"Reisinger = DISTANCE: 57% live >20 miles out; the theme is 'feeling understood'.",
+  "Weaver 2015":"Weaver = NO WORD for 'disability'; balance = filling your role in the family.",
+  "Frankland et al. 2004":"Frankland = self-determination FITS Diné (through family & interdependence).",
+  "Rabang et al. 2023":"Rabang = BRANDING: its own logo/colors &rarr; the community accepts it.",
+  "Yellowhorse 2022":"Yellowhorse '22 = WORTH by relationship, not productivity (told as her own story).",
+  "Yellowhorse 2018":"Yellowhorse '18 = K'é: you're a RELATIVE first, a label second.",
+  "Nozadi et al. 2019":"Nozadi = CRADLE BOARDS: 'late' walking is cultural, not a delay.",
+  "Rennie et al. 2023":"Rennie = LANGUAGE: verbal scores lower; could be test bias (held open).",
+  "Billey et al. 2024":"Billey = the 9-STEP adaptation (Diné language, a daily-routines map).",
+  "Kaholokula et al. 2015":"Kaholokula '15 = HULA pilot: &minus;18.3 mmHg.",
+  "Kaholokula et al. 2021":"Kaholokula '21 = HULA trial: 42.7% controlled vs 21.2% (education only).",
+  "Vigil-Hayes et al. 2021":"Vigil-Hayes = ARORA: audio, little text, cooperative games.",
+  "Hagemann et al. 2024":"Hagemann '24 = HELPERS: 'information mediators' (family); docs read aloud.",
+  "Hagemann et al. 2026":"Hagemann '26 = YOUTH test: 4.55/5; wants Hopi images + a tutorial.",
+  "Clochesy et al. 2015":"Clochesy = eSMART DESIGN: captions help EVERYONE (the curb-cut effect).",
+  "Hickman et al. 2021":"Hickman = eSMART TRIAL: practice a clinic visit &rarr; better provider talks.",
+  "Graham, Ikwunne & Duval 2025":"Graham = YOUR lab's 5 + 5: five prototypes, five strategies.",
+  "Radhakrishnan et al. 2025":"Radhakrishnan = Heart Health MOUNTAIN: steps&rarr;landmarks, but EXCLUDES mobility-aid users.",
+  "Wattanasoontorn et al. 2013":"Wattanasoontorn = the CLASSIFIER: purpose &times; player &times; stage of disease.",
+  "Rittel & Webber 1973":"Rittel = WICKED problem: no right answer, only better or worse.",
+  "Altarriba Bertran et al. 2019":"Altarriba = SITUATED PLAY: find &rarr; support &rarr; test play in daily life.",
+  "Crenshaw 1991":"Crenshaw = INTERSECTIONALITY: two identities are not the sum of their parts."
+};
+let order = CARDS.map((_,i)=>i);
+let filter = "all";
+let pos = 0;
+
+function view(){ return filter==="all" ? order.slice() : order.filter(i=>CARDS[i].b==filter); }
+function cols(){ return ["var(--b0)","var(--b1)","var(--b2)","var(--b3)"]; }
+
+function render(){
+  const v = view();
+  if(pos>=v.length) pos=0;
+  if(pos<0) pos=v.length-1;
+  const card = CARDS[v[pos]];
+  const col = cols()[card.b];
+  document.getElementById("card").classList.remove("flipped");
+  document.getElementById("ftag").textContent = BRANCHES[card.b];
+  document.getElementById("btag").textContent = BRANCHES[card.b];
+  document.getElementById("ftag").style.background = col;
+  document.getElementById("btag").style.background = col;
+  document.getElementById("fcite").textContent = card.c;
+  const pr = document.getElementById("fpron");
+  pr.textContent = PRON[card.c] ? "say:  "+PRON[card.c] : "";
+  pr.style.color = col;
+  document.getElementById("ftopic").textContent = card.t;
+  document.getElementById("bback").textContent = card.back;
+  const mn = document.getElementById("bmnem");
+  if(MNEM[card.c]){ mn.style.display="block"; mn.innerHTML = "<b>Easy to remember:</b> "+MNEM[card.c]; } else { mn.style.display="none"; }
+  document.getElementById("count").textContent = (pos+1)+" / "+v.length;
+}
+function flip(){ document.getElementById("card").classList.toggle("flipped"); }
+function next(){ pos++; render(); }
+function prev(){ pos--; render(); }
+function shuffle(){ for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];} pos=0; render(); }
+function setFilter(b){ filter=b; pos=0; document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('active', x.dataset.b===String(b))); render(); }
+
+(function init(){
+  const f = document.getElementById("filters");
+  const defs = [["all","All ("+CARDS.length+")"]];
+  BRANCHES.forEach((name,i)=>defs.push([String(i), name+" ("+CARDS.filter(c=>c.b==i).length+")"]));
+  defs.forEach(([b,label])=>{
+    const btn=document.createElement("button");
+    btn.textContent=label; btn.dataset.b=b;
+    if(b==="all") btn.classList.add("active");
+    btn.onclick=()=>setFilter(b==="all"?"all":Number(b));
+    f.appendChild(btn);
+  });
+  document.addEventListener("keydown",e=>{
+    if(e.code==="Space"){e.preventDefault();flip();}
+    else if(e.key==="ArrowRight") next();
+    else if(e.key==="ArrowLeft") prev();
+    else if(e.key.toLowerCase()==="s") shuffle();
+  });
+  render();
+})();
+</script>
+</body>
+</html>
