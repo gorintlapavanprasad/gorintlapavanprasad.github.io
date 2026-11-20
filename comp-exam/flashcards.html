@@ -79,10 +79,11 @@ const BRANCHES = [
 const MCATS = [
   "Design & research approaches",
   "Study designs",
-  "Key concepts"
+  "Key concepts",
+  "Research terms"
 ];
 const PAPER_COLORS  = ["#21918c","#440154","#3b528b","#2a9d6f"];
-const METHOD_COLORS = ["#21918c","#3b528b","#440154"];
+const METHOD_COLORS = ["#21918c","#3b528b","#440154","#2a9d6f"];
 
 /* ---------- PAPERS: front = citation, back = full brief ---------- */
 const PAPERS = [
@@ -229,6 +230,10 @@ const METHODS = [
    what:`A design process that starts from people's real needs and context and improves the design through repeated rounds of feedback.`,
    plain:`Keep the actual users and their situation at the center, and refine by testing with them again and again.`,
    eg:`RQ2 asks which HCD methods support designing at the intersection of Indigeneity and disability.`},
+  {m:0,name:"User-Centered Design (UCD)",src:"",
+   what:`An older, closely related name for designing around users' needs through cycles of research, prototyping, and testing; "human-centered design" is the current, broader term.`,
+   plain:`Same core idea as HCD: build around the real user and keep testing with them. HCD just widens it from one user to whole communities and their context.`,
+   eg:`Serious-game work like eSMART followed a user-centered loop of focus groups, then testing.`},
   {m:0,name:"Situated Play Design",src:"Altarriba Bertran et al. 2019",
    what:`A play-design approach with three steps: find the play already in people's daily life, build something that supports it, and test it in that same daily life.`,
    plain:`Do not invent play from scratch; notice how people already play, then support that where it naturally happens.`,
@@ -261,6 +266,10 @@ const METHODS = [
    what:`A structured survey of a whole research area that maps what exists and finds the gaps, rather than judging one narrow treatment.`,
    plain:`A big, organized map of all the research on a topic, made to see what is there and what is missing.`,
    eg:`This exam itself: 1,759 records narrowed to 42 core studies.`},
+  {m:0,name:"Systematic vs. scoping review",src:"",
+   what:`A systematic review answers one tight question (does treatment X work?) and pools the results; a scoping review maps a whole field to see what exists and where the gaps are.`,
+   plain:`Systematic = "does this one thing work?", a narrow yes-or-no. Scoping = "what is out there on this topic, and what is missing?"`,
+   eg:`This exam is a scoping review: it maps 42 studies to expose the Indigeneity-and-disability gap, not to test one treatment.`},
 
   // 1 — Study designs
   {m:1,name:"Cross-sectional study",src:"",
@@ -301,10 +310,18 @@ const METHODS = [
    eg:`Rawal 2023: hypertension = 42% of heart disease and stroke.`},
 
   // 2 — Key concepts
+  {m:2,name:"Game vs. therapy",src:"",
+   what:`A spectrum from play-first (a real game you choose for fun) to treatment-first (a clinical program you complete to get better); serious games try to hold both ends at once.`,
+   plain:`One end is a game you would play anyway; the other is medicine you are told to take. A good serious game stays fun enough that people keep playing while it still does real health work.`,
+   eg:`Heart Health Mountain and CardioCare Quest aim to be games people enjoy, not exercises they endure.`},
   {m:2,name:"Serious Game",src:"Wattanasoontorn et al. 2013",
    what:`A game whose main purpose is something real, such as health, while keeping real games' rules, challenges, and rewards.`,
    plain:`A real game you play for enjoyment, but one that is built to help your health at the same time.`,
    eg:`eSMART, Heart Health Mountain, and CardioCare Quest.`},
+  {m:2,name:"eSMART",src:"Clochesy 2015; Hickman 2021",
+   what:`A serious game that lets adults rehearse a clinic visit with on-screen virtual providers to practice managing chronic conditions such as high blood pressure.`,
+   plain:`A role-play game where you practice talking to a "doctor" on a screen, so a real appointment goes better. It is one of the few serious games aimed at blood pressure.`,
+   eg:`In Hickman's pilot, players got better at talking with providers over three months.`},
   {m:2,name:"Wicked Problem",src:"Rittel & Webber 1973",
    what:`A problem with no single correct answer, where solutions are only better or worse and every attempt teaches you more.`,
    plain:`A messy, tangled problem you cannot "solve" cleanly; you can only make it better or worse.`,
@@ -320,7 +337,25 @@ const METHODS = [
   {m:2,name:"Open play vs. closed game",src:"",
    what:`"Closed" means fixed rules and set goals; "open" means loose, player-led, exploratory play.`,
    plain:`A closed game tells you exactly what to do; open play lets you explore in your own way.`,
-   eg:`Your lab's participants and Situated Play Design both favor open play.`}
+   eg:`Your lab's participants and Situated Play Design both favor open play.`},
+
+  // 3 — Research terms
+  {m:3,name:"Quantitative vs. qualitative",src:"",
+   what:`Quantitative research works with numbers (how many, how much, measured outcomes); qualitative research works with words and meaning (interviews, observations, themes).`,
+   plain:`Quantitative = counting and measuring. Qualitative = listening and understanding why. Many strong studies use both together.`,
+   eg:`Percy's prevalence counts are quantitative; Schaefer 2022's focus groups are qualitative.`},
+  {m:3,name:"Methodology vs. method",src:"",
+   what:`A method is a specific technique (a survey, an interview, a trial); a methodology is the overall approach and the reasoning for why those methods fit the question.`,
+   plain:`Method = the tool you use. Methodology = your game plan and the reason you chose those tools.`,
+   eg:`"Research through Design" is a methodology; a two-hour co-design workshop is a method inside it.`},
+  {m:3,name:"Empirical",src:"",
+   what:`Based on evidence actually gathered from the world, the data you collected or observed, rather than on opinion or theory alone.`,
+   plain:`"Empirical" means you went and looked: you have real data, not just an argument.`,
+   eg:`The hula trials are empirical; Weaver's essay on Native views of disability is theoretical, not empirical.`},
+  {m:3,name:"Artifact",src:"",
+   what:`In design research, the thing you build, a prototype, app, game, or tool, studied as a source of knowledge rather than treated only as a product.`,
+   plain:`The actual made thing (a game, a prototype). In Research through Design, building and testing the artifact is how you learn.`,
+   eg:`The 5 prototypes from your lab's workshop are artifacts; CardioCare Quest is the artifact you are building.`}
 ];
 
 /* ---------- engine ---------- */
