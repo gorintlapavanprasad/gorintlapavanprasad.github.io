@@ -7,34 +7,32 @@
 <style>
   :root{
     --bg:#f4f5f6; --ink:#1a1a1a; --muted:#5b6b72; --card:#ffffff; --line:#dfe4e7;
-    --b0:#21918c; --b1:#440154; --b2:#3b528b; --b3:#2a9d6f;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Segoe UI',Helvetica,Arial,sans-serif;}
   .wrap{max-width:760px;margin:0 auto;padding:20px 16px 60px;}
   h1{font-size:22px;margin:4px 0 2px;}
-  .sub{color:var(--muted);font-size:13px;margin:0 0 16px;}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 16px;line-height:1.5;}
+  .modes{display:flex;gap:0;background:#e7ebed;border-radius:12px;padding:4px;margin:0 0 16px;max-width:360px;}
+  .modes button{flex:1;border:none;background:transparent;color:var(--muted);border-radius:9px;padding:9px 10px;font-size:14px;font-weight:700;cursor:pointer;}
+  .modes button.active{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12);}
   .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
   .filters button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:20px;padding:6px 13px;font-size:13px;cursor:pointer;}
-  .filters button.active{color:#fff;border-color:transparent;font-weight:700;}
-  .filters button.active[data-b="all"]{background:#1a1a1a;}
-  .filters button.active[data-b="0"]{background:var(--b0);}
-  .filters button.active[data-b="1"]{background:var(--b1);}
-  .filters button.active[data-b="2"]{background:var(--b2);}
-  .filters button.active[data-b="3"]{background:var(--b3);}
+  .filters button.active{border-color:transparent;font-weight:700;}
   .scene{perspective:1600px;}
-  .card{position:relative;width:100%;min-height:330px;cursor:pointer;transform-style:preserve-3d;transition:transform .5s;}
+  .card{position:relative;width:100%;min-height:340px;cursor:pointer;transform-style:preserve-3d;transition:transform .5s;}
   .card.flipped{transform:rotateY(180deg);}
   .face{position:absolute;inset:0;backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 24px;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(0,0,0,.05);}
   .back{transform:rotateY(180deg);}
   .tag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#fff;border-radius:6px;padding:3px 9px;margin-bottom:16px;}
-  .cite{font-size:26px;font-weight:700;line-height:1.2;}
+  .cite{font-size:25px;font-weight:700;line-height:1.2;}
   .pron{font-size:15px;font-weight:600;margin-top:6px;}
-  .topic{font-size:18px;color:var(--muted);margin-top:8px;}
-  .hint{margin-top:auto;color:#9aa6ac;font-size:12px;}
+  .topic{font-size:17px;color:var(--muted);margin-top:8px;line-height:1.4;}
+  .hint{margin-top:auto;color:#9aa6ac;font-size:12px;padding-top:14px;}
   .backlabel{font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
-  .backtext{font-size:17px;line-height:1.5;}
-  .mnem{margin-top:16px;padding:11px 14px;background:#fffbe6;border-left:4px solid #e0a800;border-radius:8px;font-size:15px;line-height:1.45;}
+  .backtext{font-size:16px;line-height:1.55;}
+  .mnem{margin-top:14px;padding:11px 14px;background:#fffbe6;border-left:4px solid #e0a800;border-radius:8px;font-size:15px;line-height:1.5;}
+  .eg{margin-top:12px;font-size:14px;color:var(--muted);line-height:1.5;}
   .nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px;}
   .nav button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 18px;font-size:15px;cursor:pointer;}
   .nav button:hover{background:#f0f2f3;}
@@ -44,25 +42,20 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>Comprehensive Exam — Core Paper Flashcards</h1>
-  <p class="sub">Click the card (or press Space) to flip. Arrow keys move. Facts match the defense deck.</p>
+  <h1>Comprehensive Exam — Flashcards</h1>
+  <p class="sub"><b>Papers</b> flip to a plain-English brief of the whole study. <b>Methods</b> flip to a definition plus a simple explanation. Click a card (or press Space) to flip; arrow keys move.</p>
+
+  <div class="modes" id="modes">
+    <button id="mode-papers" class="active" onclick="setMode('papers')">Papers</button>
+    <button id="mode-methods" onclick="setMode('methods')">Methods</button>
+  </div>
+
   <div class="filters" id="filters"></div>
 
   <div class="scene">
     <div class="card" id="card" onclick="flip()">
-      <div class="face front">
-        <span class="tag" id="ftag"></span>
-        <div class="cite" id="fcite"></div>
-        <div class="pron" id="fpron"></div>
-        <div class="topic" id="ftopic"></div>
-        <div class="hint">tap to reveal</div>
-      </div>
-      <div class="face back">
-        <span class="tag" id="btag"></span>
-        <div class="backlabel">Who · Method · Finding</div>
-        <div class="backtext" id="bback"></div>
-        <div class="mnem" id="bmnem"></div>
-      </div>
+      <div class="face front" id="front"></div>
+      <div class="face back" id="back"></div>
     </div>
   </div>
 
@@ -76,173 +69,380 @@
 </div>
 
 <script>
+/* ---------- labels & colors ---------- */
 const BRANCHES = [
   "Hypertension in Native communities",
   "Disability in Native communities",
   "Designing with Native communities",
-  "Serious games & methods"
+  "Serious-game studies"
 ];
-const CARDS = [
+const MCATS = [
+  "Design & research approaches",
+  "Study designs",
+  "Key concepts"
+];
+const PAPER_COLORS  = ["#21918c","#440154","#3b528b","#2a9d6f"];
+const METHOD_COLORS = ["#21918c","#3b528b","#440154"];
+
+/* ---------- PAPERS: front = citation, back = full brief ---------- */
+const PAPERS = [
   // 0 — Hypertension in Native communities
-  {b:0,c:"Sharlin et al. 1993",t:"Blood-pressure awareness, Northern Plains",back:"418 adults of one South Dakota tribe (1986); cross-sectional household survey scored like a screening test. Only 50% with high measured BP knew it; just 27% of ages 18–39 (71% at 60+). → Measurement, Education."},
-  {b:0,c:"Percy et al. 1997",t:"Navajo Health & Nutrition Survey",back:"780 Navajo adults, 20–91 (1991–92); population-based cross-sectional, BP measured 3×. 19% had HTN. Of 97 with high measured BP, only 50 had been told (47 didn't know). → Measurement."},
-  {b:0,c:"Jolly et al. 2015",t:"WATCH study, western Alaska",back:"Alaska Native adults, 4 study groups; pooled cross-sectional. 30% had HTN; of them 64% aware, 61% treated, 39% controlled."},
-  {b:0,c:"Schaefer et al. 2021",t:"Home blood-pressure cuff accuracy",back:"100 AN/AI adults with HTN, Anchorage; method-comparison (device validation). Arm cuff ≈ reference; wrist cuff read +4.8 systolic, +3.6 diastolic. → Measurement."},
-  {b:0,c:"Railey et al. 2022",t:"Which home cuff people choose",back:"Same 100 adults (81 complete); randomized crossover pilot. 66% chose the wrist cuff for comfort/ease; 75% were willing to switch to the more accurate cuff."},
-  {b:0,c:"Schaefer et al. 2022",t:"Patient vs provider views of HTN",back:"16 AN/AI patients + 5 providers; qualitative focus groups, thematic analysis. Patients saw HTN as a short-term state (stress); providers as a long-term condition."},
-  {b:0,c:"Mendlein et al. 1997",t:"Risk factors cluster (Navajo)",back:"788 Navajo adults (Navajo Health & Nutrition Survey) with lab tests. Adults with obesity were ~4× as likely to have diabetes, HTN, or a poor cholesterol level. → Diet, Exercise."},
-  {b:0,c:"Jernigan et al. 2010",t:"Risk-factor trends, AI/AN",back:"Repeated cross-sectional (BRFSS). HTN rose 28.1%→29.5% (1995–96 to 2005–06); 79% had ≥1 of 6 heart risk factors, ~20% had ≥3."},
-  {b:0,c:"Rawal et al. 2023",t:"Which factor carries the most CVD",back:"8,497 AI/AN adults (2017 BRFSS); population attributable fractions. HTN linked to 42% of heart disease/stroke — the largest share (cholesterol 27%, diabetes 18%)."},
-  {b:0,c:"Zamora-Kapoor et al. 2024",t:"Mediation: teen smoking → BP",back:"312 AI/AN (Add Health), adolescence→adulthood; longitudinal cohort + mediation. Teen smoking raised adult high-BP risk ~14%; BMI did NOT mediate as it does in White/Black adults."},
-  {b:0,c:"Rhoades & Buchwald 2003",t:"Urban Native elders, control",back:"524 urban Native elders 50+, Seattle Indian Health Board; retrospective cohort (chart review). 38% had diagnosed HTN; 83% on medicine but only 36% controlled; counseling 27% each. → Medication, Diet, Exercise."},
-  {b:0,c:"Eberly et al. 2023",t:"Medicare burden, AI/AN",back:"220,598 AI/AN Medicare beneficiaries 65+ (2015–19); retrospective cohort (claims). 72.2% had HTN — the most prevalent CVD risk factor; 38.8% in the most distressed communities."},
-  {b:0,c:"Breathett et al. 2020",t:"AHA scientific statement",back:"Expert scientific statement. Describes talking circles as shared decision-making; 14.7% of AI/AN adults meet activity recs; 573 tribes; 71% live in urban areas."},
-  {b:0,c:"Eberly et al. 2024",t:"Hózhó trial (care at home)",back:"Heart-failure adults, Gallup / Tohatchi, Navajo Nation; stepped-wedge RCT. A team starts and titrates medicines by phone using home-cuff readings. (Design paper.)"},
-  {b:0,c:"Sinclair et al. 2023",t:"NOSH protocol (DASH diet)",back:"370 urban AI/AN adults planned; cultural adaptation of DASH, wait-list RCT. Both groups get $30/week groceries (isolates the counseling). Outcome: home systolic BP. → Diet."},
+  {b:0,c:"Sharlin et al. 1993",t:"Who knows they have high blood pressure (Northern Plains)",pron:"SHAR-lin",
+   brief:`An early study of whether Native adults who have high blood pressure actually know it. The team measured blood pressure in 418 adults of one South Dakota tribe in 1986, in a one-time household survey used like a screening check. Only half of the people whose measured blood pressure was high were aware of it, and awareness was worst in the young: 27 percent at ages 18 to 39, rising to 71 percent at 60 and older. Takeaway: high blood pressure is common and silent, so a self-management tool must help people measure it and understand the number.`,
+   mnem:`"SHARE-lin" = who SHARED/knew? Only half; the youngest knew least (27%).`},
+  {b:0,c:"Percy et al. 1997",t:"Navajo Health and Nutrition Survey",pron:"PUR-see",
+   brief:`Part of the Navajo Health and Nutrition Survey. 780 Navajo adults aged 20 to 91 (1991 to 1992) had their blood pressure measured three times in one visit, a population-based snapshot. 19 percent had hypertension. Of the 97 people with high measured blood pressure, only 50 had ever been told and 47 did not know. Takeaway: even with careful measurement, about half of Navajo adults with high blood pressure were unaware, which is the gap a tool can target.`,
+   mnem:`Percy's 9-7: of 97 with high BP, 47 didn't know; 19% HTN.`},
+  {b:0,c:"Jolly et al. 2015",t:"The WATCH study, western Alaska",pron:"JOL-ee",
+   brief:`The WATCH study in western Alaska pooled blood-pressure data from Alaska Native adults across four groups, a one-time survey. 30 percent had hypertension; among them, 64 percent were aware, 61 percent were treated, and only 39 percent had it under control. Takeaway: this is the care cascade. People drop off at each step (knowing, treating, controlling), so the hardest part is control, not just diagnosis.`,
+   mnem:`WATCH the drop in Alaska: aware 64 &rarr; treated 61 &rarr; controlled 39.`},
+  {b:0,c:"Schaefer et al. 2021",t:"How accurate are home blood-pressure cuffs",pron:"SHAY-fer",
+   brief:`A device-accuracy test. 100 Alaska Native and American Indian adults with hypertension in Anchorage used home cuffs that were compared against a clinic reference, a validation study. The upper-arm cuff was accurate, but the wrist cuff read about 4.8 points too high on the top number and 3.6 too high on the bottom. Takeaway: if a game asks people to enter home readings, the device has to be accurate or the feedback is wrong, so the upper-arm cuff is the safer choice.`,
+   mnem:`Schaefer '21 = the CUFF test: the wrist cuff reads too HIGH (+4.8).`},
+  {b:0,c:"Railey et al. 2022",t:"Which home cuff people actually choose",pron:"RAY-lee",
+   brief:`A follow-up with the same 100 adults (81 finished) asking which home cuff people choose, a small randomized crossover pilot. 66 percent preferred the wrist cuff because it was more comfortable and easier, yet 75 percent said they would switch to the more accurate upper-arm cuff once they understood the difference. Takeaway: comfort drives real use, so design has to make the accurate option also the easy, appealing one.`,
+   mnem:`Railey = people pick the comfy WRIST cuff (66%), not the accurate one.`},
+  {b:0,c:"Schaefer et al. 2022",t:"How patients and providers see high blood pressure",pron:"SHAY-fer",
+   brief:`A focus-group study of how people think about high blood pressure. 16 Alaska Native and American Indian patients and 5 providers talked in groups, analyzed by theme. Patients tended to see high blood pressure as a short-term state caused by stress, while providers saw it as a long-term condition. Takeaway: a tool has to bridge that gap in understanding, not assume people already see hypertension as lifelong.`,
+   mnem:`Schaefer '22 = the STORY: patients say "short-term stress", providers say "long-term".`},
+  {b:0,c:"Mendlein et al. 1997",t:"Risk factors travel together (Navajo)",pron:"MEND-line",
+   brief:`A risk-factor study within the Navajo Health and Nutrition Survey. 788 Navajo adults had lab tests and measurements. Adults with obesity were about four times as likely to also have diabetes, high blood pressure, or an unhealthy cholesterol level. Takeaway: these conditions cluster, so diet and exercise support in a tool can move several risks at once.`,
+   mnem:`Obesity MEDDLES (Mendlein) with everything: 4&times; diabetes, HTN, bad lipids.`},
+  {b:0,c:"Jernigan et al. 2010",t:"Risk factors over time, AI/AN",pron:"JUR-nih-gun",
+   brief:`A look at how heart risk factors changed over time among American Indian and Alaska Native (AI/AN) adults, using repeated national phone surveys (BRFSS). Hypertension rose from 28.1 to 29.5 percent between 1995 to 1996 and 2005 to 2006; 79 percent of adults had at least one of six heart risk factors and about 20 percent had three or more. Takeaway: the burden is wide and growing, so prevention needs to reach many people, not only the sickest.`,
+   mnem:`Jernigan = the JOURNEY over time: 28&rarr;29%, and 79% had &ge;1 risk factor.`},
+  {b:0,c:"Rawal et al. 2023",t:"Which risk factor carries the most heart disease",pron:"ruh-WAHL",
+   brief:`A study ranking which risk factor accounts for the most heart disease and stroke in AI/AN adults, using 2017 national survey data on 8,497 AI/AN adults to estimate each factor's share (a population attributable fraction). Hypertension was tied to 42 percent of heart disease and stroke, the largest single share, ahead of cholesterol at 27 percent and diabetes at 18 percent. Takeaway: this is the headline reason to focus on blood pressure specifically.`,
+   mnem:`Rawal = the RANKING: HTN is the #1 driver of CVD (42%).`},
+  {b:0,c:"Zamora-Kapoor et al. 2024",t:"Teen smoking leads to adult high blood pressure",pron:"zuh-MOR-uh kuh-POOR",
+   brief:`A long-term study following 312 AI/AN people from adolescence into adulthood (national Add Health data) to test what links teen habits to adult blood pressure, a mediation analysis. Smoking as a teen raised the risk of adult high blood pressure by about 14 percent, and, unlike in White and Black adults, body weight did not explain the link for AI/AN participants. Takeaway: risk pathways can differ by population, so borrowed assumptions about causes may not hold for Diné adults.`,
+   mnem:`Zamora = TEEN SMOKE &rarr; adult high BP (weight doesn't carry it for AI/AN).`},
+  {b:0,c:"Rhoades & Buchwald 2003",t:"Urban Native elders: on medicine, not controlled",pron:"ROHDS & BOOK-wald",
+   brief:`A chart-review study of 524 urban Native elders aged 50 and older at the Seattle Indian Health Board, looking back through records. 38 percent had diagnosed high blood pressure; 83 percent were on medicine but only 36 percent had it controlled, and counseling on diet or exercise reached about 27 percent each. Takeaway: being on medication is not the same as being controlled, so support for daily habits still matters for urban Native adults.`,
+   mnem:`Rhoades = "ROADS" to the city: urban elders on meds (83%) but few controlled (36%).`},
+  {b:0,c:"Eberly et al. 2023",t:"Medicare burden among AI/AN elders",pron:"EB-er-lee",
+   brief:`A claims-based study of 220,598 AI/AN Medicare members aged 65 and older (2015 to 2019). Hypertension was the most common heart risk factor at 72.2 percent, and 38.8 percent of these elders lived in the most economically distressed communities. Takeaway: among older AI/AN adults high blood pressure is nearly the norm, and hardship adds to it, context an urban elder tool must respect.`,
+   mnem:`Eberly '23 = the ELDERLY Medicare paper: 72% have HTN (age 65+).`},
+  {b:0,c:"Breathett et al. 2020",t:"American Heart Association statement",pron:"BRETH-it",
+   brief:`An American Heart Association scientific statement summarizing heart health for AI/AN people. It describes talking circles as a form of shared decision-making, notes that only 14.7 percent of AI/AN adults meet physical-activity recommendations, and reminds readers there are 573 tribes and that 71 percent of AI/AN people live in urban areas. Takeaway: authoritative backing for an urban, culturally grounded, shared-decision approach, not a reservation-only one.`,
+   mnem:`Breathett = the AHA statement: talking circles; 71% urban.`},
+  {b:0,c:"Eberly et al. 2024",t:"Hózhó trial: managing medicine from home",pron:"EB-er-lee",
+   brief:`A trial design (the Hózhó study) for heart-failure adults in Gallup and Tohatchi on the Navajo Nation, rolled out in stages (a stepped-wedge randomized trial). A care team starts and adjusts blood-pressure medicines by phone using the patient's home-cuff readings. Takeaway: it shows home readings plus remote support can run real medication management, the kind of loop a game could feed.`,
+   mnem:`Eberly '24 = Hózhó: meds managed by PHONE at home (stepped-wedge).`},
+  {b:0,c:"Sinclair et al. 2023",t:"NOSH: adapting the DASH diet",pron:"sin-KLAIR",
+   brief:`A trial protocol (NOSH) for 370 urban AI/AN adults that adapts the DASH diet to traditional foods, with a wait-list comparison group. Both groups receive 30 dollars a week in groceries so the study isolates the effect of the counseling itself; the main outcome is home systolic blood pressure. Takeaway: a model for culturally adapting a proven diet for urban Native adults, with diet as a lever a tool can support.`,
+   mnem:`Sinclair = NOSH: DASH diet + traditional foods; urban; both arms get groceries.`},
+
   // 1 — Disability in Native communities
-  {b:1,c:"Hodge 1989",t:"Tribal rehabilitation needs",back:"170 clients of 3 tribal VR programs (Navajo, Chippewa-Cree, Shoshone-Bannock), 1987; collaborative needs assessment. High BP the 2nd most common problem (31.8%); #1 among Navajo clients (42.2%)."},
-  {b:1,c:"Okoro et al. 2007",t:"AI/AN disability + chronic conditions",back:"434,972 adults 50+ (BRFSS 2003–05). Disability prevalence 38.4% among older AIAN — highest of any group. Among those with a disability, 62.0% of women and 55.5% of men had HTN. → Burden."},
-  {b:1,c:"Sanderson et al. 1998",t:"Tribal disability needs (NAU)",back:"32 Navajo/Zuni/Laguna adults with disabilities. HTN among the 3 most common; 59% did not get needed food help; 63% limited in driving. → Diet, Measurement."},
-  {b:1,c:"Mashinchi et al. 2022",t:"Place, rurality & disability",back:"3,220 US counties (ACS 2015–19); ecological (county-level) analysis + GIS. Where more Native people live, Native disability was LOWER (16.4% at every rurality) vs 21–24% elsewhere — read as belonging/cultural ties."},
-  {b:1,c:"Reisinger & Ripat 2014",t:"Assistive technology, Navajo Nation",back:"28 AT users + 7 providers, Chinle; talking-circle focus groups (CBPR). Main theme: feeling understood (or not). 57% lived >20 miles from town; poor roads/housing disabled them most."},
-  {b:1,c:"Weaver 2015",t:"Native views of disability",back:"Theoretical essay + literature synthesis. Most Native languages have no word equal to 'disability'; a person is in balance when they fill a role in family and community."},
-  {b:1,c:"Frankland et al. 2004",t:"Self-determination & Diné culture",back:"Theoretical essay, cross-cultural comparison. All four parts of the self-determination model fit Diné culture, expressed through interdependence and decisions made with family."},
-  {b:1,c:"Rabang et al. 2023",t:"Oyáte Circle (ownership)",back:"Position paper with program cases. Moving from university branding to its own logo, language and colors changed how communities received the program."},
-  {b:1,c:"Yellowhorse 2022",t:"A Diné way of judging worth",back:"Critical autoethnography. Proposes a Diné measure of worth — life, people, community, land, language, teachings — rather than by how much someone produces."},
-  {b:1,c:"Yellowhorse 2018",t:"K'é (kinship) & special education",back:"Critical historical / discourse analysis. K'é (kinship) as the base of Diné special education: people are relatives first, before any label."},
-  {b:1,c:"Nozadi et al. 2019",t:"Navajo infant development",back:"530 Navajo infants (Navajo Birth Cohort Study); compared with national norms + estimated accuracy. Community reviewed every item first; at 10mo, 64.8% of mothers said 'not yet' to walking by furniture (cradle boards)."},
-  {b:1,c:"Rennie et al. 2023",t:"Diné child assessment in context",back:"138 Diné children ~4 (Navajo Birth Cohort Study); several tests, then a team agreed on the diagnosis. Diné-speaking staff clarified items; verbal scores were lower; four explanations held open, including test bias."},
+  {b:1,c:"Hodge 1989",t:"Tribal rehabilitation needs",pron:"HOJ",
+   brief:`The oldest study here: a needs assessment with 170 clients of three tribal vocational-rehabilitation programs (Navajo, Chippewa-Cree, Shoshone-Bannock) in 1987, done together with the programs. High blood pressure was the second most common health problem overall at 31.8 percent, and the single most common among Navajo clients at 42.2 percent. Takeaway: among Native people with disabilities, hypertension is at or near the top, not a side issue.`,
+   mnem:`Hodge = the OLDEST (1989): HTN is #1 among Navajo rehab clients (42.2%).`},
+  {b:1,c:"Okoro et al. 2007",t:"Disability and chronic conditions, AI/AN",pron:"oh-KOR-oh",
+   brief:`A large national survey (BRFSS 2003 to 2005) of 434,972 adults aged 50 and older, examining disability and chronic conditions. Older AI/AN adults had the highest disability rate of any group at 38.4 percent, and among those with a disability, 62.0 percent of women and 55.5 percent of men also had high blood pressure. Takeaway: this is the core number for the intersection, disability and hypertension overlap heavily in older AI/AN adults.`,
+   mnem:`Okoro = the KEY disability+HTN numbers: 38.4% disabled; HTN 62% women / 55.5% men.`},
+  {b:1,c:"Sanderson et al. 1998",t:"Tribal disability needs (run at NAU)",pron:"SAN-der-sun",
+   brief:`A needs study run at NAU with 32 Navajo, Zuni, and Laguna adults with disabilities. High blood pressure was among the three most common conditions; 59 percent did not get the food help they needed and 63 percent were limited in driving. Takeaway: health problems sit on top of everyday barriers like food and transport, so a tool cannot treat blood pressure in isolation.`,
+   mnem:`Sanderson = the NAU 32: HTN common, plus food (59%) & driving (63%) barriers.`},
+  {b:1,c:"Mashinchi et al. 2022",t:"Place, rurality, and disability",pron:"muh-SHIN-chee",
+   brief:`A county-level analysis of all 3,220 US counties (2015 to 2019 census data) with mapping. In places where more Native people lived, Native disability was lower, about 16.4 percent at every level of rurality, versus 21 to 24 percent elsewhere. The authors read this as a sign that belonging and cultural ties protect health. Takeaway: community and culture are not decoration, they appear to support wellbeing, which argues for culturally grounded design.`,
+   mnem:`Mashinchi = the MAP: more Native neighbors &rarr; LESS disability (belonging protects).`},
+  {b:1,c:"Reisinger & Ripat 2014",t:"Assistive technology, Navajo Nation",pron:"RYE-sing-er & RIP-at",
+   brief:`A talking-circle study (community-based) with 28 assistive-technology users and 7 providers in Chinle, Navajo Nation. The central theme was feeling understood, or not; 57 percent lived more than 20 miles from town, and poor roads and housing disabled people as much as their health did. Takeaway: disability here is partly made by the environment, and being understood matters, both of which point to designing with people, not for them.`,
+   mnem:`Reisinger = DISTANCE: 57% live >20 miles out; the theme is "feeling understood".`},
+  {b:1,c:"Weaver 2015",t:"Native views of disability",pron:"WEE-ver",
+   brief:`A scholarly essay drawing together Native views of disability. Most Native languages have no word that equals "disability"; a person is seen as in balance when they fill a role in their family and community. Takeaway: a deficit framing can clash with a Diné view, so a tool should support someone's role and relationships rather than label them.`,
+   mnem:`Weaver = NO WORD for "disability"; balance = filling your role in the family.`},
+  {b:1,c:"Frankland et al. 2004",t:"Self-determination and Diné culture",pron:"FRANK-lund",
+   brief:`A cross-cultural essay comparing the mainstream self-determination model with Diné culture. All four parts of that model fit Diné life, but expressed through interdependence and decisions made together with family rather than alone. Takeaway: "independence" should be read as interdependence, so design should include family and caregivers by default.`,
+   mnem:`Frankland = self-determination FITS Diné (through family & interdependence).`},
+  {b:1,c:"Rabang et al. 2023",t:"Oyáte Circle: ownership and identity",pron:"ruh-BANG",
+   brief:`A position paper with program examples (the Oyáte Circle). When a program moved from university branding to its own logo, language, and colors, communities received it very differently. Takeaway: ownership and look-and-feel change trust, so a tool should carry the community's identity, not a university's.`,
+   mnem:`Rabang = BRANDING: its own logo/colors &rarr; the community accepts it.`},
+  {b:1,c:"Yellowhorse 2022",t:"A Diné way of judging worth",pron:"YEL-oh-horss",
+   brief:`A personal scholarly account (critical autoethnography) proposing a Diné way of judging a person's worth, through life, people, community, land, language, and teachings, rather than by how much they produce. Takeaway: a notion of value built on productivity misreads disability, so a tool should reflect worth defined by relationship and culture.`,
+   mnem:`Yellowhorse '22 = WORTH by relationship, not productivity (told as her own story).`},
+  {b:1,c:"Yellowhorse 2018",t:"K'é (kinship) and special education",pron:"YEL-oh-horss",
+   brief:`A historical and discourse analysis placing K'é (kinship) at the base of Diné special education: people are relatives first, before any label. Takeaway: start from kinship and belonging, not a diagnosis, the same stance a respectful health tool should take.`,
+   mnem:`Yellowhorse '18 = K'é: you're a RELATIVE first, a label second.`},
+  {b:1,c:"Nozadi et al. 2019",t:"Navajo infant development",pron:"noh-ZAH-dee",
+   brief:`A developmental study of 530 Navajo infants (Navajo Birth Cohort Study) compared with national milestones, with the community reviewing every item first. At 10 months, 64.8 percent of mothers said "not yet" to pulling up to walk along furniture, explained by time spent on cradle boards rather than delay. Takeaway: standard tools can misread a cultural practice as a problem, so measures must be checked with the community.`,
+   mnem:`Nozadi = CRADLE BOARDS: "late" walking is cultural, not a delay.`},
+  {b:1,c:"Rennie et al. 2023",t:"Diné child assessment in context",pron:"REN-ee",
+   brief:`An assessment study of 138 Diné children around age 4 (Navajo Birth Cohort Study); several tests were given and a team agreed on each diagnosis. Diné-speaking staff had to clarify items, verbal scores came out lower, and four explanations were left open, including bias in the tests themselves. Takeaway: language and cultural fit shape results, a caution for any tool that scores or tests people.`,
+   mnem:`Rennie = LANGUAGE: verbal scores lower; could be test bias (held open).`},
+
   // 2 — Designing with Native communities
-  {b:2,c:"Billey et al. 2024",t:"+Language is Medicine (adaptation)",back:"23-member community advisory board (95% Diné), Shiprock; cultural adaptation of two evidence-based programs. Nine adaptation steps → a 5-lesson program with a map of daily routines (e.g., talking while making frybread)."},
-  {b:2,c:"Kaholokula et al. 2015",t:"Hula pilot trial",back:"55 Native Hawaiian / Pacific Islander adults (≥140 systolic), Honolulu; CBPR pilot RCT, wait-list. Systolic fell 18.3 mmHg after 12 weeks of hula + self-care, vs 7.6 in the wait-list. → Exercise, Education."},
-  {b:2,c:"Kaholokula et al. 2021",t:"Hula full RCT",back:"263 Native Hawaiian adults, uncontrolled HTN; CBPR RCT with education-only wait-list. At 6 months, 42.7% in the hula group were <130/80 vs 21.2% in education-only; gains held at 12 months."},
-  {b:2,c:"Vigil-Hayes et al. 2021",t:"ARORA (culture in an app)",back:"Advisory board (4 Navajo, 2 Hopi professionals) + 10 Native youth 12–18, Flagstaff; CBPR + tribal participatory research, co-design with grounded theory. Board asked for audio instructions, little text, cooperative games."},
-  {b:2,c:"Hagemann et al. 2024",t:"Hopi program sets requirements",back:"15 Hopi Behavioral Health staff (2023); participatory design within PAR. Many clients prefer documents read to them; 'information mediators' (parents, grandparents) will be major users."},
-  {b:2,c:"Hagemann et al. 2026",t:"Hopi youth usability test",back:"9 Hopi/Tewa youth 16–24, over Zoom; remote usability testing within PAR. Wanted to use the app again (4.55/5); asked for Hopi-specific images (the mesas) and a first-run tutorial."},
-  // 3 — Serious games & methods
-  {b:3,c:"Clochesy et al. 2015",t:"eSMART — designing the game",back:"Participatory serious-game design; 11 focus groups with adults who had diabetes + HTN → scripts for three virtual clinic staff. Captions, first added for hearing loss, helped every player and became the default. → Education."},
-  {b:3,c:"Hickman et al. 2021",t:"eSMART — pilot RCT",back:"109 adults with HTN, Ohio (not a Native sample); pilot RCT. One group practiced a virtual clinic visit monthly, the other watched a video. Talks with providers improved in the game group over 3 months; health literacy did not change."},
-  {b:3,c:"Graham, Ikwunne & Duval 2025",t:"Co-designing HTN games",back:"14 Indigenous participants (Hopi, Navajo, Diné), 2-hour workshop, N. Arizona; Research through Design + participatory design. 17 designs → 5 prototypes (one per factor); 5 strategies: rewards, familiar formats, cultural stories, step-by-step progress, open play."},
-  {b:3,c:"Radhakrishnan et al. 2025",t:"Heart Health Mountain (Lumbee)",back:"220 Lumbee adults planned, Robeson County NC; CBPR then an RCT (trial plan). Fitbit steps move the player up a trail to cultural landmarks; outcome = daily steps. Excludes anyone who can't walk without an aid or another person."},
-  {b:3,c:"Wattanasoontorn et al. 2013",t:"Serious games for health (taxonomy)",back:"Classifies serious games for health by purpose, player, and stage of disease. A serious game keeps the rules/challenges/rewards of a game while adding a health aim."},
-  {b:3,c:"Rittel & Webber 1973",t:"Wicked problems",back:"A problem with no single correct answer; solutions are better or worse, not right or wrong. HTN self-management with urban Diné adults with disabilities is such a problem."},
-  {b:3,c:"Altarriba Bertran et al. 2019",t:"Situated Play Design",back:"Three steps: find the play that already happens in daily life, design something that supports it, and test it in daily life. Basis for 'open play' vs a 'closed game'."},
-  {b:3,c:"Crenshaw 1991",t:"Intersectionality",back:"When two or more identities meet in one person, the experience differs from either one alone. Here: Indigeneity × disability in urban Diné adults with disabilities."}
+  {b:2,c:"Billey et al. 2024",t:"+Language is Medicine (cultural adaptation)",pron:"BILL-ee",
+   brief:`A cultural-adaptation project with a 23-member community advisory board (95 percent Diné) in Shiprock. Following nine adaptation steps, the team reshaped two evidence-based programs into a five-lesson program built around a map of daily routines, for example talking while making frybread. Takeaway: a concrete recipe for adapting proven content to Diné daily life, language included.`,
+   mnem:`Billey = the 9-STEP adaptation (Diné language, a daily-routines map).`},
+  {b:2,c:"Kaholokula et al. 2015",t:"Hula pilot trial",pron:"kah-ho-lo-KOO-lah",
+   brief:`A community-based pilot trial with 55 Native Hawaiian and Pacific Islander adults (top number 140 or higher) in Honolulu, with a wait-list comparison. After 12 weeks of hula plus self-care, systolic blood pressure fell 18.3 points, versus 7.6 in the wait-list. Takeaway: culturally rooted movement can lower blood pressure a lot, early evidence that culture-as-the-intervention works.`,
+   mnem:`Kaholokula '15 = HULA pilot: &minus;18.3 mmHg.`},
+  {b:2,c:"Kaholokula et al. 2021",t:"Hula full randomized trial",pron:"kah-ho-lo-KOO-lah",
+   brief:`The full randomized trial of the hula program: 263 Native Hawaiian adults with uncontrolled hypertension, compared with an education-only wait-list. At 6 months, 42.7 percent of the hula group were under 130/80 versus 21.2 percent with education only, and the gains held at 12 months. Takeaway: it confirms at scale that a cultural practice can beat standard education for blood-pressure control.`,
+   mnem:`Kaholokula '21 = HULA trial: 42.7% controlled vs 21.2% (education only).`},
+  {b:2,c:"Vigil-Hayes et al. 2021",t:"ARORA: building culture into an app",pron:"vih-HEEL HAYZ",
+   brief:`A co-design project (community-based and tribal participatory) in Flagstaff for the ARORA app: an advisory board of 4 Navajo and 2 Hopi professionals plus 10 Native youth aged 12 to 18, analyzed with grounded theory. The board asked for audio instructions, very little text, and cooperative rather than competitive games. Takeaway: direct, local design requirements an urban Diné tool can reuse.`,
+   mnem:`Vigil-Hayes = ARORA: audio, little text, cooperative games.`},
+  {b:2,c:"Hagemann et al. 2024",t:"Hopi staff set the requirements",pron:"HAH-guh-mun",
+   brief:`A participatory-design study with 15 Hopi Behavioral Health staff (2023) to set requirements for a tool. Many clients prefer to have documents read to them, and "information mediators", parents and grandparents, will be major users. Takeaway: the real users include family helpers, so design for shared, read-aloud use, not a lone reader.`,
+   mnem:`Hagemann '24 = HELPERS: "information mediators" (family); docs read aloud.`},
+  {b:2,c:"Hagemann et al. 2026",t:"Hopi youth usability test",pron:"HAH-guh-mun",
+   brief:`A remote usability test with 9 Hopi and Tewa youth aged 16 to 24 over Zoom. They rated wanting to use the app again at 4.55 out of 5 and asked for Hopi-specific images (the mesas) and a first-run tutorial. Takeaway: cultural specifics and a gentle on-ramp matter to young Native users, small design choices with real pull.`,
+   mnem:`Hagemann '26 = YOUTH test: 4.55/5; wants Hopi images + a tutorial.`},
+
+  // 3 — Serious-game studies
+  {b:3,c:"Clochesy et al. 2015",t:"eSMART: designing the game",pron:"kluh-CHESS-ee",
+   brief:`The design phase of eSMART, a serious game. Eleven focus groups with adults who had diabetes and high blood pressure shaped the scripts for three virtual clinic staff. Captions, added first for players with hearing loss, turned out to help everyone and became the default. Takeaway: a clean example of the curb-cut effect, where an accessibility feature improves the tool for all players.`,
+   mnem:`Clochesy = eSMART DESIGN: captions help EVERYONE (the curb-cut effect).`},
+  {b:3,c:"Hickman et al. 2021",t:"eSMART: pilot trial",pron:"HIK-mun",
+   brief:`The pilot trial of eSMART with 109 adults with hypertension in Ohio (not a Native sample). One group practiced a virtual clinic visit each month; the other watched a video. Over three months, the game group got better at talking with providers, though health literacy did not change. Takeaway: rehearsing the conversation is a learnable, game-sized skill, a realistic target for a short game.`,
+   mnem:`Hickman = eSMART TRIAL: practice a clinic visit &rarr; better provider talks.`},
+  {b:3,c:"Graham, Ikwunne & Duval 2025",t:"Co-designing hypertension games (your lab)",pron:"GRAY-um, ik-WOON-eh & doo-VAHL",
+   brief:`Your lab's co-design workshop: 14 Indigenous participants (Hopi, Navajo, Diné) in a two-hour session in Northern Arizona, using Research through Design and participatory design. 17 design ideas became 5 prototypes, one per self-management factor, and five strategies emerged: rewards, familiar formats, cultural stories, step-by-step progress, and open play. Takeaway: the direct foundation CardioCare Quest builds on.`,
+   mnem:`Graham = YOUR lab's 5 + 5: five prototypes, five strategies.`},
+  {b:3,c:"Radhakrishnan et al. 2025",t:"Heart Health Mountain (Lumbee)",pron:"RAH-duh-KRISH-nun",
+   brief:`A trial plan (community-based, then a randomized trial) for Heart Health Mountain with 220 Lumbee adults in Robeson County, North Carolina. Fitbit steps move the player up a trail past cultural landmarks, with daily steps as the outcome, but the study excludes anyone who cannot walk without an aid or another person. Takeaway: the closest existing game, and its exclusion of mobility-aid users is exactly the gap at the disability intersection.`,
+   mnem:`Radhakrishnan = Heart Health MOUNTAIN: steps&rarr;landmarks, but EXCLUDES mobility-aid users.`}
 ];
 
-const PRON = {
-  "Sharlin et al. 1993":"SHAR-lin","Percy et al. 1997":"PUR-see","Jolly et al. 2015":"JOL-ee",
-  "Schaefer et al. 2021":"SHAY-fer","Railey et al. 2022":"RAY-lee","Schaefer et al. 2022":"SHAY-fer",
-  "Mendlein et al. 1997":"MEND-line","Jernigan et al. 2010":"JUR-nih-gun","Rawal et al. 2023":"ruh-WAHL",
-  "Zamora-Kapoor et al. 2024":"zuh-MOR-uh kuh-POOR","Rhoades & Buchwald 2003":"ROHDS & BOOK-wald",
-  "Eberly et al. 2023":"EB-er-lee","Breathett et al. 2020":"BRETH-it","Eberly et al. 2024":"EB-er-lee",
-  "Sinclair et al. 2023":"sin-KLAIR","Hodge 1989":"HOJ","Okoro et al. 2007":"oh-KOR-oh",
-  "Sanderson et al. 1998":"SAN-der-sun","Mashinchi et al. 2022":"muh-SHIN-chee",
-  "Reisinger & Ripat 2014":"RYE-sing-er & RIP-at","Weaver 2015":"WEE-ver","Frankland et al. 2004":"FRANK-lund",
-  "Rabang et al. 2023":"ruh-BANG","Yellowhorse 2022":"YEL-oh-horss","Yellowhorse 2018":"YEL-oh-horss",
-  "Nozadi et al. 2019":"noh-ZAH-dee","Rennie et al. 2023":"REN-ee","Billey et al. 2024":"BILL-ee",
-  "Kaholokula et al. 2015":"kah-ho-lo-KOO-lah","Kaholokula et al. 2021":"kah-ho-lo-KOO-lah",
-  "Vigil-Hayes et al. 2021":"vih-HEEL HAYZ","Hagemann et al. 2024":"HAH-guh-mun","Hagemann et al. 2026":"HAH-guh-mun",
-  "Clochesy et al. 2015":"kluh-CHESS-ee","Hickman et al. 2021":"HIK-mun",
-  "Graham, Ikwunne & Duval 2025":"GRAY-um, ik-WOON-eh & doo-VAHL","Radhakrishnan et al. 2025":"RAH-duh-KRISH-nun",
-  "Wattanasoontorn et al. 2013":"waht-tuh-nuh-SOON-torn","Rittel & Webber 1973":"RIT-el & WEB-er",
-  "Altarriba Bertran et al. 2019":"al-tuh-REE-buh ber-TRAHN","Crenshaw 1991":"KREN-shaw"
-};
-const MNEM = {
-  "Sharlin et al. 1993":"\"SHARE-lin\" = who SHARED/knew? Only half; the youngest knew least (27%).",
-  "Percy et al. 1997":"Percy's 9-7: of 97 with high BP, 47 didn't know; 19% HTN.",
-  "Jolly et al. 2015":"WATCH the drop in Alaska: aware 64 &rarr; treated 61 &rarr; controlled 39.",
-  "Schaefer et al. 2021":"Schaefer '21 = the CUFF test: the wrist cuff reads too HIGH (+4.8).",
-  "Railey et al. 2022":"Railey = people pick the comfy WRIST cuff (66%), not the accurate one.",
-  "Schaefer et al. 2022":"Schaefer '22 = the STORY: patients say 'short-term stress', providers say 'long-term'.",
-  "Mendlein et al. 1997":"Obesity MEDDLES (Mendlein) with everything: 4&times; diabetes, HTN, bad lipids.",
-  "Jernigan et al. 2010":"Jernigan = the JOURNEY over time: 28&rarr;29%, and 79% had &ge;1 risk factor.",
-  "Rawal et al. 2023":"Rawal = the RANKING: HTN is the #1 driver of CVD (42%).",
-  "Zamora-Kapoor et al. 2024":"Zamora = TEEN SMOKE &rarr; adult high BP (weight doesn't carry it for AI/AN).",
-  "Rhoades & Buchwald 2003":"Rhoades = 'ROADS' to the city: urban elders on meds (83%) but few controlled (36%).",
-  "Eberly et al. 2023":"Eberly '23 = the ELDERLY Medicare paper: 72% have HTN (age 65+).",
-  "Breathett et al. 2020":"Breathett = the AHA statement: talking circles; 71% urban.",
-  "Eberly et al. 2024":"Eberly '24 = Hózhó: meds managed by PHONE at home (stepped-wedge).",
-  "Sinclair et al. 2023":"Sinclair = NOSH: DASH diet + traditional foods; urban; both arms get groceries.",
-  "Hodge 1989":"Hodge = the OLDEST (1989): HTN is #1 among Navajo rehab clients (42.2%).",
-  "Okoro et al. 2007":"Okoro = the KEY disability+HTN numbers: 38.4% disabled; HTN 62% women / 55.5% men.",
-  "Sanderson et al. 1998":"Sanderson = the NAU 32: HTN common, plus food (59%) & driving (63%) barriers.",
-  "Mashinchi et al. 2022":"Mashinchi = the MAP: more Native neighbors &rarr; LESS disability (belonging protects).",
-  "Reisinger & Ripat 2014":"Reisinger = DISTANCE: 57% live >20 miles out; the theme is 'feeling understood'.",
-  "Weaver 2015":"Weaver = NO WORD for 'disability'; balance = filling your role in the family.",
-  "Frankland et al. 2004":"Frankland = self-determination FITS Diné (through family & interdependence).",
-  "Rabang et al. 2023":"Rabang = BRANDING: its own logo/colors &rarr; the community accepts it.",
-  "Yellowhorse 2022":"Yellowhorse '22 = WORTH by relationship, not productivity (told as her own story).",
-  "Yellowhorse 2018":"Yellowhorse '18 = K'é: you're a RELATIVE first, a label second.",
-  "Nozadi et al. 2019":"Nozadi = CRADLE BOARDS: 'late' walking is cultural, not a delay.",
-  "Rennie et al. 2023":"Rennie = LANGUAGE: verbal scores lower; could be test bias (held open).",
-  "Billey et al. 2024":"Billey = the 9-STEP adaptation (Diné language, a daily-routines map).",
-  "Kaholokula et al. 2015":"Kaholokula '15 = HULA pilot: &minus;18.3 mmHg.",
-  "Kaholokula et al. 2021":"Kaholokula '21 = HULA trial: 42.7% controlled vs 21.2% (education only).",
-  "Vigil-Hayes et al. 2021":"Vigil-Hayes = ARORA: audio, little text, cooperative games.",
-  "Hagemann et al. 2024":"Hagemann '24 = HELPERS: 'information mediators' (family); docs read aloud.",
-  "Hagemann et al. 2026":"Hagemann '26 = YOUTH test: 4.55/5; wants Hopi images + a tutorial.",
-  "Clochesy et al. 2015":"Clochesy = eSMART DESIGN: captions help EVERYONE (the curb-cut effect).",
-  "Hickman et al. 2021":"Hickman = eSMART TRIAL: practice a clinic visit &rarr; better provider talks.",
-  "Graham, Ikwunne & Duval 2025":"Graham = YOUR lab's 5 + 5: five prototypes, five strategies.",
-  "Radhakrishnan et al. 2025":"Radhakrishnan = Heart Health MOUNTAIN: steps&rarr;landmarks, but EXCLUDES mobility-aid users.",
-  "Wattanasoontorn et al. 2013":"Wattanasoontorn = the CLASSIFIER: purpose &times; player &times; stage of disease.",
-  "Rittel & Webber 1973":"Rittel = WICKED problem: no right answer, only better or worse.",
-  "Altarriba Bertran et al. 2019":"Altarriba = SITUATED PLAY: find &rarr; support &rarr; test play in daily life.",
-  "Crenshaw 1991":"Crenshaw = INTERSECTIONALITY: two identities are not the sum of their parts."
-};
-let order = CARDS.map((_,i)=>i);
+/* ---------- METHODS: front = name, back = definition + plain words ---------- */
+const METHODS = [
+  // 0 — Design & research approaches
+  {m:0,name:"Research through Design (RtD)",src:"Zimmerman 2007; used by Graham & Duval",
+   what:`A way of doing research by actually designing and building things, where making and testing the prototypes is what produces the new knowledge.`,
+   plain:`Instead of only studying a problem, you make something to address it, and what you learn from building and trying it out IS the research result.`,
+   eg:`Your lab's workshop turned 17 ideas into 5 prototypes; the prototypes and what they taught are the findings.`},
+  {m:0,name:"Participatory Design (PD)",src:"",
+   what:`Designing with the people who will use the tool as partners in the decisions, not just as testers at the end.`,
+   plain:`The users are on the design team from the start; they help decide what gets built, instead of only reacting to a finished version.`,
+   eg:`Hopi staff set ARORA's requirements; Native youth shaped its features.`},
+  {m:0,name:"Community-Based Participatory Research (CBPR)",src:"",
+   what:`Research done in equal partnership with a community, sharing power over the questions, the work, and what happens with the results.`,
+   plain:`The community is a full partner, not a study subject; they help choose the topic, run the work, and own the findings.`,
+   eg:`The hula trials and the Chinle talking-circle study were CBPR.`},
+  {m:0,name:"Tribal Participatory Research (TPR)",src:"",
+   what:`CBPR adapted to tribal sovereignty: the tribe formally approves and oversees the research as a governing nation.`,
+   plain:`Like CBPR, but the tribe acts as a government that signs off on and steers the study.`,
+   eg:`ARORA in Flagstaff used tribal participatory research.`},
+  {m:0,name:"Human-Centered Design (HCD)",src:"the frame for RQ2",
+   what:`A design process that starts from people's real needs and context and improves the design through repeated rounds of feedback.`,
+   plain:`Keep the actual users and their situation at the center, and refine by testing with them again and again.`,
+   eg:`RQ2 asks which HCD methods support designing at the intersection of Indigeneity and disability.`},
+  {m:0,name:"Situated Play Design",src:"Altarriba Bertran et al. 2019",
+   what:`A play-design approach with three steps: find the play already in people's daily life, build something that supports it, and test it in that same daily life.`,
+   plain:`Do not invent play from scratch; notice how people already play, then support that where it naturally happens.`,
+   eg:`It is the basis for favoring "open play" over a fixed "closed game".`},
+  {m:0,name:"Cultural Adaptation",src:"",
+   what:`Reshaping an evidence-based program so its language, examples, and activities fit a specific culture, without losing what makes it effective.`,
+   plain:`Take a program that already works and carefully re-dress it in the community's language and daily life.`,
+   eg:`Billey's nine-step adaptation; NOSH adapting the DASH diet to traditional foods.`},
+  {m:0,name:"Grounded Theory",src:"",
+   what:`A method that builds an explanation up from the data itself by coding and grouping what people said, rather than starting from a fixed theory.`,
+   plain:`You let the themes emerge from what people actually tell you, instead of testing an idea you decided on in advance.`,
+   eg:`ARORA's co-design data were analyzed with grounded theory.`},
+  {m:0,name:"Thematic Analysis",src:"",
+   what:`Reading qualitative data such as interviews or focus groups and organizing it into a few recurring themes.`,
+   plain:`Go through everything people said and sort it into a handful of big, repeating ideas.`,
+   eg:`Schaefer 2022's patient and provider focus groups.`},
+  {m:0,name:"Talking Circles",src:"Reisinger & Ripat; Breathett",
+   what:`A traditional Native format where people speak in turn as equals, used here as a culturally appropriate way to gather views or make decisions.`,
+   plain:`Everyone takes a turn to speak and be heard, in a respectful circle, instead of a standard one-on-one interview or survey.`,
+   eg:`Breathett's AHA statement frames talking circles as shared decision-making.`},
+  {m:0,name:"Usability Testing",src:"",
+   what:`Watching real users try a tool to find what is confusing or hard before it is finished.`,
+   plain:`Hand people the thing, watch where they get stuck, and fix those spots.`,
+   eg:`Hagemann 2026's Zoom test with Hopi and Tewa youth.`},
+  {m:0,name:"Needs Assessment",src:"",
+   what:`A structured study to find out what a group actually needs before a service or tool is designed.`,
+   plain:`Ask and measure first, what do people really need, so you build the right thing.`,
+   eg:`Hodge 1989 and Sanderson 1998.`},
+  {m:0,name:"Scoping Review",src:"Arksey & O'Malley; PRISMA-ScR",
+   what:`A structured survey of a whole research area that maps what exists and finds the gaps, rather than judging one narrow treatment.`,
+   plain:`A big, organized map of all the research on a topic, made to see what is there and what is missing.`,
+   eg:`This exam itself: 1,759 records narrowed to 42 core studies.`},
+
+  // 1 — Study designs
+  {m:1,name:"Cross-sectional study",src:"",
+   what:`A snapshot of a group at one point in time; it shows how common something is, not what causes it.`,
+   plain:`One photo, not a movie: good for "how many have it right now," not for cause and effect.`,
+   eg:`Percy 1997 and Jolly 2015 are cross-sectional.`},
+  {m:1,name:"Longitudinal cohort study",src:"",
+   what:`Following the same people over time to see how things change and what leads to what.`,
+   plain:`A movie, not a photo: you track the same people for years.`,
+   eg:`Zamora-Kapoor followed people from their teens into adulthood.`},
+  {m:1,name:"Randomized Controlled Trial (RCT)",src:"",
+   what:`A test where people are randomly placed into the new program or a comparison group, so any difference can be credited to the program.`,
+   plain:`Flip a coin for who gets the new thing; that fairness is why you can trust the result.`,
+   eg:`The Kaholokula hula studies were RCTs.`},
+  {m:1,name:"Wait-list control",src:"",
+   what:`A comparison group that receives the program later, after the study, so everyone eventually benefits.`,
+   plain:`The "other" group just waits its turn, which is fairer and still gives a clean comparison.`,
+   eg:`Kaholokula 2015 and NOSH used wait-list controls.`},
+  {m:1,name:"Stepped-wedge trial",src:"",
+   what:`An RCT where sites start the program at different, randomly assigned times until all of them are using it.`,
+   plain:`You roll it out in waves, randomly choosing who goes first, and compare before versus after at each site.`,
+   eg:`Eberly 2024's Hózhó study is stepped-wedge.`},
+  {m:1,name:"Crossover design",src:"",
+   what:`A design where each person tries both options in turn, acting as their own comparison.`,
+   plain:`Everyone uses option A, then option B (or the reverse), so you compare within the same person.`,
+   eg:`Railey 2022's two home cuffs.`},
+  {m:1,name:"Device-validation study",src:"method comparison",
+   what:`Checking a measurement tool against a trusted reference to see how accurate it is.`,
+   plain:`Test the gadget against a known-good standard to see if its numbers can be trusted.`,
+   eg:`Schaefer 2021's cuff-accuracy test.`},
+  {m:1,name:"Mediation analysis",src:"",
+   what:`A statistical check of whether one thing affects an outcome through a middle step.`,
+   plain:`It asks: does A cause C because it first changes B?`,
+   eg:`Zamora-Kapoor: does teen smoking raise adult BP, and does weight explain it? (It did not.)`},
+  {m:1,name:"Population Attributable Fraction (PAF)",src:"",
+   what:`An estimate of how much of a disease in a population would go away if one risk factor were removed.`,
+   plain:`"If we erased high blood pressure, how much heart disease would disappear?" That share.`,
+   eg:`Rawal 2023: hypertension = 42% of heart disease and stroke.`},
+
+  // 2 — Key concepts
+  {m:2,name:"Serious Game",src:"Wattanasoontorn et al. 2013",
+   what:`A game whose main purpose is something real, such as health, while keeping real games' rules, challenges, and rewards.`,
+   plain:`A real game you play for enjoyment, but one that is built to help your health at the same time.`,
+   eg:`eSMART, Heart Health Mountain, and CardioCare Quest.`},
+  {m:2,name:"Wicked Problem",src:"Rittel & Webber 1973",
+   what:`A problem with no single correct answer, where solutions are only better or worse and every attempt teaches you more.`,
+   plain:`A messy, tangled problem you cannot "solve" cleanly; you can only make it better or worse.`,
+   eg:`Managing hypertension with urban Diné adults with disabilities.`},
+  {m:2,name:"Intersectionality",src:"Crenshaw 1991",
+   what:`The idea that when two or more identities meet in one person, their experience differs from either identity alone.`,
+   plain:`Being both A and B is not just A plus B; it is its own distinct experience.`,
+   eg:`Indigeneity and disability together in urban Diné adults, the gap this review targets.`},
+  {m:2,name:"Curb-cut effect",src:"",
+   what:`When a feature made for people with disabilities ends up helping everyone.`,
+   plain:`The ramp cut into a curb was for wheelchairs, but strollers and carts use it too; accessibility helps all.`,
+   eg:`Clochesy's captions, added for hearing loss, became the default for every player.`},
+  {m:2,name:"Open play vs. closed game",src:"",
+   what:`"Closed" means fixed rules and set goals; "open" means loose, player-led, exploratory play.`,
+   plain:`A closed game tells you exactly what to do; open play lets you explore in your own way.`,
+   eg:`Your lab's participants and Situated Play Design both favor open play.`}
+];
+
+/* ---------- engine ---------- */
+let MODE = "papers";
 let filter = "all";
 let pos = 0;
+let order = [];
 
-function view(){ return filter==="all" ? order.slice() : order.filter(i=>CARDS[i].b==filter); }
-function cols(){ return ["var(--b0)","var(--b1)","var(--b2)","var(--b3)"]; }
+function listNow(){ return MODE==="papers" ? PAPERS : METHODS; }
+function catsNow(){ return MODE==="papers" ? BRANCHES : MCATS; }
+function colsNow(){ return MODE==="papers" ? PAPER_COLORS : METHOD_COLORS; }
+function keyNow(){ return MODE==="papers" ? "b" : "m"; }
+
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function tag(col,name){ return '<span class="tag" style="background:'+col+'">'+esc(name)+'</span>'; }
+
+function resetOrder(){ order = listNow().map((_,i)=>i); }
+function view(){
+  const list = listNow(), k = keyNow();
+  return filter==="all" ? order.slice() : order.filter(i=>list[i][k]==filter);
+}
+
+function fit(){
+  const card = document.getElementById("card");
+  const faces = card.querySelectorAll(".face");
+  let h = 0;
+  faces.forEach(fc=>{ fc.style.position="relative"; h=Math.max(h, fc.offsetHeight); fc.style.position="absolute"; });
+  card.style.minHeight = (h+2)+"px";
+}
 
 function render(){
+  const list = listNow();
   const v = view();
+  const front = document.getElementById("front");
+  const back = document.getElementById("back");
+  if(!v.length){ front.innerHTML=""; back.innerHTML=""; document.getElementById("count").textContent="0 / 0"; return; }
   if(pos>=v.length) pos=0;
   if(pos<0) pos=v.length-1;
-  const card = CARDS[v[pos]];
-  const col = cols()[card.b];
+  const item = list[v[pos]];
+  const cat = item[keyNow()];
+  const col = colsNow()[cat];
+  const catName = catsNow()[cat];
+
+  if(MODE==="papers"){
+    front.innerHTML =
+      tag(col,catName) +
+      '<div class="cite">'+esc(item.c)+'</div>' +
+      (item.pron ? '<div class="pron" style="color:'+col+'">say:  '+esc(item.pron)+'</div>' : '') +
+      '<div class="topic">'+esc(item.t)+'</div>' +
+      '<div class="hint">tap to read the brief</div>';
+    back.innerHTML =
+      tag(col,catName) +
+      '<div class="backlabel">Brief</div>' +
+      '<div class="backtext">'+esc(item.brief)+'</div>' +
+      (item.mnem ? '<div class="mnem"><b>Easy to remember:</b> '+item.mnem+'</div>' : '');
+  } else {
+    front.innerHTML =
+      tag(col,catName) +
+      '<div class="cite">'+esc(item.name)+'</div>' +
+      (item.src ? '<div class="topic">source: '+esc(item.src)+'</div>' : '') +
+      '<div class="hint">tap for the definition</div>';
+    back.innerHTML =
+      tag(col,catName) +
+      '<div class="backlabel">Definition &amp; plain meaning</div>' +
+      '<div class="backtext"><b>What it is:</b> '+esc(item.what)+'</div>' +
+      '<div class="mnem"><b>In plain words:</b> '+esc(item.plain)+'</div>' +
+      (item.eg ? '<div class="eg"><b>In this review:</b> '+esc(item.eg)+'</div>' : '');
+  }
   document.getElementById("card").classList.remove("flipped");
-  document.getElementById("ftag").textContent = BRANCHES[card.b];
-  document.getElementById("btag").textContent = BRANCHES[card.b];
-  document.getElementById("ftag").style.background = col;
-  document.getElementById("btag").style.background = col;
-  document.getElementById("fcite").textContent = card.c;
-  const pr = document.getElementById("fpron");
-  pr.textContent = PRON[card.c] ? "say:  "+PRON[card.c] : "";
-  pr.style.color = col;
-  document.getElementById("ftopic").textContent = card.t;
-  document.getElementById("bback").textContent = card.back;
-  const mn = document.getElementById("bmnem");
-  if(MNEM[card.c]){ mn.style.display="block"; mn.innerHTML = "<b>Easy to remember:</b> "+MNEM[card.c]; } else { mn.style.display="none"; }
   document.getElementById("count").textContent = (pos+1)+" / "+v.length;
+  fit();
 }
+
 function flip(){ document.getElementById("card").classList.toggle("flipped"); }
 function next(){ pos++; render(); }
 function prev(){ pos--; render(); }
 function shuffle(){ for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];} pos=0; render(); }
-function setFilter(b){ filter=b; pos=0; document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('active', x.dataset.b===String(b))); render(); }
 
-(function init(){
-  const f = document.getElementById("filters");
-  const defs = [["all","All ("+CARDS.length+")"]];
-  BRANCHES.forEach((name,i)=>defs.push([String(i), name+" ("+CARDS.filter(c=>c.b==i).length+")"]));
-  defs.forEach(([b,label])=>{
+function buildFilters(){
+  const f = document.getElementById("filters"); f.innerHTML="";
+  const list = listNow(), cats = catsNow(), colArr = colsNow(), k = keyNow();
+  const defs = [["all","All ("+list.length+")","#1a1a1a"]];
+  cats.forEach((n,i)=>defs.push([String(i), n+" ("+list.filter(x=>x[k]==i).length+")", colArr[i]]));
+  defs.forEach(([b,label,c])=>{
     const btn=document.createElement("button");
-    btn.textContent=label; btn.dataset.b=b;
-    if(b==="all") btn.classList.add("active");
+    btn.textContent=label; btn.dataset.b=b; btn.dataset.col=c;
     btn.onclick=()=>setFilter(b==="all"?"all":Number(b));
     f.appendChild(btn);
   });
+  setFilter("all");
+}
+
+function setFilter(b){
+  filter=b; pos=0;
+  document.querySelectorAll('#filters button').forEach(x=>{
+    const on = x.dataset.b===String(b);
+    x.classList.toggle('active',on);
+    x.style.background = on ? x.dataset.col : '#fff';
+    x.style.color = on ? '#fff' : 'var(--ink)';
+    x.style.borderColor = on ? 'transparent' : 'var(--line)';
+  });
+  render();
+}
+
+function setMode(m){
+  if(m===MODE) return;
+  MODE=m; filter="all"; pos=0;
+  document.getElementById("mode-papers").classList.toggle("active", m==="papers");
+  document.getElementById("mode-methods").classList.toggle("active", m==="methods");
+  resetOrder();
+  buildFilters();
+}
+
+(function init(){
+  resetOrder();
+  buildFilters();
   document.addEventListener("keydown",e=>{
     if(e.code==="Space"){e.preventDefault();flip();}
     else if(e.key==="ArrowRight") next();
     else if(e.key==="ArrowLeft") prev();
     else if(e.key.toLowerCase()==="s") shuffle();
   });
-  render();
 })();
 </script>
 </body>
